@@ -8,5 +8,4 @@ Andrew Ogle
 Conner Smith
 Michael Mason
 Demetrice Johnson
-Dustin Murphy
 
