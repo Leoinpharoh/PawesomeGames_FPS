@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] int moveSpeed;
-    [SerializeField] int dashSpeed;
+    [SerializeField] int dashMultiplier;
     [SerializeField] CharacterController characterControl;
     [SerializeField] int maxJumps;
     [SerializeField] int jumpSpeed;
@@ -48,11 +48,11 @@ public class PlayerManager : MonoBehaviour
     {
         if(Input.GetButtonDown("Sprint"))
         {
-            moveSpeed *= dashSpeed;
+            moveSpeed *= dashMultiplier;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
-            moveSpeed /= dashSpeed;
+            moveSpeed /= dashMultiplier;
         }
     }
 }
