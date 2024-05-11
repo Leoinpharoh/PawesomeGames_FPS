@@ -11,13 +11,16 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
 
+    [SerializeField] float HP;
+
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
+    float HPOrignal;
  
     void Start()
     {
-        
+        HPOrignal = HP;
     }
 
     // Update is called once per frame
@@ -54,5 +57,18 @@ public class PlayerManager : MonoBehaviour
         {
             moveSpeed /= dashMultiplier;
         }
+    }
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+        updatePlayerUI();
+        if (HP <= 0)
+        {
+            GameManager.Instance.youLose();
+        }
+    }
+    void updatePlayerUI()
+    {
+        GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
     }
 }
