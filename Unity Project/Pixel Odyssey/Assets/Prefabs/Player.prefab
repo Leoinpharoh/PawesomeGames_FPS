@@ -49,12 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ea42ae4177d5e4abde8a24b6775107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Audio: {fileID: 98434688472806495}
+  characterControl: {fileID: 98434688472806491}
   moveSpeed: 5
   dashMultiplier: 2
-  characterControl: {fileID: 98434688472806491}
   maxJumps: 2
   jumpSpeed: 4
   gravity: 10
+  jumpAudio: {fileID: 8300000, guid: e59a62f995c68d1418e699c57d116d8f, type: 3}
+  HP: 0
 --- !u!114 &6064996864242567897
 MonoBehaviour:
   m_ObjectHideFlags: 0
