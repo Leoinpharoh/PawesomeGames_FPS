@@ -58,7 +58,15 @@ public class PlayerManager : MonoBehaviour
             moveSpeed /= dashMultiplier;
         }
     }
-
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+        updatePlayerUI();
+        if (HP <= 0)
+        {
+            GameManager.Instance.youLose();
+        }
+    }
     void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
