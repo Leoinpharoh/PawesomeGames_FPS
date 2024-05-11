@@ -11,13 +11,16 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
 
+    [SerializeField] int HP;
+
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
+    int HPOrignal;
  
     void Start()
     {
-        
+        HPOrignal = HP;
     }
 
     // Update is called once per frame
