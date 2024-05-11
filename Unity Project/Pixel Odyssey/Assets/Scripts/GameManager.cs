@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour
     //non serialized
     //image for hp
     public Image playerHpBar;
-
-
     public PlayerManager playerScript;
 
 
