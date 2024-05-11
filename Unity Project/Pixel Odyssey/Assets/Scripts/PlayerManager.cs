@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
 
-    [SerializeField] int HP;
+    [SerializeField] float HP;
 
     int jumpCounter;
     Vector3 moveDirection;
@@ -57,5 +57,10 @@ public class PlayerManager : MonoBehaviour
         {
             moveSpeed /= dashMultiplier;
         }
+    }
+
+    void updatePlayerUI()
+    {
+        GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
     }
 }
