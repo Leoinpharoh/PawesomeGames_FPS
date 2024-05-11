@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
-    int HPOrignal;
+    float HPOrignal;
  
     void Start()
     {
