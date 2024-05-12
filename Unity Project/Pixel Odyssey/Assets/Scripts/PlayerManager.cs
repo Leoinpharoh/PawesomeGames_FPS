@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
  
     void Start()
     {
+
         HPOrignal = HP;
     }
 
