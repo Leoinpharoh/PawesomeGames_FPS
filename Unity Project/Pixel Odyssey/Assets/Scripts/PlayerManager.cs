@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, IDamage
 {
+    [SerializeField] AudioSource Audio;
+    [SerializeField] CharacterController characterControl;
+
+    //move
     [SerializeField] int moveSpeed;
     [SerializeField] int dashMultiplier;
-    [SerializeField] CharacterController characterControl;
+
+    //jumps
     [SerializeField] int maxJumps;
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
+    [SerializeField] AudioClip jumpAudio;
 
     [SerializeField] float HP;
 
@@ -23,8 +29,6 @@ public class PlayerManager : MonoBehaviour
 
         HPOrignal = HP;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(characterControl.isGrounded)
@@ -41,6 +45,8 @@ public class PlayerManager : MonoBehaviour
         if(Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
         {
             jumpCounter++;
+            Audio.clip = jumpAudio;
+            Audio.Play();
             playerVelocity.y = jumpSpeed;
 
         }
