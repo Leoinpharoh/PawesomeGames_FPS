@@ -13,6 +13,7 @@ public class LaserGuns : MonoBehaviour
     [SerializeField] int shootDmg;
     [SerializeField] int shootDist;
     [SerializeField] float shootSpeed;
+    [SerializeField] float LaserWaitTime;
 
 
     //Used so that ray wont hit player or things like glass
@@ -35,31 +36,32 @@ public class LaserGuns : MonoBehaviour
         {
             StartCoroutine(shooting());
         }
-        if (Input.GetButtonUp("Fire1"))
-        {
-            isShooting = false;
-        }
     }
 
     IEnumerator shooting()
     {
-        isShooting = true;
-        Audio.clip = shootAudioSource;
-        Audio.Play();
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
+        if (!isShooting)
         {
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null) { dmg.takeDamage(shootDmg); }
-            Debug.Log(hit.collider.gameObject);
-           
-        }
+            isShooting = true;
 
+            Audio.clip = shootAudioSource;
+            Audio.Play();
+
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
+            {
+                IDamage dmg = hit.collider.GetComponent<IDamage>();
+                if (dmg != null) { dmg.takeDamage(shootDmg); }
+                Debug.Log(hit.collider.gameObject);
+            }
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, firePoint.transform.position);
+            lineRenderer.SetPosition(1, hit.point);
+        }
+        yield return new WaitForSeconds(LaserWaitTime);
+        lineRenderer.enabled = false;
 
         yield return new WaitForSeconds(shootSpeed);
         isShooting = false;
-        lineRenderer.enabled = false;
     }
-
 }

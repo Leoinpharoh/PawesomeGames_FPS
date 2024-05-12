@@ -26,13 +26,13 @@ public class WeaponSwap : MonoBehaviour
         {
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponTwo.SetActive(true);
-            currentWeapon = weaponOne;
+            currentWeapon = weaponTwo;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponThree != null)
         {
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponThree.SetActive(true);
-            currentWeapon = weaponOne;
+            currentWeapon = weaponThree;
         }
     }
 }

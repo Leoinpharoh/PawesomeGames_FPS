@@ -31,27 +31,24 @@ public class RaycastGun : MonoBehaviour
         {
             StartCoroutine(shooting());
         }
-        if (Input.GetButtonUp("Fire1"))
-        {
-            isShooting = false;
-        }
     }
 
     IEnumerator shooting()
     {
-        isShooting = true;
-        Audio.clip = shootAudioSource;
-        Audio.Play();
+        if (!isShooting)
+        {
+            isShooting = true;
+            Audio.clip = shootAudioSource;
+            Audio.Play();
 
-        RaycastHit hit;
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer) ) 
-        { 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if( dmg != null ) { dmg.takeDamage(shootDmg); }
-            Debug.Log(hit.collider.gameObject);
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
+            {
+                IDamage dmg = hit.collider.GetComponent<IDamage>();
+                if (dmg != null) { dmg.takeDamage(shootDmg); }
+                Debug.Log(hit.collider.gameObject);
+            }
         }
-        
-
         yield return new WaitForSeconds(shootSpeed);
         isShooting = false;
     }
