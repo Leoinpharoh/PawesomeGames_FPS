@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour, IDamage
  
     void Start()
     {
+
         HPOrignal = HP;
         updatePlayerUI();
     }
