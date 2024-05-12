@@ -26,7 +26,7 @@ public class ButtonFunctions : MonoBehaviour
 #endif
     }
 
-    public void sceneIntro(Button button)
+    public void sceneSwitch(Button button) // Load the scene that the button is named after
     {
         
         Debug.Log("Button/Scene Name: " + button.name); // Log the button's name, which is expected to be the scene's name
@@ -35,25 +35,25 @@ public class ButtonFunctions : MonoBehaviour
         StartCoroutine(LoadAndSetActiveScene(button.name)); // Load the scene asynchronously and then set it as active
     }
 
-    private IEnumerator LoadAndSetActiveScene(string sceneName)
+    private IEnumerator LoadAndSetActiveScene(string sceneName) // Load the scene asynchronously and then set it as active
     {
         
         if (!SceneManager.GetSceneByName(sceneName).isLoaded) // Check if the scene is already loaded; if not, load it
         {
-            Debug.Log("Loading scene: " + sceneName);
-            yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            Debug.Log("Loading scene: " + sceneName); // Log the scene that is being loaded
+            yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single); // Load the scene asynchronously and wait for it to finish loading 
         }
 
         
         Scene loadedScene = SceneManager.GetSceneByName(sceneName); // Get the loaded scene by name
-        if (loadedScene.IsValid())
+        if (loadedScene.IsValid()) // Check if the scene is valid
         {
-            Debug.Log("Setting active scene: " + sceneName);
-            SceneManager.SetActiveScene(loadedScene);
+            Debug.Log("Setting active scene: " + sceneName); // Log the scene that is being set as active
+            SceneManager.SetActiveScene(loadedScene); // Set the scene as active
         }
         else
         {
-            Debug.LogError("Failed to load the scene: " + sceneName);
+            Debug.LogError("Failed to load the scene: " + sceneName); // Log an error message if the scene failed to load
         }
     }
 
