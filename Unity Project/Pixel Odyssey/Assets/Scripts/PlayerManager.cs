@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     void Start()
     {
         HPOrignal = HP;
+        updatePlayerUI();
     }
     void Update()
     {
@@ -44,6 +45,7 @@ public class PlayerManager : MonoBehaviour, IDamage
         if(Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
         {
             jumpCounter++;
+            // handles the audio for jumping. 
             Audio.clip = jumpAudio;
             Audio.Play();
             playerVelocity.y = jumpSpeed;
