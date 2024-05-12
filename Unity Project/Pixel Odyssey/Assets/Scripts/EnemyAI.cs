@@ -5,8 +5,52 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
+    [SerializeField] Transform shootPos;
 
     [SerializeField] int HP;
+
+    [SerializeField] GameObject bullet;
+    [SerializeField] float shootRate;
+
+    bool isShooting;
+    bool playerInRange;
+
+    void Update()
+    {
+        if(playerInRange)
+        {
+            if(!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        Instantiate(bullet, shootPos.position, transform.rotation);
+
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
+
     public void takeDamage(int damageAmount)
     {
         HP -= damageAmount;
