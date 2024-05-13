@@ -1,9 +1,12 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDamage
 {
+    public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
+
     [SerializeField] AudioSource Audio;
     [SerializeField] CharacterController characterControl;
 
@@ -16,6 +19,10 @@ public class PlayerManager : MonoBehaviour, IDamage
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
     [SerializeField] AudioClip jumpAudio;
+
+    //UI Components
+    //Flasred when hit
+    bool isHit;
 
     [SerializeField] float HP;
 
@@ -67,17 +74,45 @@ public class PlayerManager : MonoBehaviour, IDamage
             moveSpeed /= dashMultiplier;
         }
     }
+
+    void hitMe()
+    {
+        //flash screen red
+        GameManager.Instance.onHit();
+    }
+
     public void takeDamage(int amount)
     {
         HP -= amount;
+        hitMe();
         updatePlayerUI();
         if (HP <= 0)
         {
             GameManager.Instance.youLose();
         }
     }
+
     void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
+    }
+
+    public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
+    {
+        var item = other.GetComponent<Item> ();
+
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);    //adds one item if it found one
+            Destroy(other.gameObject);      //destroys the item that it picked up
+        }
+    }
+
+    private void OnApplicationQuit()    //clears inventory once app is quit in editor
+    {
+        if (inventory != null)
+        {
+            inventory.Container.Clear();
+        }
     }
 }
