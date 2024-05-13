@@ -67,7 +67,6 @@ public class ShootingHandler : MonoBehaviour
         {
             Ammo -= 1;
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
-            Debug.Log("HUH");
 
             isShooting = true;
             audioSource.clip = audioSFXShoot;
