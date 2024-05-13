@@ -102,11 +102,12 @@ public class PlayerManager : MonoBehaviour, IDamage
 
     public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
     {
-        var item = other.GetComponent<Item> ();
+        var item = other.GetComponent<GroundItem> ();
 
         if (item)
         {
-            inventory.AddItem(item.item, 1);    //adds one item if it found one
+            Item _item = new Item(item.item);
+            inventory.AddItem(_item, 1);    //adds one item if it found one
             Destroy(other.gameObject);      //destroys the item that it picked up
         }
     }
@@ -115,7 +116,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     {
         if (inventory != null)
         {
-            inventory.Container.Clear();
+            inventory.Container.Items.Clear();
         }
     }
 }
