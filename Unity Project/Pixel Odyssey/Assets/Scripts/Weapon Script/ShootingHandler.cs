@@ -62,27 +62,43 @@ public class ShootingHandler : MonoBehaviour
 
     IEnumerator shooting()
     {
-        if (!isShooting && Ammo != 0)
+        if (!isShooting && Ammo != 0 && GameManager.Instance.isPaused == false)
         {
-            Ammo -= 1;
-            GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
 
-            isShooting = true;
-            audioSource.clip = audioSFXShoot;
-            audioSource.Play();
 
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, shootableLayer))
             {
-                IDamage dmg = hit.collider.GetComponent<IDamage>();
-                if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
-                //Debug.Log(hit.collider.gameObject);
+                if (weaponType.ToString() == "Laser" && hit.collider != null)
+                {
+                    lineRenderer.enabled = true;
+                    lineRenderer.SetPosition(0, firePoint.transform.position);
+                    lineRenderer.SetPosition(1, hit.point);
+                    IDamage dmg = hit.collider.GetComponent<IDamage>();
+                    if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
+
+                    isShooting = true;
+                    audioSource.clip = audioSFXShoot;
+                    audioSource.Play();
+
+                    Ammo -= 1;
+                    GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
+                }
+                else
+                {
+                    isShooting = true;
+                    audioSource.clip = audioSFXShoot;
+                    audioSource.Play();
+
+                    IDamage dmg = hit.collider.GetComponent<IDamage>();
+                    if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
+
+                    Ammo -= 1;
+                    GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
+                }
             }
             if(weaponType.ToString() == "Laser")
             {
-                lineRenderer.enabled = true;
-                lineRenderer.SetPosition(0, firePoint.transform.position);
-                lineRenderer.SetPosition(1, hit.point);
 
                 yield return new WaitForSeconds(LaserWaitTime);
                 lineRenderer.enabled = false;
