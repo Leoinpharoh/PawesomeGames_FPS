@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4977747258009646102}
+  - component: {fileID: 4282226348669760752}
   - component: {fileID: 7083055042101481250}
   - component: {fileID: 2133598936476852492}
   - component: {fileID: 3430654325181529504}
   - component: {fileID: 1158656180608974772}
   - component: {fileID: -2690901844491296373}
-  - component: {fileID: 4282226348669760752}
   - component: {fileID: 933641934059745788}
   m_Layer: 3
   m_Name: Melee
@@ -38,6 +38,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4282226348669760752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785593939968905164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece552df83072e840859b536462686c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 2133598936476852492}
+  HP: 20
+  attackSpeed: 2
+  agent: {fileID: 933641934059745788}
+  meleeRange: 2
+  damage: 1
+  followCollider: {fileID: 1158656180608974772}
+  attackCollider: {fileID: -2690901844491296373}
+  bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
 --- !u!33 &7083055042101481250
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -153,27 +174,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4282226348669760752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2785593939968905164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece552df83072e840859b536462686c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 2133598936476852492}
-  HP: 5
-  attackSpeed: 2
-  agent: {fileID: 933641934059745788}
-  meleeRange: 2
-  damage: 1
-  followCollider: {fileID: 1158656180608974772}
-  attackCollider: {fileID: -2690901844491296373}
-  bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
 --- !u!195 &933641934059745788
 NavMeshAgent:
   m_ObjectHideFlags: 0

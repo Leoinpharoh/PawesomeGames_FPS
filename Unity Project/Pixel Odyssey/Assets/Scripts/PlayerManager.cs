@@ -100,7 +100,7 @@ public class PlayerManager : MonoBehaviour, IDamage
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
     }
 
-    public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
+    /*public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
     {
         var item = other.GetComponent<GroundItem> ();
 
@@ -118,5 +118,5 @@ public class PlayerManager : MonoBehaviour, IDamage
         {
             inventory.Container.Items.Clear();
         }
-    }
+    }*/
 }
