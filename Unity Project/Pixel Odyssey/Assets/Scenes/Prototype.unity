@@ -723,6 +723,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Melee
       objectReference: {fileID: 0}
+    - target: {fileID: 4282226348669760752, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.6
@@ -963,6 +967,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e68bbdc2cf4858b4a9c668be814b0786, type: 3}
+--- !u!1 &1017744718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7958328966770946035, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 1651631972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1136094751
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2785593939968905164, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_Name
+      value: Melee (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977747258009646102, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c2a8670b3f6cf8b4f9f0346e418e3636, type: 3}
 --- !u!1001 &1388724804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1365,12 +1431,17 @@ PrefabInstance:
       propertyPath: enemyCountText
       value: 
       objectReference: {fileID: 1578074408}
+    - target: {fileID: 4041587133659888962, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: playerFlashDamage
+      value: 
+      objectReference: {fileID: 1017744718}
     - target: {fileID: 6071381607733799810, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2606392431302080457, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
@@ -1875,4 +1946,5 @@ SceneRoots:
   - {fileID: 496991472}
   - {fileID: 350021259}
   - {fileID: 521432290}
+  - {fileID: 1136094751}
   - {fileID: 1632305784}
