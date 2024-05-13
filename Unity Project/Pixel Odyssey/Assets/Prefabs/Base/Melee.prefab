@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3430654325181529504}
   - component: {fileID: 1158656180608974772}
   - component: {fileID: 4282226348669760752}
+  - component: {fileID: 933641934059745788}
   m_Layer: 0
   m_Name: Melee
   m_TagString: Untagged
@@ -142,10 +143,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece552df83072e840859b536462686c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 2133598936476852492}
   HP: 5
   attackSpeed: 0.5
-  agent: {fileID: 0}
-  meleeRange: 0
+  agent: {fileID: 933641934059745788}
+  meleeRange: 2
   followCollider: {fileID: 1158656180608974772}
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
+--- !u!195 &933641934059745788
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785593939968905164}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 32
+  avoidancePriority: 50
+  m_AngularSpeed: 600
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
