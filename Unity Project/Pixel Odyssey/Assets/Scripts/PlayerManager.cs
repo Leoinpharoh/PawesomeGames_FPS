@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDamage
 {
+    public InventoryObject inventory;
+
     [SerializeField] AudioSource Audio;
     [SerializeField] CharacterController characterControl;
 
@@ -79,5 +81,21 @@ public class PlayerManager : MonoBehaviour, IDamage
     void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
+    }
+
+    public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
+    {
+        var item = other.GetComponent<Item> ();
+
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);    //adds one item if it found one
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnApplicationQuit()    //clears inventory once app is quit in editor
+    {
+        inventory.Container.Clear();
     }
 }
