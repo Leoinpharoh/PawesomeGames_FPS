@@ -79,17 +79,19 @@ public class PlayerManager : MonoBehaviour, IDamage
     public void takeDamage(int amount, Vector3 hitPosition)
     {
         HP -= amount;
-        hitMe();
+        StartCoroutine(hitMe());
         updatePlayerUI();
         if (HP <= 0)
         {
             GameManager.Instance.youLose();
         }
     }
-    void hitMe()
+    IEnumerator hitMe()
     {
         //flash screen red
-        GameManager.Instance.onHit();
+        GameManager.Instance.playerFlashDamage.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        GameManager.Instance.playerFlashDamage.SetActive(false);
     }
 
     void updatePlayerUI()

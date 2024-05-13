@@ -16,12 +16,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
 
+    
     //non serialized
     //image for hp
     public Image playerHpBar;
     public PlayerManager playerScript;
 
-    [SerializeField] GameObject hitScreen;
+    public GameObject playerFlashDamage;
 
 
     public GameObject player;
@@ -100,13 +101,5 @@ public class GameManager : MonoBehaviour
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
-    }
-    public void onHit()
-    {
-        //turn hit screen on
-        menuActive = hitScreen;
-        //do i need to wait?
-        //turn it off
-        menuActive = null;
     }
 }
