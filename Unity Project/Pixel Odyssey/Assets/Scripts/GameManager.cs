@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public Image playerHpBar;
     public PlayerManager playerScript;
 
+    [SerializeField] GameObject hitScreen;
+
 
     public GameObject player;
 
@@ -98,5 +100,13 @@ public class GameManager : MonoBehaviour
         stateUnPaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
+    }
+    public void onHit()
+    {
+        //turn hit screen on
+        menuActive = hitScreen;
+        //do i need to wait?
+        //turn it off
+        menuActive = null;
     }
 }
