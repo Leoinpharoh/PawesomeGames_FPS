@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     //move
     [SerializeField] int moveSpeed;
     [SerializeField] int dashMultiplier;
+    [SerializeField] Rigidbody rb;
 
     //jumps
     [SerializeField] int maxJumps;
@@ -21,7 +22,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     [SerializeField] AudioClip jumpAudio;
 
     //UI Components
-    //Flasred when hit
+    //Flashred when hit
     bool isHit;
 
     [SerializeField] float HP;
@@ -79,17 +80,19 @@ public class PlayerManager : MonoBehaviour, IDamage
     public void takeDamage(int amount, Vector3 hitPosition)
     {
         HP -= amount;
-        hitMe();
+        StartCoroutine(hitMe());
         updatePlayerUI();
         if (HP <= 0)
         {
             GameManager.Instance.youLose();
         }
     }
-    void hitMe()
+    IEnumerator hitMe()
     {
         //flash screen red
-        GameManager.Instance.onHit();
+        GameManager.Instance.playerFlashDamage.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.Instance.playerFlashDamage.SetActive(false);
     }
 
     void updatePlayerUI()

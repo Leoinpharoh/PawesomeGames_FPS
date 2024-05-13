@@ -11,8 +11,10 @@ public class MeleeAI : MonoBehaviour, IDamage
     [SerializeField] float attackSpeed;
     [SerializeField] NavMeshAgent agent; // Will allow the enemy to move around the map
     [SerializeField] float meleeRange; // Enemy Attack Range
+    [SerializeField] int damage; // Damage the enemy will deal to the player
 
     [SerializeField] private Collider followCollider; // Will cause enemy to follow player when in range
+    [SerializeField] private Collider attackCollider; // Will cause enemy to attack player when in range
 
     [SerializeField] private GameObject bloodSplash; // Creates a reference to the blood splash
 
@@ -64,9 +66,17 @@ public class MeleeAI : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player")) // Check if the other object is the player
         {
-            playerInRange = false;
-            playerInAttackRange = false;
-            Debug.Log("Player out of range");
+            if(Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
+            {
+                playerInAttackRange = false; // Player exited melee range
+                Debug.Log("Player in range");
+                StartCoroutine(attack());
+            }
+            else
+            {
+                playerInRange = false; // Player is out of detection range
+                Debug.Log("Player out of range");
+            }
         }
     }
 
@@ -77,6 +87,7 @@ public class MeleeAI : MonoBehaviour, IDamage
         StartCoroutine(Damage(hitPosition)); // Start the flash coroutine
         if (HP <= 0) // Check if the enemy's health is less than or equal to 0
         {
+            GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
             Destroy(gameObject); // Destroy the enemy
         }
     }
@@ -87,13 +98,58 @@ public class MeleeAI : MonoBehaviour, IDamage
         bloodEffect.transform.SetParent(transform); // Optionally set the parent to the enemy's transform
         yield return new WaitForSeconds(1); // Wait for 1 second (adjust based on your effect's needs)
         Destroy(bloodEffect); // Optionally destroy the effect after it finishes playing
+
     }
 
     IEnumerator attack()
     {
+        if (isAttacking)
+            yield break; // Prevent multiple simultaneous attacks
         isAttacking = true; // Set isAttacking to true
-        yield return new WaitForSeconds(attackSpeed); // Wait for the attack speed
+        Debug.Log("Attacking"); // Log that the enemy is attacking
+        agent.isStopped = true; // Stop the agent from moving
+
+        PlayerManager playerHealth = GameManager.Instance.player.GetComponent<PlayerManager>();
+        if (playerHealth != null) // Check if the playerHealth component is found on the player
+        {
+            playerHealth.takeDamage(damage, GameManager.Instance.player.transform.position); // Call the takeDamage function from the playerHealth script
+
+            // Apply manual knockback
+            Transform playerTransform = GameManager.Instance.player.transform;
+            Vector3 knockbackDirection = (playerTransform.position - transform.position).normalized;
+            float knockbackDistance = 2.0f; // Customize the distance as needed
+            Vector3 newPlayerPosition = playerTransform.position + knockbackDirection * knockbackDistance;
+
+            // Optionally use a coroutine to smoothly translate the player to the new position
+            StartCoroutine(SmoothKnockback(playerTransform, newPlayerPosition, 0.2f));
+        }
+        else
+        {
+            Debug.LogError("PlayerHealth component not found on the player."); // Log an error if the playerHealth component is not found
+        }
+
+        yield return new WaitForSeconds(1f); // Wait while attack is ongoing
+
+        agent.isStopped = false; // Re-enable movement
+
+        yield return new WaitForSeconds(attackSpeed - 0.2f); // Subtract the time during which the agent was stopped
+        Debug.Log("Attack Complete"); // Log that the attack is complete
         isAttacking = false; // Set isAttacking to false
     }
+
+    IEnumerator SmoothKnockback(Transform playerTransform, Vector3 targetPosition, float duration) // Coroutine to smoothly knockback the player
+    {
+        float time = 0; // Initialize time to 0
+        Vector3 startPosition = playerTransform.position; // Get the player's current position
+        while (time < duration) // Loop while time is less than duration
+        {
+            playerTransform.position = Vector3.Lerp(startPosition, targetPosition, time / duration); // Smoothly move the player towards the target position
+            time += Time.deltaTime; // Increment time by Time.deltaTime
+            yield return null; // Wait for the next frame
+        }
+        playerTransform.position = targetPosition; // Ensure the player reaches the target position
+    }
+
+
 
 }

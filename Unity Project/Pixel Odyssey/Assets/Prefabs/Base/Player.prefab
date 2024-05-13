@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 98434688472806491}
   - component: {fileID: 98434688472806493}
   - component: {fileID: 98434688472806495}
+  - component: {fileID: 5068799564735208622}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -54,11 +55,12 @@ MonoBehaviour:
   characterControl: {fileID: 98434688472806491}
   moveSpeed: 5
   dashMultiplier: 2
+  rb: {fileID: 5068799564735208622}
   maxJumps: 2
   jumpSpeed: 4
   gravity: 10
   jumpAudio: {fileID: 8300000, guid: e59a62f995c68d1418e699c57d116d8f, type: 3}
-  HP: 0
+  HP: 10
 --- !u!114 &6064996864242567897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -219,6 +221,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &5068799564735208622
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98434688472806489}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &98434688673217119
 GameObject:
   m_ObjectHideFlags: 0

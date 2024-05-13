@@ -16,12 +16,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
 
+    
     //non serialized
     //image for hp
     public Image playerHpBar;
     public PlayerManager playerScript;
 
-    [SerializeField] GameObject hitScreen;
+    public GameObject playerFlashDamage;
 
 
     public GameObject player;
@@ -29,12 +30,6 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     int enemyCount;
-
-    [SerializeField] TMP_Text ammoDisplayAmount;
-    string ammoCurrentType;
-    int lightBullets;
-    int MediumBullets;
-    int HeavyBullets;
 
 
 
@@ -92,10 +87,11 @@ public class GameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemyCount += amount;
-        enemyCountText.text = amount.ToString("F1");
+        //send enemy count via as string
+        enemyCountText.text = enemyCount.ToString("F0");
         if(enemyCount <= 0)
         {
-            stateUnPaused();
+            statePaused();
             menuActive = menuWin;
             menuActive.SetActive(isPaused);
         }
@@ -103,33 +99,8 @@ public class GameManager : MonoBehaviour
 
     public void youLose()
     {
-        stateUnPaused();
+        statePaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
-    }
-    public void onHit()
-    {
-        //turn hit screen on
-        menuActive = hitScreen;
-        //do i need to wait?
-        //turn it off
-        menuActive = null;
-    }
-
-    public void playerAmmo(string ammoType, int ammo)
-    {
-        ammoCurrentType = ammoType;
-        lightBullets = ammo;
-        MediumBullets = ammo;
-        HeavyBullets = ammo;
-        switch (ammoCurrentType)
-        {
-            case "Light":
-                ammoDisplayAmount.text = lightBullets.ToString(); break;
-            case "Medium":
-                ammoDisplayAmount.text = MediumBullets.ToString(); break;
-            case "Heavy":
-                ammoDisplayAmount.text = HeavyBullets.ToString(); break;
-        }
     }
 }
