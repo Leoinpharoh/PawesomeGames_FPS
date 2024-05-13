@@ -1463,6 +1463,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5556014298121112019, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
+      propertyPath: shootSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
 --- !u!1 &92714369 stripped
@@ -17674,7 +17678,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1263079973}
+  shootPos: {fileID: 0}
   HP: 12
+  bullet: {fileID: 0}
+  shootRate: 0
 --- !u!1001 &1264295510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29418,7 +29425,7 @@ MonoBehaviour:
   firePoint: {fileID: 1208887457}
   shootDmg: 10
   shootDist: 20
-  shootSpeed: 1
+  shootSpeed: 0.5
   LaserWaitTime: 0.2
   shootableLayer:
     serializedVersion: 2
@@ -29436,7 +29443,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
