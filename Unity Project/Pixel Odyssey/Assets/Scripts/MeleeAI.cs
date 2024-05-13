@@ -11,6 +11,7 @@ public class MeleeAI : MonoBehaviour, IDamage
     [SerializeField] float attackSpeed;
     [SerializeField] NavMeshAgent agent; // Will allow the enemy to move around the map
     [SerializeField] float meleeRange; // Enemy Attack Range
+    [SerializeField] int damage; // Damage the enemy will deal to the player
 
     [SerializeField] private Collider followCollider; // Will cause enemy to follow player when in range
     [SerializeField] private Collider attackCollider; // Will cause enemy to attack player when in range
@@ -69,6 +70,7 @@ public class MeleeAI : MonoBehaviour, IDamage
             {
                 playerInAttackRange = false; // Player exited melee range
                 Debug.Log("Player in range");
+                StartCoroutine(attack());
             }
             else
             {
@@ -103,9 +105,22 @@ public class MeleeAI : MonoBehaviour, IDamage
     {
         isAttacking = true; // Set isAttacking to true
         Debug.Log("Attacking"); // Log that the enemy is attacking
-        Debug.Log("Attack Complete"); // Log that the attack is complete
-        yield return new WaitForSeconds(attackSpeed); // Wait for the attack speed
-        isAttacking = false; // Set isAttacking to false
+
+        
+        PlayerManager playerHealth = GameManager.Instance.player.GetComponent<PlayerManager>(); // Assuming the GameManager's player object correctly references the player
+        if (playerHealth != null)
+        {
+            
+            playerHealth.takeDamage(damage, GameManager.Instance.player.transform.position); // Deal damage to the player
+        }
+        else
+        {
+            Debug.LogError("PlayerHealth component not found on the player."); // Log an error if the playerHealth component is not found
+        }
+
+        yield return new WaitForSeconds(attackSpeed);
+        Debug.Log("Attack Complete");
+        isAttacking = false;
     }
 
 }
