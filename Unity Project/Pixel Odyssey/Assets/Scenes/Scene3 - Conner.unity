@@ -1601,9 +1601,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5556014298121112019, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
+      propertyPath: Ammo
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556014298121112019, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
+      propertyPath: mePlease
+      value: 
+      objectReference: {fileID: 1206386723}
+    - target: {fileID: 5556014298121112019, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
       propertyPath: shootSpeed
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5556014298121112019, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1206386725}
+    - target: {fileID: 5556014298121112019, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
+      propertyPath: audioSFXShoot
+      value: 
+      objectReference: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
     - target: {fileID: 5556014298121112019, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
       propertyPath: shootAudioSource
       value: 
@@ -6075,13 +6091,20 @@ PrefabInstance:
       propertyPath: enemyCountText
       value: 
       objectReference: {fileID: 152291927}
+    - target: {fileID: 4041587133659888962, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: ammoDisplayAmount
+      value: 
+      objectReference: {fileID: 671784509}
     - target: {fileID: 6071381607733799810, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4041587132823584443, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 671784508}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
 --- !u!1 &346816616 stripped
@@ -11439,6 +11462,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660342168}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &671784507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 671784508}
+  - component: {fileID: 671784510}
+  - component: {fileID: 671784509}
+  m_Layer: 5
+  m_Name: AmmoCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &671784508
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671784507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 815588180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 594, y: 409.4}
+  m_SizeDelta: {x: 225.871, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &671784509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671784507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &671784510
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671784507}
+  m_CullTransparentMesh: 1
 --- !u!1 &672736110
 GameObject:
   m_ObjectHideFlags: 0
@@ -13133,6 +13290,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4013275331872712965, guid: 3265f61d28bcc624889672a36d3aa336, type: 3}
+--- !u!224 &815588180 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4041587132823584443, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 345144104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &818389025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19701,6 +19863,11 @@ GameObject:
 --- !u!4 &1206386724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5556014298121112012, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
+  m_PrefabInstance: {fileID: 91388430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1206386725 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6143048874403792255, guid: 41287ac3e9071cd41ae2fe372b675280, type: 3}
   m_PrefabInstance: {fileID: 91388430}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1208887457
@@ -34272,6 +34439,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 323693127976256970, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 323693127976256970, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
+      propertyPath: audioSFXShoot
+      value: 
+      objectReference: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
+    - target: {fileID: 323693127976256970, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
       propertyPath: shootAudioSource
       value: 
       objectReference: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
@@ -34284,7 +34459,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2514823326349308173}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 398687225171094585, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
+    - {fileID: 323693127976256980, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 98434688673217090, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
       insertIndex: -1
@@ -34317,10 +34494,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3003235545684569015}
   - component: {fileID: 4172178293594067162}
+  - component: {fileID: 4172178293594067163}
   - component: {fileID: 4172178293594067161}
   - component: {fileID: 2162424105722569746}
   - component: {fileID: 4172178293594067160}
-  - component: {fileID: 4172178293594067163}
   m_Layer: 0
   m_Name: Futuristic Weapon Concept High-Poly_fbx_7.4_binary
   m_TagString: Untagged
@@ -34521,12 +34698,14 @@ MonoBehaviour:
   shootDmg: 10
   shootDist: 0
   shootSpeed: 0.5
-  LaserWaitTime: 0
+  LaserWaitTime: 0.2
   shootableLayer:
     serializedVersion: 2
     m_Bits: 8
-  shootAudioSource: {fileID: 8300000, guid: fadb21e6101f76a41b79c9f8808e95f8, type: 3}
-  Audio: {fileID: 0}
+  audioSFXShoot: {fileID: 8300000, guid: fadb21e6101f76a41b79c9f8808e95f8, type: 3}
+  Ammo: 8
+  ammoType: 1
+  audioSource: {fileID: 4172178293594067163}
 --- !u!82 &4172178293594067163
 AudioSource:
   m_ObjectHideFlags: 0
