@@ -47,7 +47,6 @@ public class ShootingHandler : MonoBehaviour
         if (stopPlease == 0)
         {
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
-            Debug.Log("Editor causes this Update");
             stopPlease = 1;
         }
 #endif
@@ -63,7 +62,7 @@ public class ShootingHandler : MonoBehaviour
 
     IEnumerator shooting()
     {
-        if (!isShooting)
+        if (!isShooting && Ammo != 0)
         {
             Ammo -= 1;
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);

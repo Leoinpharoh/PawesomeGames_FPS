@@ -24,7 +24,7 @@ public class WeaponSwap : MonoBehaviour
             ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
             gunScript.stopPlease = 0;
             gunScript.isShooting = false;
-            gunScript.lineRenderer.enabled = false;
+            if(gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
         }
         if(Input.GetKeyDown(KeyCode.Alpha2) && weaponTwo != null)
         {
@@ -35,6 +35,7 @@ public class WeaponSwap : MonoBehaviour
             gunScript.stopPlease = 0;
             gunScript.isShooting = false;
             gunScript.lineRenderer.enabled = false;
+            if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponThree != null)
         {
@@ -45,6 +46,7 @@ public class WeaponSwap : MonoBehaviour
             gunScript.stopPlease = 0;
             gunScript.isShooting = false;
             gunScript.lineRenderer.enabled = false;
+            if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
         }
     }
 }
