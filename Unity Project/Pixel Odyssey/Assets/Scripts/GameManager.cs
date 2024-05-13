@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void youLose()
     {
-        stateUnPaused();
+        statePaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
     }

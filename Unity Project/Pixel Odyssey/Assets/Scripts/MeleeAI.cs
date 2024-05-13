@@ -13,6 +13,7 @@ public class MeleeAI : MonoBehaviour, IDamage
     [SerializeField] float meleeRange; // Enemy Attack Range
 
     [SerializeField] private Collider followCollider; // Will cause enemy to follow player when in range
+    [SerializeField] private Collider attackCollider; // Will cause enemy to attack player when in range
 
     [SerializeField] private GameObject bloodSplash; // Creates a reference to the blood splash
 
@@ -64,9 +65,16 @@ public class MeleeAI : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player")) // Check if the other object is the player
         {
-            playerInRange = false;
-            playerInAttackRange = false;
-            Debug.Log("Player out of range");
+            if(Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
+            {
+                playerInAttackRange = false; // Player exited melee range
+                Debug.Log("Player in range");
+            }
+            else
+            {
+                playerInRange = false; // Player is out of detection range
+                Debug.Log("Player out of range");
+            }
         }
     }
 
@@ -92,6 +100,8 @@ public class MeleeAI : MonoBehaviour, IDamage
     IEnumerator attack()
     {
         isAttacking = true; // Set isAttacking to true
+        Debug.Log("Attacking"); // Log that the enemy is attacking
+        Debug.Log("Attack Complete"); // Log that the attack is complete
         yield return new WaitForSeconds(attackSpeed); // Wait for the attack speed
         isAttacking = false; // Set isAttacking to false
     }
