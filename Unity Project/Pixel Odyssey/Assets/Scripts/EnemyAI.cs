@@ -15,6 +15,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool isShooting;
     bool playerInRange;
 
+
+    void Start()
+    {
+        GameManager.Instance.updateGameGoal(1);
+    }
+
     void Update()
     {
         if(playerInRange)
@@ -51,7 +57,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    public void takeDamage(int damageAmount)
+    public void takeDamage(int damageAmount, Vector3 hitPosition)
     {
         HP -= damageAmount;
         StartCoroutine(flash());
