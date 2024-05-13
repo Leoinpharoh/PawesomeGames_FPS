@@ -17,13 +17,14 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, destroyTime);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision collision)
     {
-        IDamage dmg = other.gameObject.GetComponent<IDamage>();
+        IDamage dmg = collision.gameObject.GetComponent<IDamage>();
 
         if(dmg != null)
         {
-            dmg.takeDamage(damage);
+            Vector3 hitPosition = collision.contacts[0].point;
+            dmg.takeDamage(damage, hitPosition);
         }
 
         Destroy(gameObject);

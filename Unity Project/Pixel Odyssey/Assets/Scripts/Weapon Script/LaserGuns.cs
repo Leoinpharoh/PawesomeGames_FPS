@@ -51,7 +51,7 @@ public class LaserGuns : MonoBehaviour
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
             {
                 IDamage dmg = hit.collider.GetComponent<IDamage>();
-                if (dmg != null) { dmg.takeDamage(shootDmg); }
+                if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
                 Debug.Log(hit.collider.gameObject);
             }
             lineRenderer.enabled = true;

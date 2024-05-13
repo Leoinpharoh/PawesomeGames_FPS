@@ -8,7 +8,6 @@ using JetBrains.Annotations;
 public class GameManager : MonoBehaviour
 {
     //create the gameManager
-    public static GameManager instance; // Singleton instance for game manager
 
     //Fields for menus
     [SerializeField] GameObject menuActive;

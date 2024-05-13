@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5556014297614786582}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0.1461235, y: 1.3589567, z: -0.00037119497}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5556014298121112012}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5556014297614786587
 MeshFilter:
@@ -108,6 +108,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5556014298121112013}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.232, y: 1.706, z: 0.435}
   m_LocalScale: {x: 0.10000003, y: 0.1, z: 0.10000003}
@@ -117,7 +118,6 @@ Transform:
   - {fileID: 5556014297614786581}
   - {fileID: 5556014298919204586}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &5556014298121112019
 MonoBehaviour:
@@ -137,8 +137,8 @@ MonoBehaviour:
   shootableLayer:
     serializedVersion: 2
     m_Bits: 8
-  shootAudioSource: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
-  Audio: {fileID: 6143048874403792255}
+  shootAudioClip: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
+  audioSource: {fileID: 0}
 --- !u!82 &6143048874403792255
 AudioSource:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -260,13 +260,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5556014298757103025}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0.16676272, y: 1.2196069, z: -0.00028355658}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5556014298121112012}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5556014298757103030
 MeshFilter:
@@ -344,13 +344,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5556014298919204587}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0.30162787, y: 1.3249192, z: -0.00008052453}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5556014298121112012}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5556014298919204584
 MeshFilter:

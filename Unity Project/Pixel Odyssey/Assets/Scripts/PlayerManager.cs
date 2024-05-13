@@ -76,7 +76,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     }
 
 
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, Vector3 hitPosition)
     {
         HP -= amount;
         hitMe();

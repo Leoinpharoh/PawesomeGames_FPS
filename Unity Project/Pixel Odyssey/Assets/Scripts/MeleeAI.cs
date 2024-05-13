@@ -10,9 +10,9 @@ public class MeleeAI : MonoBehaviour, IDamage
     [SerializeField] int HP;
     [SerializeField] float attackSpeed;
     [SerializeField] NavMeshAgent agent; // Will allow the enemy to move around the map
+    [SerializeField] float meleeRange; // Enemy Attack Range
 
     [SerializeField] private Collider followCollider; // Will cause enemy to follow player when in range
-    [SerializeField] private Collider attackCollider; // Will cause enemy to attack player when in range
 
     [SerializeField] private GameObject bloodSplash; // Creates a reference to the blood splash
 
@@ -22,6 +22,7 @@ public class MeleeAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Instance.updateGameGoal(1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one more enemy in the scene
     }
 
     // Update is called once per frame
@@ -29,7 +30,7 @@ public class MeleeAI : MonoBehaviour, IDamage
     {
         if (playerInRange) // Check if the player is in range of the enemy
         {
-            agent.SetDestination(GameManager.instance.player.transform.position); // Set the destination of the agent to the player's position
+            agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
         }
 
         if (playerInAttackRange) // Check if the player is in attack range
@@ -44,25 +45,28 @@ public class MeleeAI : MonoBehaviour, IDamage
 
     void OnTriggerEnter(Collider other) // Check if the player is in range of the enemy
     {
-        if (other.gameObject == followCollider.gameObject && other.CompareTag("Player")) // Checks if the player is in range of the enemy to be seen
+        if (other.CompareTag("Player")) // Check if the other object is the player
         {
-            playerInRange = true; // Set playerInRange to true
-        }
-        else if (other.gameObject == attackCollider.gameObject && other.CompareTag("Player")) // Checks to see if the player is in range of the enemy to be attacked
-        {
-            playerInAttackRange = true; // Set playerInAttackRange to true
+            if (Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
+            {
+                playerInAttackRange = true;  // Player entered melee range
+                Debug.Log("Player in attack range");
+            }
+            else
+            {
+                playerInRange = true;  // Player is in detection range but not in melee range
+                Debug.Log("Player in range");
+            }
         }
     }
 
     void OnTriggerExit(Collider other) // Check if the player is out of range of the enemy
-    { 
-        if (other.gameObject == followCollider.gameObject && other.CompareTag("Player")) // Checks if the player is out of range of the enemy to be seen
+    {
+        if (other.CompareTag("Player")) // Check if the other object is the player
         {
-            playerInRange = false; // Set playerInRange to false
-        }
-        else if (other.gameObject == attackCollider.gameObject && other.CompareTag("Player")) // Checks if the player is out of range of the enemy to be attacked
-        {
-            playerInAttackRange = false; // Set playerInAttackRange to false
+            playerInRange = false;
+            playerInAttackRange = false;
+            Debug.Log("Player out of range");
         }
     }
 

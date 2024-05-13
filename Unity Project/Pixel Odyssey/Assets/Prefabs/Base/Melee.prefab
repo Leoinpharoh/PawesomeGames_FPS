@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7083055042101481250}
   - component: {fileID: 2133598936476852492}
   - component: {fileID: 3430654325181529504}
-  - component: {fileID: -8164453910926115912}
   - component: {fileID: 1158656180608974772}
+  - component: {fileID: 4282226348669760752}
   m_Layer: 0
   m_Name: Melee
   m_TagString: Untagged
@@ -109,18 +109,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8164453910926115912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2785593939968905164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ece552df83072e840859b536462686c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &1158656180608974772
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -142,3 +130,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4282226348669760752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785593939968905164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece552df83072e840859b536462686c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
+  HP: 5
+  attackSpeed: 0.5
+  agent: {fileID: 0}
+  meleeRange: 0
+  followCollider: {fileID: 1158656180608974772}
+  bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
