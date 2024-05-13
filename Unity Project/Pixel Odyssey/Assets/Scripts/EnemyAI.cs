@@ -57,7 +57,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    public void takeDamage(int damageAmount)
+    public void takeDamage(int damageAmount, Vector3 hitPosition)
     {
         HP -= damageAmount;
         StartCoroutine(flash());
