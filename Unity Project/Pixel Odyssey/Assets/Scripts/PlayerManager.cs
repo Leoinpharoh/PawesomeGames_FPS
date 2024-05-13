@@ -75,11 +75,6 @@ public class PlayerManager : MonoBehaviour, IDamage
         }
     }
 
-    void hitMe()
-    {
-        //flash screen red
-        GameManager.Instance.onHit();
-    }
 
     public void takeDamage(int amount)
     {
@@ -90,6 +85,11 @@ public class PlayerManager : MonoBehaviour, IDamage
         {
             GameManager.Instance.youLose();
         }
+    }
+    void hitMe()
+    {
+        //flash screen red
+        GameManager.Instance.onHit();
     }
 
     void updatePlayerUI()
