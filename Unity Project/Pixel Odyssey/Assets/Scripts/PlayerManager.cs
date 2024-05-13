@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDamage
 {
+    public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
+
     [SerializeField] AudioSource Audio;
     [SerializeField] CharacterController characterControl;
 
@@ -72,6 +74,13 @@ public class PlayerManager : MonoBehaviour, IDamage
             moveSpeed /= dashMultiplier;
         }
     }
+
+    void hitMe()
+    {
+        //flash screen red
+        GameManager.Instance.onHit();
+    }
+
     public void takeDamage(int amount)
     {
         HP -= amount;
@@ -82,14 +91,25 @@ public class PlayerManager : MonoBehaviour, IDamage
             GameManager.Instance.youLose();
         }
     }
+
     void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
     }
-    void hitMe()
+
+    public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
     {
-        //flash screen red
-        GameManager.Instance.onHit();
+        var item = other.GetComponent<Item> ();
+
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);    //adds one item if it found one
+            Destroy(other.gameObject);      //destroys the item that it picked up
+        }
     }
 
+    private void OnApplicationQuit()    //clears inventory once app is quit in editor
+    {
+        inventory.Container.Clear();
+    }
 }
