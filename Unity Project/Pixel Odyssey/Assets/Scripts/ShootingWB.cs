@@ -18,7 +18,7 @@ public class ShootingWB : MonoBehaviour, IDamage
     bool playerInRange;
 
     // Start is called before the first frame update
-    void wake()
+    void Start()
     {
         GameManager.Instance.updateGameGoal(1);
     }
