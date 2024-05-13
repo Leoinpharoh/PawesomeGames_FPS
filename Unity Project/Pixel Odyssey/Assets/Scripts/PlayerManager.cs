@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     //move
     [SerializeField] int moveSpeed;
     [SerializeField] int dashMultiplier;
+    [SerializeField] Rigidbody rb;
 
     //jumps
     [SerializeField] int maxJumps;
@@ -21,7 +22,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     [SerializeField] AudioClip jumpAudio;
 
     //UI Components
-    //Flasred when hit
+    //Flashred when hit
     bool isHit;
 
     [SerializeField] float HP;
@@ -90,7 +91,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     {
         //flash screen red
         GameManager.Instance.playerFlashDamage.SetActive(true);
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(0.1f);
         GameManager.Instance.playerFlashDamage.SetActive(false);
     }
 
