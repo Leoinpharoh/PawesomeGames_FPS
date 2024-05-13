@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     //Flashred when hit
     bool isHit;
 
-    [SerializeField] float HP;
+    public float HP;
 
     int jumpCounter;
     Vector3 moveDirection;
