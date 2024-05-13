@@ -128,11 +128,9 @@ public class MeleeAI : MonoBehaviour, IDamage
             Debug.LogError("PlayerHealth component not found on the player."); // Log an error if the playerHealth component is not found
         }
 
-        yield return new WaitForSeconds(1f); // Wait while attack is ongoing
+        yield return new WaitForSeconds(attackSpeed); // Wait while attack is ongoing
 
         agent.isStopped = false; // Re-enable movement
-
-        yield return new WaitForSeconds(attackSpeed - 0.2f); // Subtract the time during which the agent was stopped
         Debug.Log("Attack Complete"); // Log that the attack is complete
         isAttacking = false; // Set isAttacking to false
     }
