@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ea42ae4177d5e4abde8a24b6775107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
   Audio: {fileID: 98434688472806495}
   characterControl: {fileID: 98434688472806491}
   moveSpeed: 5
@@ -358,6 +359,10 @@ PrefabInstance:
     - target: {fileID: 6303157410756684542, guid: bb1d26cce22fd954a85cf46cc73c05ca, type: 3}
       propertyPath: m_Name
       value: InventorySystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6303157410756684542, guid: bb1d26cce22fd954a85cf46cc73c05ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb1d26cce22fd954a85cf46cc73c05ca, type: 3}

@@ -110,6 +110,9 @@ public class PlayerManager : MonoBehaviour, IDamage
 
     private void OnApplicationQuit()    //clears inventory once app is quit in editor
     {
-        inventory.Container.Clear();
+        if (inventory != null)
+        {
+            inventory.Container.Clear();
+        }
     }
 }
