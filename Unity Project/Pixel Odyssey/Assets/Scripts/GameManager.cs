@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
+    [SerializeField] TMP_Text ammoDisplayAmount;
 
     
     //non serialized
@@ -30,6 +31,11 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     int enemyCount;
+
+    string ammoCurrentType;
+    int lightBullets;
+    int MediumBullets;
+    int HeavyBullets;
 
 
 
@@ -102,5 +108,22 @@ public class GameManager : MonoBehaviour
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
+    }
+
+    public void playerAmmo(string ammoType, int ammo)
+    {
+        ammoCurrentType = ammoType;
+        lightBullets = ammo;
+        MediumBullets = ammo;
+        HeavyBullets = ammo;
+        switch (ammoCurrentType)
+        {
+            case "Light":
+                ammoDisplayAmount.text = lightBullets.ToString(); break;
+            case "Medium":
+                ammoDisplayAmount.text = MediumBullets.ToString(); break;
+            case "Heavy":
+                ammoDisplayAmount.text = HeavyBullets.ToString(); break;
+        }
     }
 }
