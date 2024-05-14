@@ -16,17 +16,23 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool isShooting;
     bool playerInRange;
 
+    private Transform playerTransform;
 
     void Start()
     {
         GameManager.Instance.updateGameGoal(1);
+        playerTransform = GameManager.Instance.player.transform; // Get the player's transform from the GameManager
     }
 
     void Update()
     {
-        if(playerInRange)
+        if (playerInRange)
         {
-            if(!isShooting)
+            Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
+
+            if (!isShooting)
             {
                 StartCoroutine(shoot());
             }
@@ -35,7 +41,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
         }
@@ -75,6 +81,5 @@ public class EnemyAI : MonoBehaviour, IDamage
         bloodEffect.transform.SetParent(transform); // Optionally set the parent to the enemy's transform
         yield return new WaitForSeconds(1); // Wait for 1 second (adjust based on your effect's needs)
         Destroy(bloodEffect); // Optionally destroy the effect after it finishes playing
-
     }
 }
