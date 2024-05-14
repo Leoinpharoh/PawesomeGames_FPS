@@ -35,7 +35,6 @@ public class ShootingHandler : MonoBehaviour
     [HideInInspector] public int iTwo;
     [HideInInspector]public int i = 0;
     [HideInInspector] public bool isShooting;
-
     private void Update()
     {
         shoot();
@@ -56,11 +55,19 @@ public class ShootingHandler : MonoBehaviour
     {
         if (!isShooting && Ammo != 0 && GameManager.Instance.isPaused == false && iTwo != TilReload)
         {
+
+            // Play audio and mark that the player is shooting.
+            isShooting = true;
+            audioSource.clip = audioSFXShoot;
+            audioSource.Play();
+
+            // Apply ammo changes
+            Ammo -= 1;
+            GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
+            iTwo++;
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, shootableLayer))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
             {
-                if (weaponType.ToString() == "Laser" && hit.collider != null)
-                {
                     // Shows the laser that the player has fired.
                     lineRenderer.enabled = true;
                     lineRenderer.SetPosition(0, firePoint.transform.position);
@@ -69,33 +76,6 @@ public class ShootingHandler : MonoBehaviour
                     // Handles the damage that the player deals to the enemy.
                     IDamage dmg = hit.collider.GetComponent<IDamage>();
                     if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
-
-                    // Play audio and mark that the player is shooting.
-                    isShooting = true;
-                    audioSource.clip = audioSFXShoot;
-                    audioSource.Play();
-
-                    // Apply ammo changes
-                    Ammo -= 1;
-                    GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
-                    iTwo++;
-                }
-                else
-                {
-                    // Handles the damage that the player deals to the enemy.
-                    IDamage dmg = hit.collider.GetComponent<IDamage>();
-                    if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
-
-                    // Play audio and mark that the player is shooting.
-                    isShooting = true;
-                    audioSource.clip = audioSFXShoot;
-                    audioSource.Play();
-
-                    // Apply ammo changes
-                    Ammo -= 1;
-                    iTwo++;
-                    GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
-                }
             }
 
             // Turn off the laser.

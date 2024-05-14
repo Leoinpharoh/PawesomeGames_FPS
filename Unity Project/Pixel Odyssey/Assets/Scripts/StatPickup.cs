@@ -24,7 +24,7 @@ public class StatPickup : MonoBehaviour
             }
             GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
 
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }
