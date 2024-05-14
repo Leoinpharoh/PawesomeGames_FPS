@@ -13,12 +13,11 @@ public class MeleeWB : MonoBehaviour, IDamage
     [SerializeField] float meleeRange; // Enemy Attack Range
     [SerializeField] int damage; // Damage the enemy will deal to the player
 
-    [SerializeField] private Collider followCollider; // Will cause enemy to follow player when in range
+    [SerializeField] private Collider attackCollider; // Will cause enemy to follow player when in range
 
     [SerializeField] private GameObject bloodSplash; // Creates a reference to the blood splash
 
     bool isAttacking; // Bool to check if the enemy is attacking
-    bool playerInRange; // Bool to check if the player is in range of the enemy 
     bool playerInAttackRange; // Bool to check if the player is in attack range of the enemy
     // Start is called before the first frame update
     void Start()
@@ -29,10 +28,7 @@ public class MeleeWB : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (playerInRange) // Check if the player is in range of the enemy
-        {
-            agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
-        }
+        agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
 
         if (playerInAttackRange) // Check if the player is in attack range
         {
@@ -48,34 +44,10 @@ public class MeleeWB : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player")) // Check if the other object is the player
         {
-            if (Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
-            {
+            
                 playerInAttackRange = true;  // Player entered melee range
                 Debug.Log("Player in attack range");
-            }
-            else
-            {
-                playerInRange = true;  // Player is in detection range but not in melee range
-                Debug.Log("Player in range");
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider other) // Check if the player is out of range of the enemy
-    {
-        if (other.CompareTag("Player")) // Check if the other object is the player
-        {
-            if(Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
-            {
-                playerInAttackRange = false; // Player exited melee range
-                Debug.Log("Player in range");
-                StartCoroutine(attack());
-            }
-            else
-            {
-                playerInRange = false; // Player is out of detection range
-                Debug.Log("Player out of range");
-            }
+            
         }
     }
 
@@ -110,6 +82,7 @@ public class MeleeWB : MonoBehaviour, IDamage
         isAttacking = true; // Set isAttacking to true
         Debug.Log("Attacking"); // Log that the enemy is attacking
         agent.isStopped = true; // Stop the agent from moving
+        playerInAttackRange = false;
 
         PlayerManager playerHealth = GameManager.Instance.player.GetComponent<PlayerManager>();
         if (playerHealth != null) // Check if the playerHealth component is found on the player
@@ -129,7 +102,7 @@ public class MeleeWB : MonoBehaviour, IDamage
         {
             Debug.LogError("PlayerHealth component not found on the player."); // Log an error if the playerHealth component is not found
         }
-        playerInAttackRange = false;
+        
         yield return new WaitForSeconds(attackSpeed); // Wait while attack is ongoing
 
         agent.isStopped = false; // Re-enable movement
