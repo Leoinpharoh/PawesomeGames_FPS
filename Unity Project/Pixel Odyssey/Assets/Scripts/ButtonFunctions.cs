@@ -33,6 +33,9 @@ public class ButtonFunctions : MonoBehaviour
 
 
         StartCoroutine(LoadAndSetActiveScene(button.name)); // Load the scene asynchronously and then set it as active
+
+        //make sure scene is not stuck and allow immediate player movement and function
+        GameManager.Instance.stateUnPaused();
     }
 
     private IEnumerator LoadAndSetActiveScene(string sceneName) // Load the scene asynchronously and then set it as active
@@ -46,15 +49,19 @@ public class ButtonFunctions : MonoBehaviour
 
         
         Scene loadedScene = SceneManager.GetSceneByName(sceneName); // Get the loaded scene by name
+
         if (loadedScene.IsValid()) // Check if the scene is valid
         {
             Debug.Log("Setting active scene: " + sceneName); // Log the scene that is being set as active
             SceneManager.SetActiveScene(loadedScene); // Set the scene as active
+
+
         }
         else
         {
             Debug.LogError("Failed to load the scene: " + sceneName); // Log an error message if the scene failed to load
         }
+        GameManager.Instance.statePaused();
     }
 
 
