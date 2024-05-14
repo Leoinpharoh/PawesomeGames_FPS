@@ -17,6 +17,8 @@ public class StatPickup : MonoBehaviour
             {
                 case PickUpType.Health:
                     other.gameObject.GetComponentInChildren<PlayerManager>().HP += refilAmount;
+                    if(other.gameObject.GetComponent<PlayerManager>().HP > other.gameObject.GetComponent<PlayerManager>().HPOrignal) { other.gameObject.GetComponent<PlayerManager>().HP = other.gameObject.GetComponent<PlayerManager>().HPOrignal;  }
+                    other.gameObject.GetComponent<PlayerManager>().updatePlayerUI();
                     break;
                 case PickUpType.Ammo:
                     other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo += refilAmount;

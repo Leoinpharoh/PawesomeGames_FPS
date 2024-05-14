@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6804394100243594569
 Transform:
   m_ObjectHideFlags: 0
@@ -51,20 +51,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 2998453885644877148}
   firePoint: {fileID: 7738754559520303796}
-  shootDmg: 5
-  shootDist: 20
-  shootSpeed: 0.5
-  LaserWaitTime: 0.2
-  Ammo: 8
+  audioSource: {fileID: 4328450699835256324}
   shootableLayer:
     serializedVersion: 2
     m_Bits: 8
-  audioSFXShoot: {fileID: 8300000, guid: fadb21e6101f76a41b79c9f8808e95f8, type: 3}
-  stopPlease: 0
-  isShooting: 0
-  audioSource: {fileID: 4328450699835256324}
-  ammoType: 1
+  shootDmg: 5
+  shootDist: 20
+  shootSpeed: 0.5
   weaponType: 1
+  Ammo: 8
+  TilReload: 0
+  reloadTime: 0
+  LaserWaitTime: 0.2
+  ammoType: 1
+  audioSFXShoot: {fileID: 8300000, guid: fadb21e6101f76a41b79c9f8808e95f8, type: 3}
+  audioSFXReload: {fileID: 0}
+  iTwo: 0
+  i: 0
+  isShooting: 0
 --- !u!82 &4328450699835256324
 AudioSource:
   m_ObjectHideFlags: 0

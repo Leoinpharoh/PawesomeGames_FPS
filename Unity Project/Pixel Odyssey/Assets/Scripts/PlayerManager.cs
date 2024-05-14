@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
-    float HPOrignal;
+    [HideInInspector]public float HPOrignal;
  
     void Start()
     {
@@ -95,7 +95,7 @@ public class PlayerManager : MonoBehaviour, IDamage
         GameManager.Instance.playerFlashDamage.SetActive(false);
     }
 
-    void updatePlayerUI()
+    public void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
     }
