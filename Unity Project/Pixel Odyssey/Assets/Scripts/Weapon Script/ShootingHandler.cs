@@ -47,7 +47,7 @@ public class ShootingHandler : MonoBehaviour
         shoot();
 
         // This is used to ensure that the correct ammo count is displayed.
-        if (i == 0) { GameManager.Instance.playerAmmo(ammoType.ToString(), (Ammo-clip));i = 1; }
+        if (i == 0) { GameManager.Instance.playerAmmo(ammoType.ToString(), (Ammo));i = 1; }
 
         GameManager.Instance.playerClip(clip);
 
@@ -103,10 +103,10 @@ public class ShootingHandler : MonoBehaviour
 
         isShooting = true;
         yield return new WaitForSeconds(reloadTime);
-        if (Ammo < TilReload)
+        if (Ammo < TilReload) // If the player doesn't have the ammo to fill the clip
         {
-            clip = Ammo;
-            Ammo = 0;
+            clip = Ammo; // Fill the clip with the remaining ammo
+            Ammo = 0; // Set the ammo to 0
         }
         else
         {
@@ -114,6 +114,7 @@ public class ShootingHandler : MonoBehaviour
             clip = TilReload;     
         }
         isShooting = false;
+        GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
     }
 
 
