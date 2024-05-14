@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeAI : MonoBehaviour, IDamage
+public class ComboAI : MonoBehaviour, IDamage
 {
 
     [SerializeField] Renderer model;
@@ -14,6 +14,7 @@ public class MeleeAI : MonoBehaviour, IDamage
     [SerializeField] int damage; // Damage the enemy will deal to the player
 
     [SerializeField] private Collider followCollider; // Will cause enemy to follow player when in range
+    [SerializeField] private Collider meleeAttackCollider; // Will cause enemy to attack player when in range
     [SerializeField] private Collider attackCollider; // Will cause enemy to attack player when in range
 
     [SerializeField] private GameObject bloodSplash; // Creates a reference to the blood splash
