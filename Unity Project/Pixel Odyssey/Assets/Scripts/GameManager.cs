@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text ammoDisplayAmount;
+    [SerializeField] TMP_Text clipDisplayAmount;
 
     
     //non serialized
@@ -125,5 +127,11 @@ public class GameManager : MonoBehaviour
             case "Heavy":
                 ammoDisplayAmount.text = HeavyBullets.ToString(); break;
         }
+    }
+
+    public void playerClip(int clip)
+    {
+        clipDisplayAmount.text = clip.ToString();
+
     }
 }

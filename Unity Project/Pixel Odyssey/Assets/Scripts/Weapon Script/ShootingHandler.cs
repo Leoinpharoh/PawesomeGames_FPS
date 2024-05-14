@@ -22,6 +22,7 @@ public class ShootingHandler : MonoBehaviour
 
     [Header("Ammo Stats")] // Anything having to do with the weapons ammo.
     public int Ammo;
+    public int clip;
     [SerializeField] int TilReload;
     [SerializeField] float reloadTime;
     [SerializeField] float LaserWaitTime;
@@ -32,9 +33,15 @@ public class ShootingHandler : MonoBehaviour
     [SerializeField] AudioClip audioSFXShoot;
     [SerializeField] AudioClip audioSFXReload;
 
-    public int clip;
+    
     [HideInInspector]public int i = 0;
     [HideInInspector] public bool isShooting;
+
+    private void Start()
+    {
+        clip = TilReload;
+        Ammo = Ammo - TilReload;
+    }
     private void Update()
     {
         shoot();
@@ -42,8 +49,10 @@ public class ShootingHandler : MonoBehaviour
         // This is used to ensure that the correct ammo count is displayed.
         if (i == 0) { GameManager.Instance.playerAmmo(ammoType.ToString(), (Ammo-clip));i = 1; }
 
+        GameManager.Instance.playerClip(clip);
+
         // Handles the Input of the player reloading the gun.
-        if(Input.GetKeyDown(KeyCode.R) && !isShooting){ StartCoroutine(reloading()); }
+        if (Input.GetKeyDown(KeyCode.R) && !isShooting){ StartCoroutine(reloading()); }
     }
     void shoot() 
     { 
@@ -62,9 +71,9 @@ public class ShootingHandler : MonoBehaviour
             audioSource.Play();
 
             // Apply ammo changes
-            Ammo -= 1;
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
             clip--;
+            GameManager.Instance.playerClip(clip);
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
             {
@@ -94,7 +103,16 @@ public class ShootingHandler : MonoBehaviour
 
         isShooting = true;
         yield return new WaitForSeconds(reloadTime);
-        clip = TilReload;
+        if (Ammo < TilReload)
+        {
+            clip = Ammo;
+            Ammo = 0;
+        }
+        else
+        {
+            Ammo = Ammo - (TilReload - clip);
+            clip = TilReload;     
+        }
         isShooting = false;
     }
 

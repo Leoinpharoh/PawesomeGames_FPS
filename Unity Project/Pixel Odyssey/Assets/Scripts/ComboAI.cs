@@ -21,7 +21,7 @@ public class ComboAI : MonoBehaviour, IDamage
 
     bool isAttacking; // Bool to check if the enemy is attacking
     bool playerInRange; // Bool to check if the player is in range of the enemy 
-    bool playerInAttackRange; // Bool to check if the player is in attack range of the enemy
+    bool playerInMeleeAttackRange; // Bool to check if the player is in attack range of the enemy
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +36,7 @@ public class ComboAI : MonoBehaviour, IDamage
             agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
         }
 
-        if (playerInAttackRange) // Check if the player is in attack range
+        if (playerInMeleeAttackRange) // Check if the player is in attack range
         {
             if (!isAttacking) // Check if the enemy is not attacking
             {
@@ -52,7 +52,7 @@ public class ComboAI : MonoBehaviour, IDamage
         {
             if (Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
             {
-                playerInAttackRange = true;  // Player entered melee range
+                playerInMeleeAttackRange = true;  // Player entered melee range
                 Debug.Log("Player in attack range");
             }
             else
@@ -111,7 +111,7 @@ public class ComboAI : MonoBehaviour, IDamage
         isAttacking = true; // Set isAttacking to true
         Debug.Log("Attacking"); // Log that the enemy is attacking
         agent.isStopped = true; // Stop the agent from moving
-        playerInAttackRange = false;
+        playerInMeleeAttackRange = false;
 
         PlayerManager playerHealth = GameManager.Instance.player.GetComponent<PlayerManager>();
         if (playerHealth != null) // Check if the playerHealth component is found on the player
