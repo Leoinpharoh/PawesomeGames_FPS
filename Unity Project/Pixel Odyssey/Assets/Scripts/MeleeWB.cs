@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeAI : MonoBehaviour, IDamage
+public class MeleeWB : MonoBehaviour, IDamage
 {
 
     [SerializeField] Renderer model;
@@ -14,7 +14,6 @@ public class MeleeAI : MonoBehaviour, IDamage
     [SerializeField] int damage; // Damage the enemy will deal to the player
 
     [SerializeField] private Collider followCollider; // Will cause enemy to follow player when in range
-    [SerializeField] private Collider attackCollider; // Will cause enemy to attack player when in range
 
     [SerializeField] private GameObject bloodSplash; // Creates a reference to the blood splash
 
@@ -68,7 +67,7 @@ public class MeleeAI : MonoBehaviour, IDamage
         {
             if(Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
             {
-                playerInRange = true; // Player exited melee range
+                playerInAttackRange = false; // Player exited melee range
                 Debug.Log("Player in range");
                 StartCoroutine(attack());
             }
@@ -107,6 +106,7 @@ public class MeleeAI : MonoBehaviour, IDamage
         {
             yield break; // Prevent multiple simultaneous attacks
         }
+            
         isAttacking = true; // Set isAttacking to true
         Debug.Log("Attacking"); // Log that the enemy is attacking
         agent.isStopped = true; // Stop the agent from moving
