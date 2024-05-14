@@ -32,7 +32,7 @@ public class ShootingHandler : MonoBehaviour
     [SerializeField] AudioClip audioSFXShoot;
     [SerializeField] AudioClip audioSFXReload;
 
-    [HideInInspector] public int iTwo;
+    public int clip;
     [HideInInspector]public int i = 0;
     [HideInInspector] public bool isShooting;
     private void Update()
@@ -40,7 +40,7 @@ public class ShootingHandler : MonoBehaviour
         shoot();
 
         // This is used to ensure that the correct ammo count is displayed.
-        if (i == 0) { GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);i = 1; }
+        if (i == 0) { GameManager.Instance.playerAmmo(ammoType.ToString(), (Ammo-clip));i = 1; }
 
         // Handles the Input of the player reloading the gun.
         if(Input.GetKeyDown(KeyCode.R) && !isShooting){ StartCoroutine(reloading()); }
@@ -53,7 +53,7 @@ public class ShootingHandler : MonoBehaviour
 
     IEnumerator shooting()
     {
-        if (!isShooting && Ammo != 0 && GameManager.Instance.isPaused == false && iTwo != TilReload)
+        if (!isShooting && Ammo != 0 && GameManager.Instance.isPaused == false && clip != 0)
         {
 
             // Play audio and mark that the player is shooting.
@@ -64,7 +64,7 @@ public class ShootingHandler : MonoBehaviour
             // Apply ammo changes
             Ammo -= 1;
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
-            iTwo++;
+            clip--;
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
             {
@@ -94,7 +94,7 @@ public class ShootingHandler : MonoBehaviour
 
         isShooting = true;
         yield return new WaitForSeconds(reloadTime);
-        iTwo = 0;
+        clip = TilReload;
         isShooting = false;
     }
 
