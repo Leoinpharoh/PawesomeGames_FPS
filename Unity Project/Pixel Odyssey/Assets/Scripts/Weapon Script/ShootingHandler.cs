@@ -62,7 +62,7 @@ public class ShootingHandler : MonoBehaviour
 
     IEnumerator shooting()
     {
-        if (!isShooting && Ammo != 0 && GameManager.Instance.isPaused == false && clip != 0)
+        if (!isShooting && GameManager.Instance.isPaused == false && clip != 0)
         {
 
             // Play audio and mark that the player is shooting.
