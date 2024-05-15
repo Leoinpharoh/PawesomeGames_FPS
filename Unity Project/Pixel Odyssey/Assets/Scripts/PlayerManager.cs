@@ -24,11 +24,13 @@ public class PlayerManager : MonoBehaviour, IDamage
     //Flashred when hit
     bool isHit;
 
-    [SerializeField] float HP;
+    public float HP;
 
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
+    [HideInInspector]public float HPOrignal;
+ 
     float HPOrignal;
 
     void Start()
@@ -94,12 +96,12 @@ public class PlayerManager : MonoBehaviour, IDamage
         GameManager.Instance.playerFlashDamage.SetActive(false);
     }
 
-    void updatePlayerUI()
+    public void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
     }
 
-    public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
+    /*public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
     {
         var groundItem = other.GetComponent<GroundItem> ();
 
@@ -117,5 +119,5 @@ public class PlayerManager : MonoBehaviour, IDamage
         {
             inventory.Container.Items.Clear();
         }
-    }
+    }*/
 }

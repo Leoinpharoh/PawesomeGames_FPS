@@ -13,6 +13,7 @@ public class ShootingAI : MonoBehaviour, IDamage
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+    [SerializeField] private GameObject bloodSplash; // Creates a reference to the blood splash
 
     bool isShooting;
     bool playerInRange;
@@ -59,14 +60,23 @@ public class ShootingAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
-    public void takeDamage(int damageamount, Vector3 hitpositon)
+    public void takeDamage(int amount, Vector3 hitPosition) // Method to take damage
     {
-        HP -= damageamount;
-
-        if (HP <= 0)
+        HP -= amount; // Subtract the amount from the enemy's health
+        StartCoroutine(Damage(hitPosition)); // Start the flash coroutine
+        if (HP <= 0) // Check if the enemy's health is less than or equal to 0
         {
-            GameManager.Instance.updateGameGoal(-1);
-            Destroy(gameObject);
+            GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
+            Destroy(gameObject); // Destroy the enemy
         }
+    }
+
+    IEnumerator Damage(Vector3 hitPosition)
+    {
+        GameObject bloodEffect = Instantiate(bloodSplash, hitPosition, Quaternion.identity); // Instantiate at the hit position
+        bloodEffect.transform.SetParent(transform); // Optionally set the parent to the enemy's transform
+        yield return new WaitForSeconds(1); // Wait for 1 second (adjust based on your effect's needs)
+        Destroy(bloodEffect); // Optionally destroy the effect after it finishes playing
+
     }
 }

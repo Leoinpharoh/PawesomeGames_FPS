@@ -68,7 +68,7 @@ public class MeleeAI : MonoBehaviour, IDamage
         {
             if(Vector3.Distance(transform.position, other.transform.position) <= meleeRange)
             {
-                playerInAttackRange = false; // Player exited melee range
+                playerInRange = true; // Player exited melee range
                 Debug.Log("Player in range");
                 StartCoroutine(attack());
             }
@@ -104,10 +104,13 @@ public class MeleeAI : MonoBehaviour, IDamage
     IEnumerator attack()
     {
         if (isAttacking)
+        {
             yield break; // Prevent multiple simultaneous attacks
+        }
         isAttacking = true; // Set isAttacking to true
         Debug.Log("Attacking"); // Log that the enemy is attacking
         agent.isStopped = true; // Stop the agent from moving
+        playerInAttackRange = false;
 
         PlayerManager playerHealth = GameManager.Instance.player.GetComponent<PlayerManager>();
         if (playerHealth != null) // Check if the playerHealth component is found on the player
@@ -127,12 +130,13 @@ public class MeleeAI : MonoBehaviour, IDamage
         {
             Debug.LogError("PlayerHealth component not found on the player."); // Log an error if the playerHealth component is not found
         }
-
+        
         yield return new WaitForSeconds(attackSpeed); // Wait while attack is ongoing
 
         agent.isStopped = false; // Re-enable movement
         Debug.Log("Attack Complete"); // Log that the attack is complete
         isAttacking = false; // Set isAttacking to false
+        
     }
 
     IEnumerator SmoothKnockback(Transform playerTransform, Vector3 targetPosition, float duration) // Coroutine to smoothly knockback the player

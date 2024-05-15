@@ -22,7 +22,7 @@ public class WeaponSwap : MonoBehaviour
             weaponOne.SetActive(true);
             currentWeapon = weaponOne;
             ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
-            gunScript.stopPlease = 0;
+            gunScript.i = 0;
             gunScript.isShooting = false;
             if(gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
         }
@@ -32,7 +32,7 @@ public class WeaponSwap : MonoBehaviour
             weaponTwo.SetActive(true);
             currentWeapon = weaponTwo;
             ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
-            gunScript.stopPlease = 0;
+            gunScript.i = 0;
             gunScript.isShooting = false;
             gunScript.lineRenderer.enabled = false;
             if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
@@ -43,7 +43,7 @@ public class WeaponSwap : MonoBehaviour
             weaponThree.SetActive(true);
             currentWeapon = weaponThree;
             ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
-            gunScript.stopPlease = 0;
+            gunScript.i = 0;
             gunScript.isShooting = false;
             gunScript.lineRenderer.enabled = false;
             if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }

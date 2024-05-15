@@ -24,7 +24,10 @@ public class Bullet : MonoBehaviour
         if(dmg != null)
         {
             Vector3 hitPosition = collision.contacts[0].point;
-            dmg.takeDamage(damage, hitPosition);
+            if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
+            {
+                dmg.takeDamage(damage, hitPosition);
+            }
         }
 
         Destroy(gameObject);
