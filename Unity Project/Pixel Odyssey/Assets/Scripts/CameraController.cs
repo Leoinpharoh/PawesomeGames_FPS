@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour
             rotationX -= mouseY;
         }
 
-        rotationX = Mathf.Clamp(rotationX, lockVertMin, lockVertMax);
+        rotationX = Mathf.Clamp(rotationX, -85f, 85f);
 
         transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.parent.Rotate(Vector3.up * mouseX);
