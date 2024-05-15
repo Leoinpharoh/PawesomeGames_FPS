@@ -36,6 +36,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool confused;
     public int damageOverTimeDivider;
     private Coroutine poisonCoroutine;
+    private Coroutine burnCoroutine;
+    private Coroutine freezeCoroutine;
+    private Coroutine slowCoroutine;
+    private Coroutine sconfuseCoroutine;
 
     void Start()
     {
@@ -124,23 +128,106 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         Normal = true;
         StartCoroutine(effectMe("Normal"));
     }
-    public void burnDamage(string effect)
+    public void burnDamage(int damage, float duration)
     {
-        int timerHpTick = GameManager.Instance.burningDamage / GameManager.Instance.poisonedTimer;
-        burning = true;
-        for (int i = 0; i < timerHpTick; i++)
+        if (burning)
         {
-            HP -= timerHpTick;
+            StopCoroutine(burnCoroutine);
+        }
+
+        burnCoroutine = StartCoroutine(burnMe(damage, duration));
+    }
+
+    private IEnumerator burnMe(int damage, float duration)
+    {
+        burning = true;
+        Normal = false;
+        int ticks = Mathf.FloorToInt(duration);
+
+        for (int i = 0; i < ticks; i++)
+        {
+            HP -= damage;
             updatePlayerUI();
-            StartCoroutine(effectMe(effect)); 
+            StartCoroutine(effectMe("Burning"));
             if (HP <= 0)
             {
                 GameManager.Instance.youLose();
             }
+            yield return new WaitForSeconds(1);
         }
         burning = false;
-        GameManager.Instance.playerEffect("Normal");
+        Normal = true;
+        StartCoroutine(effectMe("Normal"));
     }
+
+    public void freezeDamage(int damage, float duration)
+    {
+        if (freezing)
+        {
+            StopCoroutine(freezeCoroutine);
+            moveSpeed *= 2;
+        }
+
+        freezeCoroutine = StartCoroutine(freezeMe(damage, duration));
+        moveSpeed /= 2;
+    }
+
+    private IEnumerator freezeMe(int damage, float duration)
+    {
+        freezing = true;
+        Normal = false;
+        int ticks = Mathf.FloorToInt(duration);
+
+        for (int i = 0; i < ticks; i++)
+        {
+            HP -= damage;
+            updatePlayerUI();
+            StartCoroutine(effectMe("Freezing"));
+            if (HP <= 0)
+            {
+                GameManager.Instance.youLose();
+            }
+            yield return new WaitForSeconds(1);
+        }
+        freezing = false;
+        Normal = true;
+        StartCoroutine(effectMe("Normal"));
+    }
+
+    public void slowDamage(int damage, float duration)
+    {
+        if (slowed)
+        {
+            StopCoroutine(slowCoroutine);
+            moveSpeed *= 2;
+        }
+
+        freezeCoroutine = StartCoroutine(slowMe(damage, duration));
+        moveSpeed /= 2;
+    }
+
+    private IEnumerator slowMe(int damage, float duration)
+    {
+        slowed = true;
+        Normal = false;
+        int ticks = Mathf.FloorToInt(duration);
+
+        for (int i = 0; i < ticks; i++)
+        {
+            HP -= damage;
+            updatePlayerUI();
+            StartCoroutine(effectMe("Slowed"));
+            if (HP <= 0)
+            {
+                GameManager.Instance.youLose();
+            }
+            yield return new WaitForSeconds(1);
+        }
+        slowed = false;
+        Normal = true;
+        StartCoroutine(effectMe("Normal"));
+    }
+
     IEnumerator hitMe()
     {
         //flash screen red
