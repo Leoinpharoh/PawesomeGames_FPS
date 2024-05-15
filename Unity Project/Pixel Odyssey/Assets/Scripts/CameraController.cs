@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] int sensitivity;
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
+    [SerializeField] private GameObject inventoryScreen;
 
     float rotationX;
 
@@ -19,12 +20,49 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*    void Update()
+        {
+            float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
+            float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
+
+            if(invertY)
+            {
+                rotationX += mouseY;
+            }
+            else
+            {
+                rotationX -= mouseY;
+            }
+
+            rotationX = Mathf.Clamp(rotationX, lockVertMin, lockVertMax);
+
+            transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+
+            transform.parent.Rotate(Vector3.up * mouseX);
+        }*/
     void Update()
+    {
+        bool isInventoryOpen = inventoryScreen.activeSelf;
+
+        if (!isInventoryOpen)
+        {
+            UpdateCameraRotation();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    private void UpdateCameraRotation()
     {
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
 
-        if(invertY)
+        if (invertY)
         {
             rotationX += mouseY;
         }
@@ -32,11 +70,10 @@ public class CameraController : MonoBehaviour
         {
             rotationX -= mouseY;
         }
-        
+
         rotationX = Mathf.Clamp(rotationX, lockVertMin, lockVertMax);
 
         transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-
         transform.parent.Rotate(Vector3.up * mouseX);
     }
 }

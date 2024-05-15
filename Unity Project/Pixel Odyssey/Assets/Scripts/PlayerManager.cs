@@ -1,4 +1,3 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +30,7 @@ public class PlayerManager : MonoBehaviour, IDamage
     Vector3 moveDirection;
     Vector3 playerVelocity;
     float HPOrignal;
- 
+
     void Start()
     {
 
@@ -102,11 +101,11 @@ public class PlayerManager : MonoBehaviour, IDamage
 
     public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
     {
-        var item = other.GetComponent<GroundItem> ();
+        var groundItem = other.GetComponent<GroundItem> ();
 
-        if (item)
+        if (groundItem) //if it is a ground item
         {
-            Item _item = new Item(item.item);
+            Item _item = new Item(groundItem.itemObject);
             inventory.AddItem(_item, 1);    //adds one item if it found one
             Destroy(other.gameObject);      //destroys the item that it picked up
         }
