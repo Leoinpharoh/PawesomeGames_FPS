@@ -30,8 +30,6 @@ public class PlayerManager : MonoBehaviour, IDamage
     Vector3 moveDirection;
     Vector3 playerVelocity;
     [HideInInspector]public float HPOrignal;
- 
-    float HPOrignal;
 
     void Start()
     {

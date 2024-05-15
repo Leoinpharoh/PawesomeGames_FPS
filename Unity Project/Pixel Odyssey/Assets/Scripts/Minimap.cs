@@ -10,21 +10,19 @@ public class MinimapIcon : MonoBehaviour
 
     void Update()
     {
-        // Calculate the player's position relative to the minimap
-        Vector3 playerPosition = playerTransform.position;
 
-        // Adjust the position based on the scale of the minimap
-        float minimapWidth = minimapRectTransform.rect.width;
-        float minimapHeight = minimapRectTransform.rect.height;
+        Vector3 playerPosition = playerTransform.position; // Get the player's position
 
-        float posX = (playerPosition.x / mapScale);
-        float posY = (playerPosition.z / mapScale);
+        
+        float minimapWidth = minimapRectTransform.rect.width; // Get the width of the minimap
+        float minimapHeight = minimapRectTransform.rect.height; // Get the height of the minimap
 
-        // Set the local position of the player icon
-        iconRectTransform.localPosition = new Vector3(posX, posY, 0);
+        float posX = (playerPosition.x / mapScale); // Calculate the X position of the player icon
+        float posY = (playerPosition.z / mapScale); // Calculate the Y position of the player icon
 
-        // Update the player icon's rotation
-        float playerRotationY = playerTransform.eulerAngles.y;
-        iconRectTransform.localRotation = Quaternion.Euler(0, 0, -playerRotationY);
+        iconRectTransform.localPosition = new Vector3(posX, posY, 0); // Set the position of the player icon
+
+        float playerRotationY = playerTransform.eulerAngles.y; // Get the player's Y rotation
+        iconRectTransform.localRotation = Quaternion.Euler(0, 0, -playerRotationY); // Set the rotation of the player icon
     }
 }

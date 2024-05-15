@@ -129,9 +129,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void playerClip(int clip)
+    public void playerClip(int clip) // Update the player's clip amount
     {
-        clipDisplayAmount.text = clip.ToString();
+        clipDisplayAmount.text = clip.ToString(); // Update the clip display amount
 
     }
 }

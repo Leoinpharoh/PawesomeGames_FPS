@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*    void Update()
+        void Update()
         {
             float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
             float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
@@ -39,8 +39,8 @@ public class CameraController : MonoBehaviour
             transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
 
             transform.parent.Rotate(Vector3.up * mouseX);
-        }*/
-    void Update()
+        }
+    /*void Update()
     {
         bool isInventoryOpen = inventoryScreen.activeSelf;
 
@@ -55,7 +55,7 @@ public class CameraController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-    }
+    }*/
 
     private void UpdateCameraRotation()
     {
