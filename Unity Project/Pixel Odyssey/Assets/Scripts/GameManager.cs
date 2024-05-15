@@ -169,6 +169,9 @@ public class GameManager : MonoBehaviour
             case "Confused":
                 currentEffectText.text = "Confused";
                 break;
+            case "Normal":
+                currentEffectText.text = "Normal";
+                break;
         }
     }
 }

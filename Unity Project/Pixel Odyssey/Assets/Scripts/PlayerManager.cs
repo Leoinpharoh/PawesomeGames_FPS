@@ -26,8 +26,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     Vector3 moveDirection;
     Vector3 playerVelocity;
     [HideInInspector]public float HPOrignal;
-<<<<<<< Updated upstream
-=======
 
     //status effect bools
     public bool Normal = true;
@@ -37,7 +35,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool slowed;
     public bool confused;
     public int damageOverTimeDivider;
->>>>>>> Stashed changes
+    private Coroutine poisonCoroutine;
 
     void Start()
     {
@@ -95,31 +93,36 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             GameManager.Instance.youLose();
         }
     }
-    public void poisonDamage(string effect)
+    public void poisonDamage(int damage, float duration)
     {
-        int timerHpTick = GameManager.Instance.poisonedDamage / GameManager.Instance.poisonedTimer; //accounts for the hp down AND timer
-        //turn on poisoned bool
-        poisoned = true;
-
-        for (int i = 0; i < timerHpTick; i++)
+        if(poisoned)
         {
-            //lower health
-            HP -= timerHpTick;
-            //updates the health bar
-            poisoned = true;
-            updatePlayerUI();
-            //starts the screen flash coroutine
+            StopCoroutine(poisonCoroutine);
+        }
 
-            StartCoroutine(effectMe(effect)); //should account for the time in here
+        poisonCoroutine = StartCoroutine(poisonMe(damage, duration));
+    }
+
+    private IEnumerator poisonMe(int damage, float duration)
+    {
+        poisoned = true;
+        Normal = false;
+        int ticks = Mathf.FloorToInt(duration);
+
+        for (int i = 0; i < ticks; i++)
+        {
+            HP -= damage;
+            updatePlayerUI();
+            StartCoroutine(effectMe("Poisoned"));
             if (HP <= 0)
             {
                 GameManager.Instance.youLose();
             }
+            yield return new WaitForSeconds(1);
         }
-        //turn off poisoned
         poisoned = false;
-
-        GameManager.Instance.playerEffect("Regular");
+        Normal = true;
+        StartCoroutine(effectMe("Normal"));
     }
     public void burnDamage(string effect)
     {
@@ -162,7 +165,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 yield return new WaitForSeconds(0.1f);
                 GameManager.Instance.poisonHitScreen.SetActive(false);
                 //wait 1 second to return and start new loop so time between each damage is 1 second
-                yield return new WaitForSeconds(.9f);
                 break;
             case "Burning":
                 GameManager.Instance.playerEffect(effect);
@@ -191,6 +193,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 yield return new WaitForSeconds(0.1f);
                 GameManager.Instance.confuseHitScreen.SetActive(false);
                 yield return new WaitForSeconds(.9f);
+                break;
+            case "Normal":
+                GameManager.Instance.playerEffect(effect);
                 break;
         }
 

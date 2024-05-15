@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
+    [SerializeField] float duration;
 
     [HideInInspector] public enum DamageType { Regular, Poisoned, Burning, Freezing, Slowed, Confused }
     public DamageType damageType;
@@ -45,7 +46,7 @@ public class Bullet : MonoBehaviour
                 Vector3 hitPosition = collision.contacts[0].point;
                 if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
                 {
-                    dmg.poisonDamage("Poisoned");
+                    dmg.poisonDamage(damage, duration);
                 }
             }
         }

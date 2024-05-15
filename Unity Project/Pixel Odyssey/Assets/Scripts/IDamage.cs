@@ -5,8 +5,4 @@ using UnityEngine;
 public interface IDamage
 {
     void takeDamage(int damageAmount, Vector3 hitPosition); // Interface method for taking damage 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 }
