@@ -5,9 +5,9 @@ using UnityEngine;
 public interface EDamage
 {
     void poisonDamage(int damage, float duration);
-    void burnDamage(string effect);
-    //void freezeDamage(string effect);
-    //void slowDamage(string effect);
-    //void confuseDamage(string effect);
+    void burnDamage(int damage, float duration);
+    void freezeDamage(int damage, float duration);
+    //void slowDamage(int damage, float duration);
+    //void confuseDamage(int damage, float duration);
 
 }

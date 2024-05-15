@@ -52,53 +52,27 @@ public class Bullet : MonoBehaviour
         }
         if (damageType == DamageType.Burning)
         {
-            IDamage dmg = collision.gameObject.GetComponent<IDamage>();
+            EDamage dmg = collision.gameObject.GetComponent<EDamage>();
 
             if (dmg != null)
             {
                 Vector3 hitPosition = collision.contacts[0].point;
                 if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
                 {
-                    dmg.takeDamage(damage, hitPosition);
+                    dmg.burnDamage(damage, duration);
                 }
             }
         }
         if (damageType == DamageType.Freezing)
         {
-            IDamage dmg = collision.gameObject.GetComponent<IDamage>();
+            EDamage dmg = collision.gameObject.GetComponent<EDamage>();
 
             if (dmg != null)
             {
                 Vector3 hitPosition = collision.contacts[0].point;
                 if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
                 {
-                    dmg.takeDamage(damage, hitPosition);
-                }
-            }
-        }
-        if (damageType == DamageType.Slowed)
-        {
-            IDamage dmg = collision.gameObject.GetComponent<IDamage>();
-
-            if (dmg != null)
-            {
-                Vector3 hitPosition = collision.contacts[0].point;
-                if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
-                {
-                    dmg.takeDamage(damage, hitPosition);
-                }
-            }
-        }
-        if (damageType == DamageType.Confused)
-        {
-            IDamage dmg = collision.gameObject.GetComponent<IDamage>();
-
-            if (dmg != null)
-            {
-                Vector3 hitPosition = collision.contacts[0].point;
-                if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
-                {
-                    dmg.takeDamage(damage, hitPosition);
+                    dmg.freezeDamage(damage, duration);
                 }
             }
         }
