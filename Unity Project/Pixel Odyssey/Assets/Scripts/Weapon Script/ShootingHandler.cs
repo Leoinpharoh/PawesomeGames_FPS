@@ -57,7 +57,7 @@ public class ShootingHandler : MonoBehaviour
     void shoot() 
     { 
         // Handles the Input of the player to fire the gun.
-        if (Input.GetButtonDown("Fire1") && !isShooting) { StartCoroutine(shooting()); }
+        if (Input.GetButtonDown("Fire1") && !isShooting) { StartCoroutine(shooting());}
     }
 
     IEnumerator shooting()
@@ -84,7 +84,8 @@ public class ShootingHandler : MonoBehaviour
 
                     // Handles the damage that the player deals to the enemy.
                     IDamage dmg = hit.collider.GetComponent<IDamage>();
-                    if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
+                    Debug.Log(hit.transform.name);
+                if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
             }
 
             // Turn off the laser.
