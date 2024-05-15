@@ -19,25 +19,39 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
 
-    
+    //status needs
+    [SerializeField] TMP_Text currentEffectText;
+    [SerializeField] public int poisonedTimer;
+    [SerializeField] public int poisonedDamage;
+    [SerializeField] public int burningTimer;
+    [SerializeField] public int burningDamage;
+    [SerializeField] public int freezingTimer;
+    [SerializeField] public int freezingDamage;
+    [SerializeField] public int slowedTimer;
+    [SerializeField] public int confusedTimer;
+
+
     //non serialized
-    //image for hp
+    //gameObject/screenflashes
     public Image playerHpBar;
     public PlayerManager playerScript;
-
     public GameObject playerFlashDamage;
-
-
+    public GameObject poisonHitScreen;
+    public GameObject burnHitScreen;
+    public GameObject freezeHitScreen;
+    public GameObject slowHitScreen;
+    public GameObject confuseHitScreen;
     public GameObject player;
 
+    //basics
     public bool isPaused;
-
     int enemyCount;
-
     string ammoCurrentType;
     int lightBullets;
     int MediumBullets;
     int HeavyBullets;
+    public int confusedDamage = 0;
+    public int slowedDamage = 0;
 
 
 
@@ -55,9 +69,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // to pause
-        if(Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel"))
         {
-            if(menuActive == null)
+            if (menuActive == null)
             {
                 statePaused();
 
@@ -97,7 +111,7 @@ public class GameManager : MonoBehaviour
         enemyCount += amount;
         //send enemy count via as string
         enemyCountText.text = enemyCount.ToString("F0");
-        if(enemyCount <= 0)
+        if (enemyCount <= 0)
         {
             statePaused();
             menuActive = menuWin;
@@ -133,5 +147,28 @@ public class GameManager : MonoBehaviour
     {
         clipDisplayAmount.text = clip.ToString(); // Update the clip display amount
 
+    }
+
+    public void playerEffect(string effect) //updates UI with current Status user is under
+    {
+        switch (effect)
+        {
+            case "Poisoned":
+                //updates the UI here
+                currentEffectText.text = "Poisoned";
+                break;
+            case "Burning":
+                currentEffectText.text = "Burning";
+                break;
+            case "Freezing":
+                currentEffectText.text = "Freezing";
+                break;
+            case "Slowed":
+                currentEffectText.text = "Slowed";
+                break;
+            case "Confused":
+                currentEffectText.text = "Confused";
+                break;
+        }
     }
 }
