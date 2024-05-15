@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
                 Vector3 hitPosition = collision.contacts[0].point;
                 if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
                 {
-                    dmg.poisonDamage(damage, duration);
+                    dmg.poisonDamage(GameManager.Instance.poisonedDamage, (float)GameManager.Instance.poisonedTimer);
                 }
             }
         }
@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
                 Vector3 hitPosition = collision.contacts[0].point;
                 if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
                 {
-                    dmg.burnDamage(damage, duration);
+                    dmg.burnDamage(GameManager.Instance.burningDamage, (float)GameManager.Instance.burningTimer);
                 }
             }
         }
@@ -72,7 +72,20 @@ public class Bullet : MonoBehaviour
                 Vector3 hitPosition = collision.contacts[0].point;
                 if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
                 {
-                    dmg.freezeDamage(damage, duration);
+                    dmg.freezeDamage(GameManager.Instance.freezingDamage, (float)GameManager.Instance.freezingTimer);
+                }
+            }
+        }
+        if (damageType == DamageType.Slowed)
+        {
+            EDamage dmg = collision.gameObject.GetComponent<EDamage>();
+
+            if (dmg != null)
+            {
+                Vector3 hitPosition = collision.contacts[0].point;
+                if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
+                {
+                    dmg.slowDamage(GameManager.Instance.slowedDamage, (float)GameManager.Instance.slowedTimer);
                 }
             }
         }
