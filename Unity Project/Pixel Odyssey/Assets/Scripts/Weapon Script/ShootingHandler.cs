@@ -11,13 +11,14 @@ public class ShootingHandler : MonoBehaviour
     public LineRenderer lineRenderer;
     [SerializeField] GameObject firePoint;
     [SerializeField] AudioSource audioSource;
-    [SerializeField] LayerMask shootableLayer;
+    [SerializeField] LayerMask shootableLayer; 
+    [SerializeField] GameObject projectileBullet;
 
     [Header("Gun Stats")]   // The stats of the gun.
     [SerializeField] int shootDmg;
     [SerializeField] int shootDist;
     [SerializeField] float shootSpeed;
-    enum WeaponType { RayCast, Laser }
+    enum WeaponType { RayCast, Laser, Projectile }
     [SerializeField] WeaponType weaponType;
 
     [Header("Ammo Stats")] // Anything having to do with the weapons ammo.
@@ -74,9 +75,12 @@ public class ShootingHandler : MonoBehaviour
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
             clip--;
             GameManager.Instance.playerClip(clip);
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
+
+            if (weaponType == WeaponType.Laser || weaponType == WeaponType.RayCast)
             {
+                RaycastHit hit;
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
+                {
                     // Shows the laser that the player has fired.
                     lineRenderer.enabled = true;
                     lineRenderer.SetPosition(0, firePoint.transform.position);
@@ -85,10 +89,13 @@ public class ShootingHandler : MonoBehaviour
                     // Handles the damage that the player deals to the enemy.
                     IDamage dmg = hit.collider.GetComponent<IDamage>();
                     Debug.Log(hit.transform.name);
-                if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
+                    if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
+                }
+            }else if (weaponType == WeaponType.Projectile)
+            {
+                Instantiate(projectileBullet, firePoint.transform.position, transform.rotation);
             }
-
-            // Turn off the laser.
+          // Turn off the laser.
             if(weaponType.ToString() == "Laser") { yield return new WaitForSeconds(LaserWaitTime); lineRenderer.enabled = false; }
         }
         // Toggle the player as no longer shooting.
@@ -104,6 +111,7 @@ public class ShootingHandler : MonoBehaviour
 
         isShooting = true;
         yield return new WaitForSeconds(reloadTime);
+        audioSource.Stop();
         if (Ammo < TilReload) // If the player doesn't have the ammo to fill the clip
         {
             clip = Ammo; // Fill the clip with the remaining ammo
