@@ -21,32 +21,30 @@ public class WeaponSwap : MonoBehaviour
             if (currentWeapon != null) {currentWeapon.SetActive(false);}
             weaponOne.SetActive(true);
             currentWeapon = weaponOne;
-            ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
-            gunScript.i = 0;
-            gunScript.isShooting = false;
-            if(gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
+            redundancy();
         }
         if(Input.GetKeyDown(KeyCode.Alpha2) && weaponTwo != null)
         {
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponTwo.SetActive(true);
             currentWeapon = weaponTwo;
-            ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
-            gunScript.i = 0;
-            gunScript.isShooting = false;
-            gunScript.lineRenderer.enabled = false;
-            if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
+            redundancy();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponThree != null)
         {
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponThree.SetActive(true);
             currentWeapon = weaponThree;
-            ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
-            gunScript.i = 0;
-            gunScript.isShooting = false;
-            gunScript.lineRenderer.enabled = false;
-            if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
+            redundancy();
         }
+    }
+
+    void redundancy()
+    {
+        ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
+        gunScript.i = 0;
+        gunScript.isShooting = false;
+        gunScript.lineRenderer.enabled = false;
+        if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
     }
 }
