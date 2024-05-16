@@ -34,16 +34,18 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool freezing;
     public bool slowed;
     public bool confused;
-    public int damageOverTimeDivider;
     private Coroutine poisonCoroutine;
     private Coroutine burnCoroutine;
     private Coroutine freezeCoroutine;
     private Coroutine slowCoroutine;
-    private Coroutine sconfuseCoroutine;
+    private Coroutine confuseCoroutine;
+    bool moveSpeedReduced;
+    int moveSpeedOriginal;
+
 
     void Start()
     {
-
+        moveSpeedOriginal = moveSpeed;
         HPOrignal = HP;
         updatePlayerUI();
     }
@@ -162,22 +164,26 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void freezeDamage(int damage, float duration)
     {
+
         if (freezing)
         {
             StopCoroutine(freezeCoroutine);
-            moveSpeed *= 2;
+            
         }
 
         freezeCoroutine = StartCoroutine(freezeMe(damage, duration));
-        moveSpeed /= 2;
     }
 
     private IEnumerator freezeMe(int damage, float duration)
     {
+        if (!moveSpeedReduced)
+        {
+            moveSpeed /= 2;
+            moveSpeedReduced = true;
+        }
         freezing = true;
         Normal = false;
         int ticks = Mathf.FloorToInt(duration);
-
         for (int i = 0; i < ticks; i++)
         {
             HP -= damage;
@@ -191,6 +197,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         freezing = false;
         Normal = true;
+        moveSpeed = moveSpeedOriginal;
+        moveSpeedReduced = false;
         StartCoroutine(effectMe("Normal"));
     }
 
@@ -199,15 +207,19 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         if (slowed)
         {
             StopCoroutine(slowCoroutine);
-            moveSpeed *= 2;
-        }
 
-        freezeCoroutine = StartCoroutine(slowMe(damage, duration));
-        moveSpeed /= 2;
+        }
+        slowCoroutine = StartCoroutine(slowMe(damage, duration));
+
     }
 
     private IEnumerator slowMe(int damage, float duration)
     {
+        if (!moveSpeedReduced)
+        {
+            moveSpeed /= 2;
+            moveSpeedReduced = true;
+        }
         slowed = true;
         Normal = false;
         int ticks = Mathf.FloorToInt(duration);
@@ -225,6 +237,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         slowed = false;
         Normal = true;
+        moveSpeed = moveSpeedOriginal;
+        moveSpeedReduced = false;
         StartCoroutine(effectMe("Normal"));
     }
 
@@ -283,6 +297,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 break;
             case "Normal":
                 GameManager.Instance.playerEffect(effect);
+                moveSpeed = moveSpeedOriginal;
                 break;
         }
 
