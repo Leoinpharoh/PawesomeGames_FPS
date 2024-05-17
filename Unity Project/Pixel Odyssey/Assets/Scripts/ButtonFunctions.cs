@@ -9,7 +9,12 @@ public class ButtonFunctions : MonoBehaviour
     public void resume()
     {
         GameManager.Instance.stateUnPaused();
-    }    
+    }
+
+    public void back()
+    {
+        GameManager.Instance.stateUnPaused();
+    }
 
     public void restart() 
     {

@@ -61,6 +61,8 @@ public class ShootingHandler : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !isShooting) { StartCoroutine(shooting());}
     }
 
+
+
     IEnumerator shooting()
     {
         if (!isShooting && GameManager.Instance.isPaused == false && clip != 0)
