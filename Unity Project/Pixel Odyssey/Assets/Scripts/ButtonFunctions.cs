@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ButtonFunctions : MonoBehaviour
 {
+
+    public Button targetButton;
     public void resume()
     {
         GameManager.Instance.stateUnPaused();
@@ -29,6 +31,28 @@ public class ButtonFunctions : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void subtitle(Button button)
+    {
+
+        Debug.Log("Button" + button.name);
+        Image buttonImage = button.GetComponent<Image>();
+        Color color = buttonImage.color;
+        Debug.Log(color.a);
+        if (color.a == 0)
+        {
+            color.a = 1;
+            SettingsManager.Instance.subtitles = true;
+        }
+        else
+        {
+            color.a = 0;
+            SettingsManager.Instance.subtitles = false;
+        }
+
+        buttonImage.color = color;
+
     }
 
     public void sceneSwitch(Button button) // Load the scene that the button is named after

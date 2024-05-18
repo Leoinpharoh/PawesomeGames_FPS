@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject sceneSelect;
+    [SerializeField] GameObject optionsMainMenu;
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int slowedTimer;
     [SerializeField] public int confusedTimer;
 
+    
 
     //non serialized
     //gameObject/screenflashes
@@ -131,6 +133,12 @@ public class GameManager : MonoBehaviour
     {
         statePaused();
         menuActive = sceneSelect;
+        menuActive.SetActive(isPaused);
+    }
+    public void optionsMain()
+    {
+        statePaused();
+        menuActive = optionsMainMenu;
         menuActive.SetActive(isPaused);
     }
 

@@ -16,10 +16,14 @@ public class CenterObjectLogger : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // Log the name of the object that was hit
-                Debug.Log("Object at center of screen: " + hit.collider.gameObject.name);
+                //Debug.Log("Object at center of screen: " + hit.collider.gameObject.name);
                 if(hit.collider.gameObject.name == "Scene Selection Screen" && !GameManager.Instance.isPaused)
                 {
                     GameManager.Instance.sceneSelectMain();
+                }
+                if (hit.collider.gameObject.name == "Options Screen" && !GameManager.Instance.isPaused)
+                {
+                    GameManager.Instance.optionsMain();
                 }
             }
             else
