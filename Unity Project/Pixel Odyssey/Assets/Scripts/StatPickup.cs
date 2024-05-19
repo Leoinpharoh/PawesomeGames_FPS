@@ -28,6 +28,7 @@ public class StatPickup : MonoBehaviour
                     other.gameObject.GetComponent<PlayerManager>().freezing = false;
                     other.gameObject.GetComponent<PlayerManager>().slowed = false;
                     other.gameObject.GetComponent<PlayerManager>().confused = false;
+
                     break;
             }
             GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
