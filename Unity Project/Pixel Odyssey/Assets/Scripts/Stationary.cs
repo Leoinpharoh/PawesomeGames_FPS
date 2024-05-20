@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class Stationary : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
