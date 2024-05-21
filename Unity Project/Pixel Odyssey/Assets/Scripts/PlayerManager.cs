@@ -78,13 +78,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Sprint()
     {
-        if(Input.GetButtonDown("Sprint"))
+        if(!confused && !freezing && !slowed)
         {
-            moveSpeed *= dashMultiplier;
-        }
-        else if (Input.GetButtonUp("Sprint"))
-        {
-            moveSpeed /= dashMultiplier;
+            if (Input.GetButtonDown("Sprint"))
+            {
+                moveSpeed *= dashMultiplier;
+            }
+            else if (Input.GetButtonUp("Sprint"))
+            {
+                moveSpeed /= dashMultiplier;
+            }
         }
     }
 
@@ -239,6 +242,36 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         Normal = true;
         moveSpeed = moveSpeedOriginal;
         moveSpeedReduced = false;
+        StartCoroutine(effectMe("Normal"));
+    }
+    public void confuseDamage(int damage, float duration)
+    {
+        if (confused)
+        {
+            StopCoroutine(confuseCoroutine);
+        }
+        confuseCoroutine = StartCoroutine(confuseMe(damage, duration));
+    }
+
+    private IEnumerator confuseMe(int damage, float duration)
+    {
+        Normal = false;
+        confused = true;
+        int ticks = Mathf.FloorToInt(duration);
+
+        for (int i = 0; i < ticks; i++)
+        {
+            updatePlayerUI();
+            StartCoroutine(effectMe("Confused"));
+            if (HP <= 0)
+            {
+                GameManager.Instance.youLose();
+            }
+            yield return new WaitForSeconds(1);
+        }
+        confused = false;
+        Normal = true;
+        moveSpeed = moveSpeedOriginal;
         StartCoroutine(effectMe("Normal"));
     }
 

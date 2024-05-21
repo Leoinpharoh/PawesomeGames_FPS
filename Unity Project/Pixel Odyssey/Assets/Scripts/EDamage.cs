@@ -8,6 +8,6 @@ public interface EDamage
     void burnDamage(int damage, float duration);
     void freezeDamage(int damage, float duration);
     void slowDamage(int damage, float duration);
-    //void confuseDamage(int damage, float duration);
+    void confuseDamage(int damage, float duration);
 
 }

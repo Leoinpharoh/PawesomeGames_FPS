@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3016006575053961251}
   - component: {fileID: 1243531323888914467}
   m_Layer: 0
-  m_Name: FreezingBullet
+  m_Name: ConfusingBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.25
+    widthMultiplier: 0.15
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -140,7 +140,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.41314697
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -152,8 +152,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.9440856, b: 1, a: 0.5647059}
-      key1: {r: 1, g: 1, b: 1, a: 0.5647059}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 0, b: 0.82666826, a: 0.4117647}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -161,7 +161,7 @@ TrailRenderer:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65021
+      ctime1: 65535
       ctime2: 0
       ctime3: 0
       ctime4: 0

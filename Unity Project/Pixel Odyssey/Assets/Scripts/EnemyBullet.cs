@@ -40,6 +40,7 @@ public class EnemyBullet : MonoBehaviour
                     HandleSlowedDamage(collision);
                     break;
                 case EnemyParams.DamageType.Confused: // Check if the damage type is Confused
+                    HandleConfusedDamage(collision);
                     break;
             }
 
@@ -116,6 +117,20 @@ public class EnemyBullet : MonoBehaviour
             {
                 Idmg.takeDamage(enemyParams.rangedDamage, hitPosition); // Call the takeDamage function from the IDamage component
                 dmg.slowDamage(enemyParams.effectDamage, enemyParams.effectDuration); // Call the slowDamage function from the EDamage component
+            }
+        }
+    }
+    private void HandleConfusedDamage(Collision collision)
+    {
+        EDamage dmg = collision.gameObject.GetComponent<EDamage>(); // Get the EDamage component from the collided object
+        IDamage Idmg = collision.gameObject.GetComponent<IDamage>();
+        if (dmg != null) // Check if the EDamage component is not null
+        {
+            Vector3 hitPosition = collision.contacts[0].point; // Get the hit position of the bullet
+            if (collision.gameObject.CompareTag("Player")) // Check if the collided object is the player
+            {
+                Idmg.takeDamage(enemyParams.rangedDamage, hitPosition); // Call the takeDamage function from the IDamage component
+                dmg.confuseDamage(enemyParams.effectDamage, enemyParams.effectDuration); // Call the slowDamage function from the EDamage component
             }
         }
     }
