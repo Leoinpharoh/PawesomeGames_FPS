@@ -57,9 +57,21 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             jumpCounter = 0;
             playerVelocity = Vector3.zero;
         }
-        moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
-            (Input.GetAxis("Vertical") * transform.forward).normalized;
-        characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+
+        if(!confused)
+        {
+            moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+                (Input.GetAxis("Vertical") * transform.forward).normalized;
+            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            moveDirection = (Input.GetAxis("Vertical") * transform.right) +
+                (Input.GetAxis("Horizontal") * transform.forward);
+            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+        }
+        
+
 
         Sprint();
 
