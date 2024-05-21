@@ -20,6 +20,7 @@ public class EnemyParams : ScriptableObject
     [Range(0, 100)] public int rangedRange;
     [Range(0.1f, 20)] public float effectDuration;
     [Range(0.1f, 20)] public float bulletSpeed;
+    [Range(0, 180)] public float viewAngle;
     [Range(2, 10)] public int destroyTime;
 
     public enum EnemyType { Melee, Ranged, Combination, Stationary, Exploding };
