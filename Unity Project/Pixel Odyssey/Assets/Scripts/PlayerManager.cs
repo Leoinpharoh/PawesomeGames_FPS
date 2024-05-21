@@ -32,6 +32,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [HideInInspector] public float OSOrignal;
     public int OSTimer = 0;
     public bool OSRefilling;
+    private bool isWaitingToRefill = false;
+    private Coroutine refillCoroutine;
+    private Coroutine waitCoroutine;
 
     //status effect bools
     public bool Normal = true;
@@ -81,13 +84,24 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
 
         Sprint();
-        
-        if(OS < OSOrignal)
+        if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
         {
-            refillOS();
+            isWaitingToRefill = true;
+            StartCoroutine(WaitBeforeRefill());
+            Debug.Log("Starting Wait Before Refill");
         }
 
-        if(Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
+        if (OSTimer >= 5)
+        {
+            OS = OSOrignal;
+            updatePlayerUI();
+            OSTimer = 0;
+            OSRefilling = false;
+            isWaitingToRefill = false;
+            Debug.Log("Refilling Complete");
+        }
+
+        if (Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
         {
             jumpCounter++;
             // handles the audio for jumping. 
@@ -114,30 +128,67 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             }
         }
     }
-
-    public void refillOS()
+    IEnumerator WaitBeforeRefill()
     {
-        while (OS != OSOrignal)
+        yield return new WaitForSeconds(5);
+        if (!OSRefilling && OS < OSOrignal)
         {
-            OSTimer++;
-            if (OSTimer >= 5)
-            {
-                OS++;
-                if(OS == OSOrignal)
-                {
-                    OSTimer = 0;
-                }
-            }
+            OSRefilling = true;
+            refillCoroutine = StartCoroutine(refillOS());
+            Debug.Log("Refilling");
         }
+        waitCoroutine = null; // Reset the waitCoroutine reference
+    }
+
+    IEnumerator refillOS()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Debug.Log("Incrementing Timer");
+            OSTimer++;
+            Debug.Log("Waiting 1 Second");
+            yield return new WaitForSeconds(1);
+        }
+        refillCoroutine = null; // Reset the refillCoroutine reference
     }
 
     public void takeDamage(int amount, Vector3 hitPosition)
     {
+        OSTimer = 0;
+        OSRefilling = false;
+        isWaitingToRefill = false;
+
+        // Stop the refill coroutine if it is running
+        if (refillCoroutine != null)
+        {
+            StopCoroutine(refillCoroutine);
+            refillCoroutine = null;
+        }
+
+        // Stop the wait coroutine if it is running
+        if (waitCoroutine != null)
+        {
+            StopCoroutine(waitCoroutine);
+            waitCoroutine = null;
+        }
+
         if (OS > 0)
         {
-            OS -= amount;
-            StartCoroutine(hitMe());
-            updatePlayerUI();
+            if (OS - amount < 0)
+            {
+                Debug.Log("True 1");
+                HP -= amount - OS;
+                OS = 0;
+                StartCoroutine(hitMe());
+                updatePlayerUI();
+            }
+            else
+            {
+                Debug.Log("True 2");
+                OS -= amount;
+                StartCoroutine(hitMe());
+                updatePlayerUI();
+            }
         }
         else if (OS <= 0)
         {
