@@ -11,11 +11,12 @@ public class GameManager : MonoBehaviour
     //create the gameManager
 
     //Fields for menus
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
+    [SerializeField] public GameObject menuActive;
+    [SerializeField] public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject sceneSelect;
+    [SerializeField] public GameObject menuOptions;
     [SerializeField] GameObject optionsMainMenu;
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text ammoDisplayAmount;
@@ -107,6 +108,7 @@ public class GameManager : MonoBehaviour
         //allow time to pass again
         Time.timeScale = 1;
         menuActive.SetActive(isPaused);
+        menuOptions.SetActive(false);
         menuActive = null;
     }
     public void updateGameGoal(int amount)
@@ -139,6 +141,13 @@ public class GameManager : MonoBehaviour
     {
         statePaused();
         menuActive = optionsMainMenu;
+        menuActive.SetActive(isPaused);
+    }
+
+    public void optionsMenu()
+    {
+        statePaused();
+        menuActive = menuOptions;
         menuActive.SetActive(isPaused);
     }
 

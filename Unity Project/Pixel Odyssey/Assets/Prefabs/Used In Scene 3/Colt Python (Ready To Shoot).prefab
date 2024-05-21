@@ -131,14 +131,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootDmg: 3
-  shootDist: 5000
-  shootSpeed: 0.1
+  lineRenderer: {fileID: 0}
+  firePoint: {fileID: 0}
+  audioSource: {fileID: 0}
   shootableLayer:
     serializedVersion: 2
     m_Bits: 8
-  shootAudioClip: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
-  audioSource: {fileID: 0}
+  projectileBullet: {fileID: 0}
+  shootDmg: 3
+  shootDist: 5000
+  shootSpeed: 0.1
+  weaponType: 0
+  Ammo: 0
+  clip: 0
+  TilReload: 0
+  reloadTime: 0
+  LaserWaitTime: 0
+  ammoType: 0
+  audioSFXShoot: {fileID: 0}
+  audioSFXReload: {fileID: 0}
+  i: 0
+  isShooting: 0
 --- !u!82 &6143048874403792255
 AudioSource:
   m_ObjectHideFlags: 0
@@ -148,7 +161,7 @@ AudioSource:
   m_GameObject: {fileID: 5556014298121112013}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

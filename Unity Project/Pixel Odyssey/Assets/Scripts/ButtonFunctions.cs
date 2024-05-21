@@ -24,6 +24,17 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.stateUnPaused();
     }
+
+    public void options()
+    {
+        if (GameManager.Instance.menuActive != null)
+        {
+            GameManager.Instance.menuActive.SetActive(false); // Deactivate the current active menu
+        }
+
+        GameManager.Instance.menuOptions.SetActive(true); // Activate the options menu
+        GameManager.Instance.menuActive = GameManager.Instance.menuOptions; // Set the active menu to the options menu
+    }
     public void quit()
     {
 #if UNITY_EDITOR

@@ -55,18 +55,19 @@ MonoBehaviour:
   shootableLayer:
     serializedVersion: 2
     m_Bits: 8
+  projectileBullet: {fileID: 0}
   shootDmg: 5
   shootDist: 20
   shootSpeed: 0.5
   weaponType: 1
   Ammo: 8
+  clip: 0
   TilReload: 0
   reloadTime: 0
   LaserWaitTime: 0.2
   ammoType: 1
   audioSFXShoot: {fileID: 8300000, guid: fadb21e6101f76a41b79c9f8808e95f8, type: 3}
   audioSFXReload: {fileID: 0}
-  iTwo: 0
   i: 0
   isShooting: 0
 --- !u!82 &4328450699835256324
@@ -78,7 +79,7 @@ AudioSource:
   m_GameObject: {fileID: 1264114196097254582}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
