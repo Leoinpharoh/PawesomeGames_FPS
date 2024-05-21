@@ -21,11 +21,20 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] AudioClip jumpAudio;
 
     public float HP;
-
+    
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
     [HideInInspector]public float HPOrignal;
+
+    //overshield
+    public float OS;
+    [HideInInspector] public float OSOrignal;
+    public int OSTimer = 0;
+    public bool OSRefilling;
+    private bool isWaitingToRefill = false;
+    private Coroutine refillCoroutine;
+    private Coroutine waitCoroutine;
 
     //status effect bools
     public bool Normal = true;
@@ -47,6 +56,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         moveSpeedOriginal = moveSpeed;
         HPOrignal = HP;
+        OSOrignal = OS;
         updatePlayerUI();
     }
     void Update()
@@ -74,8 +84,24 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
 
         Sprint();
+        if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
+        {
+            isWaitingToRefill = true;
+            StartCoroutine(WaitBeforeRefill());
+            Debug.Log("Starting Wait Before Refill");
+        }
 
-        if(Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
+        if (OSTimer >= 5)
+        {
+            OS = OSOrignal;
+            updatePlayerUI();
+            OSTimer = 0;
+            OSRefilling = false;
+            isWaitingToRefill = false;
+            Debug.Log("Refilling Complete");
+        }
+
+        if (Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
         {
             jumpCounter++;
             // handles the audio for jumping. 
@@ -102,16 +128,77 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             }
         }
     }
+    IEnumerator WaitBeforeRefill()
+    {
+        yield return new WaitForSeconds(5);
+        if (!OSRefilling && OS < OSOrignal)
+        {
+            OSRefilling = true;
+            refillCoroutine = StartCoroutine(refillOS());
+            Debug.Log("Refilling");
+        }
+        waitCoroutine = null; // Reset the waitCoroutine reference
+    }
 
+    IEnumerator refillOS()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Debug.Log("Incrementing Timer");
+            OSTimer++;
+            Debug.Log("Waiting 1 Second");
+            yield return new WaitForSeconds(1);
+        }
+        refillCoroutine = null; // Reset the refillCoroutine reference
+    }
 
     public void takeDamage(int amount, Vector3 hitPosition)
     {
-        HP -= amount;
-        StartCoroutine(hitMe());
-        updatePlayerUI();
-        if (HP <= 0)
+        OSTimer = 0;
+        OSRefilling = false;
+        isWaitingToRefill = false;
+
+        // Stop the refill coroutine if it is running
+        if (refillCoroutine != null)
         {
-            GameManager.Instance.youLose();
+            StopCoroutine(refillCoroutine);
+            refillCoroutine = null;
+        }
+
+        // Stop the wait coroutine if it is running
+        if (waitCoroutine != null)
+        {
+            StopCoroutine(waitCoroutine);
+            waitCoroutine = null;
+        }
+
+        if (OS > 0)
+        {
+            if (OS - amount < 0)
+            {
+                Debug.Log("True 1");
+                HP -= amount - OS;
+                OS = 0;
+                StartCoroutine(hitMe());
+                updatePlayerUI();
+            }
+            else
+            {
+                Debug.Log("True 2");
+                OS -= amount;
+                StartCoroutine(hitMe());
+                updatePlayerUI();
+            }
+        }
+        else if (OS <= 0)
+        {
+            HP -= amount;
+            StartCoroutine(hitMe());
+            updatePlayerUI();
+            if (HP <= 0)
+            {
+                GameManager.Instance.youLose();
+            }
         }
     }
     public void poisonDamage(int damage, float duration)
@@ -298,6 +385,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
+        GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
     }
     IEnumerator effectMe(string effect) //used to flash the screen based on what effect user has
     {

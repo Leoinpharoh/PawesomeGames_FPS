@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     //non serialized
     //gameObject/screenflashes
     public Image playerHpBar;
+    public Image playerOS;
     public PlayerManager playerScript;
     public GameObject playerFlashDamage;
     public GameObject poisonHitScreen;
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
                 menuActive = menuPause;
                 menuActive.SetActive(isPaused);
             }
-            else if (menuActive == menuPause)
+            else if (menuActive == menuPause || menuActive == menuOptions)
             {
                 stateUnPaused();
             }

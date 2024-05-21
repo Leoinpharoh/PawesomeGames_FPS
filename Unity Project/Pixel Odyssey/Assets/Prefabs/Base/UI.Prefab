@@ -973,7 +973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5315606297581428852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1203,7 +1203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1321145856237996208
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1473,7 +1473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9101375548133142914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1743,7 +1743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2897226639756907934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2304,7 +2304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5303891515530824293
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2879,6 +2879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3495130359615274089}
   - component: {fileID: 6195030733689483051}
+  - component: {fileID: 5499480004063588319}
   - component: {fileID: 1665229104415444466}
   m_Layer: 5
   m_Name: OptionsMenu
@@ -2920,6 +2921,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860135279857280089}
   m_CullTransparentMesh: 1
+--- !u!114 &5499480004063588319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860135279857280089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90c717e87365e7489d01fbad3019e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subtitles: 1
+  soundEffects: 1
+  music: 1
+  voice: 1
+  master: 1
+  audioMixer: {fileID: 24100000, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
+  soundEffectsSlider: {fileID: 5278393953148157320}
+  musicSlider: {fileID: 8797778661384662551}
+  voiceSlider: {fileID: 340282211161856050}
+  masterSlider: {fileID: 8249454629463907098}
 --- !u!114 &1665229104415444466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4890,7 +4913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5549022774581026735
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7297,7 +7320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7802278976011891784
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8695,7 +8718,7 @@ MonoBehaviour:
   menuWin: {fileID: 4041587133543925537}
   menuLose: {fileID: 4041587134660070408}
   sceneSelect: {fileID: 1225575540604628188}
-  menuOptions: {fileID: 0}
+  menuOptions: {fileID: 5379155198070590970}
   optionsMainMenu: {fileID: 1860135279857280089}
   enemyCountText: {fileID: 891432527550119226}
   ammoDisplayAmount: {fileID: 5028909106148066738}
@@ -9847,7 +9870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4041587134510328667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9979,7 +10002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4041587134587269711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10342,7 +10365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6538988232096456843
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12366,7 +12389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1042227381577831614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12859,6 +12882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 329576438262048074}
   - component: {fileID: 4531575406455023529}
+  - component: {fileID: 8010400721077807370}
   - component: {fileID: 3856371763554926240}
   m_Layer: 5
   m_Name: Option Menu
@@ -12908,6 +12932,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379155198070590970}
   m_CullTransparentMesh: 1
+--- !u!114 &8010400721077807370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5379155198070590970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90c717e87365e7489d01fbad3019e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subtitles: 1
+  soundEffects: 1
+  music: 1
+  voice: 1
+  master: 1
+  audioMixer: {fileID: 24100000, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
+  soundEffectsSlider: {fileID: 5923272674924980837}
+  musicSlider: {fileID: 6459438227983912650}
+  voiceSlider: {fileID: 5573029664769433465}
+  masterSlider: {fileID: 8419951803264778175}
 --- !u!114 &3856371763554926240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13599,7 +13645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7297397813722339570
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14597,7 +14643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6108854349406781050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14833,7 +14879,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1336337354316825984}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4041587133659888989}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: options
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6677525377431216759
 GameObject:
   m_ObjectHideFlags: 0
@@ -14887,7 +14945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &703860558295028830
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17334,7 +17392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &663441609487599054
 RectTransform:
   m_ObjectHideFlags: 0
