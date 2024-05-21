@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     //non serialized
     //gameObject/screenflashes
     public Image playerHpBar;
+    public Image playerOS;
     public PlayerManager playerScript;
     public GameObject playerFlashDamage;
     public GameObject poisonHitScreen;

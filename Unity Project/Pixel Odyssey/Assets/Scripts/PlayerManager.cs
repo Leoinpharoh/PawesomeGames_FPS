@@ -21,11 +21,17 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] AudioClip jumpAudio;
 
     public float HP;
-
+    
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
     [HideInInspector]public float HPOrignal;
+
+    //overshield
+    public float OS;
+    [HideInInspector] public float OSOrignal;
+    public int OSTimer = 0;
+    public bool OSRefilling;
 
     //status effect bools
     public bool Normal = true;
@@ -47,6 +53,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         moveSpeedOriginal = moveSpeed;
         HPOrignal = HP;
+        OSOrignal = OS;
         updatePlayerUI();
     }
     void Update()
@@ -74,6 +81,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
 
         Sprint();
+        
+        if(OS < OSOrignal)
+        {
+            refillOS();
+        }
 
         if(Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
         {
@@ -103,15 +115,39 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
     }
 
+    public void refillOS()
+    {
+        while (OS != OSOrignal)
+        {
+            OSTimer++;
+            if (OSTimer >= 5)
+            {
+                OS++;
+                if(OS == OSOrignal)
+                {
+                    OSTimer = 0;
+                }
+            }
+        }
+    }
 
     public void takeDamage(int amount, Vector3 hitPosition)
     {
-        HP -= amount;
-        StartCoroutine(hitMe());
-        updatePlayerUI();
-        if (HP <= 0)
+        if (OS > 0)
         {
-            GameManager.Instance.youLose();
+            OS -= amount;
+            StartCoroutine(hitMe());
+            updatePlayerUI();
+        }
+        else if (OS <= 0)
+        {
+            HP -= amount;
+            StartCoroutine(hitMe());
+            updatePlayerUI();
+            if (HP <= 0)
+            {
+                GameManager.Instance.youLose();
+            }
         }
     }
     public void poisonDamage(int damage, float duration)
@@ -298,6 +334,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void updatePlayerUI()
     {
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
+        GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
     }
     IEnumerator effectMe(string effect) //used to flash the screen based on what effect user has
     {
