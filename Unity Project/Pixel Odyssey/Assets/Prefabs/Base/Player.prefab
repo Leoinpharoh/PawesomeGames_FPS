@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98434688472806489}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071058, z: -0, w: 0.7071078}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 62.25, y: 1, z: 10.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   Audio: {fileID: 98434688472806495}
   characterControl: {fileID: 98434688472806491}
-  moveSpeed: 5
+  moveSpeed: 4
   dashMultiplier: 2
   rb: {fileID: 5068799564735208622}
   maxJumps: 2
@@ -459,7 +459,7 @@ MonoBehaviour:
   shootDist: 5000
   shootSpeed: 0.1
   weaponType: 0
-  Ammo: 32
+  Ammo: 50
   clip: 0
   TilReload: 6
   reloadTime: 1.5
@@ -478,7 +478,7 @@ AudioSource:
   m_GameObject: {fileID: 5620892561698442924}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -632,7 +632,7 @@ LineRenderer:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 1, g: 1, b: 1, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -640,7 +640,7 @@ LineRenderer:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 65535
+      ctime2: 0
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -655,7 +655,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -998,7 +998,7 @@ AudioSource:
   m_GameObject: {fileID: 7307349272792044303}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
