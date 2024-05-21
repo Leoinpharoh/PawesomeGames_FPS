@@ -10,15 +10,18 @@ public class ShootingHandler : MonoBehaviour
     [Header("Outside Referances")]  // Outside references.
     public LineRenderer lineRenderer;
     [SerializeField] GameObject firePoint;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource fireAudioSource;
+    [SerializeField] AudioSource reloadAudioSource;
     [SerializeField] LayerMask shootableLayer; 
     [SerializeField] GameObject projectileBullet;
+    Vector3 dir;
 
     [Header("Gun Stats")]   // The stats of the gun.
     [SerializeField] int shootDmg;
     [SerializeField] int shootDist;
     [SerializeField] float shootSpeed;
-    enum WeaponType { RayCast, Laser, Projectile }
+    [SerializeField] int numberOfRays; // This can be higher so that the weapon can be a burst gun.
+    enum WeaponType { RayCast, Laser, Projectile, SpreadRay }
     [SerializeField] WeaponType weaponType;
 
     [Header("Ammo Stats")] // Anything having to do with the weapons ammo.
@@ -71,32 +74,19 @@ public class ShootingHandler : MonoBehaviour
     {
         if (!isShooting && GameManager.Instance.isPaused == false && clip != 0)
         {
-
             // Play audio and mark that the player is shooting.
             isShooting = true;
-            audioSource.clip = audioSFXShoot;
-            audioSource.Play();
+            fireAudioSource.clip = audioSFXShoot;
+            fireAudioSource.Play();
 
             // Apply ammo changes
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
             clip--;
             GameManager.Instance.playerClip(clip);
 
-            if (weaponType == WeaponType.Laser || weaponType == WeaponType.RayCast)
+            if (weaponType == WeaponType.Laser || weaponType == WeaponType.RayCast || weaponType == WeaponType.SpreadRay)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, shootableLayer))
-                {
-                    // Shows the laser that the player has fired.
-                    lineRenderer.enabled = true;
-                    lineRenderer.SetPosition(0, firePoint.transform.position);
-                    lineRenderer.SetPosition(1, hit.point);
-
-                    // Handles the damage that the player deals to the enemy.
-                    IDamage dmg = hit.collider.GetComponent<IDamage>();
-                    Debug.Log(hit.transform.name);
-                    if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
-                }
+                for (int i = 0; i < numberOfRays; i++) { rayDraw(); }   // Fire a bullet in a straight line.          
             }else if (weaponType == WeaponType.Projectile)
             {
                 Instantiate(projectileBullet, firePoint.transform.position, transform.rotation);
@@ -112,12 +102,12 @@ public class ShootingHandler : MonoBehaviour
     // Handles reloading the gun when the player runs out of bullets.
     IEnumerator reloading()
     {
-        audioSource.clip = audioSFXReload;
-        audioSource.Play();
+        reloadAudioSource.clip = audioSFXReload;
+        reloadAudioSource.Play();
 
         isShooting = true;
         yield return new WaitForSeconds(reloadTime);
-        audioSource.Stop();
+        reloadAudioSource.Stop();
         if (Ammo < TilReload) // If the player doesn't have the ammo to fill the clip
         {
             clip = Ammo; // Fill the clip with the remaining ammo
@@ -132,5 +122,28 @@ public class ShootingHandler : MonoBehaviour
         GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
     }
 
+    private void rayDraw()
+    {
+        if (weaponType == WeaponType.SpreadRay) // Fire bullets in a randomized spread.
+        {
+            dir = Camera.main.transform.forward;
+            Vector3 spread = Vector3.zero;
+            spread += Camera.main.transform.up * Random.Range(-1f, 1f);
+            spread += Camera.main.transform.right * Random.Range(-1f, 1f);
+            dir += spread.normalized * Random.Range(0f, 0.2f);
+        }
+        else { dir = Camera.main.transform.forward; }
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, dir, out hit, Mathf.Infinity, shootableLayer))
+        {
+            // Shows the laser that the player has fired.
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, firePoint.transform.position);
+            lineRenderer.SetPosition(1, hit.point);
 
+            // Handles the damage that the player deals to the enemy.
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            if (dmg != null) { dmg.takeDamage(shootDmg, hit.point); }
+        }
+    }
 }

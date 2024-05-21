@@ -133,7 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   firePoint: {fileID: 0}
-  audioSource: {fileID: 0}
+  fireAudioSource: {fileID: 0}
+  reloadAudioSource: {fileID: 0}
   shootableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -141,6 +142,7 @@ MonoBehaviour:
   shootDmg: 3
   shootDist: 5000
   shootSpeed: 0.1
+  numberOfRays: 0
   weaponType: 0
   Ammo: 0
   clip: 0
