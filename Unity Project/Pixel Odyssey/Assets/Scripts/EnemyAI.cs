@@ -14,6 +14,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] EnemyParams enemyParams; // Reference to the EnemyParams ScriptableObject
     bool isAttacking = false;
     bool playerInRange = false;
+    bool playerInMeleeAttackRange = false;
+    bool playerInRangedAttackRange = false;
+    float meleeRange;
+    float rangedRange;
     private Transform playerTransform;
 
     EnemyParams.EnemyType enemyType; // references the enemy type from the EnemyParams scriptable object
@@ -30,10 +34,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         triggerCollider.isTrigger = true;
         agent.acceleration = enemyParams.Acceleration;
         agent.speed = enemyParams.movementSpeed;
+        meleeRange = enemyParams.meleeRange;
+        rangedRange = enemyParams.rangedRange;
         playerTransform = GameManager.Instance.player.transform; // Get the player's transform from the GameManager
         if (enemyType == EnemyParams.EnemyType.Ranged)
         {
-            agent.stoppingDistance = enemyParams.attackRange - 3;
+            agent.stoppingDistance = enemyParams.rangedRange - 3;
             if (agent.stoppingDistance < 1)
             {
                 agent.stoppingDistance = 1;
@@ -41,7 +47,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         else
         {
-            agent.stoppingDistance = enemyParams.attackRange;
+            agent.stoppingDistance = enemyParams.rangedRange;
         }
 
 
@@ -52,28 +58,37 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+//Wave Based Enemy=======================================================
         if (enemyDetection == EnemyParams.DetectionType.Wave)
         {
             agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
-        }
-        if (!isAttacking && enemyType == EnemyParams.EnemyType.Ranged && playerInRange) // Check if the enemy is a Ranged enemy and is not shooting
-        {
-            StartCoroutine(shoot()); // Start the shoot coroutine
-        }
-
-        if (playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave) // Check if the player is in range and the enemy is not a Stationary enemy
-        {
-            Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
-            agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
-            if (!isAttacking && enemyType == EnemyParams.EnemyType.Ranged) // Check if the enemy is a Ranged enemy and is not shooting
+            if (!isAttacking && enemyType == EnemyParams.EnemyType.Ranged && playerInRange) // Check if the enemy is a Ranged enemy and is not shooting
             {
                 StartCoroutine(shoot()); // Start the shoot coroutine
             }
         }
+//Wave Based Enemy=======================================================
 
-        if(playerInRange && enemyType == EnemyParams.EnemyType.Stationary)
+//Line of Sight Enemy=======================================================
+        if (playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave) // Check if the player is in range and the enemy is not a Stationary enemy
+        {
+            if (enemyType == EnemyParams.EnemyType.Ranged)
+            {
+                Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
+                agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
+                if (!isAttacking) // Check if the enemy is a Ranged enemy and is not shooting
+                {
+                    StartCoroutine(shoot()); // Start the shoot coroutine
+                }
+            }
+            
+        }
+//Line of Sight Enemy=======================================================
+
+//Stationary Enemy=======================================================
+        if (playerInRange && enemyType == EnemyParams.EnemyType.Stationary)
         {
             Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
@@ -83,6 +98,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 StartCoroutine(shoot()); // Start the shoot coroutine
             }
         }
+//Stationary Enemy=======================================================
     }
 
     void OnTriggerEnter(Collider other)

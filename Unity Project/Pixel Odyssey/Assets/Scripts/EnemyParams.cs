@@ -16,7 +16,8 @@ public class EnemyParams : ScriptableObject
     [Range(1, 20)] public int meleeDamage;
     [Range(1, 20)] public int effectDamage;
     [Range(0, 100)] public int lineOfSightRange;
-    [Range(0, 100)] public int attackRange;
+    [Range(0, 100)] public int meleeRange;
+    [Range(0, 100)] public int rangedRange;
     [Range(0.1f, 20)] public float effectDuration;
     [Range(0.1f, 20)] public float bulletSpeed;
     [Range(2, 10)] public int destroyTime;
