@@ -45,15 +45,19 @@ public class ShootingHandler : MonoBehaviour
     }
     private void Update()
     {
-        shoot();
+        //if game is unpaused all the code below
+        if (!GameManager.Instance.isPaused)
+        {
+            shoot();
 
-        // This is used to ensure that the correct ammo count is displayed.
-        if (i == 0) { GameManager.Instance.playerAmmo(ammoType.ToString(), (Ammo));i = 1; }
+            // This is used to ensure that the correct ammo count is displayed.
+            if (i == 0) { GameManager.Instance.playerAmmo(ammoType.ToString(), (Ammo)); i = 1; }
 
-        GameManager.Instance.playerClip(clip);
+            GameManager.Instance.playerClip(clip);
 
-        // Handles the Input of the player reloading the gun.
-        if (Input.GetKeyDown(KeyCode.R) && !isShooting){ StartCoroutine(reloading()); }
+            // Handles the Input of the player reloading the gun.
+            if (Input.GetKeyDown(KeyCode.R) && !isShooting) { StartCoroutine(reloading()); }
+        }
     }
     void shoot() 
     { 
