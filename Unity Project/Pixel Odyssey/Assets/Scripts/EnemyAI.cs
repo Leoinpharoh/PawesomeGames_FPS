@@ -66,6 +66,14 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
+        if(animSpeed == 0 && canSeePlayer() == true)
+        {
+            anim.SetBool("isStopped", true);
+        }
+        else
+        {
+            anim.SetBool("isStopped", false);
+        }
 //Wave Based Enemy=======================================================
         if (enemyDetection == EnemyParams.DetectionType.Wave)
         {
@@ -80,8 +88,8 @@ public class EnemyAI : MonoBehaviour, IDamage
                 StartCoroutine(meleeAttack());
             }
         }
-//Wave Based Enemy=======================================================
-
+        //Wave Based Enemy=======================================================
+        anim.SetBool("canSeePlayer", canSeePlayer());
 //Line of Sight Enemy=======================================================
         if (playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && canSeePlayer()) // Check if the player is in range and the enemy is not a Stationary enemy
         {
@@ -246,7 +254,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator Death() // Coroutine to handle the enemy's death
     {
-        yield return new WaitForSeconds(1); // Wait for the destroyTime from the EnemyParams scriptable object
+        yield return new WaitForSeconds(2); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
         GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
     }
@@ -321,6 +329,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
                 
                 return true; // Return true
+
             }
         }
         return false; // Return false
