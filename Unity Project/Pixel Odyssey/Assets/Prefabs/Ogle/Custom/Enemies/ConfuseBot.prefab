@@ -474,7 +474,7 @@ Transform:
   m_GameObject: {fileID: 1443731835127992613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -924,7 +924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2354464303489731459}
-  - component: {fileID: 93716880300154932}
+  - component: {fileID: 1967487344436472619}
   - component: {fileID: 5381871684170579662}
   - component: {fileID: 3389618441031181270}
   - component: {fileID: 1640394217941867457}
@@ -952,14 +952,14 @@ Transform:
   - {fileID: 4809690834898243247}
   - {fileID: 6897663700417615340}
   - {fileID: 2296054626073573665}
-  - {fileID: 7951295226592670848}
   - {fileID: 6327962466426878491}
   - {fileID: 7442498009557610561}
   - {fileID: 2189825007661027516}
   - {fileID: 3952203183399764562}
+  - {fileID: 7951295226592670848}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &93716880300154932
+--- !u!114 &1967487344436472619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -968,21 +968,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2910056126148820530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 233756a354853824b890d02ab03a899a, type: 3}
+  m_Script: {fileID: 11500000, guid: b64a19a1163ed2f44bdf2ba1bb58573f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 3389618441031181270}
-  modelBody: {fileID: 13700004, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelArm1: {fileID: 13700000, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelArm2: {fileID: 13700002, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelFeet: {fileID: 13700006, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelHead: {fileID: 13700008, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelLegs: {fileID: 13700010, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelRifle: {fileID: 13700012, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
+  model: {fileID: 2330449893146715586}
   shootPos: {fileID: 4233299504914876516}
   headPos: {fileID: 2314668817315425711}
   triggerCollider: {fileID: 7039128427525477809}
-  enemyParams: {fileID: 11400000, guid: 5a415333f65c22448847552abfd39ac1, type: 2}
+  enemyParams: {fileID: 11400000, guid: 50f706e564bcb614ebf001a331889272, type: 2}
 --- !u!95 &5381871684170579662
 Animator:
   serializedVersion: 5

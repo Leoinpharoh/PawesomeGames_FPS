@@ -792,7 +792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7933043018752747682}
-  - component: {fileID: 4921105505548903672}
+  - component: {fileID: 5697737458272714169}
   - component: {fileID: 582521786729824930}
   - component: {fileID: 1556896273601368902}
   - component: {fileID: 6364029241294744410}
@@ -813,7 +813,7 @@ Transform:
   m_GameObject: {fileID: 2313320119930159705}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.2678528, z: -0, w: 0.9634598}
-  m_LocalPosition: {x: -189.2706, y: 0, z: 9.08658}
+  m_LocalPosition: {x: -156.55624, y: 0, z: 5.5028644}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -827,7 +827,7 @@ Transform:
   - {fileID: 682113681748278873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4921105505548903672
+--- !u!114 &5697737458272714169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -836,21 +836,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2313320119930159705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 233756a354853824b890d02ab03a899a, type: 3}
+  m_Script: {fileID: 11500000, guid: b64a19a1163ed2f44bdf2ba1bb58573f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1556896273601368902}
-  modelBody: {fileID: 13700004, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelArm1: {fileID: 13700000, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelArm2: {fileID: 13700002, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelFeet: {fileID: 13700006, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelHead: {fileID: 13700008, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelLegs: {fileID: 13700010, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelRifle: {fileID: 13700012, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
+  model: {fileID: 374165436389535964}
   shootPos: {fileID: 1950589537414938893}
   headPos: {fileID: 6841761341149728486}
   triggerCollider: {fileID: 4026821412453562532}
-  enemyParams: {fileID: 11400000, guid: 5a415333f65c22448847552abfd39ac1, type: 2}
+  enemyParams: {fileID: 11400000, guid: f65ae0940eac9044393e398216dd1ec1, type: 2}
 --- !u!95 &582521786729824930
 Animator:
   serializedVersion: 5
