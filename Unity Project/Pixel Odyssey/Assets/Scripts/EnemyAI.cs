@@ -31,7 +31,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.updateGameGoal(1);
         HP = enemyParams.HP; // Set the HP to the HP from the EnemyParams scriptable object
         enemyType = enemyParams.enemyType; // Get the enemy type from the EnemyParams scriptable object
         enemyDetection = enemyParams.detectionType; // Get the enemy detection from the EnemyParams scriptable object
@@ -233,13 +232,21 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(Damage(hitPosition)); // Start the flash coroutine
         if (HP <= 0) // Check if the enemy's health is less than or equal to 0
         {
-            GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
-            Destroy(gameObject); // Destroy the enemy
+            
+            anim.SetTrigger("isDead"); // Set the trigger for the death animation
+            StartCoroutine(Death()); // Start the death coroutine
         }
         else
         {
             agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
         }
+    }
+
+    IEnumerator Death() // Coroutine to handle the enemy's death
+    {
+        yield return new WaitForSeconds(1); // Wait for the destroyTime from the EnemyParams scriptable object
+        Destroy(gameObject); // Destroy the enemy
+        GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
     }
 
     IEnumerator Damage(Vector3 hitPosition)
