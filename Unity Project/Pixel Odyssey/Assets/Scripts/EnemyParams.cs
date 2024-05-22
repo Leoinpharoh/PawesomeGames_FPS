@@ -24,6 +24,7 @@ public class EnemyParams : ScriptableObject
     [Range(0.1f, 20)] public float bulletSpeed;
     [Range(0, 180)] public float viewAngle;
     [Range(2, 10)] public int destroyTime;
+    [Range(2, 10)] public int animSpeedTrans;
 
     public enum EnemyType { Melee, Ranged, Combination, Stationary, Exploding };
     public enum DamageType { Regular, Poisoned, Burning, Freezing, Slowed, Confused };
