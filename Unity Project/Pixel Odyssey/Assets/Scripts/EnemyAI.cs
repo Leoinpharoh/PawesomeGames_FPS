@@ -11,7 +11,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     [SerializeField] SphereCollider triggerCollider;
-
     [SerializeField] EnemyParams enemyParams; // Reference to the EnemyParams ScriptableObject
     bool isAttacking = false; // Bool to check if the enemy is attacking
     bool playerInRange = false; // Bool to check if the player is in range of the enemy
@@ -59,10 +58,6 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = 1; // Set the stopping distance to 1
             }
         }
-
-
-
-
     }
 
     // Update is called once per frame
