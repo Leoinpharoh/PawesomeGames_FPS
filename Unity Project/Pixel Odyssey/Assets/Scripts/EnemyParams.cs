@@ -9,7 +9,6 @@ public class EnemyParams : ScriptableObject
 {
     public GameObject bloodSplash;
     public GameObject bullet;
-    public Animator anim;
     [Range(1, 1000)] public int HP;
     [Range(0.1f , 5)] public float attackSpeed;
     [Range(0.5f, 10.0f)] public float movementSpeed;

@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     [SerializeField] SphereCollider triggerCollider;
+    [SerializeField] Animator anim;
     [SerializeField] EnemyParams enemyParams; // Reference to the EnemyParams ScriptableObject
     bool isAttacking = false; // Bool to check if the enemy is attacking
     bool playerInRange = false; // Bool to check if the player is in range of the enemy
@@ -65,7 +66,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
 
         float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
-        enemyParams.anim.SetFloat("Speed", Mathf.Lerp(enemyParams.anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
 //Wave Based Enemy=======================================================
         if (enemyDetection == EnemyParams.DetectionType.Wave)
         {
