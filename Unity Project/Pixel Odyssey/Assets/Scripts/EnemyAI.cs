@@ -165,10 +165,12 @@ public class EnemyAI : MonoBehaviour, IDamage
                 if (distance <= rangedRange) // Check if the player is in attack range
                 {
                     playerInRangedAttackRange = true; // Set playerInAttackRange to true
+                    anim.SetBool("playerInRange", true);
                 }
                 else
                 {
                     playerInRangedAttackRange = false;
+                    anim.SetBool("playerInRange", false);
                 }
             }
 
