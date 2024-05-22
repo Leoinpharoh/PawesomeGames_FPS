@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4041587133659888962, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: playerOS
+      value: 
+      objectReference: {fileID: 1089743185}
     - target: {fileID: 4041587134587269708, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -9046,7 +9050,19 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 98434688472806490, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
+      propertyPath: OS
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 98434688472806490, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
+      propertyPath: OSTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 98434688472806490, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
       propertyPath: poisoned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98434688472806490, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
+      propertyPath: OSRefilling
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 98434688472806492, guid: 0eb6da7d485687e4c95faa6669cc3d82, type: 3}
@@ -18194,6 +18210,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4013275331872712965, guid: 3265f61d28bcc624889672a36d3aa336, type: 3}
+--- !u!114 &1089743185 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6268175528269777832, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 9526326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1097239440 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5159643131316443608, guid: 687c3072ec6eb794e88102db3eb26eb4, type: 3}
@@ -19939,7 +19966,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 1182472686}
   firePoint: {fileID: 1249700018}
-  audioSource: {fileID: 1182472687}
+  fireAudioSource: {fileID: 0}
+  reloadAudioSource: {fileID: 0}
   shootableLayer:
     serializedVersion: 2
     m_Bits: 8
