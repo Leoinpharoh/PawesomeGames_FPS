@@ -254,7 +254,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator Death() // Coroutine to handle the enemy's death
     {
-        yield return new WaitForSeconds(2); // Wait for the destroyTime from the EnemyParams scriptable object
+        yield return new WaitForSeconds(1); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
         GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
     }
