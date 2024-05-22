@@ -235,13 +235,17 @@ public class MultiModelEnemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int amount, Vector3 hitPosition) // Method to take damage
     {
+
         HP -= amount; // Subtract the amount from the enemy's health
-        agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
         StartCoroutine(Damage(hitPosition)); // Start the flash coroutine
         if (HP <= 0) // Check if the enemy's health is less than or equal to 0
         {
             GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
             Destroy(gameObject); // Destroy the enemy
+        }
+        else
+        {
+            agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
         }
     }
 
