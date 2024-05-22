@@ -63,6 +63,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+
+        float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
+        enemyParams.anim.SetFloat("Speed", Mathf.Lerp(enemyParams.anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
 //Wave Based Enemy=======================================================
         if (enemyDetection == EnemyParams.DetectionType.Wave)
         {
