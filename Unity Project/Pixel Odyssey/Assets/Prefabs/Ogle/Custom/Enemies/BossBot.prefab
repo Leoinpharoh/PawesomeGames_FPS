@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119920340816866562}
-  - component: {fileID: 4255247966794158009}
+  - component: {fileID: -2602927120494426839}
   - component: {fileID: 4978542914177271930}
   - component: {fileID: 8981055233683968972}
   - component: {fileID: 4665322643541233292}
@@ -214,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 1119366472943743179}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.26785284, z: -0, w: 0.96345985}
-  m_LocalPosition: {x: -15.146606, y: 10.76627, z: 64.14491}
+  m_LocalPosition: {x: -153.12788, y: 0.00000047683716, z: 4.831409}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -228,7 +228,7 @@ Transform:
   - {fileID: 4060107485277391824}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4255247966794158009
+--- !u!114 &-2602927120494426839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,17 +237,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1119366472943743179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 233756a354853824b890d02ab03a899a, type: 3}
+  m_Script: {fileID: 11500000, guid: b64a19a1163ed2f44bdf2ba1bb58573f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 8981055233683968972}
-  modelBody: {fileID: 13700004, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelArm1: {fileID: 13700000, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelArm2: {fileID: 13700002, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelFeet: {fileID: 13700006, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelHead: {fileID: 13700008, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelLegs: {fileID: 13700010, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  modelRifle: {fileID: 13700012, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
+  model: {fileID: 7342084617667234688}
   shootPos: {fileID: 5821378147984002630}
   headPos: {fileID: 7843306237754811357}
   triggerCollider: {fileID: 1651392655957210877}

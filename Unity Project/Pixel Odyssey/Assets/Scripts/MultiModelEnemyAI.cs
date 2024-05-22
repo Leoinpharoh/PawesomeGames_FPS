@@ -7,13 +7,7 @@ public class MultiModelEnemyAI : MonoBehaviour, IDamage
 {
 
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Renderer modelBody;
-    [SerializeField] Renderer modelArm1;
-    [SerializeField] Renderer modelArm2;
-    [SerializeField] Renderer modelFeet;
-    [SerializeField] Renderer modelHead;
-    [SerializeField] Renderer modelLegs;
-    [SerializeField] Renderer modelRifle;
+    [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     [SerializeField] SphereCollider triggerCollider;
