@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
+    [SerializeField] CapsuleCollider capsuleCollider;
     [SerializeField] SphereCollider triggerCollider;
     [SerializeField] Animator anim;
     [SerializeField] EnemyParams enemyParams; // Reference to the EnemyParams ScriptableObject
@@ -63,92 +64,94 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-
-        float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
-        if(animSpeed == 0 && canSeePlayer() == true)
-        {
-            anim.SetBool("isStopped", true);
-        }
-        else
-        {
-            anim.SetBool("isStopped", false);
-        }
-//Wave Based Enemy=======================================================
-        if (enemyDetection == EnemyParams.DetectionType.Wave)
-        {
-            agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
-            if (!isAttacking && enemyType == EnemyParams.EnemyType.Ranged && playerInRangedAttackRange || (enemyType == EnemyParams.EnemyType.Combination && !playerInMeleeAttackRange)) // Check if the enemy is a Ranged enemy and is not shooting
+        if(HP > 0) {
+            float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
+            if (animSpeed == 0 && canSeePlayer() == true)
             {
-                StartCoroutine(shoot()); // Start the shoot coroutine
+                anim.SetBool("isStopped", true);
+            }
+            else
+            {
+                anim.SetBool("isStopped", false);
+            }
+            //Wave Based Enemy=======================================================
+            if (enemyDetection == EnemyParams.DetectionType.Wave)
+            {
+                agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
+                if (!isAttacking && enemyType == EnemyParams.EnemyType.Ranged && playerInRangedAttackRange || (enemyType == EnemyParams.EnemyType.Combination && !playerInMeleeAttackRange)) // Check if the enemy is a Ranged enemy and is not shooting
+                {
+                    StartCoroutine(shoot()); // Start the shoot coroutine
+                }
+
+                if (!isAttacking && (enemyType == EnemyParams.EnemyType.Melee || enemyType == EnemyParams.EnemyType.Combination) && playerInMeleeAttackRange)
+                {
+                    StartCoroutine(meleeAttack());
+                }
+            }
+            //Wave Based Enemy=======================================================
+            anim.SetBool("canSeePlayer", canSeePlayer());
+            //Line of Sight Enemy=======================================================
+            if (playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && canSeePlayer()) // Check if the player is in range and the enemy is not a Stationary enemy
+            {
+                if (enemyType == EnemyParams.EnemyType.Ranged)
+                {
+                    Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
+                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
+                    agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
+                    if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
+                    {
+                        StartCoroutine(shoot()); // Start the shoot coroutine
+                    }
+                }
+
+                if (enemyType == EnemyParams.EnemyType.Melee)
+                {
+                    Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
+                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
+                    agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
+                    if (!isAttacking && playerInMeleeAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
+                    {
+                        StartCoroutine(meleeAttack()); // Start the shoot coroutine
+                    }
+
+                }
+
+                if (enemyType == EnemyParams.EnemyType.Combination)
+                {
+                    Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
+                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
+                    agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
+                    if (!isAttacking && playerInMeleeAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
+                    {
+                        StartCoroutine(meleeAttack()); // Start the shoot coroutine
+                    }
+                    if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
+                    {
+                        StartCoroutine(shoot()); // Start the shoot coroutine
+                    }
+                }
             }
 
-            if(!isAttacking && (enemyType == EnemyParams.EnemyType.Melee || enemyType == EnemyParams.EnemyType.Combination)  && playerInMeleeAttackRange)
-            {
-                StartCoroutine(meleeAttack());
-            }
-        }
-        //Wave Based Enemy=======================================================
-        anim.SetBool("canSeePlayer", canSeePlayer());
-//Line of Sight Enemy=======================================================
-        if (playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && canSeePlayer()) // Check if the player is in range and the enemy is not a Stationary enemy
-        {
-            if (enemyType == EnemyParams.EnemyType.Ranged)
+            //Line of Sight Enemy=======================================================
+
+            //Stationary Enemy=======================================================
+            if (playerInRange && enemyType == EnemyParams.EnemyType.Stationary)
             {
                 Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
-                agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
                 if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
                 {
                     StartCoroutine(shoot()); // Start the shoot coroutine
                 }
             }
-
-            if(enemyType == EnemyParams.EnemyType.Melee)
-            {
-                Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
-                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
-                agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
-                if (!isAttacking && playerInMeleeAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
-                {
-                    StartCoroutine(meleeAttack()); // Start the shoot coroutine
-                }
-
-            }
-
-            if (enemyType == EnemyParams.EnemyType.Combination)
-            {
-                Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
-                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
-                agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
-                if (!isAttacking && playerInMeleeAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
-                {
-                    StartCoroutine(meleeAttack()); // Start the shoot coroutine
-                }
-                if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
-                {
-                    StartCoroutine(shoot()); // Start the shoot coroutine
-                }
-            }
-
+            //Stationary Enemy=======================================================
         }
-//Line of Sight Enemy=======================================================
 
-//Stationary Enemy=======================================================
-        if (playerInRange && enemyType == EnemyParams.EnemyType.Stationary)
-        {
-            Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
-            if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
-            {
-                StartCoroutine(shoot()); // Start the shoot coroutine
-            }
-        }
-//Stationary Enemy=======================================================
     }
 
     void OnTriggerEnter(Collider other)
@@ -163,57 +166,61 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if(HP > 0)
         {
-            playerInRange = true;
-            float distance = Vector3.Distance(transform.position, other.transform.position); // Get the distance between the enemy and the player
-
-            if (enemyType == EnemyParams.EnemyType.Ranged)
+            if (other.CompareTag("Player"))
             {
-                if (distance <= rangedRange) // Check if the player is in attack range
-                {
-                    playerInRangedAttackRange = true; // Set playerInAttackRange to true
-                    anim.SetBool("playerInRange", true);
-                }
-                else
-                {
-                    playerInRangedAttackRange = false;
-                    anim.SetBool("playerInRange", false);
-                }
-            }
+                playerInRange = true;
+                float distance = Vector3.Distance(transform.position, other.transform.position); // Get the distance between the enemy and the player
 
-            if (enemyType == EnemyParams.EnemyType.Melee)
-            {
-                if (distance <= meleeRange) // Check if the player is in attack range
+                if (enemyType == EnemyParams.EnemyType.Ranged)
                 {
-                    playerInMeleeAttackRange = true; // Set playerInAttackRange to true
-                }
-                else
-                {
-                    playerInMeleeAttackRange = false;
-                }
-            }
-
-            if (enemyType == EnemyParams.EnemyType.Combination)
-            {
-                if (distance <= meleeRange)
-                {
-                    playerInRangedAttackRange = false;
-                    playerInMeleeAttackRange = true;
-                }
-                else if (distance <= rangedRange)
-                {
-                    playerInRangedAttackRange = true;
-                    playerInMeleeAttackRange = false;
-                }
-                else
-                {
-                    playerInRangedAttackRange = false;
-                    playerInMeleeAttackRange = false;
+                    if (distance <= rangedRange) // Check if the player is in attack range
+                    {
+                        playerInRangedAttackRange = true; // Set playerInAttackRange to true
+                        anim.SetBool("playerInRange", true);
+                    }
+                    else
+                    {
+                        playerInRangedAttackRange = false;
+                        anim.SetBool("playerInRange", false);
+                    }
                 }
 
+                if (enemyType == EnemyParams.EnemyType.Melee)
+                {
+                    if (distance <= meleeRange) // Check if the player is in attack range
+                    {
+                        playerInMeleeAttackRange = true; // Set playerInAttackRange to true
+                    }
+                    else
+                    {
+                        playerInMeleeAttackRange = false;
+                    }
+                }
+
+                if (enemyType == EnemyParams.EnemyType.Combination)
+                {
+                    if (distance <= meleeRange)
+                    {
+                        playerInRangedAttackRange = false;
+                        playerInMeleeAttackRange = true;
+                    }
+                    else if (distance <= rangedRange)
+                    {
+                        playerInRangedAttackRange = true;
+                        playerInMeleeAttackRange = false;
+                    }
+                    else
+                    {
+                        playerInRangedAttackRange = false;
+                        playerInMeleeAttackRange = false;
+                    }
+
+                }
             }
         }
+        
     }
 
     void OnTriggerExit(Collider other)
@@ -254,7 +261,12 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator Death() // Coroutine to handle the enemy's death
     {
-        yield return new WaitForSeconds(1); // Wait for the destroyTime from the EnemyParams scriptable object
+        isAttacking = false; // Bool to check if the enemy is attacking
+        playerInRange = false; // Bool to check if the player is in range of the enemy
+        playerInMeleeAttackRange = false; // Bool to check if the player is in melee attack range of the enemy
+        playerInRangedAttackRange = false; // Bool to check if the player is in ranged attack range of the enemy
+        capsuleCollider.enabled = false; // Disable the capsule collider
+        yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
         GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
     }
