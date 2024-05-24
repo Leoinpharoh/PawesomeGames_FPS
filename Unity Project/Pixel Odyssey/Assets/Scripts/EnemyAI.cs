@@ -97,14 +97,15 @@ public class EnemyAI : MonoBehaviour, IDamage
                 if (enemyType == EnemyParams.EnemyType.Ranged)
                 {
                     Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
-                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
-                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
+                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player on the horizontal plane
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate the enemy's body to face the player
                     agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
                     if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
                     {
                         StartCoroutine(shoot()); // Start the shoot coroutine
                     }
                 }
+
 
                 if (enemyType == EnemyParams.EnemyType.Melee)
                 {
