@@ -100,6 +100,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             //Line of Sight Enemy=======================================================
             if (playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && canSeePlayer()) // Check if the player is in range and the enemy is not a Stationary enemy
             {
+                agent.stoppingDistance = stoppingDistanceOriginal; // Set the stopping distance of the NavMeshAgent to the original stopping distance
                 if (enemyType == EnemyParams.EnemyType.Ranged)
                 {
                     Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
@@ -141,11 +142,12 @@ public class EnemyAI : MonoBehaviour, IDamage
                         StartCoroutine(shoot()); // Start the shoot coroutine
                     }
                 }
+                if (!playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && !canSeePlayer() && roaming)
+                {
+                    StartCoroutine(roam()); // Call the roam function
+                }
             }
-            else if(!playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && !canSeePlayer() && roaming)
-            {
-                StartCoroutine(roam()); // Call the roam function
-            }
+            
 
             //Line of Sight Enemy=======================================================
 
@@ -356,7 +358,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         playerDir = GameManager.Instance.player.transform.position - headPos.position; // Get the direction to the player
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, playerDir.y + 1, playerDir.z), transform.forward); // Get the angle to the player
-        agent.stoppingDistance = stoppingDistanceOriginal; // Set the stopping distance of the NavMeshAgent to the original stopping distance
+        
 
         if(enemyDetection == EnemyParams.DetectionType.Wave)
         {
