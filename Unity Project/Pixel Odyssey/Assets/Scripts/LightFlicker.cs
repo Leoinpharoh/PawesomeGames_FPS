@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightFlicker : MonoBehaviour
 {
-    [SerializeField] Light light; // The light to flicker
+    [SerializeField] Light flickerLight; // The light to flicker
     [SerializeField] float flashRate; // The rate at which the light will flicker
 
     // Update is called once per frame
@@ -12,7 +12,7 @@ public class LightFlicker : MonoBehaviour
     {
         if (Random.Range(0, 100) < flashRate) // Randomly turn the light on or off
         {
-            light.enabled = !light.enabled; // Toggle the light
+            flickerLight.enabled = !flickerLight.enabled; // Toggle the light
         }
     }
 }
