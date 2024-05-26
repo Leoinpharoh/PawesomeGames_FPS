@@ -23,7 +23,9 @@ public class EnemyParams : ScriptableObject
     [Range(0.1f, 20)] public float bulletSpeed;
     [Range(0, 180)] public float viewAngle;
     [Range(2, 10)] public int destroyTime;
-    [Range(2, 10)] public int animSpeedTrans;
+    [Range(2, 10)] public int animSpeedTrans; 
+    [Range(0, 100)] public int roamDist;
+    [Range(0, 100)] public int roamTimer;
 
     public enum EnemyType { Melee, Ranged, Combination, Stationary, Exploding };
     public enum DamageType { Regular, Poisoned, Burning, Freezing, Slowed, Confused };
@@ -34,5 +36,6 @@ public class EnemyParams : ScriptableObject
     public DetectionType detectionType;
 
     public bool flying = false;
+    public bool roaming = false;
 
 }

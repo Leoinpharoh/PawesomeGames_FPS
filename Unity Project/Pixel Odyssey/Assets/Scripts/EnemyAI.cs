@@ -18,6 +18,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool playerInRange = false; // Bool to check if the player is in range of the enemy
     bool playerInMeleeAttackRange = false; // Bool to check if the player is in melee attack range of the enemy
     bool playerInRangedAttackRange = false; // Bool to check if the player is in ranged attack range of the enemy
+    bool roaming = false; // Bool to check if the enemy is roaming
+    bool destChosen;
     int HP; // Enemy Health
     float meleeRange; // Enemy Attack Range
     float rangedRange; // Enemy Attack Range
@@ -37,6 +39,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         enemyDetection = enemyParams.detectionType; // Get the enemy detection from the EnemyParams scriptable object
         triggerCollider.radius = enemyParams.lineOfSightRange; // Set the radius of the trigger collider to the lineOfSightRange from the EnemyParams scriptable object
         triggerCollider.isTrigger = true; // Set the trigger collider to true
+        roaming = enemyParams.roaming; // Set the roaming bool to the roaming bool from the EnemyParams scriptable object
         agent.acceleration = enemyParams.Acceleration; // Set the acceleration of the NavMeshAgent to the Acceleration from the EnemyParams scriptable object
         agent.speed = enemyParams.movementSpeed; // Set the speed of the NavMeshAgent to the movementSpeed from the EnemyParams scriptable object
         meleeRange = enemyParams.meleeRange; // Set the meleeRange to the meleeRange from the EnemyParams scriptable object
@@ -135,6 +138,10 @@ public class EnemyAI : MonoBehaviour, IDamage
                         StartCoroutine(shoot()); // Start the shoot coroutine
                     }
                 }
+            }
+            else if(!playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && !canSeePlayer() && roaming)
+            {
+                StartCoroutine(roam()); // Call the roam function
             }
 
             //Line of Sight Enemy=======================================================
@@ -346,5 +353,24 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
         }
         return false; // Return false
+    }
+
+    IEnumerator roam()
+    {
+        if (!destChosen && agent.remainingDistance < 0.05f)
+        {
+            destChosen = true; // Set destChosen to true
+            agent.stoppingDistance = 0; // Set the stopping distance of the agent to 0
+
+            yield return new WaitForSeconds(enemyParams.roamTimer); // Wait for the roam timer
+            Vector3 ranPos = Random.insideUnitSphere * enemyParams.roamDist; // Get a random position within the roam distance
+            ranPos += startingPos; // Add the starting position to the random position
+            NavMeshHit hit; // Create a navmesh hit variable
+            NavMesh.SamplePosition(ranPos, out hit, enemyParams.roamDist, 1); // Sample the position of the random position
+            agent.SetDestination(hit.position); // Set the destination of the agent to the random position
+            destChosen = false; // Set destChosen to false
+        }
+
+
     }
 }
