@@ -398,6 +398,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 GameManager.Instance.poisonHitScreen.SetActive(true);
                 yield return new WaitForSeconds(0.1f);
                 GameManager.Instance.poisonHitScreen.SetActive(false);
+                yield return new WaitForSeconds(.9f);
                 //wait 1 second to return and start new loop so time between each damage is 1 second
                 break;
             case "Burning":
