@@ -195,7 +195,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= amount;
             StartCoroutine(hitMe());
             updatePlayerUI();
-            if (HP <= 0)
+            if (HP <= 0 && Normal == true)
             {
                 GameManager.Instance.youLose();
             }
