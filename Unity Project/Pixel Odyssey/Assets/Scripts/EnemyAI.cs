@@ -21,6 +21,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool roaming = false; // Bool to check if the enemy is roaming
     bool destChosen;
     int HP; // Enemy Health
+    int stoppingDistanceOriginal; // Original stopping distance of the NavMeshAgent
     float meleeRange; // Enemy Attack Range
     float rangedRange; // Enemy Attack Range
     Vector3 playerDir; // Vector3 to store the direction to the player
@@ -62,6 +63,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = 1; // Set the stopping distance to 1
             }
         }
+        stoppingDistanceOriginal = (int)agent.stoppingDistance; // Set the stoppingDistanceOriginal to the stopping distance of the NavMeshAgent
     }
 
     // Update is called once per frame
@@ -354,6 +356,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         playerDir = GameManager.Instance.player.transform.position - headPos.position; // Get the direction to the player
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, playerDir.y + 1, playerDir.z), transform.forward); // Get the angle to the player
+        agent.stoppingDistance = stoppingDistanceOriginal; // Set the stopping distance of the NavMeshAgent to the original stopping distance
 
         if(enemyDetection == EnemyParams.DetectionType.Wave)
         {
