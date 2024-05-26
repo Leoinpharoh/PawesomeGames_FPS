@@ -44,7 +44,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool freezing;
     public bool slowed;
     public bool confused;
-    public bool deadFromEffect;
     private Coroutine poisonCoroutine;
     private Coroutine burnCoroutine;
     private Coroutine freezeCoroutine;
@@ -56,7 +55,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Start()
     {
-        deadFromEffect = false;
         moveSpeedOriginal = moveSpeed;
         HPOrignal = HP;
         OSOrignal = OS;
