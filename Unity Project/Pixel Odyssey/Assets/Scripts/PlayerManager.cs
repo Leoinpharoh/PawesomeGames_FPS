@@ -196,7 +196,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= amount;
             StartCoroutine(hitMe());
             updatePlayerUI();
-            if(HP <= 0 && Normal)
+            if (HP <= 0 && Normal)
             {
                 playerDeath();
             }
