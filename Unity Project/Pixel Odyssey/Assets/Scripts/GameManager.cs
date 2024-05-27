@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
+    [SerializeField] TMP_Text objectiveText;
+    [SerializeField] TMP_Text objective2Text;
+    [SerializeField] TMP_Text objective3Text;
 
     //status needs
     [SerializeField] TMP_Text currentEffectText;
@@ -123,6 +126,13 @@ public class GameManager : MonoBehaviour
             menuActive = menuWin;
             menuActive.SetActive(isPaused);
         }
+    }
+
+    public void updateGameObjective(string objective, string objective2, string objective3)
+    {
+        objectiveText.text = objective;
+        objective2Text.text = objective2;
+        objective3Text.text = objective3;
     }
 
     public void youLose()
