@@ -18,7 +18,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool playerInRange = false; // Bool to check if the player is in range of the enemy
     bool playerInMeleeAttackRange = false; // Bool to check if the player is in melee attack range of the enemy
     bool playerInRangedAttackRange = false; // Bool to check if the player is in ranged attack range of the enemy
+    bool roaming = false; // Bool to check if the enemy is roaming
+    bool destChosen;
     int HP; // Enemy Health
+    int stoppingDistanceOriginal; // Original stopping distance of the NavMeshAgent
     float meleeRange; // Enemy Attack Range
     float rangedRange; // Enemy Attack Range
     Vector3 playerDir; // Vector3 to store the direction to the player
@@ -37,6 +40,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         enemyDetection = enemyParams.detectionType; // Get the enemy detection from the EnemyParams scriptable object
         triggerCollider.radius = enemyParams.lineOfSightRange; // Set the radius of the trigger collider to the lineOfSightRange from the EnemyParams scriptable object
         triggerCollider.isTrigger = true; // Set the trigger collider to true
+        roaming = enemyParams.roaming; // Set the roaming bool to the roaming bool from the EnemyParams scriptable object
         agent.acceleration = enemyParams.Acceleration; // Set the acceleration of the NavMeshAgent to the Acceleration from the EnemyParams scriptable object
         agent.speed = enemyParams.movementSpeed; // Set the speed of the NavMeshAgent to the movementSpeed from the EnemyParams scriptable object
         meleeRange = enemyParams.meleeRange; // Set the meleeRange to the meleeRange from the EnemyParams scriptable object
@@ -59,6 +63,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = 1; // Set the stopping distance to 1
             }
         }
+        stoppingDistanceOriginal = (int)agent.stoppingDistance; // Set the stoppingDistanceOriginal to the stopping distance of the NavMeshAgent
     }
 
     // Update is called once per frame
@@ -86,6 +91,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
                 if (!isAttacking && (enemyType == EnemyParams.EnemyType.Melee || enemyType == EnemyParams.EnemyType.Combination) && playerInMeleeAttackRange)
                 {
+                    Debug.Log("Melee Attack");
                     StartCoroutine(meleeAttack());
                 }
             }
@@ -94,6 +100,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             //Line of Sight Enemy=======================================================
             if (playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && canSeePlayer()) // Check if the player is in range and the enemy is not a Stationary enemy
             {
+                agent.stoppingDistance = stoppingDistanceOriginal; // Set the stopping distance of the NavMeshAgent to the original stopping distance
                 if (enemyType == EnemyParams.EnemyType.Ranged)
                 {
                     Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
@@ -135,7 +142,12 @@ public class EnemyAI : MonoBehaviour, IDamage
                         StartCoroutine(shoot()); // Start the shoot coroutine
                     }
                 }
+                if (!playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && !canSeePlayer() && roaming)
+                {
+                    StartCoroutine(roam()); // Call the roam function
+                }
             }
+            
 
             //Line of Sight Enemy=======================================================
 
@@ -193,10 +205,12 @@ public class EnemyAI : MonoBehaviour, IDamage
                     if (distance <= meleeRange) // Check if the player is in attack range
                     {
                         playerInMeleeAttackRange = true; // Set playerInAttackRange to true
+                        anim.SetBool("playerInRange", true);
                     }
                     else
                     {
                         playerInMeleeAttackRange = false;
+                        anim.SetBool("playerInRange", false);
                     }
                 }
 
@@ -267,6 +281,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         playerInMeleeAttackRange = false; // Bool to check if the player is in melee attack range of the enemy
         playerInRangedAttackRange = false; // Bool to check if the player is in ranged attack range of the enemy
         capsuleCollider.enabled = false; // Disable the capsule collider
+        agent.isStopped = true; // Stop the agent from moving
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
         GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
@@ -288,6 +303,9 @@ public class EnemyAI : MonoBehaviour, IDamage
             yield break; // Prevent multiple simultaneous attacks
         }
         isAttacking = true; // Set isAttacking to true
+        anim.SetBool("Attack", true); // Set the trigger for the attack animation
+        anim.SetBool("isStopped", true); // Set the trigger for the idle animation
+        yield return new WaitForSeconds(0.5f); // Wait for the attack animation to play
         agent.isStopped = true; // Stop the agent from moving
         playerInRangedAttackRange = false; // Set playerInAttackRange to false
         playerInMeleeAttackRange = false; // Set playerInMeleeAttackRange to false
@@ -301,38 +319,52 @@ public class EnemyAI : MonoBehaviour, IDamage
             Transform playerTransform = GameManager.Instance.player.transform;
             Vector3 knockbackDirection = (playerTransform.position - transform.position).normalized;
             float knockbackDistance = 2.0f; // Customize the distance as needed
-            Vector3 newPlayerPosition = playerTransform.position + knockbackDirection * knockbackDistance;
 
             // Optionally use a coroutine to smoothly translate the player to the new position
-            StartCoroutine(SmoothKnockback(playerTransform, newPlayerPosition, 0.2f));
+            Rigidbody playerRigidbody = GameManager.Instance.player.GetComponent<Rigidbody>();
+            if (playerRigidbody != null)
+            {
+                StartCoroutine(SmoothKnockback(playerRigidbody, knockbackDirection, knockbackDistance, 0.2f));
+            }
         }
 
         yield return new WaitForSeconds(enemyParams.attackSpeed); // Wait while attack is ongoing
 
         agent.isStopped = false; // Re-enable movement
         isAttacking = false; // Set isAttacking to false
-
+        anim.SetBool("Attack", false); // Set the trigger for the attack animation
+        anim.SetBool("isStopped", false); // Set the trigger for the idle animation
     }
 
-    IEnumerator SmoothKnockback(Transform playerTransform, Vector3 targetPosition, float duration) // Coroutine to smoothly knockback the player
+    IEnumerator SmoothKnockback(Rigidbody playerRigidbody, Vector3 direction, float distance, float duration) // Coroutine to smoothly knockback the player
     {
         float time = 0; // Initialize time to 0
-        Vector3 startPosition = playerTransform.position; // Get the player's current position
+        Vector3 startPosition = playerRigidbody.position; // Get the player's current position
+        Vector3 targetPosition = startPosition + direction * distance; // Calculate the target position
+
         while (time < duration) // Loop while time is less than duration
         {
-            playerTransform.position = Vector3.Lerp(startPosition, targetPosition, time / duration); // Smoothly move the player towards the target position
+            playerRigidbody.MovePosition(Vector3.Lerp(startPosition, targetPosition, time / duration)); // Smoothly move the player towards the target position
             time += Time.deltaTime; // Increment time by Time.deltaTime
             yield return null; // Wait for the next frame
         }
-        playerTransform.position = targetPosition; // Ensure the player reaches the target position
+        playerRigidbody.MovePosition(targetPosition); // Ensure the player reaches the target position
     }
 
 
 
     bool canSeePlayer()
     {
+
         playerDir = GameManager.Instance.player.transform.position - headPos.position; // Get the direction to the player
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, playerDir.y + 1, playerDir.z), transform.forward); // Get the angle to the player
+        
+
+        if(enemyDetection == EnemyParams.DetectionType.Wave)
+        {
+            agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
+            return true;
+        }
 
         RaycastHit hit; // Create a raycast hit variable
         if (Physics.Raycast(headPos.position, playerDir, out hit)) // Check if the raycast hits something
@@ -347,4 +379,24 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         return false; // Return false
     }
+
+    IEnumerator roam()
+    {
+        if (!destChosen && agent.remainingDistance < 0.05f)
+        {
+            destChosen = true; // Set destChosen to true
+            agent.stoppingDistance = 0; // Set the stopping distance of the agent to 0
+
+            yield return new WaitForSeconds(enemyParams.roamTimer); // Wait for the roam timer
+            Vector3 ranPos = Random.insideUnitSphere * enemyParams.roamDist; // Get a random position within the roam distance
+            ranPos += startingPos; // Add the starting position to the random position
+            NavMeshHit hit; // Create a navmesh hit variable
+            NavMesh.SamplePosition(ranPos, out hit, enemyParams.roamDist, 1); // Sample the position of the random position
+            agent.SetDestination(hit.position); // Set the destination of the agent to the random position
+            destChosen = false; // Set destChosen to false
+        }
+
+
+    }
+
 }

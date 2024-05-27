@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,11 +22,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] AudioClip jumpAudio;
 
     public float HP;
-    
+
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
-    [HideInInspector]public float HPOrignal;
+    [HideInInspector] public float HPOrignal;
 
     //overshield
     public float OS;
@@ -61,14 +62,14 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     void Update()
     {
-        
-        if(characterControl.isGrounded)
+
+        if (characterControl.isGrounded)
         {
             jumpCounter = 0;
             playerVelocity = Vector3.zero;
         }
 
-        if(!confused)
+        if (!confused)
         {
             moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
                 (Input.GetAxis("Vertical") * transform.forward).normalized;
@@ -80,7 +81,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 (Input.GetAxis("Horizontal") * transform.forward);
             characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
-        
+
 
 
         Sprint();
@@ -116,7 +117,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Sprint()
     {
-        if(!confused && !freezing && !slowed)
+        if (!confused && !freezing && !slowed)
         {
             if (Input.GetButtonDown("Sprint"))
             {
@@ -195,15 +196,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= amount;
             StartCoroutine(hitMe());
             updatePlayerUI();
-            if (HP <= 0)
+            if(HP <= 0 && Normal)
             {
-                GameManager.Instance.youLose();
+                playerDeath();
             }
+
         }
     }
     public void poisonDamage(int damage, float duration)
     {
-        if(poisoned)
+        if (poisoned)
         {
             StopCoroutine(poisonCoroutine);
         }
@@ -222,10 +224,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= damage;
             updatePlayerUI();
             StartCoroutine(effectMe("Poisoned"));
-            if (HP <= 0)
-            {
-                GameManager.Instance.youLose();
-            }
+            playerDeath();
             yield return new WaitForSeconds(1);
         }
         poisoned = false;
@@ -253,10 +252,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= damage;
             updatePlayerUI();
             StartCoroutine(effectMe("Burning"));
-            if (HP <= 0)
-            {
-                GameManager.Instance.youLose();
-            }
+            playerDeath();
             yield return new WaitForSeconds(1);
         }
         burning = false;
@@ -270,7 +266,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         if (freezing)
         {
             StopCoroutine(freezeCoroutine);
-            
+
         }
 
         freezeCoroutine = StartCoroutine(freezeMe(damage, duration));
@@ -291,10 +287,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= damage;
             updatePlayerUI();
             StartCoroutine(effectMe("Freezing"));
-            if (HP <= 0)
-            {
-                GameManager.Instance.youLose();
-            }
+            playerDeath();
             yield return new WaitForSeconds(1);
         }
         freezing = false;
@@ -331,10 +324,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= damage;
             updatePlayerUI();
             StartCoroutine(effectMe("Slowed"));
-            if (HP <= 0)
-            {
-                GameManager.Instance.youLose();
-            }
+            playerDeath();
             yield return new WaitForSeconds(1);
         }
         slowed = false;
@@ -362,10 +352,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             updatePlayerUI();
             StartCoroutine(effectMe("Confused"));
-            if (HP <= 0)
-            {
-                GameManager.Instance.youLose();
-            }
+            playerDeath();
             yield return new WaitForSeconds(1);
         }
         confused = false;
@@ -389,7 +376,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     IEnumerator effectMe(string effect) //used to flash the screen based on what effect user has
     {
-        switch(effect)
+        switch (effect)
         {
             case "Poisoned":
                 //updates status bar to poisoned
@@ -398,6 +385,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 GameManager.Instance.poisonHitScreen.SetActive(true);
                 yield return new WaitForSeconds(0.1f);
                 GameManager.Instance.poisonHitScreen.SetActive(false);
+                yield return new WaitForSeconds(.9f);
                 //wait 1 second to return and start new loop so time between each damage is 1 second
                 break;
             case "Burning":
@@ -433,8 +421,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 moveSpeed = moveSpeedOriginal;
                 break;
         }
-
-
+    }
+    public void playerDeath()
+    {
+        if (HP <= 0 && Normal || HP <= 0 && !Normal)
+        {
+            GameManager.Instance.youLose();
+        }
     }
 
 
