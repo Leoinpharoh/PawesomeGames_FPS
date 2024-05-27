@@ -14,6 +14,7 @@ public class ShootingHandler : MonoBehaviour
     [SerializeField] AudioSource reloadAudioSource;
     [SerializeField] LayerMask shootableLayer; 
     [SerializeField] GameObject projectileBullet;
+    [SerializeField] Animator Anim;
     Vector3 dir;
 
     [Header("Gun Stats")]   // The stats of the gun.
@@ -78,6 +79,7 @@ public class ShootingHandler : MonoBehaviour
             isShooting = true;
             fireAudioSource.clip = audioSFXShoot;
             fireAudioSource.Play();
+            Anim.SetBool("isShooting", true);
 
             // Apply ammo changes
             GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
@@ -97,6 +99,7 @@ public class ShootingHandler : MonoBehaviour
         // Toggle the player as no longer shooting.
         yield return new WaitForSeconds(shootSpeed);
         isShooting = false;
+        Anim.SetBool("isShooting", false);
     }
 
     // Handles reloading the gun when the player runs out of bullets.
@@ -104,6 +107,7 @@ public class ShootingHandler : MonoBehaviour
     {
         reloadAudioSource.clip = audioSFXReload;
         reloadAudioSource.Play();
+        Anim.SetBool("isReloading", true);
 
         isShooting = true;
         yield return new WaitForSeconds(reloadTime);
@@ -118,6 +122,7 @@ public class ShootingHandler : MonoBehaviour
             Ammo = Ammo - (TilReload - clip);
             clip = TilReload;     
         }
+        Anim.SetBool("isReloading", false);
         isShooting = false;
         GameManager.Instance.playerAmmo(ammoType.ToString(), Ammo);
     }

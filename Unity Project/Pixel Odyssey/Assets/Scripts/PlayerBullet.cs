@@ -11,6 +11,12 @@ public class playerBullet : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
 
+
+    [SerializeField] GameObject Explode;
+
+    private IDamage dmg;
+    private Vector3 hitPosition;
+
     void Start()
     {
         rb.velocity = transform.forward * speed;
@@ -19,15 +25,15 @@ public class playerBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        IDamage dmg = collision.gameObject.GetComponent<IDamage>();
+        dmg = collision.gameObject.GetComponent<IDamage>();
 
         if (dmg != null)
         {
-            Vector3 hitPosition = collision.contacts[0].point;
-            if (!collision.gameObject.CompareTag("Player"))
-            {
-                dmg.takeDamage(damage, hitPosition);
-            }
+            hitPosition = collision.contacts[0].point;
+            dmg.takeDamage(damage, hitPosition);
+            Destroy(gameObject);
         }
+        Instantiate(Explode, collision.transform);
+        Destroy(gameObject);
     }
 }
