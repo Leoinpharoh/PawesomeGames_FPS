@@ -13,14 +13,13 @@ public class NextLevel : MonoBehaviour
     {
         if (levelFlashImage == null)
         {
-            Debug.LogError("LevelFlash Image is not assigned.");
+            Debug.LogError("LevelFlash Image is not assigned."); // Log an error message if the level flash image is not assigned
         }
         else
         {
-            // Ensure the image is transparent at the start
-            Color color = levelFlashImage.color;
-            color.a = 0;
-            levelFlashImage.color = color;
+            Color color = levelFlashImage.color; // Get the color of the level flash image
+            color.a = 0; // Set the alpha value to 0
+            levelFlashImage.color = color; // Set the color of the level flash image
         }
     }
 
@@ -28,64 +27,63 @@ public class NextLevel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(NextLevelCoroutine());
+            StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
         }
     }
 
     private IEnumerator NextLevelCoroutine()
     {
         
-        levelFlashImage.gameObject.SetActive(true);
-        // Fade to white
-        yield return StartCoroutine(FadeToWhite());
+        levelFlashImage.gameObject.SetActive(true); // Enable the level flash image
+       
+        yield return StartCoroutine(FadeToWhite()); // Fade to white
 
-        // Load the scene asynchronously
-        yield return SceneManager.LoadSceneAsync(nextLevelName, LoadSceneMode.Single);
+        yield return SceneManager.LoadSceneAsync(nextLevelName, LoadSceneMode.Single); // Load the next level
 
-        Scene loadedScene = SceneManager.GetSceneByName(nextLevelName);
+        Scene loadedScene = SceneManager.GetSceneByName(nextLevelName); // Get the loaded scene by name
 
-        if (loadedScene.IsValid())
+        if (loadedScene.IsValid()) // Check if the scene is valid
         {
-            Debug.Log("Setting active scene: " + nextLevelName);
-            SceneManager.SetActiveScene(loadedScene);
+            Debug.Log("Setting active scene: " + nextLevelName); // Log the scene that is being set as active
+            SceneManager.SetActiveScene(loadedScene); // Set the scene as active
         }
         else
         {
-            Debug.LogError("Failed to load the scene: " + nextLevelName);
+            Debug.LogError("Failed to load the scene: " + nextLevelName); // Log an error message if the scene failed to load
         }
 
         // Fade from white
-        yield return StartCoroutine(FadeFromWhite());
-        levelFlashImage.gameObject.SetActive(false);
-        GameManager.Instance.statePaused();
+        yield return StartCoroutine(FadeFromWhite()); // Fade from white
+        levelFlashImage.gameObject.SetActive(false); // Disable the level flash image
+        GameManager.Instance.statePaused(); // Pause the game
 
     }
 
-    private IEnumerator FadeToWhite()
+    private IEnumerator FadeToWhite() // Fade the level flash image to white
     {
-        float elapsedTime = 0f;
-        Color color = levelFlashImage.color;
+        float elapsedTime = 0f; // Elapsed time since the coroutine started
+        Color color = levelFlashImage.color; // The color of the level flash image
 
-        while (elapsedTime < fadeDuration)
+        while (elapsedTime < fadeDuration) // While the elapsed time is less than the fade duration
         {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Clamp01(elapsedTime / fadeDuration);
-            levelFlashImage.color = color;
-            yield return null;
+            elapsedTime += Time.deltaTime; // Increment the elapsed time by the time since the last frame
+            color.a = Mathf.Clamp01(elapsedTime / fadeDuration); // Calculate the alpha value based on the elapsed time
+            levelFlashImage.color = color; // Set the color of the level flash image
+            yield return null; // Wait for the next frame
         }
     }
 
-    private IEnumerator FadeFromWhite()
+    private IEnumerator FadeFromWhite() // Fade the level flash image from white
     {
-        float elapsedTime = 0f;
-        Color color = levelFlashImage.color;
+        float elapsedTime = 0f; // Elapsed time since the coroutine started
+        Color color = levelFlashImage.color; // The color of the level flash image
 
-        while (elapsedTime < fadeDuration)
+        while (elapsedTime < fadeDuration) // While the elapsed time is less than the fade duration
         {
-            elapsedTime += Time.deltaTime;
-            color.a = 1f - Mathf.Clamp01(elapsedTime / fadeDuration);
-            levelFlashImage.color = color;
-            yield return null;
+            elapsedTime += Time.deltaTime; // Increment the elapsed time by the time since the last frame
+            color.a = 1f - Mathf.Clamp01(elapsedTime / fadeDuration); // Calculate the alpha value based on the elapsed time
+            levelFlashImage.color = color; // Set the color of the level flash image
+            yield return null; // Wait for the next frame
         }
     }
 }
