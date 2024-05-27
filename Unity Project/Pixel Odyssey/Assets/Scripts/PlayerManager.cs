@@ -22,11 +22,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] AudioClip jumpAudio;
 
     public float HP;
-    
+
     int jumpCounter;
     Vector3 moveDirection;
     Vector3 playerVelocity;
-    [HideInInspector]public float HPOrignal;
+    [HideInInspector] public float HPOrignal;
 
     //overshield
     public float OS;
@@ -62,14 +62,14 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     void Update()
     {
-        
-        if(characterControl.isGrounded)
+
+        if (characterControl.isGrounded)
         {
             jumpCounter = 0;
             playerVelocity = Vector3.zero;
         }
 
-        if(!confused)
+        if (!confused)
         {
             moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
                 (Input.GetAxis("Vertical") * transform.forward).normalized;
@@ -81,7 +81,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 (Input.GetAxis("Horizontal") * transform.forward);
             characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
-        
+
 
 
         Sprint();
@@ -117,7 +117,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Sprint()
     {
-        if(!confused && !freezing && !slowed)
+        if (!confused && !freezing && !slowed)
         {
             if (Input.GetButtonDown("Sprint"))
             {
@@ -196,12 +196,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             HP -= amount;
             StartCoroutine(hitMe());
             updatePlayerUI();
-            playerDeath();
+            if(HP <= 0 && Normal)
+            {
+                playerDeath();
+            }
+
         }
     }
     public void poisonDamage(int damage, float duration)
     {
-        if(poisoned)
+        if (poisoned)
         {
             StopCoroutine(poisonCoroutine);
         }
@@ -262,7 +266,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         if (freezing)
         {
             StopCoroutine(freezeCoroutine);
-            
+
         }
 
         freezeCoroutine = StartCoroutine(freezeMe(damage, duration));
@@ -372,7 +376,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     IEnumerator effectMe(string effect) //used to flash the screen based on what effect user has
     {
-        switch(effect)
+        switch (effect)
         {
             case "Poisoned":
                 //updates status bar to poisoned
@@ -420,11 +424,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void playerDeath()
     {
-        if (HP <= 0 && Normal)
-        {
-            GameManager.Instance.youLose();
-        }
-        if (HP <= 0 && !Normal)
+        if (HP <= 0 && Normal || HP <= 0 && !Normal)
         {
             GameManager.Instance.youLose();
         }
