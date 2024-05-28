@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ObjectiveTrigger : MonoBehaviour
 {
-    [SerializeField] string objective;
+    [SerializeField] public string objective;
 
     bool needsObjective;
 
@@ -29,9 +29,10 @@ public class ObjectiveTrigger : MonoBehaviour
             GameManager.Instance.objectives.Add(objective);
             GameManager.Instance.updateGameObjective();
         }
+        
     }
     private void OnTriggerExit(Collider other)
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
