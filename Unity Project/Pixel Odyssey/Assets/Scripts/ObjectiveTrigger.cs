@@ -6,40 +6,32 @@ using UnityEngine;
 public class ObjectiveTrigger : MonoBehaviour
 {
     [SerializeField] string objective;
-    [SerializeField] string objective2;
-    [SerializeField] string objective3;
-    bool needObjective;
+
+    bool needsObjective;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.updateGameObjective("Loading...please wait...", "", "");
-        needObjective = false;
+        needsObjective = GameManager.Instance.needsObjective;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //If no objective provide one
-        if(needObjective)
-        {
-            GameManager.Instance.updateGameObjective(objective, objective2, objective3);
-            //feed objective to UI
-        }
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && needsObjective)
         {
-            needObjective = true;
+            Debug.Log("objective zone");
+            //add string to objectives list
+            GameManager.Instance.objectives.Add(objective);
+            GameManager.Instance.updateGameObjective();
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

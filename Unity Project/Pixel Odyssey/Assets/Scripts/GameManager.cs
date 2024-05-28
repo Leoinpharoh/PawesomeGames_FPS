@@ -21,9 +21,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
-    [SerializeField] TMP_Text objectiveText;
+
+
+    [SerializeField] public List<string> objectives;
+    [SerializeField] TMP_Text objective1Text;
     [SerializeField] TMP_Text objective2Text;
     [SerializeField] TMP_Text objective3Text;
+    public bool objective1Aquired;
+    public bool objective2Aquired;
+    public bool objective3Aquired;
+    public bool needsObjective;
 
     //status needs
     [SerializeField] TMP_Text currentEffectText;
@@ -36,7 +43,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int slowedTimer;
     [SerializeField] public int confusedTimer;
 
-    
+
 
     //non serialized
     //gameObject/screenflashes
@@ -66,11 +73,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     void Awake()
     {
+        objective1Text.text = "Aquiring...";
+        objective2Text.text = "Aquiring...";
+        objective3Text.text = "Aquiring...";
         Instance = this;
         //show player location
         player = GameObject.FindWithTag("Player");
         //define player script
         playerScript = player.GetComponent<PlayerManager>();
+        //on awake needs objective
+        needsObjective = true;
     }
 
     // Update is called once per frame
@@ -91,6 +103,11 @@ public class GameManager : MonoBehaviour
                 stateUnPaused();
             }
         }
+        if (objective1Aquired && objective2Aquired && objective3Aquired)
+        {
+            needsObjective = false;
+        }
+
     }
 
     public void statePaused()
@@ -128,11 +145,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void updateGameObjective(string objective, string objective2, string objective3)
+    public void updateGameObjective()
     {
-        objectiveText.text = objective;
-        objective2Text.text = objective2;
-        objective3Text.text = objective3;
+        if(objectives.Count <= 0)
+        {
+
+        }
+        else if (objectives.Count >= 1)
+        {
+            objective1Text.text = objectives[0].ToString();
+            objective1Aquired = true;
+            if (objectives.Count >= 2)
+            {
+                objective2Text.text = objectives[1].ToString();
+                objective2Aquired = true;
+                if (objectives.Count >= 3)
+                {
+                    objective3Text.text = objectives[2].ToString();
+                    objective3Aquired = true;
+                }
+                else
+                {
+                    objective3Text.text = "Aquiring...";
+                }
+            }
+            else
+            {
+                objective2Text.text = "Aquiring...";
+                objective3Text.text = "Aquiring...";
+            }
+        }
     }
 
     public void youLose()
