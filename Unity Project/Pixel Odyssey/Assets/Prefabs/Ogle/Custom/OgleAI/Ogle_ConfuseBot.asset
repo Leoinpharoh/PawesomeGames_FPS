@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 203a79f8c7d8cb547ba06f88fa04f57e, type: 3}
   bullet: {fileID: 6060363923453239229, guid: cb5062c98519cf341af4ccb44a880a6b, type: 3}
-  HP: 12
+  HP: 20
   attackSpeed: 0.3
   movementSpeed: 3
   Acceleration: 5
@@ -29,7 +29,10 @@ MonoBehaviour:
   viewAngle: 180
   destroyTime: 3
   animSpeedTrans: 6
+  roamDist: 12
+  roamTimer: 3
   damageType: 5
   enemyType: 1
   detectionType: 0
   flying: 0
+  roaming: 1
