@@ -3119,7 +3119,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.2126, y: -15.1}
+  m_AnchoredPosition: {x: 3.2126, y: -21.800007}
   m_SizeDelta: {x: 150.4044, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3213613208270980453
@@ -9159,9 +9159,14 @@ MonoBehaviour:
   enemyCountText: {fileID: 891432527550119226}
   ammoDisplayAmount: {fileID: 5028909106148066738}
   clipDisplayAmount: {fileID: 5660464172908917249}
-  objectiveText: {fileID: 4177027251005277180}
+  objectives: []
+  objective1Text: {fileID: 0}
   objective2Text: {fileID: 2406791961617752131}
   objective3Text: {fileID: 863782373930347805}
+  objective1Aquired: 0
+  objective2Aquired: 0
+  objective3Aquired: 0
+  needsObjective: 0
   currentEffectText: {fileID: 7557631586164841435}
   poisonedTimer: 10
   poisonedDamage: 1
@@ -13840,7 +13845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.2126, y: 37.2}
+  m_AnchoredPosition: {x: 3.2126, y: 30.5}
   m_SizeDelta: {x: 150.4044, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6319834787261728042
@@ -15081,7 +15086,6 @@ RectTransform:
   - {fileID: 9181439225584911485}
   - {fileID: 4364233691409351450}
   - {fileID: 4084493614577796667}
-  - {fileID: 3163409366834241960}
   - {fileID: 9136827666914487831}
   - {fileID: 3495130359615274089}
   - {fileID: 3861970252829284463}
@@ -15189,6 +15193,7 @@ Transform:
   m_Children:
   - {fileID: 4041587133659888963}
   - {fileID: 4041587133918826703}
+  - {fileID: 3163409366834241960}
   m_Father: {fileID: 4041587132823584443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6303143621968644736
@@ -15458,16 +15463,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6538538431894742111}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -277.12994}
+  m_LocalScale: {x: 2.4000003, y: 2.4000003, z: 2.4000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4041587132823584443}
+  m_Father: {fileID: 4364233691409351450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 51.354, y: -48.944637}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3726547238138851661
@@ -18214,7 +18219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.2126, y: -68.4}
+  m_AnchoredPosition: {x: 3.2126, y: -75.100006}
   m_SizeDelta: {x: 150.4044, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3046331325871080760
