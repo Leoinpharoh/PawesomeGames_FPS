@@ -73,9 +73,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     void Awake()
     {
-        objective1Text.text = "Aquiring...";
-        objective2Text.text = "Aquiring...";
-        objective3Text.text = "Aquiring...";
+        objective1Text.text = "";
+        objective2Text.text = "";
+        objective3Text.text = "";
+
+        objectives = new List<string> {"", "", ""};
         Instance = this;
         //show player location
         player = GameObject.FindWithTag("Player");
@@ -166,13 +168,13 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    objective3Text.text = "Aquiring...";
+                    objective3Text.text = "";
                 }
             }
             else
             {
-                objective2Text.text = "Aquiring...";
-                objective3Text.text = "Aquiring...";
+                objective2Text.text = "";
+                objective3Text.text = "";
             }
         }
     }

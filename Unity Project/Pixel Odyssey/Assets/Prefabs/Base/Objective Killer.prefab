@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6111834531959482214}
-  - component: {fileID: 7971908298408163441}
+  - component: {fileID: -7211203341751473909}
   - component: {fileID: 2078983647015882358}
   m_Layer: 0
   m_Name: Objective Killer
@@ -33,7 +33,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7971908298408163441
+--- !u!114 &-7211203341751473909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1131351126369316212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objective: Objective 1 here
-  objective2: Objective 2 here
-  objective3: Objective 3
+  objectiveToKill: {fileID: 0}
 --- !u!135 &2078983647015882358
 SphereCollider:
   m_ObjectHideFlags: 0
