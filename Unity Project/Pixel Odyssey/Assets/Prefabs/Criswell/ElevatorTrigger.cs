@@ -12,7 +12,7 @@ public class EventTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player")) // If the player enters the collider and the spawner is not already spawning
         {
-            animator.SetTrigger("Trigger");
+            animator.SetBool("Trigger", true);
             triggerToActivate.SetActive(true);
             Destroy(triggerToDestroy);
         }

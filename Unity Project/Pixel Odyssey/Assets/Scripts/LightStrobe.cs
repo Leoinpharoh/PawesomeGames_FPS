@@ -13,19 +13,14 @@ public class LightStrobe : MonoBehaviour
     {
         if (targetLight == null)
         {
-            targetLight = GetComponent<Light>();
+            targetLight = GetComponent<Light>(); // Get the light component if it is not assigned
         }
     }
 
     void Update()
     {
-        // Increment lerpTime based on colorChangeSpeed and time elapsed
-        lerpTime += Time.deltaTime * colorChangeSpeed;
-
-        // Ping-pong the lerpTime to create a continuous transition between startColor and endColor
-        float t = Mathf.PingPong(lerpTime, 1.0f);
-
-        // Update the light color
-        targetLight.color = Color.Lerp(startColor, endColor, t);
+        lerpTime += Time.deltaTime * colorChangeSpeed; // Increment the lerp time
+        float t = Mathf.PingPong(lerpTime, 1.0f); // Calculate the t value for the lerp
+        targetLight.color = Color.Lerp(startColor, endColor, t); // Lerp the color of the light
     }
 }
