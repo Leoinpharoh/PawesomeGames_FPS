@@ -143,12 +143,13 @@ public class EnemyAI : MonoBehaviour, IDamage
                         StartCoroutine(shoot()); // Start the shoot coroutine
                     }
                 }
-                if (!playerInRange && enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && !canSeePlayer() && roaming)
-                {
-                    StartCoroutine(roam()); // Call the roam function
-                }
+                
             }
-            
+            if (enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && !canSeePlayer() && roaming)
+            {
+                StartCoroutine(roam()); // Call the roam function
+            }
+
 
             //Line of Sight Enemy=======================================================
 
@@ -401,19 +402,26 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator roam()
     {
-        if (!destChosen && agent.remainingDistance < 0.05f)
+        if (!destChosen)
         {
-            destChosen = true; // Set destChosen to true
-            agent.stoppingDistance = 0; // Set the stopping distance of the agent to 0
-
+            destChosen = true;
+            startingPos = transform.position;
+            Debug.Log("Roaming called");
             yield return new WaitForSeconds(enemyParams.roamTimer); // Wait for the roam timer
+            Debug.Log("Waited for " + enemyParams.roamTimer + " seconds");
             Vector3 ranPos = Random.insideUnitSphere * enemyParams.roamDist; // Get a random position within the roam distance
+            Debug.Log("Random position: " + ranPos);
             ranPos += startingPos; // Add the starting position to the random position
+            Debug.Log("Starting position: " + startingPos);
             NavMeshHit hit; // Create a navmesh hit variable
+            Debug.Log("Hit created");
             NavMesh.SamplePosition(ranPos, out hit, enemyParams.roamDist, 1); // Sample the position of the random position
+            Debug.Log("Sampled position");
             agent.SetDestination(hit.position); // Set the destination of the agent to the random position
-            destChosen = false; // Set destChosen to false
+            Debug.Log("Set destination");
+            destChosen = false;
         }
+        
 
 
     }
