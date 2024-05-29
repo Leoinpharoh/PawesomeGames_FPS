@@ -251,10 +251,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isAttacking = true;
+        anim.SetBool("Attack", true); // Set the trigger for the attack animation
+        anim.SetBool("isStopped", true); // Set the trigger for the idle animation
         Instantiate(enemyParams.bullet, shootPos.position, transform.rotation);
 
         yield return new WaitForSeconds(enemyParams.attackSpeed);
         isAttacking = false;
+        anim.SetBool("Attack", false); // Set the trigger for the attack animation
+        anim.SetBool("isStopped", false); // Set the trigger for the idle animation
     }
 
     public void takeDamage(int amount, Vector3 hitPosition) // Method to take damage
