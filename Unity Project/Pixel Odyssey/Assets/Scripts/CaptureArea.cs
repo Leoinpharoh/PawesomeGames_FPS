@@ -6,11 +6,11 @@ public class CaptureAreaLogic : MonoBehaviour
 {
     public string capturingTag = "Player"; // The tag of the capturing object
     private bool isCaptured = false;
-    private float captureProgress = 0f;
-    public float captureTime = 30f; // Time required to capture the area
+    private float captureProgress = 1f;
+    public float captureTime = 10f; // Time required to capture the area
     public GameObject captureAreaObject; // The object to destroy after capture
-    public int damageAmount = 1; // The amount of damage to apply
-    public float damageInterval = 2f; // Time interval between damage applications
+    [SerializeField] public int damageAmount; // The amount of damage to apply
+    [SerializeField] public float damageInterval; // Time interval between damage applications
     private HashSet<GameObject> playersInZone = new HashSet<GameObject>(); // Track players inside the capture area
     private Coroutine captureCoroutine; // Reference to the capture coroutine
 
@@ -70,13 +70,13 @@ public class CaptureAreaLogic : MonoBehaviour
 
     private System.Collections.IEnumerator ApplyDamageOutsideZone(GameObject player)
     {
-        IDamage damageable = player.GetComponent<IDamage>();
+        EDamage damageable = player.GetComponent<EDamage>();
 
         if (damageable != null)
         {
             while (!playersInZone.Contains(player) && !isCaptured)
             {
-                damageable.takeDamage(damageAmount, player.transform.position); // Assuming the hit position is the player's current position
+                damageable.poisonDamage( damageAmount,damageInterval); // Assuming the hit position is the player's current position
                 yield return new WaitForSeconds(damageInterval);
             }
         }
