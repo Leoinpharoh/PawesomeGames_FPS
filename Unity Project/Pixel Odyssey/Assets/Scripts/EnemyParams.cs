@@ -26,10 +26,13 @@ public class EnemyParams : ScriptableObject
     [Range(2, 10)] public int animSpeedTrans; 
     [Range(0, 100)] public int roamDist;
     [Range(0, 100)] public int roamTimer;
+    [Range(0, 100)] public int lootChance;
 
     public enum EnemyType { Melee, Ranged, Combination, Stationary, Exploding };
     public enum DamageType { Regular, Poisoned, Burning, Freezing, Slowed, Confused };
     public enum DetectionType { LineOfSight, Wave };
+
+    public GameObject[] loot;
 
     public DamageType damageType;
     public EnemyType enemyType;
@@ -37,5 +40,6 @@ public class EnemyParams : ScriptableObject
 
     public bool flying = false;
     public bool roaming = false;
+    public bool lootPinata = false;
 
 }

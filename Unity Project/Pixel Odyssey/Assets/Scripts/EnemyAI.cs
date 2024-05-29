@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     EnemyParams.EnemyType enemyType; // references the enemy type from the EnemyParams scriptable object
     EnemyParams.DetectionType enemyDetection; // references the enemy detection from the EnemyParams scriptable object
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -289,6 +290,20 @@ public class EnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
         GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
+        Vector3 dropPosition = new Vector3 (transform.position.x, transform.position.y + 2, transform.position.z);
+        if (enemyParams.lootPinata)
+        {
+            int chance = Random.Range(0, 100);
+            if(chance <= enemyParams.lootChance)
+            {
+                Instantiate(enemyParams.loot[Random.Range(0, enemyParams.loot.Length)], dropPosition, Quaternion.identity); // Instantiate the loot at the enemy's position
+            }
+            else
+            {
+                
+            }
+            
+        }
     }
 
     IEnumerator Damage(Vector3 hitPosition)
