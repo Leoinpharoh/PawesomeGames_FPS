@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] SphereCollider triggerCollider;
     [SerializeField] Animator anim;
     [SerializeField] EnemyParams enemyParams; // Reference to the EnemyParams ScriptableObject
+    [SerializeField] AudioSource audioSource; // Reference to the AudioSource component
     bool isAttacking = false; // Bool to check if the enemy is attacking
     bool playerInRange = false; // Bool to check if the player is in range of the enemy
     bool playerInMeleeAttackRange = false; // Bool to check if the player is in melee attack range of the enemy
@@ -73,6 +74,10 @@ public class EnemyAI : MonoBehaviour, IDamage
         if(HP > 0) {
             float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
             anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
+            if (animSpeed > 0 && !audioSource.isPlaying)
+            {
+                PlayWalkingSound();
+            }
             if (animSpeed == 0 && canSeePlayer() == true)
             {
                 anim.SetBool("isStopped", true);
@@ -147,6 +152,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
             if (enemyType != EnemyParams.EnemyType.Stationary && enemyDetection != EnemyParams.DetectionType.Wave && !canSeePlayer() && roaming)
             {
+                
                 StartCoroutine(roam()); // Call the roam function
             }
 
@@ -253,6 +259,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isAttacking = true;
+        PlayAttackSound();
         anim.SetBool("Attack", true); // Set the trigger for the attack animation
         anim.SetBool("isStopped", true); // Set the trigger for the idle animation
         Instantiate(enemyParams.bullet, shootPos.position, transform.rotation);
@@ -288,6 +295,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         playerInRangedAttackRange = false; // Bool to check if the player is in ranged attack range of the enemy
         capsuleCollider.enabled = false; // Disable the capsule collider
         agent.isStopped = true; // Stop the agent from moving
+        PlayDeathSound();
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
         GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
@@ -311,6 +319,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         GameObject bloodEffect = Instantiate(enemyParams.bloodSplash, hitPosition, Quaternion.identity); // Instantiate at the hit position
         bloodEffect.transform.SetParent(transform); // Optionally set the parent to the enemy's transform
+        PlayDamageSound();
         yield return new WaitForSeconds(1); // Wait for 1 second (adjust based on your effect's needs)
         Destroy(bloodEffect); // Optionally destroy the effect after it finishes playing
 
@@ -323,6 +332,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             yield break; // Prevent multiple simultaneous attacks
         }
         isAttacking = true; // Set isAttacking to true
+        PlayAttackSound();
         anim.SetBool("Attack", true); // Set the trigger for the attack animation
         anim.SetBool("isStopped", true); // Set the trigger for the idle animation
         yield return new WaitForSeconds(0.5f); // Wait for the attack animation to play
@@ -392,7 +402,6 @@ public class EnemyAI : MonoBehaviour, IDamage
             if (hit.collider.CompareTag("Player") && angleToPlayer <= enemyParams.viewAngle && playerInRange) // Check if the object hit is the player
             {
                 agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
-                
                 return true; // Return true
 
             }
@@ -421,9 +430,55 @@ public class EnemyAI : MonoBehaviour, IDamage
             Debug.Log("Set destination");
             destChosen = false;
         }
-        
+    }
 
+    private void PlayAttackSound()
+    {
+        if (audioSource != null && enemyParams.attackSound.Length > 0)
+        {
+            AudioClip clip = enemyParams.attackSound[Random.Range(0, enemyParams.attackSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
 
+    private void PlayDeathSound()
+    {
+        if (audioSource != null && enemyParams.deathSound.Length > 0)
+        {
+            AudioClip clip = enemyParams.deathSound[Random.Range(0, enemyParams.deathSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayDamageSound()
+    {
+        if (audioSource != null && enemyParams.damagedSound.Length > 0)
+        {
+            AudioClip clip = enemyParams.damagedSound[Random.Range(0, enemyParams.damagedSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayIdleSound()
+    {
+        if (audioSource != null && enemyParams.idleSound.Length > 0)
+        {
+            AudioClip clip = enemyParams.idleSound[Random.Range(0, enemyParams.idleSound.Length)];
+            audioSource.clip = clip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    private void PlayWalkingSound()
+    {
+        if (audioSource != null && enemyParams.walkingSound.Length > 0)
+        {
+            AudioClip clip = enemyParams.walkingSound[Random.Range(0, enemyParams.walkingSound.Length)];
+            audioSource.clip = clip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
 }
