@@ -7,7 +7,7 @@ public class CaptureAreaLogic : MonoBehaviour
     public string capturingTag = "Player"; // The tag of the capturing object
     private bool isCaptured = false;
     private float captureProgress = 1f;
-    public float captureTime = 10f; // Time required to capture the area
+    public float captureTime = 160f; // Time required to capture the area
     public GameObject captureAreaObject; // The object to destroy after capture
     [SerializeField] public int damageAmount; // The amount of damage to apply
     [SerializeField] public float damageInterval; // Time interval between damage applications
