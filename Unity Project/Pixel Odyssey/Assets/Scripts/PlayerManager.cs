@@ -50,11 +50,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     private Coroutine slowCoroutine;
     private Coroutine confuseCoroutine;
     bool moveSpeedReduced;
+    bool alive;
     int moveSpeedOriginal;
 
 
     void Start()
     {
+        alive = true;
         moveSpeedOriginal = moveSpeed;
         HPOrignal = HP;
         OSOrignal = OS;
@@ -424,9 +426,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void playerDeath()
     {
-        if (HP <= 0 && Normal || HP <= 0 && !Normal)
+        if (alive)
         {
-            GameManager.Instance.youLose();
+            if (HP <= 0 && Normal || HP <= 0 && !Normal)
+            {
+                GameManager.Instance.youLose();
+                alive = false;
+            }
         }
     }
 
