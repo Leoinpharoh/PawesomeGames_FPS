@@ -29,10 +29,16 @@ MonoBehaviour:
   viewAngle: 180
   destroyTime: 3
   animSpeedTrans: 6
-  roamDist: 0
-  roamTimer: 0
+  roamDist: 10
+  roamTimer: 2
+  lootChance: 66
+  loot:
+  - {fileID: 5124695256270460069, guid: 32dff355718e02b44b868681d2fdb8b6, type: 3}
+  - {fileID: 4302621495598530509, guid: 97e219c7d556f0240b80f2770fd499a8, type: 3}
+  - {fileID: 8426798306682229451, guid: 0074f54a0569a5949a026f398cb7a99d, type: 3}
   damageType: 2
   enemyType: 1
   detectionType: 0
   flying: 0
-  roaming: 0
+  roaming: 1
+  lootPinata: 1
