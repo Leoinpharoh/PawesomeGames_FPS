@@ -6188,6 +6188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 26831789}
   - component: {fileID: 26831791}
+  - component: {fileID: 26831794}
   - component: {fileID: 26831792}
   - component: {fileID: 26831790}
   m_Layer: 0
@@ -6257,6 +6258,19 @@ MonoBehaviour:
   animator: {fileID: 1618115357}
   triggerToDestroy: {fileID: 1346394576}
   triggerToActivate: {fileID: 1870562054}
+--- !u!114 &26831794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26831788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 1470884540}
 --- !u!1 &29711257
 GameObject:
   m_ObjectHideFlags: 0
@@ -12961,6 +12975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 253770115}
   - component: {fileID: 253770117}
+  - component: {fileID: 253770118}
   - component: {fileID: 253770116}
   m_Layer: 0
   m_Name: DoorCharlie Trigger
@@ -13018,6 +13033,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objective: Find Charlie Keycard
+--- !u!114 &253770118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253770114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 1829688074}
 --- !u!1001 &259964337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25167,6 +25195,8 @@ GameObject:
   m_Component:
   - component: {fileID: 461084365}
   - component: {fileID: 461084368}
+  - component: {fileID: 461084370}
+  - component: {fileID: 461084369}
   - component: {fileID: 461084367}
   - component: {fileID: 461084366}
   m_Layer: 0
@@ -25236,6 +25266,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461084364}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &461084369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461084364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: Get the hell on!
+--- !u!114 &461084370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461084364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 1104469227}
 --- !u!1 &465139014
 GameObject:
   m_ObjectHideFlags: 0
@@ -30294,6 +30350,132 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2665425264791472026, guid: ff25b715f02cfd947b8608c3d7de53c9, type: 3}
   m_PrefabInstance: {fileID: 650678885}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &652834603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652834609}
+  - component: {fileID: 652834608}
+  - component: {fileID: 652834611}
+  - component: {fileID: 652834606}
+  - component: {fileID: 652834605}
+  - component: {fileID: 652834604}
+  - component: {fileID: 652834610}
+  m_Layer: 0
+  m_Name: Getevator Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &652834604
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652834603}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &652834605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652834603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 17427086}
+--- !u!114 &652834606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652834603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: Get to the elevator
+--- !u!33 &652834608
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652834603}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &652834609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652834603}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.712, y: 8.059, z: -21.301}
+  m_LocalScale: {x: 0.5692759, y: 4.4693723, z: 5.6428614}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 797978213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &652834610
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652834603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &652834611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652834603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775b328b54c8b9d49af5418c903ebf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerToDestroy: {fileID: 1470884536}
 --- !u!4 &653755066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 409034, guid: a4c18952442944083b1fddc06ba477c2, type: 3}
@@ -34270,8 +34452,12 @@ Transform:
   - {fileID: 500794971}
   - {fileID: 2086071230}
   - {fileID: 1547088058}
+  - {fileID: 1104469224}
+  - {fileID: 881209916}
   - {fileID: 2080348539}
   - {fileID: 17427083}
+  - {fileID: 652834609}
+  - {fileID: 1470884537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &799275167
@@ -36956,6 +37142,132 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13990f94448cc49c08e917134d8b0479, type: 3}
+--- !u!1 &881209915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881209916}
+  - component: {fileID: 881209920}
+  - component: {fileID: 881209922}
+  - component: {fileID: 881209924}
+  - component: {fileID: 881209919}
+  - component: {fileID: 881209917}
+  - component: {fileID: 881209923}
+  m_Layer: 0
+  m_Name: Too Many Trigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881209916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881209915}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 27.863, y: 7.922, z: -21.368649}
+  m_LocalScale: {x: 5.5095816, y: 3.8063295, z: 0.45725644}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 797978213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &881209917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881209915}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &881209919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881209915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: Theres too many! Maybe they aren't in the other elevator?
+--- !u!33 &881209920
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881209915}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &881209922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881209915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 652834606}
+--- !u!95 &881209923
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881209915}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &881209924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881209915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775b328b54c8b9d49af5418c903ebf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerToDestroy: {fileID: 1104469223}
 --- !u!4 &882686150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 409034, guid: a4c18952442944083b1fddc06ba477c2, type: 3}
@@ -44422,8 +44734,10 @@ GameObject:
   m_Component:
   - component: {fileID: 955962711}
   - component: {fileID: 955962710}
+  - component: {fileID: 955962714}
+  - component: {fileID: 955962713}
   - component: {fileID: 955962709}
-  - component: {fileID: 955962708}
+  - component: {fileID: 955962712}
   m_Layer: 0
   m_Name: Charlie Card
   m_TagString: Untagged
@@ -44431,27 +44745,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &955962708
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 955962707}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &955962709
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -44518,6 +44811,53 @@ Transform:
   - {fileID: 5915860943234462351}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -39.459, z: 0}
+--- !u!65 &955962712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955962707}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.63, y: 99.63, z: 2.86}
+  m_Center: {x: 2.83, y: -1.32, z: 1.2}
+--- !u!114 &955962713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955962707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 253770117}
+--- !u!114 &955962714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955962707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: Open Charlie Door
 --- !u!1001 &959190284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49745,6 +50085,132 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409034, guid: a4c18952442944083b1fddc06ba477c2, type: 3}
   m_PrefabInstance: {fileID: 911550976}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1104469223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1104469224}
+  - component: {fileID: 1104469228}
+  - component: {fileID: 1104469230}
+  - component: {fileID: 1104469232}
+  - component: {fileID: 1104469227}
+  - component: {fileID: 1104469225}
+  - component: {fileID: 1104469231}
+  m_Layer: 0
+  m_Name: Too Many Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1104469224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104469223}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7089108, z: -0, w: 0.7052981}
+  m_LocalPosition: {x: 61.806, y: 7.922, z: -21.156}
+  m_LocalScale: {x: 5.509582, y: 3.8063295, z: 0.45725644}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 797978213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1104469225
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104469223}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1104469227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104469223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: Theres too many! Maybe they aren't in the other elevator?
+--- !u!33 &1104469228
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104469223}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1104469230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104469223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 652834606}
+--- !u!95 &1104469231
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104469223}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1104469232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104469223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775b328b54c8b9d49af5418c903ebf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerToDestroy: {fileID: 881209915}
 --- !u!1 &1106013703
 GameObject:
   m_ObjectHideFlags: 0
@@ -52994,6 +53460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1196174086}
   - component: {fileID: 1196174088}
+  - component: {fileID: 1196174089}
   - component: {fileID: 1196174087}
   m_Layer: 0
   m_Name: DoorBeta Trigger
@@ -53051,6 +53518,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objective: Find Beta Keycard
+--- !u!114 &1196174089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196174085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 1829688074}
 --- !u!1 &1198128742
 GameObject:
   m_ObjectHideFlags: 0
@@ -64442,6 +64922,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1273243059}
+  - component: {fileID: 1273243063}
+  - component: {fileID: 1273243062}
   - component: {fileID: 1273243061}
   - component: {fileID: 1273243060}
   m_Layer: 0
@@ -64512,8 +64994,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1273243060}
-  triggerToDestroy: {fileID: 0}
+  triggerToDestroy: {fileID: 675494835}
   triggerToActivate: {fileID: 1351526537}
+--- !u!114 &1273243062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273243058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: That was close!
+--- !u!114 &1273243063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273243058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 461084369}
 --- !u!1 &1279104924
 GameObject:
   m_ObjectHideFlags: 0
@@ -70921,6 +71429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1346394577}
   - component: {fileID: 1346394580}
+  - component: {fileID: 1346394582}
   - component: {fileID: 1346394579}
   - component: {fileID: 1346394578}
   m_Layer: 0
@@ -70990,6 +71499,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346394576}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1346394582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346394576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 652834606}
 --- !u!1001 &1350654173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71952,6 +72474,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1380805827}
   - component: {fileID: 1380805832}
+  - component: {fileID: 1380805834}
+  - component: {fileID: 1380805833}
   - component: {fileID: 1380805830}
   - component: {fileID: 1380805828}
   - component: {fileID: 1380805831}
@@ -72040,8 +72564,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1273243060}
-  triggerToDestroy: {fileID: 0}
+  triggerToDestroy: {fileID: 1861058657}
   triggerToActivate: {fileID: 1351526537}
+--- !u!114 &1380805833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380805826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: That was close!
+--- !u!114 &1380805834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380805826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 461084369}
 --- !u!1 &1381845589
 GameObject:
   m_ObjectHideFlags: 0
@@ -74706,6 +75256,132 @@ MonoBehaviour:
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
   colorChangeSpeed: 0.7
+--- !u!1 &1470884536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1470884537}
+  - component: {fileID: 1470884542}
+  - component: {fileID: 1470884544}
+  - component: {fileID: 1470884540}
+  - component: {fileID: 1470884539}
+  - component: {fileID: 1470884538}
+  - component: {fileID: 1470884543}
+  m_Layer: 0
+  m_Name: Getevator Trigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1470884537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470884536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.795, y: 8.059, z: -21.301}
+  m_LocalScale: {x: 0.5692759, y: 4.4693723, z: 5.6428614}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 797978213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1470884538
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470884536}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1470884539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470884536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 17427086}
+--- !u!114 &1470884540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470884536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: Get to the elevator
+--- !u!33 &1470884542
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470884536}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &1470884543
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470884536}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1470884544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470884536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775b328b54c8b9d49af5418c903ebf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerToDestroy: {fileID: 652834603}
 --- !u!1001 &1472305553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87072,6 +87748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829688072}
   - component: {fileID: 1829688075}
+  - component: {fileID: 1829688076}
   - component: {fileID: 1829688074}
   - component: {fileID: 1829688073}
   m_Layer: 0
@@ -87148,6 +87825,19 @@ MonoBehaviour:
   spawnTimer: 1
   spawnPos:
   - {fileID: 1142238853}
+--- !u!114 &1829688076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829688071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 1273243062}
 --- !u!4 &1829693063 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 409034, guid: a4c18952442944083b1fddc06ba477c2, type: 3}
@@ -88397,6 +89087,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1861058661}
   - component: {fileID: 1861058660}
+  - component: {fileID: 1861058663}
+  - component: {fileID: 1861058662}
   - component: {fileID: 1861058659}
   - component: {fileID: 1861058658}
   m_Layer: 0
@@ -88466,6 +89158,32 @@ Transform:
   - {fileID: 2123238118}
   m_Father: {fileID: 1618115356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1861058662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861058657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objective: Get the hell on!
+--- !u!114 &1861058663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861058657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 1104469227}
 --- !u!4 &1862224019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1543462391947735107, guid: ab931d06f54192f45ae5f39db40c6e7b, type: 3}
@@ -96318,6 +97036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2108663398}
   - component: {fileID: 2108663400}
+  - component: {fileID: 2108663401}
   - component: {fileID: 2108663399}
   m_Layer: 0
   m_Name: DoorAlpha Trigger
@@ -96375,6 +97094,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objective: Find Alpha Keycard
+--- !u!114 &2108663401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108663397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675932fa644e3a24e98ad0c5ab638ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectiveToKill: {fileID: 1829688074}
 --- !u!1 &2109303250
 GameObject:
   m_ObjectHideFlags: 0

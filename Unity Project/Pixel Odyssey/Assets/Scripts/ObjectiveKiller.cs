@@ -37,8 +37,6 @@ public class ObjectiveKiller : MonoBehaviour
                             }
                         }
                 }
-                    Debug.Log(GameManager.Instance.objectives[i]);
-                    Debug.Log(objectiveToKillString);
                 }
             }
             GameManager.Instance.updateGameObjective();
