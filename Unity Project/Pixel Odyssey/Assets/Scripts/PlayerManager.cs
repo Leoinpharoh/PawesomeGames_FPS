@@ -44,11 +44,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool freezing;
     public bool slowed;
     public bool confused;
-    private Coroutine poisonCoroutine;
-    private Coroutine burnCoroutine;
-    private Coroutine freezeCoroutine;
-    private Coroutine slowCoroutine;
-    private Coroutine confuseCoroutine;
+    public Coroutine poisonCoroutine;
+    public Coroutine burnCoroutine;
+    public Coroutine freezeCoroutine;
+    public Coroutine slowCoroutine;
+    public Coroutine confuseCoroutine;
     bool moveSpeedReduced;
     bool alive;
     int moveSpeedOriginal;
@@ -376,7 +376,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
         GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
     }
-    IEnumerator effectMe(string effect) //used to flash the screen based on what effect user has
+    public IEnumerator effectMe(string effect) //used to flash the screen based on what effect user has
     {
         switch (effect)
         {

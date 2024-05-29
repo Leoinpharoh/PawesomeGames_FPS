@@ -20,7 +20,11 @@ public class StatPickup : MonoBehaviour
                     other.gameObject.GetComponent<PlayerManager>().updatePlayerUI();
                     break;
                 case PickUpType.Ammo:
-                    other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo += refilAmount;
+                    ShootingHandler[] shootingHandlers = other.gameObject.GetComponentsInChildren<ShootingHandler>(true);
+                    foreach (var shootingHandler in shootingHandlers)
+                    {
+                        shootingHandler.Ammo += refilAmount;
+                    }
                     break;
                 case PickUpType.Cure:
                     other.gameObject.GetComponent<PlayerManager>().poisoned = false;
@@ -28,9 +32,17 @@ public class StatPickup : MonoBehaviour
                     other.gameObject.GetComponent<PlayerManager>().freezing = false;
                     other.gameObject.GetComponent<PlayerManager>().slowed = false;
                     other.gameObject.GetComponent<PlayerManager>().confused = false;
+                    other.gameObject.GetComponent<PlayerManager>().Normal = true;
+                    other.gameObject.GetComponent<PlayerManager>().StopAllCoroutines();
+                    GameManager.Instance.playerEffect("Normal");
+                    other.gameObject.GetComponent<PlayerManager>().updatePlayerUI();
                     break;
             }
-            GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
+            if(other.gameObject.GetComponentInChildren<ShootingHandler>() != null)
+            {
+                GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
+            }
+
 
             Destroy(this.gameObject);
         }

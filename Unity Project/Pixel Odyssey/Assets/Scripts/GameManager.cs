@@ -139,12 +139,12 @@ public class GameManager : MonoBehaviour
         enemyCount += amount;
         //send enemy count via as string
         enemyCountText.text = enemyCount.ToString("F0");
-        if (enemyCount <= 0)
-        {
-            statePaused();
-            menuActive = menuWin;
-            menuActive.SetActive(isPaused);
-        }
+        //if (enemyCount <= 0 )
+        //{
+        //    statePaused();
+        //    menuActive = menuWin;
+        //    menuActive.SetActive(isPaused);
+        //}
     }
 
     public void updateGameObjective()
