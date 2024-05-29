@@ -32,16 +32,6 @@ public class ObjectiveTrigger : MonoBehaviour
                     GameManager.Instance.objectives[i] = objective;
                     GameManager.Instance.updateGameObjective();
                     return;
-                    //for (int j = 0; j < GameManager.Instance.objectives.Count; j++)
-                    //{
-                    //    if (GameManager.Instance.objectives[j] == string.Empty)
-                    //    {
-                    //        int k = j + 1;
-                    //        GameManager.Instance.objectives[j] = GameManager.Instance.objectives[k];
-                    //        GameManager.Instance.objectives[k] = string.Empty;
-
-                    //    }
-                    //}
                 }
                 else
                 {
@@ -51,17 +41,6 @@ public class ObjectiveTrigger : MonoBehaviour
         }
 
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player") && needsObjective)
-    //    {
-    //        Debug.Log("objective zone");
-    //        //add string to objectives list
-    //        GameManager.Instance.objectives.Add(objective);
-    //        GameManager.Instance.updateGameObjective();
-    //    }
-
-    //}
     private void OnTriggerExit(Collider other)
     {
         gameObject.SetActive(false);
