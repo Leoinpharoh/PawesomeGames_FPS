@@ -13,26 +13,41 @@ MonoBehaviour:
   m_Name: NormalBowGoblin
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
-  bullet: {fileID: 6060363923453239229, guid: a2477b0059be95644b96f8e294a1d086, type: 3}
   HP: 5
-  attackSpeed: 1.8
   movementSpeed: 3
   Acceleration: 10
-  rangedDamage: 2
-  meleeDamage: 1
-  effectDamage: 0
-  lineOfSightRange: 25
-  meleeRange: 0
-  rangedRange: 10
-  effectDuration: 0.1
-  bulletSpeed: 4
-  viewAngle: 180
-  destroyTime: 3
   animSpeedTrans: 6
+  flying: 0
+  enemyType: 1
+  bullet: {fileID: 6060363923453239229, guid: a2477b0059be95644b96f8e294a1d086, type: 3}
+  attackSpeed: 1.8
+  meleeRange: 0
+  meleeDamage: 4
+  rangedRange: 10
+  rangedDamage: 2
+  bulletSpeed: 4
+  destroyTime: 3
+  effectDamage: 0
+  effectDuration: 0.1
+  damageType: 0
+  roaming: 0
   roamDist: 5
   roamTimer: 3
-  damageType: 0
-  enemyType: 1
+  lootPinata: 1
+  lootChance: 70
+  loot:
+  - {fileID: 8884114810549261806, guid: a5b228b84d9b12e46bce8e52e7cff51e, type: 3}
+  - {fileID: 3802848766677527129, guid: 927d1baae9bc8ea40bc7eda0e1c9a938, type: 3}
+  lineOfSightRange: 25
+  viewAngle: 180
   detectionType: 0
-  flying: 0
-  roaming: 0
+  attackSound:
+  - {fileID: 8300000, guid: 65352b53c75848b4b95ad3b77f22df65, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: 41470c43794245f4aa7357515c0d2fac, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: ef6cd6df919c9824ebfbe371b9b1bc33, type: 3}
+  idleSound:
+  - {fileID: 8300000, guid: cbaf4a920be24f846bea194fa72894fb, type: 3}
+  walkingSound:
+  - {fileID: 8300000, guid: 040e6e5807632e54cbe19d044330b1b5, type: 3}
