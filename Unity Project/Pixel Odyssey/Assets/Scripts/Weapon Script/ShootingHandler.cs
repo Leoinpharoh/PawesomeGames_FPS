@@ -112,9 +112,13 @@ public class ShootingHandler : MonoBehaviour
         isShooting = true;
         yield return new WaitForSeconds(reloadTime);
         reloadAudioSource.Stop();
-        if (Ammo < TilReload) // If the player doesn't have the ammo to fill the clip
+        if(Ammo == 0)
         {
-            clip = Ammo; // Fill the clip with the remaining ammo
+           
+        }
+        else if (Ammo < TilReload) // If the player doesn't have the ammo to fill the clip
+        {
+            clip = Ammo + clip; // Fill the clip with the remaining ammo
             Ammo = 0; // Set the ammo to 0
         }
         else

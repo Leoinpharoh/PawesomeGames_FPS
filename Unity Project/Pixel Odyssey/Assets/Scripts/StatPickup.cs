@@ -23,7 +23,12 @@ public class StatPickup : MonoBehaviour
                     ShootingHandler[] shootingHandlers = other.gameObject.GetComponentsInChildren<ShootingHandler>(true);
                     foreach (var shootingHandler in shootingHandlers)
                     {
+                        
                         shootingHandler.Ammo += refilAmount;
+                        if((shootingHandler.Ammo + refilAmount) >= 99)
+                        {
+                            shootingHandler.Ammo = 99;
+                        }
                     }
                     break;
                 case PickUpType.Cure:
@@ -48,8 +53,13 @@ public class StatPickup : MonoBehaviour
                 GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
             }
 
-
-            Destroy(this.gameObject);
+            StartCoroutine(DestroyAfterDelay(0.5f));
         }
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
