@@ -25,9 +25,9 @@ public class StatPickup : MonoBehaviour
                     {
                         
                         shootingHandler.Ammo += refilAmount;
-                        if(refilAmount >= 99)
+                        if((shootingHandler.Ammo + refilAmount) >= 99)
                         {
-                            refilAmount = 99;
+                            shootingHandler.Ammo = 99;
                         }
                     }
                     break;
