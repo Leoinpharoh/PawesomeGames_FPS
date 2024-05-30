@@ -23,7 +23,12 @@ public class StatPickup : MonoBehaviour
                     ShootingHandler[] shootingHandlers = other.gameObject.GetComponentsInChildren<ShootingHandler>(true);
                     foreach (var shootingHandler in shootingHandlers)
                     {
+                        
                         shootingHandler.Ammo += refilAmount;
+                        if(refilAmount >= 99)
+                        {
+                            refilAmount = 99;
+                        }
                     }
                     break;
                 case PickUpType.Cure:
