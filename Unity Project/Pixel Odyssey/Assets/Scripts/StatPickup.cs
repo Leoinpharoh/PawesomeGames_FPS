@@ -23,28 +23,43 @@ public class StatPickup : MonoBehaviour
                     ShootingHandler[] shootingHandlers = other.gameObject.GetComponentsInChildren<ShootingHandler>(true);
                     foreach (var shootingHandler in shootingHandlers)
                     {
+                        
                         shootingHandler.Ammo += refilAmount;
+                        if((shootingHandler.Ammo + refilAmount) >= 99)
+                        {
+                            shootingHandler.Ammo = 99;
+                        }
                     }
                     break;
                 case PickUpType.Cure:
                     other.gameObject.GetComponent<PlayerManager>().poisoned = false;
+                    GameManager.Instance.poisonHitScreen.SetActive(false);
                     other.gameObject.GetComponent<PlayerManager>().burning = false;
+                    GameManager.Instance.burnHitScreen.SetActive(false);
                     other.gameObject.GetComponent<PlayerManager>().freezing = false;
+                    GameManager.Instance.freezeHitScreen.SetActive(false);
                     other.gameObject.GetComponent<PlayerManager>().slowed = false;
+                    GameManager.Instance.slowHitScreen.SetActive(false);
                     other.gameObject.GetComponent<PlayerManager>().confused = false;
+                    GameManager.Instance.confuseHitScreen.SetActive(false);
                     other.gameObject.GetComponent<PlayerManager>().Normal = true;
                     other.gameObject.GetComponent<PlayerManager>().StopAllCoroutines();
                     GameManager.Instance.playerEffect("Normal");
                     other.gameObject.GetComponent<PlayerManager>().updatePlayerUI();
                     break;
-            }
+}
             if(other.gameObject.GetComponentInChildren<ShootingHandler>() != null)
             {
                 GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
             }
 
-
-            Destroy(this.gameObject);
+            StartCoroutine(DestroyAfterDelay(0.5f));
         }
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }

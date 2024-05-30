@@ -13,23 +13,42 @@ MonoBehaviour:
   m_Name: Ogle_BurnBot
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 203a79f8c7d8cb547ba06f88fa04f57e, type: 3}
-  bullet: {fileID: 6060363923453239229, guid: bce551ff1a8ae9d46972fadde190cd73, type: 3}
   HP: 8
-  attackSpeed: 0.3
   movementSpeed: 4
   Acceleration: 5
-  rangedDamage: 2
-  meleeDamage: 1
-  effectDamage: 2
-  lineOfSightRange: 12
-  meleeRange: 0
-  rangedRange: 10
-  effectDuration: 10
-  bulletSpeed: 15
-  viewAngle: 180
-  destroyTime: 3
   animSpeedTrans: 6
-  damageType: 2
-  enemyType: 1
-  detectionType: 0
   flying: 0
+  enemyType: 1
+  bullet: {fileID: 6060363923453239229, guid: bce551ff1a8ae9d46972fadde190cd73, type: 3}
+  attackSpeed: 0.3
+  meleeRange: 0
+  meleeDamage: 1
+  rangedRange: 13
+  rangedDamage: 2
+  bulletSpeed: 15
+  destroyTime: 3
+  effectDamage: 2
+  effectDuration: 10
+  damageType: 2
+  roaming: 1
+  roamDist: 30
+  roamTimer: 2
+  lootPinata: 1
+  lootChance: 66
+  loot:
+  - {fileID: 5124695256270460069, guid: 32dff355718e02b44b868681d2fdb8b6, type: 3}
+  - {fileID: 4302621495598530509, guid: 97e219c7d556f0240b80f2770fd499a8, type: 3}
+  - {fileID: 8426798306682229451, guid: 0074f54a0569a5949a026f398cb7a99d, type: 3}
+  lineOfSightRange: 19
+  viewAngle: 180
+  detectionType: 0
+  attackSound:
+  - {fileID: 8300000, guid: a48bf6977cc6f8b42ab90e9fe888183e, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: dc4cdc240c1e7a747b041c33cd6f64b6, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: 938903797cea7dc4da0cee0f8fe61e00, type: 3}
+  idleSound:
+  - {fileID: 0}
+  walkingSound:
+  - {fileID: 0}

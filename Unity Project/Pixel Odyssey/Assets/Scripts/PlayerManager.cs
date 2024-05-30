@@ -37,6 +37,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     private Coroutine refillCoroutine;
     private Coroutine waitCoroutine;
 
+    [SerializeField] AudioClip[] playerWalk;
+    [Range(0, 1)][SerializeField] float playerWalkVolume;
+    [SerializeField] AudioClip[] playerShot;
+    [Range(0, 1)][SerializeField] float playerShotVolume;
+    [SerializeField] AudioClip[] OSShot;
+    [Range(0, 1)][SerializeField] float OSShotVolume;
+    [SerializeField] AudioClip[] OSBroken;
+    [Range(0, 1)][SerializeField] float OSBrokenVolume;
+
     //status effect bools
     public bool Normal = true;
     public bool poisoned;
@@ -65,28 +74,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     void Update()
     {
 
-        if (characterControl.isGrounded)
-        {
-            jumpCounter = 0;
-            playerVelocity = Vector3.zero;
-        }
 
-        if (!confused)
-        {
-            moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
-                (Input.GetAxis("Vertical") * transform.forward).normalized;
-            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-        }
-        else
-        {
-            moveDirection = (Input.GetAxis("Vertical") * transform.right) +
-                (Input.GetAxis("Horizontal") * transform.forward);
-            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-        }
+        Movement();
 
-
-
-        Sprint();
         if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
         {
             isWaitingToRefill = true;
@@ -160,7 +150,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         OSTimer = 0;
         OSRefilling = false;
         isWaitingToRefill = false;
-
         // Stop the refill coroutine if it is running
         if (refillCoroutine != null)
         {
@@ -179,6 +168,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             if (OS - amount < 0)
             {
+                Audio.PlayOneShot(OSShot[Random.Range(0, OSShot.Length)], OSShotVolume);
                 Debug.Log("True 1");
                 HP -= amount - OS;
                 OS = 0;
@@ -187,6 +177,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             }
             else
             {
+                Audio.PlayOneShot(OSBroken[Random.Range(0, OSBroken.Length)], OSBrokenVolume);
                 Debug.Log("True 2");
                 OS -= amount;
                 StartCoroutine(hitMe());
@@ -195,6 +186,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         else if (OS <= 0)
         {
+            Audio.PlayOneShot(playerShot[Random.Range(0, playerShot.Length)], playerShotVolume);
             HP -= amount;
             StartCoroutine(hitMe());
             updatePlayerUI();
@@ -435,6 +427,30 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             }
         }
     }
+    public void Movement()
+    {
+        if (characterControl.isGrounded)
+        {
+            jumpCounter = 0;
+            playerVelocity = Vector3.zero;
+        }
+        if (!confused)
+        {
+            moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+                (Input.GetAxis("Vertical") * transform.forward).normalized;
+            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            moveDirection = (Input.GetAxis("Vertical") * transform.right) +
+                (Input.GetAxis("Horizontal") * transform.forward);
+            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+            
+        }
+
+        Sprint();
+    }
+
 
 
     /*public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
