@@ -53,8 +53,13 @@ public class StatPickup : MonoBehaviour
                 GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
             }
 
-
-            Destroy(this.gameObject);
+            StartCoroutine(DestroyAfterDelay(0.5f));
         }
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
