@@ -7,12 +7,12 @@ public class playerBullet : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] int damage;
-    [SerializeField] int speed;
-    [SerializeField] int destroyTime;
+    public int damage;
+    public int speed;
+    public int destroyTime;
 
 
-    [SerializeField] GameObject Explode;
+    public GameObject Explode;
 
     private IDamage dmg;
     private Vector3 hitPosition;

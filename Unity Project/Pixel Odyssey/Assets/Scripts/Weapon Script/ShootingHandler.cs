@@ -21,6 +21,7 @@ public class ShootingHandler : MonoBehaviour
     [SerializeField] int shootDmg;
     [SerializeField] int shootDist;
     [SerializeField] float shootSpeed;
+    [SerializeField] int projectileSpeed;
     [SerializeField] int numberOfRays; // This can be higher so that the weapon can be a burst gun.
     enum WeaponType { RayCast, Laser, Projectile, SpreadRay }
     [SerializeField] WeaponType weaponType;
@@ -91,6 +92,8 @@ public class ShootingHandler : MonoBehaviour
                 for (int i = 0; i < numberOfRays; i++) { rayDraw(); }   // Fire a bullet in a straight line.          
             }else if (weaponType == WeaponType.Projectile)
             {
+                projectileBullet.GetComponent<playerBullet>().damage = shootDmg;
+                projectileBullet.GetComponent<playerBullet>().speed = projectileSpeed;
                 Instantiate(projectileBullet, firePoint.transform.position, transform.rotation);
             }
           // Turn off the laser.
