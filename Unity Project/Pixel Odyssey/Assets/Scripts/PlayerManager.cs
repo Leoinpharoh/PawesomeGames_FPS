@@ -61,7 +61,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool moveSpeedReduced;
     bool alive;
     int moveSpeedOriginal;
-    bool isMoving;
 
 
     void Start()
@@ -77,11 +76,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
 
         Movement();
-
-        if (isMoving)
-        {
-            StartCoroutine(walkingSounds());
-        }
 
         if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
         {
@@ -435,14 +429,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void Movement()
     {
-        if(moveDirection == Vector3.zero)
-        {
-            isMoving = false;
-        }
-        else
-        {
-            isMoving = true;
-        }
         if (characterControl.isGrounded)
         {
             jumpCounter = 0;
@@ -463,11 +449,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
 
         Sprint();
-    }
-    IEnumerator walkingSounds()
-    {
-        //Audio.PlayOneShot(playerWalk[Random.Range(0, playerWalk.Length)], playerWalkVolume);
-        yield return new WaitForSeconds(1);
     }
 
 
