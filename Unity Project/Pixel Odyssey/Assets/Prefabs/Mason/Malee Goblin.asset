@@ -13,26 +13,41 @@ MonoBehaviour:
   m_Name: Malee Goblin
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
-  bullet: {fileID: 0}
-  HP: 10
-  attackSpeed: 1
+  HP: 20
   movementSpeed: 3
   Acceleration: 10
-  rangedDamage: 1
-  meleeDamage: 4
-  effectDamage: 0
-  lineOfSightRange: 25
-  meleeRange: 5
-  rangedRange: 0
-  effectDuration: 0.1
-  bulletSpeed: 0.1
-  viewAngle: 180
-  destroyTime: 3
   animSpeedTrans: 6
+  flying: 0
+  enemyType: 0
+  bullet: {fileID: 0}
+  attackSpeed: 1
+  meleeRange: 5
+  meleeDamage: 4
+  rangedRange: 0
+  rangedDamage: 1
+  bulletSpeed: 0.1
+  destroyTime: 3
+  effectDamage: 0
+  effectDuration: 0.1
+  damageType: 0
+  roaming: 0
   roamDist: 0
   roamTimer: 0
-  damageType: 0
-  enemyType: 0
+  lootPinata: 1
+  lootChance: 50
+  loot:
+  - {fileID: 3802848766677527129, guid: 927d1baae9bc8ea40bc7eda0e1c9a938, type: 3}
+  - {fileID: 8884114810549261806, guid: a5b228b84d9b12e46bce8e52e7cff51e, type: 3}
+  lineOfSightRange: 25
+  viewAngle: 180
   detectionType: 0
-  flying: 0
-  roaming: 0
+  attackSound:
+  - {fileID: 8300000, guid: d5af17ea00ac985419319c3799154a97, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: 47df5ad02e88c804e94751c8cf24572c, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: ef6cd6df919c9824ebfbe371b9b1bc33, type: 3}
+  idleSound:
+  - {fileID: 8300000, guid: cbaf4a920be24f846bea194fa72894fb, type: 3}
+  walkingSound:
+  - {fileID: 8300000, guid: 040e6e5807632e54cbe19d044330b1b5, type: 3}
