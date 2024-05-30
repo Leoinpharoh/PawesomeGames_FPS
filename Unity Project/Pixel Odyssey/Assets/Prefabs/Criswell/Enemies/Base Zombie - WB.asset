@@ -13,26 +13,44 @@ MonoBehaviour:
   m_Name: Base Zombie - WB
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
-  bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
   HP: 30
-  attackSpeed: 1
   movementSpeed: 1
   Acceleration: 20
-  rangedDamage: 1
-  meleeDamage: 5
-  effectDamage: 0
-  lineOfSightRange: 100
-  meleeRange: 3
-  rangedRange: 0
-  effectDuration: 0.1
-  bulletSpeed: 0.1
-  viewAngle: 180
-  destroyTime: 2
   animSpeedTrans: 7
+  flying: 0
+  enemyType: 0
+  bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
+  attackSpeed: 1
+  meleeRange: 3
+  meleeDamage: 5
+  rangedRange: 0
+  rangedDamage: 1
+  bulletSpeed: 0.1
+  destroyTime: 2
+  effectDamage: 0
+  effectDuration: 0.1
+  damageType: 0
+  roaming: 0
   roamDist: 0
   roamTimer: 0
-  damageType: 0
-  enemyType: 0
+  lootPinata: 0
+  lootChance: 0
+  loot: []
+  lineOfSightRange: 100
+  viewAngle: 180
   detectionType: 1
-  flying: 0
-  roaming: 0
+  attackSound:
+  - {fileID: 8300000, guid: afdfc295d48626b4f8ab5286992a1163, type: 3}
+  - {fileID: 8300000, guid: fb2e005fe643c7d4392dec0d02432de2, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: baf123e9194144748beb7914d012075b, type: 3}
+  - {fileID: 8300000, guid: 2a3e2039759ff1c47a95873bdc9e948b, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: b70ec854eee1638409e0d73ee6cc821b, type: 3}
+  idleSound:
+  - {fileID: 8300000, guid: bf92246d2e9b6a64c90234f50f0ef192, type: 3}
+  - {fileID: 8300000, guid: 1ad4dbbc5c0572e4f9efa8097308f835, type: 3}
+  walkingSound:
+  - {fileID: 8300000, guid: fe1da5ea3e2c8fe4f952dbf34e6d5c72, type: 3}
+  - {fileID: 8300000, guid: e10c9448d7c1c2e4cb0e98a82df61c96, type: 3}
+  - {fileID: 8300000, guid: 6b29532875e76cf409fef645d5de0074, type: 3}

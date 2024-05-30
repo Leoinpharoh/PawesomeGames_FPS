@@ -415,19 +415,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             destChosen = true;
             startingPos = transform.position;
-            Debug.Log("Roaming called");
             yield return new WaitForSeconds(enemyParams.roamTimer); // Wait for the roam timer
-            Debug.Log("Waited for " + enemyParams.roamTimer + " seconds");
             Vector3 ranPos = Random.insideUnitSphere * enemyParams.roamDist; // Get a random position within the roam distance
-            Debug.Log("Random position: " + ranPos);
             ranPos += startingPos; // Add the starting position to the random position
-            Debug.Log("Starting position: " + startingPos);
             NavMeshHit hit; // Create a navmesh hit variable
-            Debug.Log("Hit created");
             NavMesh.SamplePosition(ranPos, out hit, enemyParams.roamDist, 1); // Sample the position of the random position
-            Debug.Log("Sampled position");
             agent.SetDestination(hit.position); // Set the destination of the agent to the random position
-            Debug.Log("Set destination");
             destChosen = false;
         }
     }
