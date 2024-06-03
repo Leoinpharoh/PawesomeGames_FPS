@@ -65,6 +65,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] GameObject flashlight;
     private bool flashlightToggle;
 
+    private CharacterController CharCon;
+    float interpolationProgress = 1f;
+    float targetHeight;
+    float baseHeight;
+    float crouchHeight;
+
 
     void Start()
     {
@@ -73,11 +79,32 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         HPOrignal = HP;
         OSOrignal = OS;
         updatePlayerUI();
+        CharCon = gameObject.GetComponent<CharacterController>();
+        baseHeight = CharCon.height;
+        crouchHeight = baseHeight / 2;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(!flashlightToggle); }
+        if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(!flashlight); } // input to toggle the flashlight on or off
+        if (Input.GetKeyDown(KeyCode.LeftControl)) 
+        {
+            moveSpeed = moveSpeed / 2;
+            interpolationProgress = 0;
+            targetHeight = crouchHeight;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            moveSpeed = moveSpeedOriginal;
+            interpolationProgress = 0;
+            targetHeight = baseHeight;
+        }
 
+        if (interpolationProgress < 1f)
+        {
+            interpolationProgress = Mathf.Clamp01(interpolationProgress + Time.deltaTime * 0.3f);
+            CharCon.height = Mathf.Lerp(CharCon.height, targetHeight, interpolationProgress);
+        }
+            
 
         Movement();
 
