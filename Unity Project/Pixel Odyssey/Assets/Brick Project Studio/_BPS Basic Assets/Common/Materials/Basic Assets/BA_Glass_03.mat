@@ -12,7 +12,10 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+<<<<<<< Updated upstream
   - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+=======
+>>>>>>> Stashed changes
   - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
@@ -24,6 +27,10 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - DepthOnly
+<<<<<<< Updated upstream
+=======
+  - SHADOWCASTER
+>>>>>>> Stashed changes
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -120,11 +127,19 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
+<<<<<<< Updated upstream
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7713665664218824524
+=======
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
+  m_BuildTextureStacks: []
+--- !u!114 &8831849896649051893
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
