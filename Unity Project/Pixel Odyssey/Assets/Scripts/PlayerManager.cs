@@ -62,6 +62,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool alive;
     int moveSpeedOriginal;
 
+    [SerializeField] GameObject flashlight;
+    private bool flashlightToggle;
+
 
     void Start()
     {
@@ -73,6 +76,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(!flashlightToggle); }
 
 
         Movement();
