@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject sceneSelect;
     [SerializeField] public GameObject menuOptions;
     [SerializeField] GameObject optionsMainMenu;
-    [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
 
@@ -134,18 +133,18 @@ public class GameManager : MonoBehaviour
         menuOptions.SetActive(false);
         menuActive = null;
     }
-    public void updateGameGoal(int amount)
-    {
-        enemyCount += amount;
-        //send enemy count via as string
-        enemyCountText.text = enemyCount.ToString("F0");
-        //if (enemyCount <= 0 )
-        //{
-        //    statePaused();
-        //    menuActive = menuWin;
-        //    menuActive.SetActive(isPaused);
-        //}
-    }
+    //public void updateGameGoal(int amount)
+    //{
+    //    enemyCount += amount;
+    //    //send enemy count via as string
+    //    enemyCountText.text = enemyCount.ToString("F0");
+    //    //if (enemyCount <= 0 )
+    //    //{
+    //    //    statePaused();
+    //    //    menuActive = menuWin;
+    //    //    menuActive.SetActive(isPaused);
+    //    //}
+    //}
 
     public void updateGameObjective()
     {

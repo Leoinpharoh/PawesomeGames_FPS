@@ -31,7 +31,7 @@ public class MultiModelEnemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.updateGameGoal(1);
+        //GameManager.Instance.updateGameGoal(1);
         HP = enemyParams.HP; // Set the HP to the HP from the EnemyParams scriptable object
         enemyType = enemyParams.enemyType; // Get the enemy type from the EnemyParams scriptable object
         enemyDetection = enemyParams.detectionType; // Get the enemy detection from the EnemyParams scriptable object
@@ -234,7 +234,7 @@ public class MultiModelEnemyAI : MonoBehaviour, IDamage
         StartCoroutine(Damage(hitPosition)); // Start the flash coroutine
         if (HP <= 0) // Check if the enemy's health is less than or equal to 0
         {
-            GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
+            //GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
             Destroy(gameObject); // Destroy the enemy
         }
         else

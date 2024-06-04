@@ -171,7 +171,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         PlayDeathSound();
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
-        GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
+        //GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
         Vector3 dropPosition = new Vector3 (transform.position.x, transform.position.y + 2, transform.position.z);
         if (enemyParams.lootPinata)
         {

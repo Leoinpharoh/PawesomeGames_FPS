@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.updateGameGoal(numToSpawn); // Increment the enemy count
+        //GameManager.Instance.updateGameGoal(numToSpawn); // Increment the enemy count
     }
 
     private void Update()
