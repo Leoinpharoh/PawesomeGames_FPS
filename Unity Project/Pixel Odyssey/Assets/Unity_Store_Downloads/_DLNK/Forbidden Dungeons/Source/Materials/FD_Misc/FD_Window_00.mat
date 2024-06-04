@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-719178317931936313
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -21,28 +8,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FD_Window_00
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_Shader: {fileID: 4800000, guid: e57354225c64ec4488b0f06dc7e8772a, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _EMISSION
+  - _INVERTMASK_ON
   - _NORMALMAP
-  m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 512da8cc3bc5e9242bd49bc46d1cd004, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -76,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e1e5382f1cc820e449bf1d49cb398dc0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex1:
@@ -107,10 +87,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _WaterAGloss:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -127,44 +103,22 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AffectDepth: 0
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _BumpSmooth: 0
     - _ChromaticAberration: 0.1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
     - _ColorMix: 1
-    - _Cull: 2
     - _Cutoff: 0.5
     - _Depth: 0
     - _DepthFocus: 1
     - _DepthRange: 0
-    - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DetailTiling: 9.15
     - _Displacement: 0
     - _Distorsion: 0.1
     - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _EnvironmentReflections: 1
     - _Falloff: -3
     - _FoamDepth: 0.9
     - _FoamFalloff: -3
@@ -189,8 +143,6 @@ Material:
     - _Offset: 0
     - _Opacity: 1
     - _Parallax: 0.02
-    - _QueueOffset: 0
-    - _ReceiveShadows: 1
     - _Refraction: 1
     - _RefractionLevel: 1
     - _SecondaryGloss: 0.5
@@ -200,8 +152,6 @@ Material:
     - _SpecularHighlights: 1
     - _Speed: 1
     - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
-    - _Surface: 0
     - _TessPhongStrength: 0.897
     - _Tessellation: 1
     - _TimeSize: 1
@@ -213,11 +163,9 @@ Material:
     - _VelocityB: 0.2
     - _VelocityX: 1
     - _VelocityY: 1
-    - _WorkflowMode: 1
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorA: {r: 0.6480689, g: 0.5729352, b: 0.9716981, a: 1}
     - _ColorB: {r: 0.71298915, g: 0.19560987, b: 0.9852941, a: 1}
@@ -226,7 +174,6 @@ Material:
     - _MainColor: {r: 0.6121324, g: 0.6473123, b: 0.75, a: 1}
     - _MainVXYDetVZW: {r: 1, g: 1, b: 0.5, a: 1.08}
     - _OpacPowerRMultGAddBDepthW: {r: 16.65, g: 0.74, b: 0.6, a: 0}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecXYSnsZW: {r: 0.1, g: 0, b: 0.5, a: 0.2}
     - _SpeedAB: {r: 0, g: 1, b: 0, a: 0.5}
     - _VelocityXYFoamZ: {r: 0.03, g: -0.05, b: 0.04, a: 0}
