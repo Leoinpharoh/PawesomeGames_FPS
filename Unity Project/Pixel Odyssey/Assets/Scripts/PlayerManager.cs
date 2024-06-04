@@ -60,6 +60,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public Coroutine confuseCoroutine;
     bool moveSpeedReduced;
     bool alive;
+    public bool isSprinting;
     int moveSpeedOriginal;
 
     [SerializeField] GameObject flashlight;
@@ -86,7 +87,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(!flashlight); } // input to toggle the flashlight on or off
-        if (Input.GetKeyDown(KeyCode.LeftControl)) 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             moveSpeed = moveSpeed / 2;
             interpolationProgress = 0;
@@ -104,7 +105,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             interpolationProgress = Mathf.Clamp01(interpolationProgress + Time.deltaTime * 0.3f);
             CharCon.height = Mathf.Lerp(CharCon.height, targetHeight, interpolationProgress);
         }
-            
+
 
         Movement();
 
@@ -140,16 +141,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Sprint()
     {
-        if (!confused && !freezing && !slowed)
+        
+        if ((Input.GetButtonDown("Sprint") && !isSprinting))
         {
-            if (Input.GetButtonDown("Sprint"))
-            {
-                moveSpeed *= dashMultiplier;
-            }
-            else if (Input.GetButtonUp("Sprint"))
-            {
-                moveSpeed /= dashMultiplier;
-            }
+            moveSpeed *= dashMultiplier;
+            isSprinting = true;
+        }
+        else if ((Input.GetButtonUp("Sprint") && !freezing && !slowed && !confused && isSprinting))
+        {
+            moveSpeed /= dashMultiplier;
+            isSprinting = false;
         }
     }
     IEnumerator WaitBeforeRefill()
@@ -291,7 +292,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         if (freezing)
         {
             StopCoroutine(freezeCoroutine);
-
         }
 
         freezeCoroutine = StartCoroutine(freezeMe(damage, duration));
@@ -305,6 +305,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             moveSpeedReduced = true;
         }
         freezing = true;
+        isSprinting = false;
         Normal = false;
         int ticks = Mathf.FloorToInt(duration);
         for (int i = 0; i < ticks; i++)
@@ -341,6 +342,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             moveSpeedReduced = true;
         }
         slowed = true;
+        isSprinting = false;
         Normal = false;
         int ticks = Mathf.FloorToInt(duration);
 
@@ -371,6 +373,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         Normal = false;
         confused = true;
+        isSprinting = false;
         int ticks = Mathf.FloorToInt(duration);
 
         for (int i = 0; i < ticks; i++)
@@ -476,10 +479,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             moveDirection = (Input.GetAxis("Vertical") * transform.right) +
                 (Input.GetAxis("Horizontal") * transform.forward);
             characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-            
+
+        }
+        if(!freezing && !slowed && !confused)
+        {
+            Sprint();
         }
 
-        Sprint();
     }
 
 
