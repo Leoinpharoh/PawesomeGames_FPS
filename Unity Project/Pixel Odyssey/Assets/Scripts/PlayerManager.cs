@@ -155,7 +155,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         else if ((Input.GetButtonUp("Sprint") && !freezing && !slowed && !confused && isSprinting))
         {
-            moveSpeed /= dashMultiplier;
+            moveSpeed = moveSpeedOriginal;
             isSprinting = false;
         }
     }
