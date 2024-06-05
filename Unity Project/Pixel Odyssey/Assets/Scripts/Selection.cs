@@ -47,7 +47,7 @@ public class CenterObjectLogger : MonoBehaviour
     IEnumerator LoadLevel()
     {
         yield return new WaitForSeconds(6);
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Scene2 - Michael", LoadSceneMode.Single);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Player Hub", LoadSceneMode.Single);
 
         // Wait until the scene is fully loaded
         while (!asyncLoad.isDone)
@@ -55,7 +55,7 @@ public class CenterObjectLogger : MonoBehaviour
             yield return null;
         }
 
-        Scene loadedScene = SceneManager.GetSceneByName("Scene2 - Michael"); // Get the loaded scene by name
+        Scene loadedScene = SceneManager.GetSceneByName("Player Hub"); // Get the loaded scene by name
         SceneManager.SetActiveScene(loadedScene);
     }
 }
