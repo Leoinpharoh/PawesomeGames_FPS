@@ -30,7 +30,6 @@ public class StageObjectManager : MonoBehaviour
             if (obj != null)
             {
                 allDestroyed = false;
-                Debug.Log(obj);
                 break;
             }
         }

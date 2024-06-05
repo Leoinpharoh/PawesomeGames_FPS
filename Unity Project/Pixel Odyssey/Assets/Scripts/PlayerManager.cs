@@ -58,9 +58,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public Coroutine freezeCoroutine;
     public Coroutine slowCoroutine;
     public Coroutine confuseCoroutine;
+    public Coroutine walkCoroutine;
     bool moveSpeedReduced;
     bool alive;
+    public bool isMoving;
     public bool isSprinting;
+    bool playingWalkAudio;
     int moveSpeedOriginal;
 
     [SerializeField] GameObject flashlight;
@@ -75,6 +78,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Start()
     {
+        playingWalkAudio = false;
         alive = true;
         moveSpeedOriginal = moveSpeed;
         HPOrignal = HP;
@@ -107,13 +111,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
 
 
+        playerMoving();
+
         Movement();
 
         if (!freezing && !slowed && !confused)
         {
             Sprint();
         }
-            
+          
 
         if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
         {
@@ -182,7 +188,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         refillCoroutine = null; // Reset the refillCoroutine reference
     }
-
     public void takeDamage(int amount, Vector3 hitPosition)
     {
         OSTimer = 0;
@@ -504,10 +509,34 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 (Input.GetAxis("Horizontal") * transform.forward);
             characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
+
     }
-
-
-
+    public void playerMoving()
+    {
+        //if player is moving play sound
+        if (moveDirection == Vector3.zero)
+        {
+            isMoving = false;
+        }
+        else if (moveDirection != Vector3.zero)
+        {
+            isMoving = true;
+            if(!playingWalkAudio)
+            {
+                StartCoroutine(walking());
+            }
+        }
+    }
+    IEnumerator walking()
+    {
+        if (!playingWalkAudio)
+        {
+            playingWalkAudio = true;
+            Audio.PlayOneShot(playerWalk[Random.Range(0, playerWalk.Length)], playerWalkVolume);
+            yield return new WaitForSeconds(.75f);
+            playingWalkAudio = false;
+        }
+    }
     /*public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
     {
         var groundItem = other.GetComponent<GroundItem> ();
