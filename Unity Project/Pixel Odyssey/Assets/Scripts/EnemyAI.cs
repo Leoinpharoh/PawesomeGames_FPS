@@ -386,15 +386,18 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         if (HP > 0)
         {
-            float maxSpeed = enemyParams.animSpeedTrans;
-            float animSpeed = agent.velocity.magnitude/maxSpeed; // Get the speed of the agent
-            animSpeed = Mathf.Clamp(animSpeed, 0, 1);
-            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
-            if (animSpeed > 0 && !audioSource.isPlaying)
+            Vector3 directionToPlayer = (GameManager.Instance.player.transform.position - agent.transform.position).normalized;
+            float forwardSpeed = Vector3.Dot(agent.velocity, directionToPlayer);
+            float maxForwardSpeed = 5.0f;  // Define according to your game's scale
+            float normalizedForwardSpeed = Mathf.Clamp(forwardSpeed, 0, maxForwardSpeed) / maxForwardSpeed;
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), normalizedForwardSpeed, Time.deltaTime * enemyParams.animSpeedTrans));
+
+            if (normalizedForwardSpeed > 0 && !audioSource.isPlaying)
             {
                 PlayWalkingSound();
             }
-            if (animSpeed <= 0 && canSeePlayer() == true)
+
+            if (normalizedForwardSpeed <= 0 && canSeePlayer())
             {
                 anim.SetBool("isStopped", true);
             }
