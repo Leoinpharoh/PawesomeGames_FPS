@@ -109,6 +109,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         Movement();
 
+        if (!freezing && !slowed && !confused)
+        {
+            Sprint();
+        }
+            
+
         if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
         {
             isWaitingToRefill = true;
@@ -318,8 +324,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         freezing = false;
         Normal = true;
-        moveSpeed = moveSpeedOriginal;
-        moveSpeedReduced = false;
+        if (moveSpeedReduced)
+        {
+            moveSpeed = moveSpeedOriginal;
+            moveSpeedReduced = false;
+        }
         StartCoroutine(effectMe("Normal"));
     }
 
@@ -356,8 +365,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         slowed = false;
         Normal = true;
-        moveSpeed = moveSpeedOriginal;
-        moveSpeedReduced = false;
+        if (moveSpeedReduced)
+        {
+            moveSpeed = moveSpeedOriginal;
+            moveSpeedReduced = false;
+        }
         StartCoroutine(effectMe("Normal"));
     }
     public void confuseDamage(int damage, float duration)
@@ -479,13 +491,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             moveDirection = (Input.GetAxis("Vertical") * transform.right) +
                 (Input.GetAxis("Horizontal") * transform.forward);
             characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-
         }
-        if(!freezing && !slowed && !confused)
-        {
-            Sprint();
-        }
-
     }
 
 
