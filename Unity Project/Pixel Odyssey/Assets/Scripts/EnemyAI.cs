@@ -388,8 +388,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             Vector3 directionToPlayer = (GameManager.Instance.player.transform.position - agent.transform.position).normalized;
             float forwardSpeed = Vector3.Dot(agent.velocity, directionToPlayer);
-            float maxForwardSpeed = 5.0f;  // Define according to your game's scale
-            float normalizedForwardSpeed = Mathf.Clamp(forwardSpeed, 0, maxForwardSpeed) / maxForwardSpeed;
+            forwardSpeed = Mathf.Max(forwardSpeed, 0);  // Only consider speed towards the player
+
+            float maxForwardSpeed = 5.0f;  // Adjust as necessary
+            float normalizedForwardSpeed = forwardSpeed / maxForwardSpeed;
+            normalizedForwardSpeed = Mathf.Clamp(normalizedForwardSpeed, 0, 1);
+
             anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), normalizedForwardSpeed, Time.deltaTime * enemyParams.animSpeedTrans));
 
             if (normalizedForwardSpeed > 0 && !audioSource.isPlaying)
@@ -397,14 +401,16 @@ public class EnemyAI : MonoBehaviour, IDamage
                 PlayWalkingSound();
             }
 
-            if (normalizedForwardSpeed <= 0 && canSeePlayer())
-            {
-                anim.SetBool("isStopped", true);
-            }
-            else
+            bool isMovingTowardsPlayer = normalizedForwardSpeed > 0;
+            if (isMovingTowardsPlayer && canSeePlayer())
             {
                 anim.SetBool("isStopped", false);
             }
+            else
+            {
+                anim.SetBool("isStopped", true);
+            }
+
             //Wave Based Enemy=======================================================
             if (enemyDetection == EnemyParams.DetectionType.Wave)
             {
