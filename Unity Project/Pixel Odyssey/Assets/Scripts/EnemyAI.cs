@@ -386,13 +386,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         if (HP > 0)
         {
-            float animSpeed = agent.velocity.magnitude;  // This gives the actual speed
-            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans));
+            float maxSpeed = enemyParams.animSpeedTrans;
+            float animSpeed = agent.velocity.magnitude/maxSpeed; // Get the speed of the agent
+            animSpeed = Mathf.Clamp(animSpeed, 0, 1);
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
             if (animSpeed > 0 && !audioSource.isPlaying)
             {
                 PlayWalkingSound();
             }
-            if (animSpeed == 0 && canSeePlayer() == true)
+            if (animSpeed <= 0 && canSeePlayer() == true)
             {
                 anim.SetBool("isStopped", true);
             }
