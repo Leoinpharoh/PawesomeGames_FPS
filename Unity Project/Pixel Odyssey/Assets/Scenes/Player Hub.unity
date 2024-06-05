@@ -6850,6 +6850,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4448208585850494574, guid: 6fa4d788379f8394ea1283e58aa06fd1, type: 3}
   m_PrefabInstance: {fileID: 376955765}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1216835886 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5042134978082411119, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+  m_PrefabInstance: {fileID: 1380641515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1230655878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 496276, guid: 27856c31c3afe6244a0f17a4fef0905a, type: 3}
@@ -7493,11 +7498,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!4 &1380641518 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
-  m_PrefabInstance: {fileID: 1380641515}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1393722167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10853,7 +10853,7 @@ GameObject:
   - component: {fileID: 4806001215883010325}
   - component: {fileID: 4806001215874826709}
   m_Layer: 0
-  m_Name: unitychan_dynamic_locomotion
+  m_Name: WelcomeNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14180,7 +14180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13526cd8e9f905419f7400c99158eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 1380641518}
+  cameraTransform: {fileID: 1216835886}
 --- !u!4 &4806001215869878037
 Transform:
   m_ObjectHideFlags: 0
