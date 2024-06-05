@@ -275,21 +275,24 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator burnMe(int damage, float duration)
     {
-        burning = true;
-        Normal = false;
-        int ticks = Mathf.FloorToInt(duration);
-
-        for (int i = 0; i < ticks; i++)
+        if (OS == 0)
         {
-            HP -= damage;
-            updatePlayerUI();
-            StartCoroutine(effectMe("Burning"));
-            playerDeath();
-            yield return new WaitForSeconds(1);
+            burning = true;
+            Normal = false;
+            int ticks = Mathf.FloorToInt(duration);
+
+            for (int i = 0; i < ticks; i++)
+            {
+                HP -= damage;
+                updatePlayerUI();
+                StartCoroutine(effectMe("Burning"));
+                playerDeath();
+                yield return new WaitForSeconds(1);
+            }
+            burning = false;
+            Normal = true;
+            StartCoroutine(effectMe("Normal"));
         }
-        burning = false;
-        Normal = true;
-        StartCoroutine(effectMe("Normal"));
     }
 
     public void freezeDamage(int damage, float duration)
@@ -305,31 +308,34 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator freezeMe(int damage, float duration)
     {
-        if (!moveSpeedReduced)
+        if (OS == 0)
         {
-            moveSpeed /= 2;
-            moveSpeedReduced = true;
+            if (!moveSpeedReduced)
+            {
+                moveSpeed /= 2;
+                moveSpeedReduced = true;
+            }
+            freezing = true;
+            isSprinting = false;
+            Normal = false;
+            int ticks = Mathf.FloorToInt(duration);
+            for (int i = 0; i < ticks; i++)
+            {
+                HP -= damage;
+                updatePlayerUI();
+                StartCoroutine(effectMe("Freezing"));
+                playerDeath();
+                yield return new WaitForSeconds(1);
+            }
+            freezing = false;
+            Normal = true;
+            if (moveSpeedReduced)
+            {
+                moveSpeed = moveSpeedOriginal;
+                moveSpeedReduced = false;
+            }
+            StartCoroutine(effectMe("Normal"));
         }
-        freezing = true;
-        isSprinting = false;
-        Normal = false;
-        int ticks = Mathf.FloorToInt(duration);
-        for (int i = 0; i < ticks; i++)
-        {
-            HP -= damage;
-            updatePlayerUI();
-            StartCoroutine(effectMe("Freezing"));
-            playerDeath();
-            yield return new WaitForSeconds(1);
-        }
-        freezing = false;
-        Normal = true;
-        if (moveSpeedReduced)
-        {
-            moveSpeed = moveSpeedOriginal;
-            moveSpeedReduced = false;
-        }
-        StartCoroutine(effectMe("Normal"));
     }
 
     public void slowDamage(int damage, float duration)
@@ -345,32 +351,35 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator slowMe(int damage, float duration)
     {
-        if (!moveSpeedReduced)
+        if (OS == 0)
         {
-            moveSpeed /= 2;
-            moveSpeedReduced = true;
-        }
-        slowed = true;
-        isSprinting = false;
-        Normal = false;
-        int ticks = Mathf.FloorToInt(duration);
+            if (!moveSpeedReduced)
+            {
+                moveSpeed /= 2;
+                moveSpeedReduced = true;
+            }
+            slowed = true;
+            isSprinting = false;
+            Normal = false;
+            int ticks = Mathf.FloorToInt(duration);
 
-        for (int i = 0; i < ticks; i++)
-        {
-            HP -= damage;
-            updatePlayerUI();
-            StartCoroutine(effectMe("Slowed"));
-            playerDeath();
-            yield return new WaitForSeconds(1);
+            for (int i = 0; i < ticks; i++)
+            {
+                HP -= damage;
+                updatePlayerUI();
+                StartCoroutine(effectMe("Slowed"));
+                playerDeath();
+                yield return new WaitForSeconds(1);
+            }
+            slowed = false;
+            Normal = true;
+            if (moveSpeedReduced)
+            {
+                moveSpeed = moveSpeedOriginal;
+                moveSpeedReduced = false;
+            }
+            StartCoroutine(effectMe("Normal"));
         }
-        slowed = false;
-        Normal = true;
-        if (moveSpeedReduced)
-        {
-            moveSpeed = moveSpeedOriginal;
-            moveSpeedReduced = false;
-        }
-        StartCoroutine(effectMe("Normal"));
     }
     public void confuseDamage(int damage, float duration)
     {
@@ -383,22 +392,25 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator confuseMe(int damage, float duration)
     {
-        Normal = false;
-        confused = true;
-        isSprinting = false;
-        int ticks = Mathf.FloorToInt(duration);
-
-        for (int i = 0; i < ticks; i++)
+        if (OS == 0)
         {
-            updatePlayerUI();
-            StartCoroutine(effectMe("Confused"));
-            playerDeath();
-            yield return new WaitForSeconds(1);
+            Normal = false;
+            confused = true;
+            isSprinting = false;
+            int ticks = Mathf.FloorToInt(duration);
+
+            for (int i = 0; i < ticks; i++)
+            {
+                updatePlayerUI();
+                StartCoroutine(effectMe("Confused"));
+                playerDeath();
+                yield return new WaitForSeconds(1);
+            }
+            confused = false;
+            Normal = true;
+            moveSpeed = moveSpeedOriginal;
+            StartCoroutine(effectMe("Normal"));
         }
-        confused = false;
-        Normal = true;
-        moveSpeed = moveSpeedOriginal;
-        StartCoroutine(effectMe("Normal"));
     }
 
     IEnumerator hitMe()
