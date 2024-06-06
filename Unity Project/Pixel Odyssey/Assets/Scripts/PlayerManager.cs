@@ -73,6 +73,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     void Update()
     {
+
         FlashLight();
 
         playerMoving();
@@ -86,6 +87,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         OverShieldSystems();
 
         Jump();
+
     }
 
     #region Effects and Damage
