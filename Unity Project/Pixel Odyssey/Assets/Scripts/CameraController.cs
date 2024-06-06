@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public DisplayInventory inventoryDisplay;
+
     [SerializeField] int sensitivity;
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
-    [SerializeField] private GameObject inventoryScreen;
+    //[SerializeField] private GameObject inventoryScreen;
 
     float rotationX;
 
@@ -20,12 +20,16 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-        void Update()
+    void Update()
+    {
+        bool isInventoryOpen = inventoryDisplay.isActiveAndEnabled;
+
+        if (!isInventoryOpen)   //if inventory is not open camera can move
         {
             float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
             float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
 
-            if(invertY)
+            if (invertY)
             {
                 rotationX += mouseY;
             }
@@ -40,6 +44,7 @@ public class CameraController : MonoBehaviour
 
             transform.parent.Rotate(Vector3.up * mouseX);
         }
+    }
     /*void Update()
     {
         bool isInventoryOpen = inventoryScreen.activeSelf;

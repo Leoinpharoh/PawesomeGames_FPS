@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 2555936464404414126}
   - component: {fileID: 7245206801081939404}
   - component: {fileID: 85892016356726611}
+  - component: {fileID: 3193789558631110542}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -517,7 +518,6 @@ MonoBehaviour:
   OSBroken:
   - {fileID: 8300000, guid: 70047a9b05d0b1645b4f6a2e04a7b10f, type: 3}
   OSBrokenVolume: 0.05
-  inventory: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
   Normal: 1
@@ -532,6 +532,10 @@ MonoBehaviour:
   OSTimer: 2
   HP: 25
   OS: 20
+  inventory: {fileID: 0}
+  inventoryDisplay: {fileID: 0}
+  inventoryManager: {fileID: 0}
+  interactScript: {fileID: 0}
 --- !u!114 &3804893452896125985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,6 +723,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3193789558631110542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568827330076845495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6d2a2b52faae5c4e99bd5d0192aee05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupRange: 0
+  displayInventory: {fileID: 0}
+  playerManager: {fileID: 4449042350219607151}
 --- !u!1 &1861634458113830439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,11 +3657,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bc9da98f72a464dbb4742803e99318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryDisplay: {fileID: 0}
   sensitivity: 700
   lockVertMin: -150
   lockVertMax: 65
   invertY: 0
-  inventoryScreen: {fileID: 0}
 --- !u!20 &1501747595001335908
 Camera:
   m_ObjectHideFlags: 0
