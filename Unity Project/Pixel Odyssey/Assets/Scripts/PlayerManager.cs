@@ -586,7 +586,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     void FlashLight()
     {
-        if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(!flashlight); } // input to toggle the flashlight on or off
+        if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(flashlightToggle); } // input to toggle the flashlight on or off
     }
     #endregion
 
