@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     //basics
     public bool isPaused;
-    int enemyCount;
+    //int enemyCount;
     string ammoCurrentType;
     int lightBullets;
     int MediumBullets;

@@ -21,6 +21,7 @@ MonoBehaviour:
   enemyType: 1
   bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
   attackSpeed: 0.3
+  rangedAttackLead: 0.5
   meleeRange: 0
   meleeDamage: 1
   rangedRange: 15
@@ -31,8 +32,8 @@ MonoBehaviour:
   effectDuration: 0.1
   damageType: 0
   roaming: 1
-  roamDist: 22
-  roamTimer: 3
+  roamDist: 10
+  roamTimer: 5
   lootPinata: 1
   lootChance: 66
   loot:
