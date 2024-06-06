@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
     [SerializeField] AudioClip jumpAudio;
+    [SerializeField] float walkAudioTimer;
 
     public float HP;
 
@@ -27,7 +28,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     Vector3 moveDirection;
     Vector3 playerVelocity;
     [HideInInspector] public float HPOrignal;
-
+    float walkAudioTimerOriginal;
     //overshield
     public float OS;
     [HideInInspector] public float OSOrignal;
@@ -63,6 +64,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool alive;
     public bool isMoving;
     public bool isSprinting;
+   
     bool playingWalkAudio;
     int moveSpeedOriginal;
 
@@ -78,6 +80,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Start()
     {
+        walkAudioTimerOriginal = walkAudioTimer;
         playingWalkAudio = false;
         alive = true;
         moveSpeedOriginal = moveSpeed;
@@ -157,11 +160,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         if ((Input.GetButtonDown("Sprint") && !isSprinting))
         {
             moveSpeed *= dashMultiplier;
+            walkAudioTimer /= dashMultiplier;
             isSprinting = true;
         }
         else if ((Input.GetButtonUp("Sprint") && !freezing && !slowed && !confused && isSprinting))
         {
             moveSpeed = moveSpeedOriginal;
+            walkAudioTimer = walkAudioTimerOriginal;
             isSprinting = false;
         }
     }
@@ -533,7 +538,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             playingWalkAudio = true;
             Audio.PlayOneShot(playerWalk[Random.Range(0, playerWalk.Length)], playerWalkVolume);
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(walkAudioTimer);
             playingWalkAudio = false;
         }
     }
