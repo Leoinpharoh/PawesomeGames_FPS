@@ -1,72 +1,115 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Subtitles : MonoBehaviour
 {
     public TMP_Text displayText;  // Main text component for subtitles
     public TMP_Text fadeText;     // Separate TMP text component for continuous fading
-    public string messageToDisplay = "Hello, World! This is the message.";
-    public float typingSpeed = 0.1f;  // Time between each letter
-    public float fadeDuration = 1.0f;  // Duration for each fade in and fade out cycle
+    public string[] messagesToDisplay = new string[] { "Hello, World!", "Welcome to the game!", "Enjoy your adventure!" };
+    public float typingSpeed = 0.1f;
+    public float fadeDuration = 1.0f;
 
-    private bool keepFading = true;  // Flag to control the fading loop
+    private bool keepFading = true;
+    private int currentMessageIndex = 0;
+    private bool skipToEnd = false;
+    public UnityEvent onSubtitlesComplete;
 
     void OnTriggerEnter()
     {
-        displayText.text = "";  // Optionally clear the main text at the start
-        StartCoroutine(TypeMessage());
-        StartCoroutine(FadeInOutLoop(fadeText));
+        StartSubtitles();
     }
 
-    IEnumerator TypeMessage()
+    public void StartSubtitles()
     {
-        foreach (char letter in messageToDisplay.ToCharArray())
+        StopAllCoroutines();  // Stop all existing coroutines to handle new trigger
+        keepFading = true;
+        currentMessageIndex = 0;
+        StartCoroutine(ControlSubtitles());
+    }
+
+    IEnumerator ControlSubtitles()
+    {
+        StartCoroutine(FadeInOutLoop(fadeText));
+        while (currentMessageIndex < messagesToDisplay.Length)
         {
-            displayText.text += letter;  // Add one letter at a time
-            if (Input.GetKeyDown(KeyCode.Return))
+            skipToEnd = false;
+            yield return StartCoroutine(TypeMessage(messagesToDisplay[currentMessageIndex]));
+
+            if (!skipToEnd)
             {
-                // If Enter is pressed, skip to the end of the message
-                displayText.text = messageToDisplay;
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            }
+
+            if (currentMessageIndex == messagesToDisplay.Length - 1)
+            {
+                TriggerSomethingElse();  // Call another function or trigger an event here
+            }
+
+            currentMessageIndex++;
+        }
+
+        keepFading = false;
+        fadeText.text = "";
+        displayText.text = "";
+    }
+
+    IEnumerator TypeMessage(string message)
+    {
+        displayText.text = "";
+        foreach (char letter in message.ToCharArray())
+        {
+            if (skipToEnd)
+            {
+                displayText.text = message;
                 break;
             }
-            yield return new WaitForSeconds(typingSpeed);
-        }
+            else
+            {
+                displayText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
 
-        // Wait until Enter key is pressed to clear the text and stop fading
-        // This loop ensures that Enter must be pressed even if it's pressed early
-        while (!Input.GetKeyDown(KeyCode.Return))
-        {
-            yield return null;
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                skipToEnd = true;
+            }
         }
-
-        keepFading = false;  // Stop the fading loop
-        fadeText.text = "";  // Clear the fading text
-        displayText.text = "";  // Clear the main text
     }
 
     IEnumerator FadeInOutLoop(TMP_Text text)
     {
         while (keepFading)
         {
-            // Fade in
             yield return FadeTextToAlpha(text, 1.0f);
-            // Fade out
             yield return FadeTextToAlpha(text, 0.0f);
         }
     }
 
     IEnumerator FadeTextToAlpha(TMP_Text text, float targetAlpha)
     {
-        float startAlpha = text.color.a;
-        float timer = 0.0f;
-        while (timer < fadeDuration)
+        float startAlpha = text.color.a; // Store the initial alpha value of the text
+        float timer = 0.0f; // Initialize a timer to 0
+
+        while (timer < fadeDuration) // Loop until the timer exceeds the duration of the fade
         {
-            timer += Time.deltaTime;
-            float alpha = Mathf.Lerp(startAlpha, targetAlpha, timer / fadeDuration);
-            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
-            yield return null;
+            timer += Time.deltaTime; // Increment the timer by the time elapsed since last frame
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, timer / fadeDuration); // Calculate the new alpha value
+            text.color = new Color(text.color.r, text.color.g, text.color.b, alpha); // Update the text color with new alpha value
+            yield return null; // Wait until the next frame before continuing the loop
         }
-        text.color = new Color(text.color.r, text.color.g, text.color.b, targetAlpha);  // Ensure target alpha is set
+
+        text.color = new Color(text.color.r, text.color.g, text.color.b, targetAlpha); // Ensure the target alpha is set at the end
+    }
+
+    void TriggerSomethingElse()
+    {
+        // Define what happens when Enter is pressed at the end of the last message
+        if (onSubtitlesComplete != null)
+        {
+            onSubtitlesComplete.Invoke();
+        }
+            
     }
 }
