@@ -79,7 +79,7 @@ public class ShootingHandler : MonoBehaviour
             // Play audio and mark that the player is shooting.
             isShooting = true;
             fireAudioSource.clip = audioSFXShoot;
-            fireAudioSource.Play();
+            fireAudioSource.PlayOneShot(audioSFXShoot);
             Anim.SetBool("isShooting", true);
 
             // Apply ammo changes
