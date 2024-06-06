@@ -92,19 +92,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         Jump();
 
-        if (Input.GetKeyDown(KeyCode.E))       //handles picking up items
-        {
-            interactScript.PickupItem();
-        }
+        PickUpThings();
 
-        if (Input.GetKeyDown(KeyCode.Tab))  //handles toggling the invenotry on and off
-        {
-            if (!GameManager.Instance.menuActive)
-            {
-                inventoryDisplay.UpdateDisplay();
-                inventoryManager.ToggleInventory();
-            }
-        }
+        OpenInventory();
+
     }
 
     #region Effects and Damage
@@ -406,7 +397,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     #endregion
 
-    #region Movements
+    #region Movements and Interactions
 
     public void Movement()
     {
@@ -519,6 +510,24 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             CharCon.height = Mathf.Lerp(CharCon.height, targetHeight, interpolationProgress);
         }
     }
+    void PickUpThings()
+    {
+        if (Input.GetKeyDown(KeyCode.E))       //handles picking up items
+        {
+            interactScript.PickupItem();
+        }
+    }
+    void OpenInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))  //handles toggling the invenotry on and off
+        {
+            if (!GameManager.Instance.menuActive)
+            {
+                inventoryDisplay.UpdateDisplay();
+                inventoryManager.ToggleInventory();
+            }
+        }
+    }
 
     #endregion
 
@@ -595,7 +604,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(flashlightToggle); } // input to toggle the flashlight on or off
     }
-    #endregion
 
     private void OnApplicationQuit()    //clears inventory once app is quit in editor
     {
@@ -604,4 +612,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             inventory.Container.Items.Clear();
         }
     }
+
+    #endregion
+
 }
