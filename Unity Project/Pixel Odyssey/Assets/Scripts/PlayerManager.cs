@@ -591,23 +591,4 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     #endregion
 
 
-    /*public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
-    {
-        var groundItem = other.GetComponent<GroundItem> ();
-
-        if (groundItem) //if it is a ground item
-        {
-            Item _item = new Item(groundItem.itemObject);
-            inventory.AddItem(_item, 1);    //adds one item if it found one
-            Destroy(other.gameObject);      //destroys the item that it picked up
-        }
-    }
-
-    private void OnApplicationQuit()    //clears inventory once app is quit in editor
-    {
-        if (inventory != null)
-        {
-            inventory.Container.Items.Clear();
-        }
-    }*/
 }
