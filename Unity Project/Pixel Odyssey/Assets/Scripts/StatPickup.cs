@@ -24,7 +24,7 @@ public class StatPickup : MonoBehaviour
                     foreach (var shootingHandler in shootingHandlers)
                     {
                         
-                        shootingHandler.Ammo += refilAmount;
+                        shootingHandler.weaponStats.Ammo += refilAmount;
                         if((shootingHandler.Ammo + refilAmount) >= 99)
                         {
                             shootingHandler.Ammo = 99;
@@ -50,7 +50,7 @@ public class StatPickup : MonoBehaviour
 }
             if(other.gameObject.GetComponentInChildren<ShootingHandler>() != null)
             {
-                GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
+                GameManager.Instance.playerAmmo(other.gameObject.GetComponentInChildren<ShootingHandler>().weaponStats.ammoType.ToString(), other.gameObject.GetComponentInChildren<ShootingHandler>().Ammo);
             }
 
             StartCoroutine(DestroyAfterDelay(0.5f));
