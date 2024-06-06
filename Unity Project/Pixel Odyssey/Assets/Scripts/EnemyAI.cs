@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] EnemyParams enemyParams; // Reference to the EnemyParams ScriptableObject
     [SerializeField] AudioSource audioSource; // Reference to the AudioSource component
+    public Rigidbody playerRigidbody; // Reference to the player's Rigidbody component
     bool isAttacking = false; // Bool to check if the enemy is attacking
     bool playerInRange = false; // Bool to check if the player is in range of the enemy
     bool playerInMeleeAttackRange = false; // Bool to check if the player is in melee attack range of the enemy
@@ -25,6 +26,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     int stoppingDistanceOriginal; // Original stopping distance of the NavMeshAgent
     float meleeRange; // Enemy Attack Range
     float rangedRange; // Enemy Attack Range
+    float attackLeadingtime; // Leading time for the enemy's attack
     Vector3 playerDir; // Vector3 to store the direction to the player
     Vector3 startingPos; // Vector3 to store the starting position of the enemy
     float angleToPlayer; // Float to store the angle to the player
@@ -32,6 +34,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     EnemyParams.EnemyType enemyType; // references the enemy type from the EnemyParams scriptable object
     EnemyParams.DetectionType enemyDetection; // references the enemy detection from the EnemyParams scriptable object
+    PlayerManager playerManager; // Reference to the PlayerManager script
 
 
     // Start is called before the first frame update
@@ -131,17 +134,34 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator shoot()
     {
+        if (isAttacking) yield break; // Prevent concurrent shooting routines
+
         isAttacking = true;
         PlayAttackSound();
-        anim.SetBool("Attack", true); // Set the trigger for the attack animation
-        anim.SetBool("isStopped", true); // Set the trigger for the idle animation
-        Instantiate(enemyParams.bullet, shootPos.position, transform.rotation);
+        anim.SetBool("Attack", true);
+        anim.SetBool("isStopped", true);
 
-        yield return new WaitForSeconds(enemyParams.attackSpeed);
+        float projectileSpeed = enemyParams.bulletSpeed; // Get the speed of the projectile
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position); // Get the distance to the player
+
+        // Get the move direction from the PlayerManager
+        Vector3 playerMoveDirection = playerManager.GetCurrentMoveDirection() * playerManager.moveSpeed;
+
+        // Predict the player's future position
+        Vector3 predictedPosition = playerTransform.position + (playerMoveDirection * attackLeadingtime);
+        Vector3 shootDirection = (predictedPosition - shootPos.position).normalized;
+        Quaternion shootRotation = Quaternion.LookRotation(shootDirection);
+
+        // Instantiate the bullet and orient it towards the predicted position
+        Instantiate(enemyParams.bullet, shootPos.position, shootRotation);
+
+        yield return new WaitForSeconds(enemyParams.attackSpeed); // Wait based on attack speed
+
+        anim.SetBool("Attack", false);
+        anim.SetBool("isStopped", false);
         isAttacking = false;
-        anim.SetBool("Attack", false); // Set the trigger for the attack animation
-        anim.SetBool("isStopped", false); // Set the trigger for the idle animation
     }
+
 
     public void takeDamage(int amount, Vector3 hitPosition) // Method to take damage
     {
@@ -360,8 +380,30 @@ public class EnemyAI : MonoBehaviour, IDamage
         agent.speed = enemyParams.movementSpeed; // Set the speed of the NavMeshAgent to the movementSpeed from the EnemyParams scriptable object
         meleeRange = enemyParams.meleeRange; // Set the meleeRange to the meleeRange from the EnemyParams scriptable object
         rangedRange = enemyParams.rangedRange; // Set the rangedRange to the rangedRange from the EnemyParams scriptable object
+        attackLeadingtime = enemyParams.rangedAttackLead; // Set the attackLeadingtime to the rangedAttackLead from the EnemyParams scriptable object
         playerTransform = GameManager.Instance.player.transform; // Get the player's transform from the GameManager
         agent.stoppingDistance = enemyParams.rangedRange; // Set the stopping distance of the NavMeshAgent to the rangedRange from the EnemyParams scriptable object
+        if (playerTransform == null)
+        {
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        if (playerRigidbody == null && playerTransform != null)
+        {
+            playerRigidbody = playerTransform.GetComponent<Rigidbody>();
+        }
+        GameObject playerGameObject = GameObject.FindGameObjectWithTag("Player"); // Adjust tag as necessary
+        if (playerGameObject != null)
+        {
+            playerManager = playerGameObject.GetComponent<PlayerManager>();
+            if (playerManager == null)
+            {
+                Debug.LogError("PlayerManager component not found on Player GameObject!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found!");
+        }
         if (enemyType == EnemyParams.EnemyType.Ranged)
         {
             agent.stoppingDistance = enemyParams.rangedRange - 3; // Set the stopping distance of the NavMeshAgent to the rangedRange from the EnemyParams scriptable object
@@ -423,9 +465,10 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = stoppingDistanceOriginal; // Set the stopping distance of the NavMeshAgent to the original stopping distance
                 if (enemyType == EnemyParams.EnemyType.Ranged)
                 {
+                    
                     Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
-                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player on the horizontal plane
-                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate the enemy's body to face the player
+                    Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
                     agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
                     if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
                     {
@@ -476,6 +519,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             //Stationary Enemy=======================================================
             if (playerInRange && enemyType == EnemyParams.EnemyType.Stationary)
             {
+                Vector3 predictedPlayerPosition = playerTransform.position + playerRigidbody.velocity * attackLeadingtime;
                 Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Create a rotation to face the player
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player

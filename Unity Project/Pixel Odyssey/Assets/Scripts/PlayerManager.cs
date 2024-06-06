@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] CharacterController characterControl;
 
     //move
-    [SerializeField] int moveSpeed;
+    [SerializeField] public int moveSpeed;
     [SerializeField] int dashMultiplier;
     [SerializeField] Rigidbody rb;
 
@@ -25,8 +25,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public float HP;
 
     int jumpCounter;
-    Vector3 moveDirection;
-    Vector3 playerVelocity;
+    public Vector3 moveDirection;
+    public Vector3 playerVelocity;
     [HideInInspector] public float HPOrignal;
     float walkAudioTimerOriginal;
     //overshield
@@ -515,6 +515,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
         }
 
+    }
+
+    public Vector3 GetCurrentMoveDirection()
+    {
+        return moveDirection;
     }
     public void playerMoving()
     {

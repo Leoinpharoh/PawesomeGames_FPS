@@ -465,7 +465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568827330076845495}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071057, z: -0, w: 0.70710796}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -27.18, y: 75, z: -0.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -496,7 +496,10 @@ MonoBehaviour:
   jumpSpeed: 4
   gravity: 10
   jumpAudio: {fileID: 8300000, guid: e59a62f995c68d1418e699c57d116d8f, type: 3}
+  walkAudioTimer: 0.75
   HP: 25
+  moveDirection: {x: 0, y: 0, z: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
   HPOrignal: 0
   OS: 20
   OSOrignal: 0
@@ -507,8 +510,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6bcb04ca876997f42ad3b325f9e06dd6, type: 3}
   - {fileID: 8300000, guid: 52ac4d18a4413b746bf7f07a9df1d393, type: 3}
   - {fileID: 8300000, guid: 5ee791fed51711c4f9a417d1c19b626d, type: 3}
-  - {fileID: 8300000, guid: b1e353af9faa34847b161c12a7b82bca, type: 3}
-  playerWalkVolume: 0.15
+  - {fileID: 8300000, guid: ac5dd13766fcf5b448683c87b2711f39, type: 3}
+  playerWalkVolume: 0.3
   playerShot:
   - {fileID: 8300000, guid: 361ed0d20273a734e8ee9ce974318d8a, type: 3}
   - {fileID: 8300000, guid: 07606298d7756654f9aa08cb4d9ef200, type: 3}
