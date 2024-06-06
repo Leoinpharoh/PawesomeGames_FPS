@@ -14,7 +14,7 @@ public class DisplayInventory : MonoBehaviour
     public InventoryObject inventory;
     public GameObject inventoryGrid;
     public GameObject inventoryUI;  //reference to the UI panel
-    public InventorySlot selectedSlot;
+    public InventorySlot selectedSlot;  //for dropping/using purposes
 
     Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
 
