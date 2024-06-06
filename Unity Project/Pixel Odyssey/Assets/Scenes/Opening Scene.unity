@@ -1959,6 +1959,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -2006,7 +2010,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6918708174312642886, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: m_Radius
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918708174312642886, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 85892016356726611, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -2028,6 +2041,7 @@ GameObject:
   - component: {fileID: 845129107}
   - component: {fileID: 845129109}
   - component: {fileID: 845129108}
+  - component: {fileID: 845129110}
   m_Layer: 0
   m_Name: Subtitle1
   m_TagString: Untagged
@@ -2064,10 +2078,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 1662216569}
   fadeText: {fileID: 157492952}
-  messageToDisplay: Phew! This was a rough week! Can't wait to sit back and relax!
-    I gotta test that new game "Pawesome Games" sent me!
+  messagesToDisplay:
+  - Phew, this was such a rough week at work! I can finally get to sit down and try
+    that new game from "Pawesome Games" that they sent me!
   typingSpeed: 0.05
   fadeDuration: 1.5
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1792791762}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &845129109
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2089,6 +2119,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &845129110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845129106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e6197aef55de749a4e07f48b6e51e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  performCode:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1792791762}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: PauseAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &925463326
 GameObject:
   m_ObjectHideFlags: 0
@@ -6144,6 +6201,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6482195809108570800, guid: 3a3c0bbe58beeff4a8d63acd5a770137, type: 3}
   m_PrefabInstance: {fileID: 1760060867}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1792791760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792791761}
+  - component: {fileID: 1792791762}
+  m_Layer: 0
+  m_Name: SitdownTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1792791761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792791760}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -22.141174, y: -13.708665, z: 10.750702}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2078041149}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1792791762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792791760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9580fa07c100cff4bb1ded58d78c5ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2093309872}
 --- !u!4 &1803661579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4532440485179112049, guid: 29e76f542ce050b4d8948ddead8c0c46, type: 3}
@@ -6685,6 +6787,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 845129107}
+  - {fileID: 1792791761}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2085958964 stripped
@@ -9824,7 +9927,7 @@ Transform:
   m_GameObject: {fileID: 8158194208221005299}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000020183231, y: 0.38365412, z: 0.000000008385026, w: 0.9234769}
-  m_LocalPosition: {x: 1.771, y: 0, z: 0.684}
+  m_LocalPosition: {x: 2.767, y: 0, z: 1.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

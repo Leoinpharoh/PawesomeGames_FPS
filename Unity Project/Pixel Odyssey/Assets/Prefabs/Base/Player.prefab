@@ -465,7 +465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568827330076845495}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071057, z: -0, w: 0.70710796}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -27.18, y: 75, z: -0.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -486,7 +486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ea42ae4177d5e4abde8a24b6775107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
   Audio: {fileID: 7245206801081939404}
   characterControl: {fileID: 6918708174312642886}
   moveSpeed: 4
@@ -496,19 +495,17 @@ MonoBehaviour:
   jumpSpeed: 4
   gravity: 10
   jumpAudio: {fileID: 8300000, guid: e59a62f995c68d1418e699c57d116d8f, type: 3}
-  HP: 25
+  walkAudioTimer: 0.75
+  flashlight: {fileID: 2622531320752839541}
   HPOrignal: 0
-  OS: 20
   OSOrignal: 0
-  OSTimer: 2
-  OSRefilling: 0
   playerWalk:
   - {fileID: 8300000, guid: 64cbde3e134056a4a88a7f8195abb2bf, type: 3}
-  - {fileID: 8300000, guid: 6bcb04ca876997f42ad3b325f9e06dd6, type: 3}
+  - {fileID: 8300000, guid: 3022f290d6c93954b96d4f3d2ebbc4f0, type: 3}
   - {fileID: 8300000, guid: 52ac4d18a4413b746bf7f07a9df1d393, type: 3}
   - {fileID: 8300000, guid: 5ee791fed51711c4f9a417d1c19b626d, type: 3}
-  - {fileID: 8300000, guid: b1e353af9faa34847b161c12a7b82bca, type: 3}
-  playerWalkVolume: 0.15
+  - {fileID: 8300000, guid: fca56c1f5ff920847a83fcf7d1b66dd7, type: 3}
+  playerWalkVolume: 0.5
   playerShot:
   - {fileID: 8300000, guid: 361ed0d20273a734e8ee9ce974318d8a, type: 3}
   - {fileID: 8300000, guid: 07606298d7756654f9aa08cb4d9ef200, type: 3}
@@ -520,6 +517,9 @@ MonoBehaviour:
   OSBroken:
   - {fileID: 8300000, guid: 70047a9b05d0b1645b4f6a2e04a7b10f, type: 3}
   OSBrokenVolume: 0.05
+  inventory: {fileID: 0}
+  moveDirection: {x: 0, y: 0, z: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
   Normal: 1
   poisoned: 0
   burning: 0
@@ -528,7 +528,10 @@ MonoBehaviour:
   confused: 0
   isMoving: 0
   isSprinting: 0
-  flashlight: {fileID: 2622531320752839541}
+  OSRefilling: 0
+  OSTimer: 2
+  HP: 25
+  OS: 20
 --- !u!114 &3804893452896125985
 MonoBehaviour:
   m_ObjectHideFlags: 0

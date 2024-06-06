@@ -5,38 +5,20 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
 {
-    public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
 
     [SerializeField] AudioSource Audio;
     [SerializeField] CharacterController characterControl;
-
-    //move
-    [SerializeField] int moveSpeed;
+    [SerializeField] public int moveSpeed;
     [SerializeField] int dashMultiplier;
     [SerializeField] Rigidbody rb;
-
-    //jumps
     [SerializeField] int maxJumps;
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
     [SerializeField] AudioClip jumpAudio;
-
-    public float HP;
-
-    int jumpCounter;
-    Vector3 moveDirection;
-    Vector3 playerVelocity;
+    [SerializeField] float walkAudioTimer;
+    [SerializeField] GameObject flashlight;
     [HideInInspector] public float HPOrignal;
-
-    //overshield
-    public float OS;
     [HideInInspector] public float OSOrignal;
-    public int OSTimer = 0;
-    public bool OSRefilling;
-    private bool isWaitingToRefill = false;
-    private Coroutine refillCoroutine;
-    private Coroutine waitCoroutine;
-
     [SerializeField] AudioClip[] playerWalk;
     [Range(0, 1)][SerializeField] float playerWalkVolume;
     [SerializeField] AudioClip[] playerShot;
@@ -46,148 +28,86 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] AudioClip[] OSBroken;
     [Range(0, 1)][SerializeField] float OSBrokenVolume;
 
-    //status effect bools
-    public bool Normal = true;
-    public bool poisoned;
-    public bool burning;
-    public bool freezing;
-    public bool slowed;
-    public bool confused;
+    private CharacterController CharCon;
+
     public Coroutine poisonCoroutine;
     public Coroutine burnCoroutine;
     public Coroutine freezeCoroutine;
     public Coroutine slowCoroutine;
     public Coroutine confuseCoroutine;
     public Coroutine walkCoroutine;
-    bool moveSpeedReduced;
-    bool alive;
+    private Coroutine refillCoroutine;
+    private Coroutine waitCoroutine;
+    public Vector3 moveDirection;
+    public Vector3 playerVelocity;
+    private bool flashlightToggle;
+    private bool isWaitingToRefill = false;
+    public bool Normal = true;
+    public bool poisoned;
+    public bool burning;
+    public bool freezing;
+    public bool slowed;
+    public bool confused;
     public bool isMoving;
     public bool isSprinting;
+    public bool OSRefilling;
+    bool moveSpeedReduced;
+    bool alive;
     bool playingWalkAudio;
+    public int OSTimer = 0;
     int moveSpeedOriginal;
-
-    [SerializeField] GameObject flashlight;
-    private bool flashlightToggle;
-
-    private CharacterController CharCon;
+    int jumpCounter;
+    public float HP;
+    public float OS;
     float interpolationProgress = 1f;
     float targetHeight;
     float baseHeight;
     float crouchHeight;
+    float walkAudioTimerOriginal;
 
+    public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
+    public DisplayInventory inventoryDisplay;
+    public InventoryManager inventoryManager;
+    public Interact interactScript;
+    public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
 
     void Start()
     {
-        playingWalkAudio = false;
-        alive = true;
-        moveSpeedOriginal = moveSpeed;
-        HPOrignal = HP;
-        OSOrignal = OS;
-        updatePlayerUI();
-        CharCon = gameObject.GetComponent<CharacterController>();
-        baseHeight = CharCon.height;
-        crouchHeight = baseHeight / 2;
+        StartUp();
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(!flashlight); } // input to toggle the flashlight on or off
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            moveSpeed = moveSpeed / 2;
-            interpolationProgress = 0;
-            targetHeight = crouchHeight;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            moveSpeed = moveSpeedOriginal;
-            interpolationProgress = 0;
-            targetHeight = baseHeight;
-        }
 
-        if (interpolationProgress < 1f)
-        {
-            interpolationProgress = Mathf.Clamp01(interpolationProgress + Time.deltaTime * 0.3f);
-            CharCon.height = Mathf.Lerp(CharCon.height, targetHeight, interpolationProgress);
-        }
-
+        FlashLight();
 
         playerMoving();
 
         Movement();
 
-        if (!freezing && !slowed && !confused)
-        {
-            Sprint();
-        }
-          
+        Crouch();
 
-        if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
-        {
-            isWaitingToRefill = true;
-            StartCoroutine(WaitBeforeRefill());
-            Debug.Log("Starting Wait Before Refill");
-        }
+        AllowedToSprint();
 
-        if (OSTimer >= 5)
+        OverShieldSystems();
+
+        Jump();
+
+        if (Input.GetKeyDown(KeyCode.E))       //handles picking up items
         {
-            OS = OSOrignal;
-            updatePlayerUI();
-            OSTimer = 0;
-            OSRefilling = false;
-            isWaitingToRefill = false;
-            Debug.Log("Refilling Complete");
+            interactScript.PickupItem();
         }
 
-        if (Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
+        if (Input.GetKeyDown(KeyCode.Tab))  //handles toggling the invenotry on and off
         {
-            jumpCounter++;
-            // handles the audio for jumping. 
-            Audio.clip = jumpAudio;
-            Audio.Play();
-            playerVelocity.y = jumpSpeed;
-
+            if (!GameManager.Instance.menuActive)
+            {
+                inventoryDisplay.UpdateDisplay();
+                inventoryManager.ToggleInventory();
+            }
         }
-        playerVelocity.y -= gravity * Time.deltaTime;
-        characterControl.Move(playerVelocity * Time.deltaTime);
     }
 
-    void Sprint()
-    {
-        
-        if ((Input.GetButtonDown("Sprint") && !isSprinting))
-        {
-            moveSpeed *= dashMultiplier;
-            isSprinting = true;
-        }
-        else if ((Input.GetButtonUp("Sprint") && !freezing && !slowed && !confused && isSprinting))
-        {
-            moveSpeed = moveSpeedOriginal;
-            isSprinting = false;
-        }
-    }
-    IEnumerator WaitBeforeRefill()
-    {
-        yield return new WaitForSeconds(5);
-        if (!OSRefilling && OS < OSOrignal)
-        {
-            OSRefilling = true;
-            refillCoroutine = StartCoroutine(refillOS());
-            Debug.Log("Refilling");
-        }
-        waitCoroutine = null; // Reset the waitCoroutine reference
-    }
-
-    IEnumerator refillOS()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            Debug.Log("Incrementing Timer");
-            OSTimer++;
-            Debug.Log("Waiting 1 Second");
-            yield return new WaitForSeconds(1);
-        }
-        refillCoroutine = null; // Reset the refillCoroutine reference
-    }
+    #region Effects and Damage
     public void takeDamage(int amount, Vector3 hitPosition)
     {
         OSTimer = 0;
@@ -425,12 +345,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         yield return new WaitForSeconds(0.1f);
         GameManager.Instance.playerFlashDamage.SetActive(false);
     }
-
-    public void updatePlayerUI()
-    {
-        GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
-        GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
-    }
     public IEnumerator effectMe(string effect) //used to flash the screen based on what effect user has
     {
         switch (effect)
@@ -490,6 +404,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             }
         }
     }
+    #endregion
+
+    #region Movements
+
     public void Movement()
     {
         if (characterControl.isGrounded)
@@ -511,6 +429,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
 
     }
+
+    public Vector3 GetCurrentMoveDirection()
+    {
+        return moveDirection;
+    }
     public void playerMoving()
     {
         //if player is moving play sound
@@ -521,7 +444,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         else if (moveDirection != Vector3.zero)
         {
             isMoving = true;
-            if(!playingWalkAudio)
+            if (!playingWalkAudio)
             {
                 StartCoroutine(walking());
             }
@@ -533,21 +456,146 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             playingWalkAudio = true;
             Audio.PlayOneShot(playerWalk[Random.Range(0, playerWalk.Length)], playerWalkVolume);
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(walkAudioTimer);
             playingWalkAudio = false;
         }
     }
-    /*public void OnTriggerEnter(Collider other)  //when player collides with an item that can be picked up DM
+    void Sprint()
     {
-        var groundItem = other.GetComponent<GroundItem> ();
 
-        if (groundItem) //if it is a ground item
+        if ((Input.GetButtonDown("Sprint") && !isSprinting))
         {
-            Item _item = new Item(groundItem.itemObject);
-            inventory.AddItem(_item, 1);    //adds one item if it found one
-            Destroy(other.gameObject);      //destroys the item that it picked up
+            moveSpeed *= dashMultiplier;
+            walkAudioTimer /= dashMultiplier;
+            isSprinting = true;
+        }
+        else if ((Input.GetButtonUp("Sprint") && !freezing && !slowed && !confused && isSprinting))
+        {
+            moveSpeed = moveSpeedOriginal;
+            walkAudioTimer = walkAudioTimerOriginal;
+            isSprinting = false;
         }
     }
+
+    void AllowedToSprint()
+    {
+        if (!freezing && !slowed && !confused)
+        {
+            Sprint();
+        }
+    }
+
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
+        {
+            jumpCounter++;
+            // handles the audio for jumping. 
+            Audio.clip = jumpAudio;
+            Audio.Play();
+            playerVelocity.y = jumpSpeed;
+
+        }
+        playerVelocity.y -= gravity * Time.deltaTime;
+        characterControl.Move(playerVelocity * Time.deltaTime);
+    }
+    void Crouch()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            moveSpeed = moveSpeed / 2;
+            interpolationProgress = 0;
+            targetHeight = crouchHeight;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            moveSpeed = moveSpeedOriginal;
+            interpolationProgress = 0;
+            targetHeight = baseHeight;
+        }
+        if (interpolationProgress < 1f)
+        {
+            interpolationProgress = Mathf.Clamp01(interpolationProgress + Time.deltaTime * 0.3f);
+            CharCon.height = Mathf.Lerp(CharCon.height, targetHeight, interpolationProgress);
+        }
+    }
+
+    #endregion
+
+    #region Over Shield System
+
+    IEnumerator WaitBeforeRefill()
+    {
+        yield return new WaitForSeconds(5);
+        if (!OSRefilling && OS < OSOrignal)
+        {
+            OSRefilling = true;
+            refillCoroutine = StartCoroutine(refillOS());
+            Debug.Log("Refilling");
+        }
+        waitCoroutine = null; // Reset the waitCoroutine reference
+    }
+
+    IEnumerator refillOS()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Debug.Log("Incrementing Timer");
+            OSTimer++;
+            Debug.Log("Waiting 1 Second");
+            yield return new WaitForSeconds(1);
+        }
+        refillCoroutine = null; // Reset the refillCoroutine reference
+    }
+
+    public void OverShieldSystems()
+    {
+        if (OS < OSOrignal && !OSRefilling && !isWaitingToRefill)
+        {
+            isWaitingToRefill = true;
+            StartCoroutine(WaitBeforeRefill());
+            Debug.Log("Starting Wait Before Refill");
+        }
+
+        if (OSTimer >= 5)
+        {
+            OS = OSOrignal;
+            updatePlayerUI();
+            OSTimer = 0;
+            OSRefilling = false;
+            isWaitingToRefill = false;
+            Debug.Log("Refilling Complete");
+        }
+    }
+
+    #endregion
+
+    #region PlayerUI and StartUp and FlashLight
+
+    public void updatePlayerUI()
+    {
+        GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
+        GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
+    }
+
+    void StartUp()
+    {
+        walkAudioTimerOriginal = walkAudioTimer;
+        playingWalkAudio = false;
+        alive = true;
+        moveSpeedOriginal = moveSpeed;
+        HPOrignal = HP;
+        OSOrignal = OS;
+        updatePlayerUI();
+        CharCon = gameObject.GetComponent<CharacterController>();
+        baseHeight = CharCon.height;
+        crouchHeight = baseHeight / 2;
+    }
+    void FlashLight()
+    {
+        if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(flashlightToggle); } // input to toggle the flashlight on or off
+    }
+    #endregion
 
     private void OnApplicationQuit()    //clears inventory once app is quit in editor
     {
@@ -555,5 +603,5 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             inventory.Container.Items.Clear();
         }
-    }*/
+    }
 }

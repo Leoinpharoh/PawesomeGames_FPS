@@ -1,46 +1,99 @@
+//InventoryObject
+
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using UnityEngine.EventSystems;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject
 {
-    public List<InventorySlot> Container = new List<InventorySlot>();
-    public void AddItem(ItemObject _item, int _amount)
-    {
-        bool hasItem = false;   // used to decide if we already have one of the items we found
+    public string savePath; //used to save inventory to a path
+    public ItemDatabaseObject database;
+    public Inventory Container;
 
-        for(int i = 0; i < Container.Count; i++)
+    private void Awake()
+    {
+        database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/ScriptableObjects/Items/Database.asset", typeof(ItemDatabaseObject));
+    }
+
+    public void AddItem(Item _item, int _amount)
+    {
+        Debug.Log("AddItem method called with item ID: " + _item.id + "and amount: " + _amount);
+
+        Debug.Log("Contents of Container.Items before picking up: \n");
+        foreach (var slot in Container.Items)
         {
-            if (Container[i].item == _item)
+            Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");   //debug
+        }
+
+        for (int i = 0; i < Container.Items.Count; i++)   //looping through the container/slot
+        {
+            if (Container.Items[i].item.id == _item.id) //if we have the item already
             {
-                Container[i].AddAmount(_amount);
-                hasItem = true;
-                break;
+                Container.Items[i].AddAmount(_amount);    //add item to the list
+                return;
             }
         }
-        if (!hasItem)
+
+        foreach (var slot in Container.Items)
         {
-            Container.Add(new InventorySlot(_item, _amount));
+            Debug.Log($"Item ID: {slot.item.id} Amount: {slot.amount}");
+        }
+
+        Container.Items.Add(new InventorySlot(_item.id, _item, _amount));   //else add a new container to that slot
+    }
+
+    public void RemoveItem(int id)
+    {
+        Container.Items.RemoveAll(slot => slot.ID == id);
+    }
+
+    //[ContextMenu("Save")]
+    public void Save()  //not implemented
+    {
+        string saveData = JsonUtility.ToJson(this, true);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
+        bf.Serialize(file, saveData);
+        file.Close();
+    }
+
+    //[ContextMenu("Load")]
+    public void Load()  //not implemented
+    {
+        if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
+            JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
+            file.Close();
+        }
+    }
+
+    [ContextMenu("Clear")]
+    public void Clear()
+    {
+        Container = new Inventory();
+    }
+
+    public void OnAfterDeserialize()
+    {
+        for (int i = 0; i < Container.Items.Count; i++)
+        {
+            InventorySlot slot = Container.Items[i];
+            ItemObject itemObject = database.GetItem[slot.ID];
+            slot.item = new Item(itemObject); // Create a new Item instance with the retrieved ItemObject
+            Debug.Log($"Assigned Item '{itemObject.name}' with ID {itemObject.ItemId} to InventorySlot {i}");
         }
     }
 }
 
-
 [System.Serializable]
-public class InventorySlot
+public class Inventory
 {
-    public ItemObject item;
-    public int amount;
-    public InventorySlot(ItemObject _item, int _amount)
-    {
-        item = _item;
-        amount = _amount;
-    }
-
-    public void AddAmount(int value)
-    {
-        amount += value;
-    }
+    public List<InventorySlot> Items = new List<InventorySlot>();
 }

@@ -23,6 +23,7 @@ public class EnemyParams : ScriptableObject
     [Header("Damage")]
     public GameObject bullet;
     [Range(0.1f, 5)] public float attackSpeed;
+    [Range(0.1f, 3)] public float rangedAttackLead;
     [Range(0, 100)] public int meleeRange;
     [Range(1, 20)] public int meleeDamage;
     [Range(0, 100)] public int rangedRange;
