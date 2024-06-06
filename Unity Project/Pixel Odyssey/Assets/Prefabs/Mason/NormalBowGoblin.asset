@@ -16,11 +16,12 @@ MonoBehaviour:
   HP: 10
   movementSpeed: 3
   Acceleration: 10
-  animSpeedTrans: 6
+  animSpeedTrans: 10
   flying: 0
   enemyType: 1
   bullet: {fileID: 6060363923453239229, guid: a2477b0059be95644b96f8e294a1d086, type: 3}
-  attackSpeed: 1.8
+  attackSpeed: 1
+  rangedAttackLead: 0.1
   meleeRange: 0
   meleeDamage: 4
   rangedRange: 20
@@ -38,7 +39,7 @@ MonoBehaviour:
   loot:
   - {fileID: 8884114810549261806, guid: a5b228b84d9b12e46bce8e52e7cff51e, type: 3}
   - {fileID: 3802848766677527129, guid: 927d1baae9bc8ea40bc7eda0e1c9a938, type: 3}
-  lineOfSightRange: 25
+  lineOfSightRange: 14
   viewAngle: 180
   detectionType: 0
   attackSound:
