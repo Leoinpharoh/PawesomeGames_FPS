@@ -5,39 +5,20 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
 {
-    public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
 
     [SerializeField] AudioSource Audio;
     [SerializeField] CharacterController characterControl;
-
-    //move
     [SerializeField] public int moveSpeed;
     [SerializeField] int dashMultiplier;
     [SerializeField] Rigidbody rb;
-
-    //jumps
     [SerializeField] int maxJumps;
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
     [SerializeField] AudioClip jumpAudio;
     [SerializeField] float walkAudioTimer;
-
-    public float HP;
-
-    int jumpCounter;
-    public Vector3 moveDirection;
-    public Vector3 playerVelocity;
+    [SerializeField] GameObject flashlight;
     [HideInInspector] public float HPOrignal;
-    float walkAudioTimerOriginal;
-    //overshield
-    public float OS;
     [HideInInspector] public float OSOrignal;
-    public int OSTimer = 0;
-    public bool OSRefilling;
-    private bool isWaitingToRefill = false;
-    private Coroutine refillCoroutine;
-    private Coroutine waitCoroutine;
-
     [SerializeField] AudioClip[] playerWalk;
     [Range(0, 1)][SerializeField] float playerWalkVolume;
     [SerializeField] AudioClip[] playerShot;
@@ -47,45 +28,51 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] AudioClip[] OSBroken;
     [Range(0, 1)][SerializeField] float OSBrokenVolume;
 
-    //status effect bools
-    public bool Normal = true;
-    public bool poisoned;
-    public bool burning;
-    public bool freezing;
-    public bool slowed;
-    public bool confused;
+    public InventoryObject inventory;   
+    private CharacterController CharCon;
+
     public Coroutine poisonCoroutine;
     public Coroutine burnCoroutine;
     public Coroutine freezeCoroutine;
     public Coroutine slowCoroutine;
     public Coroutine confuseCoroutine;
     public Coroutine walkCoroutine;
-    bool moveSpeedReduced;
-    bool alive;
+    private Coroutine refillCoroutine;
+    private Coroutine waitCoroutine;
+    public Vector3 moveDirection;
+    public Vector3 playerVelocity;
+    private bool flashlightToggle;
+    private bool isWaitingToRefill = false;
+    public bool Normal = true;
+    public bool poisoned;
+    public bool burning;
+    public bool freezing;
+    public bool slowed;
+    public bool confused;
     public bool isMoving;
     public bool isSprinting;
-   
+    public bool OSRefilling;
+    bool moveSpeedReduced;
+    bool alive;
     bool playingWalkAudio;
+    public int OSTimer = 0;
     int moveSpeedOriginal;
-
-    [SerializeField] GameObject flashlight;
-    private bool flashlightToggle;
-
-    private CharacterController CharCon;
+    int jumpCounter;
+    public float HP;
+    public float OS;
     float interpolationProgress = 1f;
     float targetHeight;
     float baseHeight;
     float crouchHeight;
+    float walkAudioTimerOriginal;
 
 
     void Start()
     {
         StartUp();
-
     }
     void Update()
     {
-
         FlashLight();
 
         playerMoving();
@@ -100,6 +87,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         Jump();
     }
+
     #region Effects and Damage
     public void takeDamage(int amount, Vector3 hitPosition)
     {
