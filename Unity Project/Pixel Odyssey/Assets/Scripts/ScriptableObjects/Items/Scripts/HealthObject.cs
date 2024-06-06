@@ -9,6 +9,6 @@ public class HealthObject : ItemObject
     public int restoreHealthValue;  //value which the health item will restore
     public void Awake()
     {
-        type = ItemType.Health; //auto creates health item
+        type = ItemType.HealthPack; //auto creates health item
     }
 }

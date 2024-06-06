@@ -28,7 +28,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] AudioClip[] OSBroken;
     [Range(0, 1)][SerializeField] float OSBrokenVolume;
 
-    public InventoryObject inventory;   
     private CharacterController CharCon;
 
     public Coroutine poisonCoroutine;
@@ -66,6 +65,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     float crouchHeight;
     float walkAudioTimerOriginal;
 
+    public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
+    public DisplayInventory inventoryDisplay;
+    public InventoryManager inventoryManager;
+    public Interact interactScript;
+    public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
 
     void Start()
     {
@@ -88,6 +92,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         Jump();
 
+        if (Input.GetKeyDown(KeyCode.E))       //handles picking up items
+        {
+            interactScript.PickupItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))  //handles toggling the invenotry on and off
+        {
+            inventoryDisplay.UpdateDisplay();
+            inventoryManager.ToggleInventory();
+        }
     }
 
     #region Effects and Damage
@@ -580,5 +594,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     #endregion
 
-
+    private void OnApplicationQuit()    //clears inventory once app is quit in editor
+    {
+        if (inventory != null)
+        {
+            inventory.Container.Items.Clear();
+        }
+    }
 }
