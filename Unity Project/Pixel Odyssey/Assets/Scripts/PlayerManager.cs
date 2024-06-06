@@ -99,8 +99,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         if (Input.GetKeyDown(KeyCode.Tab))  //handles toggling the invenotry on and off
         {
-            inventoryDisplay.UpdateDisplay();
-            inventoryManager.ToggleInventory();
+            if (!GameManager.Instance.menuActive)
+            {
+                inventoryDisplay.UpdateDisplay();
+                inventoryManager.ToggleInventory();
+            }
         }
     }
 
