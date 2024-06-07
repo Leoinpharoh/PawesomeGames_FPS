@@ -36,12 +36,16 @@ public class SettingsManager : MonoBehaviour
         voice = PlayerPrefs.GetFloat("Voice", 1f); // Get the Voice volume from PlayerPrefs
         master = PlayerPrefs.GetFloat("Master", 1f);  // Get the Master volume from PlayerPrefs
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1f);  // Get the Sensitivity from PlayerPrefs
-        SetSoundEffects(soundEffects); // Set the Sound Effects volume
-        SetMusic(music); // Set the Music volume)
-        SetSensitivity(sensitivity); // Set the Sensitivity
     }
+
     void Start()
     {
+
+        SetVolume("Master", master); // Set the Master volume
+        SetVolume("Music", music); // Set the Music volume
+        SetVolume("SoundEffects", soundEffects); // Set the Sound Effects volume
+        SetVolume("Voice", voice); // Set the Voice volume
+        SetSensitivity(sensitivity); // Set the Sensitivity
 
         soundEffectsSlider.value = soundEffects; // Set the Sound Effects slider to the saved value
         musicSlider.value = music; // Set the Music slider to the saved value
@@ -54,8 +58,6 @@ public class SettingsManager : MonoBehaviour
         voiceSlider.onValueChanged.AddListener(SetVoice); // Listen for Voice slider changes
         masterSlider.onValueChanged.AddListener(SetMaster); // Listen for Master slider changes
         sensitivitySlider.onValueChanged.AddListener(SetSensitivity); // Listen for Sensitivity slider changes
-
-
     }
 
     public void SetVolume(string parameterName, float value) // Set the volume in the AudioMixer
@@ -69,15 +71,18 @@ public class SettingsManager : MonoBehaviour
         {
             dBValue = Mathf.Log10(value) * 20; // Convert linear volume to dB
         }
-        audioMixer.SetFloat(parameterName, dBValue); // Set the volume in the AudioMixer
+
+        Debug.Log($"SetVolume - Setting {parameterName} to dBValue: {dBValue}");
+        bool result = audioMixer.SetFloat(parameterName, dBValue); // Set the volume in the AudioMixer
+        Debug.Log($"SetVolume - Result of setting {parameterName}: {result}");
     }
+
     public void SetSensitivity(float value) // Set the camera sensitivity
     {
         sensitivity = value;
         PlayerPrefs.SetFloat("Sensitivity", value); // Save the sensitivity to PlayerPrefs
         PlayerPrefs.Save(); // Ensure PlayerPrefs are saved
         cameraController.SetCameraSensitivity(sensitivity); // Update the camera sensitivity
-
     }
 
     public void SetSoundEffects(float value) // Set the Sound Effects volume
