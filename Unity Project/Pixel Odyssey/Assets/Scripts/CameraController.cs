@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public DisplayInventory inventoryDisplay;
 
     [SerializeField] int sensitivity;
+=======
+    [SerializeField] public float sensitivity = 200;
+>>>>>>> Stashed changes
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
     //[SerializeField] private GameObject inventoryScreen;
 
     float rotationX;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -80,5 +85,10 @@ public class CameraController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.parent.Rotate(Vector3.up * mouseX);
+    }
+
+    public void SetCameraSensitivity(float newSensitivity)
+    {
+        sensitivity = newSensitivity * 500;
     }
 }
