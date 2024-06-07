@@ -45,22 +45,6 @@ public class CameraController : MonoBehaviour
             transform.parent.Rotate(Vector3.up * mouseX);
         }
     }
-    /*void Update()
-    {
-        bool isInventoryOpen = inventoryScreen.activeSelf;
-
-        if (!isInventoryOpen)
-        {
-            UpdateCameraRotation();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-    }*/
 
     private void UpdateCameraRotation()
     {
