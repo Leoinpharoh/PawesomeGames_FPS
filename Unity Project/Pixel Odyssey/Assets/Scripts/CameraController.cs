@@ -4,7 +4,7 @@ public class CameraController : MonoBehaviour
 {
     public DisplayInventory inventoryDisplay;
 
-    [SerializeField] int sensitivity;
+    [SerializeField] float sensitivity;
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
     //[SerializeField] private GameObject inventoryScreen;
@@ -46,23 +46,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void UpdateCameraRotation()
+    public void SetCameraSensitivity(float newSensitivity)
     {
-        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
-        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
-
-        if (invertY)
-        {
-            rotationX += mouseY;
-        }
-        else
-        {
-            rotationX -= mouseY;
-        }
-
-        rotationX = Mathf.Clamp(rotationX, -60f, 60f);
-
-        transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.parent.Rotate(Vector3.up * mouseX);
+        sensitivity = newSensitivity * 250;
     }
 }
