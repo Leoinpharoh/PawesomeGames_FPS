@@ -387,7 +387,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 94392136}
-  - component: {fileID: 94392138}
   - component: {fileID: 94392137}
   m_Layer: 5
   m_Name: Eyes
@@ -438,19 +437,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &94392138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94392135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d4ab997339282429706707898bfae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 94392137}
 --- !u!1 &121912212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,7 +1991,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1568827330076845495, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       insertIndex: 3
-      addedObject: {fileID: 2093309877}
+      addedObject: {fileID: 2093309885}
     - targetCorrespondingSourceObject: {fileID: 1568827330076845495, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2093309872}
@@ -2347,6 +2333,10 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 2093309872}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: tutorialComplete
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2583085358008173265, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3677,6 +3667,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1210738909}
+  saveSystem: {fileID: 0}
+  ShotgunUnlocked: 0
+  AssaultRifleUnlocked: 0
+  RPGUnlocked: 0
+  MeleeUnlocked: 0
+  OvershieldUnlocked: 0
+  PotionbeltUnlocked: 0
+  TutorialComplete: 0
+  PythonAmmo: 0
+  ShotgunAmmo: 0
+  AssaultRifleAmmo: 0
+  RPGAmmo: 0
+  HealthMax: 100
+  OvershieldMax: 0
+  OvershieldPotions: 0
+  HealthPotions: 0
+  Currency: 0
 --- !u!1001 &1227453751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5698,6 +5705,7 @@ GameObject:
   - component: {fileID: 1669123426}
   - component: {fileID: 1669123427}
   - component: {fileID: 1669123429}
+  - component: {fileID: 1669123430}
   - component: {fileID: 1669123428}
   m_Layer: 5
   m_Name: Opening Scene
@@ -5763,6 +5771,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1669123427}
+  saveSystem: {fileID: 1669123430}
+  ShotgunUnlocked: 0
+  AssaultRifleUnlocked: 0
+  RPGUnlocked: 0
+  MeleeUnlocked: 0
+  OvershieldUnlocked: 0
+  PotionbeltUnlocked: 0
+  TutorialComplete: 0
+  PythonAmmo: 0
+  ShotgunAmmo: 0
+  AssaultRifleAmmo: 0
+  RPGAmmo: 0
+  HealthMax: 100
+  OvershieldMax: 0
+  OvershieldPotions: 0
+  HealthPotions: 0
+  Currency: 0
 --- !u!114 &1669123429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5776,6 +5801,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2093309872}
+--- !u!114 &1669123430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669123425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6ae1c34af78154382900e3e3b14c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShotgunUnlocked: 0
+  AssaultRifleUnlocked: 0
+  RPGUnlocked: 0
+  MeleeUnlocked: 0
+  OvershieldUnlocked: 0
+  PotionbeltUnlocked: 0
+  TutorialComplete: 0
+  PythonAmmo: 0
+  ShotgunAmmo: 0
+  AssaultRifleAmmo: 0
+  RPGAmmo: 0
+  HealthMax: 100
+  OvershieldMax: 0
+  OvershieldPotions: 0
+  HealthPotions: 0
+  Currency: 0
 --- !u!1001 &1698428350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6925,7 +6978,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2093309877
+--- !u!114 &2093309885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6934,10 +6987,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2093309871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d4ab997339282429706707898bfae6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a6ae1c34af78154382900e3e3b14c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2093309872}
+  ShotgunUnlocked: 0
+  AssaultRifleUnlocked: 0
+  RPGUnlocked: 0
+  MeleeUnlocked: 0
+  OvershieldUnlocked: 0
+  PotionbeltUnlocked: 0
+  TutorialComplete: 0
+  PythonAmmo: 0
+  ShotgunAmmo: 0
+  AssaultRifleAmmo: 0
+  RPGAmmo: 0
+  HealthMax: 100
+  OvershieldMax: 0
+  OvershieldPotions: 0
+  HealthPotions: 0
+  Currency: 0
 --- !u!1001 &2134406898
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -191,8 +191,7 @@ public class GameManager : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        //tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
-        tutorialComplete = false;
+        tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
         if (tutorialComplete == false && sceneName == "Player Hub")
         {
             TutorialTrigger();
