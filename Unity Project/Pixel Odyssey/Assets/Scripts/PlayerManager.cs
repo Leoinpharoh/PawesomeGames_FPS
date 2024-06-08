@@ -6,19 +6,12 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
 {
 
+    //Static Variables
     [SerializeField] AudioSource Audio;
     [SerializeField] CharacterController characterControl;
-    [SerializeField] public int moveSpeed;
-    [SerializeField] int dashMultiplier;
     [SerializeField] Rigidbody rb;
-    [SerializeField] int maxJumps;
-    [SerializeField] int jumpSpeed;
-    [SerializeField] int gravity;
     [SerializeField] AudioClip jumpAudio;
-    [SerializeField] float walkAudioTimer;
     [SerializeField] GameObject flashlight;
-    [HideInInspector] public float HPOrignal;
-    [HideInInspector] public float OSOrignal;
     [SerializeField] AudioClip[] playerWalk;
     [Range(0, 1)][SerializeField] float playerWalkVolume;
     [SerializeField] AudioClip[] playerShot;
@@ -27,9 +20,26 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [Range(0, 1)][SerializeField] float OSShotVolume;
     [SerializeField] AudioClip[] OSBroken;
     [Range(0, 1)][SerializeField] float OSBrokenVolume;
-
+    [SerializeField] float walkAudioTimer;
+    float walkAudioTimerOriginal;
     private CharacterController CharCon;
+    public Vector3 moveDirection;
+    public Vector3 playerVelocity;
+    float interpolationProgress = 1f;
+    float targetHeight;
+    float baseHeight;
+    float crouchHeight;
+    public int OSTimer = 0;
+    public int moveSpeed = 4;
+    int dashMultiplier = 2;
+    int maxJumps;
+    int jumpSpeed = 4;
+    int jumpCounter;
+    int gravity;
+    int moveSpeedOriginal;
+    
 
+    //Coroutines
     public Coroutine poisonCoroutine;
     public Coroutine burnCoroutine;
     public Coroutine freezeCoroutine;
@@ -38,8 +48,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public Coroutine walkCoroutine;
     private Coroutine refillCoroutine;
     private Coroutine waitCoroutine;
-    public Vector3 moveDirection;
-    public Vector3 playerVelocity;
+
+    //Status Bools
     private bool flashlightToggle;
     private bool isWaitingToRefill = false;
     public bool Normal = true;
@@ -54,17 +64,25 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool moveSpeedReduced;
     bool alive;
     bool playingWalkAudio;
-    public int OSTimer = 0;
-    int moveSpeedOriginal;
-    int jumpCounter;
+
+    //Saved Variables
+    public float HPOrignal;
+    public float OSOrignal;
+    public bool tutorialComplete;
+    public bool shotgunUnlocked;
+    public bool assaultRifleUnlocked;
+    public bool RPGUnlocked;
+    public bool meleeUnlocked;
+    public bool overshieldUnlocked;
+    public bool potionbeltUnlocked;
+    public int healthPotions;
+    public int overshieldPotions;
+    public int currency;
     public float HP;
     public float OS;
-    float interpolationProgress = 1f;
-    float targetHeight;
-    float baseHeight;
-    float crouchHeight;
-    float walkAudioTimerOriginal;
 
+
+    //Inventory
     public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
     public DisplayInventory inventoryDisplay;
     public InventoryManager inventoryManager;
@@ -74,6 +92,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     void Start()
     {
         StartUp();
+        LoadPlayer();
     }
     void Update()
     {
@@ -96,6 +115,27 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         OpenInventory();
 
+    }
+
+    public void LoadPlayer()
+    {
+
+        currency = PlayerPrefs.GetInt("Currency");
+        //PythonAmmo = PlayerPrefs.GetInt("PythonAmmo");
+        //ShotgunAmmo = PlayerPrefs.GetInt("ShotgunAmmo");
+        //AssaultRifleAmmo = PlayerPrefs.GetInt("AssaultRifleAmmo");
+        //RPGAmmo = PlayerPrefs.GetInt("RPGAmmo");
+        HPOrignal = PlayerPrefs.GetInt("HealthMax");
+        OSOrignal = PlayerPrefs.GetInt("OvershieldMax");
+        overshieldPotions = PlayerPrefs.GetInt("OvershieldPotions");
+        healthPotions = PlayerPrefs.GetInt("HealthPotions");
+        tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
+        shotgunUnlocked = PlayerPrefs.GetInt("ShotgunUnlocked") == 1;
+        assaultRifleUnlocked = PlayerPrefs.GetInt("AssaultRifleUnlocked") == 1;
+        RPGUnlocked = PlayerPrefs.GetInt("RPGUnlocked") == 1;
+        meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
+        overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
+        potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
     }
 
     #region Effects and Damage

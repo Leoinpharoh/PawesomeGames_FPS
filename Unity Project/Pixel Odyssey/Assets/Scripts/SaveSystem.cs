@@ -43,8 +43,8 @@ public class SaveSystem : MonoBehaviour
         PlayerPrefs.SetInt("MeleeUnlocked", MeleeUnlocked ? 1 : 0);
         PlayerPrefs.SetInt("OvershieldUnlocked", OvershieldUnlocked ? 1 : 0);
         PlayerPrefs.SetInt("PotionbeltUnlocked", PotionbeltUnlocked ? 1 : 0);
+        PlayerPrefs.Save();
 
-        
 
 
     }
