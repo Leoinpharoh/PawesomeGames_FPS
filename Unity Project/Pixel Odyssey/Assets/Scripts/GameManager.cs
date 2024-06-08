@@ -297,7 +297,6 @@ public class GameManager : MonoBehaviour
             characterController.enabled = false;
             weaponSwap.enabled = false;
             cameraController.enabled = false;
-            tutorialComplete = false;
             playerAnimator.SetBool("Tutorial", true);
             PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
             PlayerPrefs.Save();
@@ -306,7 +305,21 @@ public class GameManager : MonoBehaviour
         else
         {
             
+
         }
+    }
+
+    public void TutorialComplete()
+    {
+        characterController = player.GetComponent<CharacterController>();
+        weaponSwap = player.GetComponent<WeaponSwap>();
+        cameraController = mainCamera.GetComponent<CameraController>();
+        characterController.enabled = true;
+        weaponSwap.enabled = true;
+        cameraController.enabled = true;
+        tutorialComplete = true;
+        PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void updateEnemiesToKill()

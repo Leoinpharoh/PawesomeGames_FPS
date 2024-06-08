@@ -168,6 +168,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         subtitles.StartSubtitles();
     }
 
+    public void TutorialComplete()
+    {
+        GameManager.Instance.TutorialComplete();
+    }
+
     #region Effects and Damage
     public void takeDamage(int amount, Vector3 hitPosition)
     {
