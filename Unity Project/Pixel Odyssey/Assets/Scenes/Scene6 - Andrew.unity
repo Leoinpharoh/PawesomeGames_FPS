@@ -7032,22 +7032,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2622531320752839541, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3193789558631110542, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
-      propertyPath: displayInventory
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
-      propertyPath: inventory
-      value: 
-      objectReference: {fileID: 11400000, guid: b27e526d34359964f89ebb28d9f1b9e5, type: 2}
-    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
-      propertyPath: interactScript
-      value: 
-      objectReference: {fileID: 850710285}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: inventoryDisplay
       value: 
@@ -7060,10 +7044,6 @@ PrefabInstance:
       propertyPath: inventoryDisplay
       value: 
       objectReference: {fileID: 267923186}
-    - target: {fileID: 6575734085267450707, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
-      propertyPath: weaponStats
-      value: 
-      objectReference: {fileID: 11400000, guid: ab27f254ea4342d4f8c75000b8962b5b, type: 2}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.18
@@ -10623,17 +10603,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1365845865058394134, guid: 355caeea4e1590442b7516a9a0d311ed, type: 3}
   m_PrefabInstance: {fileID: 839757815}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &850710285 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3193789558631110542, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
-  m_PrefabInstance: {fileID: 508593671}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6d2a2b52faae5c4e99bd5d0192aee05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &859922820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 477146, guid: 9c0a6df65fcfba243abb2cf9260b869f, type: 3}
@@ -20749,18 +20718,6 @@ PrefabInstance:
     - target: {fileID: 4810219760894292095, guid: 7f170c34933807f439081b4150e81d94, type: 3}
       propertyPath: m_Name
       value: InventorySystemBasicTheme
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109630782905306906, guid: 7f170c34933807f439081b4150e81d94, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5220125
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109630782905306906, guid: 7f170c34933807f439081b4150e81d94, type: 3}
-      propertyPath: m_Color.g
-      value: 0.63539
-      objectReference: {fileID: 0}
-    - target: {fileID: 9109630782905306906, guid: 7f170c34933807f439081b4150e81d94, type: 3}
-      propertyPath: m_Color.r
-      value: 0.66666657
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

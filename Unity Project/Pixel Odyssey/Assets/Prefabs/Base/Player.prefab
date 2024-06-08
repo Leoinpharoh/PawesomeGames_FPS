@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStats: {fileID: 0}
   lineRenderer: {fileID: 2911706952583884231}
   firePoint: {fileID: 7022535744768477772}
   fireAudioSource: {fileID: 423247788450090085}
@@ -59,22 +60,9 @@ MonoBehaviour:
     m_Bits: 8
   projectileBullet: {fileID: 0}
   Anim: {fileID: 0}
-  shootDmg: 10
-  shootDist: 20
-  shootSpeed: 0.5
-  projectileSpeed: 0
-  numberOfRays: 1
-  weaponType: 1
-  Ammo: 16
-  clip: 0
-  TilReload: 8
-  reloadTime: 1.5
-  LaserWaitTime: 0.2
-  ammoType: 1
-  audioSFXShoot: {fileID: 8300000, guid: fadb21e6101f76a41b79c9f8808e95f8, type: 3}
-  audioSFXReload: {fileID: 8300000, guid: 907da7d35b9687b4597be4c5d9942a1c, type: 3}
   i: 0
   isShooting: 0
+  Ammo: 16
 --- !u!82 &423247788450090085
 AudioSource:
   m_ObjectHideFlags: 0
@@ -518,6 +506,8 @@ MonoBehaviour:
   OSBroken:
   - {fileID: 8300000, guid: 70047a9b05d0b1645b4f6a2e04a7b10f, type: 3}
   OSBrokenVolume: 0.05
+  playerDeathAudio: {fileID: 8300000, guid: 44a5ef8804b022643a037d87a0eb0790, type: 3}
+  playerDeathVolume: 1
   moveDirection: {x: 0, y: 0, z: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
   Normal: 1
@@ -532,10 +522,10 @@ MonoBehaviour:
   OSTimer: 2
   HP: 25
   OS: 20
-  inventory: {fileID: 0}
+  inventory: {fileID: 11400000, guid: b27e526d34359964f89ebb28d9f1b9e5, type: 2}
   inventoryDisplay: {fileID: 0}
   inventoryManager: {fileID: 0}
-  interactScript: {fileID: 0}
+  interactScript: {fileID: 3193789558631110542}
 --- !u!114 &3804893452896125985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,7 +827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2524652716959469111
 Transform:
   m_ObjectHideFlags: 0
@@ -1330,6 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStats: {fileID: 11400000, guid: ab27f254ea4342d4f8c75000b8962b5b, type: 2}
   lineRenderer: {fileID: 720884011072055431}
   firePoint: {fileID: 7525400910889542333}
   fireAudioSource: {fileID: 474973716664394740}
@@ -1339,22 +1330,9 @@ MonoBehaviour:
     m_Bits: 8
   projectileBullet: {fileID: 0}
   Anim: {fileID: 3755279995117230355}
-  shootDmg: 10
-  shootDist: 5000
-  shootSpeed: 0.1
-  projectileSpeed: 0
-  numberOfRays: 1
-  weaponType: 0
-  Ammo: 50
-  clip: 0
-  TilReload: 6
-  reloadTime: 1.5
-  LaserWaitTime: 0
-  ammoType: 0
-  audioSFXShoot: {fileID: 8300000, guid: c52ddbd50c89ffa42a2bb2ecf167f87a, type: 3}
-  audioSFXReload: {fileID: 8300000, guid: 5a7b6d0b82ec6d2458e86206e89b5d27, type: 3}
   i: 0
   isShooting: 0
+  Ammo: 50
 --- !u!82 &474973716664394740
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2006,6 +1984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStats: {fileID: 0}
   lineRenderer: {fileID: 8559486391555919893}
   firePoint: {fileID: 7561604881690636808}
   fireAudioSource: {fileID: 1639319562463013473}
@@ -2015,22 +1994,9 @@ MonoBehaviour:
     m_Bits: 8
   projectileBullet: {fileID: 6847005562306369180, guid: 9c7cf182632619742baf48ef6653526a, type: 3}
   Anim: {fileID: 2617803211432623085}
-  shootDmg: 20
-  shootDist: 300
-  shootSpeed: 1
-  projectileSpeed: 20
-  numberOfRays: 0
-  weaponType: 2
-  Ammo: 5
-  clip: 1
-  TilReload: 1
-  reloadTime: 4.5
-  LaserWaitTime: 0
-  ammoType: 2
-  audioSFXShoot: {fileID: 8300000, guid: d26fb94e502661a4eb132c82fc82cd4a, type: 3}
-  audioSFXReload: {fileID: 8300000, guid: 96e94eccaf72c7a4dbc8cb4cee119964, type: 3}
   i: 0
   isShooting: 0
+  Ammo: 5
 --- !u!82 &1639319562463013473
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2838,6 +2804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStats: {fileID: 0}
   lineRenderer: {fileID: 7962671769766830585}
   firePoint: {fileID: 4591733456505596914}
   fireAudioSource: {fileID: 0}
@@ -2847,22 +2814,9 @@ MonoBehaviour:
     m_Bits: 8
   projectileBullet: {fileID: 0}
   Anim: {fileID: 0}
-  shootDmg: 10
-  shootDist: 20
-  shootSpeed: 0.5
-  projectileSpeed: 0
-  numberOfRays: 0
-  weaponType: 1
-  Ammo: 16
-  clip: 0
-  TilReload: 8
-  reloadTime: 1.5
-  LaserWaitTime: 0.2
-  ammoType: 1
-  audioSFXShoot: {fileID: 8300000, guid: fadb21e6101f76a41b79c9f8808e95f8, type: 3}
-  audioSFXReload: {fileID: 8300000, guid: 907da7d35b9687b4597be4c5d9942a1c, type: 3}
   i: 0
   isShooting: 0
+  Ammo: 16
 --- !u!82 &2914186071237672868
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3180,6 +3134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStats: {fileID: 0}
   lineRenderer: {fileID: 2357329859242010345}
   firePoint: {fileID: 6472608581354279539}
   fireAudioSource: {fileID: 7710918103183404709}
@@ -3189,22 +3144,9 @@ MonoBehaviour:
     m_Bits: 8
   projectileBullet: {fileID: 0}
   Anim: {fileID: 3071468052993237310}
-  shootDmg: 20
-  shootDist: 20
-  shootSpeed: 0.2
-  projectileSpeed: 0
-  numberOfRays: 5
-  weaponType: 3
-  Ammo: 20
-  clip: 2
-  TilReload: 2
-  reloadTime: 1.5
-  LaserWaitTime: 0
-  ammoType: 1
-  audioSFXShoot: {fileID: 8300000, guid: 3f85cdaed5df3954caea0567b3dbef8b, type: 3}
-  audioSFXReload: {fileID: 8300000, guid: 335b89877211d604b8fd0c9ef0559e6c, type: 3}
   i: 0
   isShooting: 0
+  Ammo: 20
 --- !u!82 &7710918103183404709
 AudioSource:
   m_ObjectHideFlags: 0

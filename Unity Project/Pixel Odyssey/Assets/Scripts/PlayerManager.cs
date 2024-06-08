@@ -27,6 +27,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [Range(0, 1)][SerializeField] float OSShotVolume;
     [SerializeField] AudioClip[] OSBroken;
     [Range(0, 1)][SerializeField] float OSBrokenVolume;
+    [SerializeField] AudioClip playerDeathAudio;
+    [Range(0, 1)][SerializeField] float playerDeathVolume;
 
     private CharacterController CharCon;
 
@@ -146,6 +148,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             updatePlayerUI();
             if (HP <= 0 && Normal)
             {
+                Audio.PlayOneShot(playerDeathAudio, playerDeathVolume);
                 playerDeath();
             }
 
