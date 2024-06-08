@@ -181,6 +181,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         GameManager.Instance.TutorialComplete();
     }
+    public void CameraTrigger()
+    {
+        GameManager.Instance.CameraTrigger();
+    }
 
     #region Effects and Damage
     public void takeDamage(int amount, Vector3 hitPosition)

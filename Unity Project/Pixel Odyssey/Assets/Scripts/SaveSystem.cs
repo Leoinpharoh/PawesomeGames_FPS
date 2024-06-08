@@ -44,9 +44,6 @@ public class SaveSystem : MonoBehaviour
         PlayerPrefs.SetInt("OvershieldUnlocked", OvershieldUnlocked ? 1 : 0);
         PlayerPrefs.SetInt("PotionbeltUnlocked", PotionbeltUnlocked ? 1 : 0);
         PlayerPrefs.Save();
-
-
-
     }
 
     public void LoadPlayer()
@@ -69,5 +66,25 @@ public class SaveSystem : MonoBehaviour
         OvershieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
         PotionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
 
+    }
+
+    public void ResetPlayer()
+    {
+        Currency = 0;
+        PythonAmmo = 50;
+        ShotgunAmmo = 0;
+        AssaultRifleAmmo = 0;
+        RPGAmmo = 0;
+        HealthMax = 100;
+        OvershieldMax = 0;
+        OvershieldPotions = 0;
+        HealthPotions = 0;
+        TutorialComplete = false;
+        ShotgunUnlocked = false;
+        AssaultRifleUnlocked = false;
+        RPGUnlocked = false;
+        MeleeUnlocked = false;
+        OvershieldUnlocked = false;
+        PotionbeltUnlocked = false;
     }
 }
