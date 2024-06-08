@@ -1694,6 +1694,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 473298, guid: 12b4881e50528bb41b2a8973a5ad4ddc, type: 3}
   m_PrefabInstance: {fileID: 1330681598}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &243916024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 243916025}
+  - component: {fileID: 243916026}
+  m_Layer: 0
+  m_Name: Subtitle25
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &243916025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243916024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &243916026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243916024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1814836938}
+  fadeText: {fileID: 1814836936}
+  messagesToDisplay:
+  - Very well, Player! Good luck on your odyssey through this sea of pixels!
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &246323288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3504,6 +3569,73 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ba36f38cf8819041a5354a5adbd8102, type: 3}
+--- !u!1 &452321431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452321432}
+  - component: {fileID: 452321433}
+  m_Layer: 0
+  m_Name: Subtitle16
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &452321432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452321431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &452321433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452321431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1814836938}
+  fadeText: {fileID: 1814836936}
+  messagesToDisplay:
+  - '*She giggles* No, you won''t die! You''ll be kicked back here to try again! '
+  - Though, if you're not good enough to beat the Architect then you'll be stuck
+    here forever! Which could be a worse fate than death! *Giggles*
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &457182766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4448208585850192462, guid: 6fa4d788379f8394ea1283e58aa06fd1, type: 3}
@@ -3880,6 +4012,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4942213727401814, guid: b8b953250bb36d5469a7f3cca22e3cce, type: 3}
   m_PrefabInstance: {fileID: 490573911}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &528428024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528428025}
+  - component: {fileID: 528428026}
+  m_Layer: 0
+  m_Name: Subtitle24
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &528428025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528428024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &528428026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528428024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1750889807}
+  fadeText: {fileID: 1223114387}
+  messagesToDisplay:
+  - Nope! Let's do this thing!
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &543802779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6883,6 +7080,73 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4661336524304296, guid: 16a9c12f54edf6d47817264eb58ea416, type: 3}
   m_PrefabInstance: {fileID: 1054955073}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1056285415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1056285416}
+  - component: {fileID: 1056285417}
+  m_Layer: 0
+  m_Name: Subtitle21
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1056285416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056285415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1056285417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056285415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1814836938}
+  fadeText: {fileID: 1814836936}
+  messagesToDisplay:
+  - This is a health upgrade! It will increase your max HP when you collect it.
+  - This will definitely help when you need a bit more health to get through hordes
+    of enemies!
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1060626536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8077,6 +8341,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 496276, guid: 27856c31c3afe6244a0f17a4fef0905a, type: 3}
   m_PrefabInstance: {fileID: 440244148}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1241872016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1241872017}
+  - component: {fileID: 1241872018}
+  m_Layer: 0
+  m_Name: Subtitle18
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1241872017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241872016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1241872018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241872016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1814836938}
+  fadeText: {fileID: 1814836936}
+  messagesToDisplay:
+  - Sorry! It's literally in my code. I couldn't stop myself if I wanted to!
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1242133949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9338,6 +9667,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 443766, guid: f29352d7918cb4c4297a716609e8c1c7, type: 3}
   m_PrefabInstance: {fileID: 1470221586}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1479769642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1479769643}
+  - component: {fileID: 1479769644}
+  m_Layer: 0
+  m_Name: Subtitle20
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1479769643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479769642}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1479769644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479769642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1814836938}
+  fadeText: {fileID: 1814836936}
+  messagesToDisplay:
+  - Not exactly! Let me show you a couple of upgrades you need to be on the lookout
+    for!
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1505117823
 GameObject:
   m_ObjectHideFlags: 0
@@ -9407,6 +9802,72 @@ MonoBehaviour:
   nextLevelName: Scene3 - Conner
   levelFlashImage: {fileID: 0}
   fadeDuration: 1
+--- !u!1 &1509164973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1509164974}
+  - component: {fileID: 1509164975}
+  m_Layer: 0
+  m_Name: Subtitle17
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1509164974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509164973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1509164975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509164973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1750889807}
+  fadeText: {fileID: 1223114387}
+  messagesToDisplay:
+  - I understand you're an anime girl, but that doesn't mean you have to giggle at
+    my demise.
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1553457786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10524,6 +10985,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4643845458444114, guid: 384a8966b533a2b4da29baa236a5e5bc, type: 3}
   m_PrefabInstance: {fileID: 1785777140}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1786827031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1786827032}
+  - component: {fileID: 1786827033}
+  m_Layer: 0
+  m_Name: Subtitle19
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1786827032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786827031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1786827033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786827031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1750889807}
+  fadeText: {fileID: 1223114387}
+  messagesToDisplay:
+  - '*Sigh* Alright... Is that everything?'
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1786972690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1365845865058394134, guid: 927d1baae9bc8ea40bc7eda0e1c9a938, type: 3}
@@ -10780,6 +11306,17 @@ Transform:
   - {fileID: 599482980}
   - {fileID: 2136758988}
   - {fileID: 1090989271}
+  - {fileID: 1989251768}
+  - {fileID: 452321432}
+  - {fileID: 1509164974}
+  - {fileID: 1241872017}
+  - {fileID: 1786827032}
+  - {fileID: 1479769643}
+  - {fileID: 1056285416}
+  - {fileID: 2128334809}
+  - {fileID: 2083116319}
+  - {fileID: 528428025}
+  - {fileID: 243916025}
   - {fileID: 351224202}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11510,6 +12047,74 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 426824, guid: 7ba36f38cf8819041a5354a5adbd8102, type: 3}
   m_PrefabInstance: {fileID: 702351986}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1989251767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1989251768}
+  - component: {fileID: 1989251769}
+  m_Layer: 0
+  m_Name: Subtitle15
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1989251768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989251767}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1989251769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989251767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1750889807}
+  fadeText: {fileID: 1223114387}
+  messagesToDisplay:
+  - Alright, so I've got ammo, health, and curing status effects... Seems simple
+    enough.
+  - WAIT!
+  - If I have a health pool... does that mean I can die in here?!
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2001117458
 GameObject:
   m_ObjectHideFlags: 0
@@ -11807,6 +12412,73 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4448208585850494574, guid: 6fa4d788379f8394ea1283e58aa06fd1, type: 3}
   m_PrefabInstance: {fileID: 1939836894}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2083116318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083116319}
+  - component: {fileID: 2083116320}
+  m_Layer: 0
+  m_Name: Subtitle23
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2083116319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083116318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2083116320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083116318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1814836938}
+  fadeText: {fileID: 1814836936}
+  messagesToDisplay:
+  - 'Both of the upgrades are usually locked behind secret areas that will require
+    an upgrade in order to get through! '
+  - Other than that, the rest is for you to figure out! Do you have any questions?
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &2088319308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12107,6 +12779,73 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 432036114}
   m_SourcePrefab: {fileID: 100100000, guid: 6fa4d788379f8394ea1283e58aa06fd1, type: 3}
+--- !u!1 &2128334808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128334809}
+  - component: {fileID: 2128334810}
+  m_Layer: 0
+  m_Name: Subtitle22
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2128334809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128334808}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1835145722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2128334810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128334808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbfa111efd5d14685a4529fc318968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 1814836938}
+  fadeText: {fileID: 1814836936}
+  messagesToDisplay:
+  - And this is an Overshield upgrade! When you unlock the overshield this will increase
+    the amount of damage it can take!
+  - Hopefully you can figure out which gate will lead to the overshield unlock!
+  typingSpeed: 0.05
+  fadeDuration: 1
+  onSubtitlesComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 351224203}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: ResumeAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2136758987
 GameObject:
   m_ObjectHideFlags: 0
