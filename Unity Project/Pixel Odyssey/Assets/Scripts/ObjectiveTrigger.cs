@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,12 +19,14 @@ public class ObjectiveTrigger : MonoBehaviour
  
         needsObjective = GameManager.Instance.needsObjective;
         CheckObjects();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckKills();
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -81,6 +84,7 @@ public class ObjectiveTrigger : MonoBehaviour
             {
                 objectsToCheck.Remove(obj);
                 currentlyDeadEnemies++;
+                Debug.Log("Enemy Killed");
                 GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
                 GameManager.Instance.updateEnemiesToKill();
                 break;

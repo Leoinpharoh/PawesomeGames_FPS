@@ -6,6 +6,7 @@ using TMPro;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEditor.Experimental.GraphView;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text objective1Text;
     [SerializeField] TMP_Text objective2Text;
     [SerializeField] TMP_Text objective3Text;
-    [SerializeField] TMP_Text objectiveEnemiesToKill;
+    [SerializeField] public TMP_Text objectiveEnemiesToKill;
     public int objectiveEnemiesKilledCount;
     public int objectiveEnemiesToKillCount;
 
@@ -322,7 +323,18 @@ public class GameManager : MonoBehaviour
 
     public void updateEnemiesToKill()
     {
-        objectiveEnemiesToKill.text = ("Enemies to kill: " + objectiveEnemiesKilledCount.ToString() + " / " + objectiveEnemiesToKillCount.ToString());
+        //if there are enemies to kill
+        if(objectiveEnemiesToKillCount > 0)
+        {
+            objectiveEnemiesToKill.text = ("Enemies to kill: " + objectiveEnemiesKilledCount.ToString() + " / " + objectiveEnemiesToKillCount.ToString());
+        }
+        //else no ememies to kill
+        else
+        {
+            objectiveEnemiesToKill.text = ("");
+        }
+
+
     }
 
 
