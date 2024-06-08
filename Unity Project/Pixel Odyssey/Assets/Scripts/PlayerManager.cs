@@ -161,6 +161,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void subtitleTrigger()
     {
         subtitleIndex++;
+        Debug.Log(subtitleIndex);
         subtitlesObject = GameObject.Find("Subtitle" + subtitleIndex);
         subtitles = subtitlesObject.GetComponent<Subtitles>();
         subtitles.StartSubtitles();
