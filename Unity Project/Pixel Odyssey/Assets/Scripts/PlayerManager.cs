@@ -40,13 +40,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     float baseHeight;
     float crouchHeight;
     public int OSTimer = 0;
-    public int moveSpeed = 4;
-    int dashMultiplier = 2;
-    int maxJumps;
-    int jumpSpeed = 4;
-    int jumpCounter;
-    int gravity;
-    int moveSpeedOriginal;
+    [SerializeField] public int moveSpeed = 4;
+    [SerializeField] int dashMultiplier = 2;
+    [SerializeField] int maxJumps;
+    [SerializeField] int jumpSpeed = 4;
+    [SerializeField] int jumpCounter;
+    [SerializeField] int gravity;
+    [SerializeField] int moveSpeedOriginal;
     
 
     //Coroutines
@@ -110,7 +110,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         subtitlesObject = GameObject.Find("Subtitle1");
     }
     void Update()
-    {
+    {                                                                                     
 
         FlashLight();
 
@@ -163,7 +163,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void subtitleTrigger()
     {
         subtitleIndex++;
-        Debug.Log(subtitleIndex);
         subtitlesObject = GameObject.Find("Subtitle" + subtitleIndex);
         subtitles = subtitlesObject.GetComponent<Subtitles>();
         subtitles.StartSubtitles();
