@@ -1118,6 +1118,7 @@ Transform:
   - {fileID: 4930354891421972938}
   - {fileID: 9150736845199963054}
   - {fileID: 4551935949573839558}
+  - {fileID: 6118616283719011854}
   - {fileID: 7096527542421126133}
   m_Father: {fileID: 6131495630411720467}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1321,12 +1322,12 @@ GameObject:
   - component: {fileID: 1225735786483352704}
   - component: {fileID: 1178363341211031808}
   m_Layer: 5
-  m_Name: Weapon Image Slot 3
+  m_Name: Weapon Image Slot 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1280017272858266310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2666,7 +2667,7 @@ GameObject:
   - component: {fileID: 6814352875497262033}
   - component: {fileID: 3141952683090355460}
   m_Layer: 5
-  m_Name: ToolBeltSlot3
+  m_Name: ToolBeltSlot4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2686,12 +2687,11 @@ RectTransform:
   m_Children:
   - {fileID: 6566345261467193820}
   - {fileID: 1280017272858266310}
-  - {fileID: 6118616283719011854}
   m_Father: {fileID: 3819611873748186874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 2843.831, y: 1075.4645}
+  m_AnchoredPosition: {x: 2839, y: 1075.4645}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6814352875497262033
@@ -4285,12 +4285,12 @@ GameObject:
   - component: {fileID: 8565899589484209451}
   - component: {fileID: 3475832337290309483}
   m_Layer: 5
-  m_Name: Weapon Image Slot 4
+  m_Name: Weapon Image Slot 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8274463008319587376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4333,14 +4333,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6792453, g: 0.6557494, b: 0.6557494, a: 1}
+  m_Color: {r: 0.6289307, g: 0.6289307, b: 0.6289307, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 423812cfc14b06f4b8bc9c3c6e213b5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36242ea3ee693404db47ab51c9b910f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4944,7 +4944,7 @@ GameObject:
   - component: {fileID: 4398095877609374643}
   - component: {fileID: 7109827612669904363}
   m_Layer: 5
-  m_Name: Slot 4 Rounds Image
+  m_Name: Slot 3 Rounds Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4997,7 +4997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 32b5a19f49c29204f8d49b16274c4c2e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5263,7 +5263,7 @@ GameObject:
   - component: {fileID: 1171370991787172268}
   - component: {fileID: 1042628833044487583}
   m_Layer: 5
-  m_Name: Slot 1 Rounds in Bag
+  m_Name: Slot 3 Rounds in Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5996,7 +5996,7 @@ GameObject:
   - component: {fileID: 5225312646300225191}
   - component: {fileID: 7156884602094826236}
   m_Layer: 5
-  m_Name: Weapon Slot 4 KeyTip
+  m_Name: Weapon Slot 3 KeyTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6049,7 +6049,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6948,7 +6948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 2589.7024, y: 1075.4645}
+  m_AnchoredPosition: {x: 2458, y: 1075.4645}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2726613528784737587
@@ -7392,7 +7392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 2717.8694, y: 1075.4645}
+  m_AnchoredPosition: {x: 2586.167, y: 1075.4645}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4885444342408415419
@@ -8703,7 +8703,7 @@ GameObject:
   - component: {fileID: 4700878549828799042}
   - component: {fileID: 6872601476237211438}
   m_Layer: 5
-  m_Name: Slot 3 Rounds in Bag
+  m_Name: Slot 4 Rounds in Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11796,7 +11796,7 @@ GameObject:
   - component: {fileID: 5816407359691428534}
   - component: {fileID: 6203835223637854711}
   m_Layer: 5
-  m_Name: ToolBeltSlot4
+  m_Name: ToolBeltSlot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11810,17 +11810,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5869122475711096900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.3534427}
+  m_LocalScale: {x: 1.178544, y: 1.189152, z: 2.4000003}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8630563187972273728}
   - {fileID: 8274463008319587376}
-  m_Father: {fileID: 7096527542421126133}
+  m_Father: {fileID: 3819611873748186874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 57.05664, y: 49.693726}
+  m_AnchoredPosition: {x: 2715, y: 1075.1001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5816407359691428534
@@ -13038,7 +13038,7 @@ GameObject:
   - component: {fileID: 6345900949983299297}
   - component: {fileID: 7361662159052968210}
   m_Layer: 5
-  m_Name: Weapon Slot 3 KeyTip
+  m_Name: Weapon Slot 4 KeyTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13091,7 +13091,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15152,7 +15152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 205.19693, y: -187.14583}
+  m_AnchoredPosition: {x: 150.32094, y: -187.14583}
   m_SizeDelta: {x: 64.1612, y: 72.0815}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &905716435988824698
@@ -15280,7 +15280,7 @@ GameObject:
   - component: {fileID: 5837768306663889629}
   - component: {fileID: 5023176909241335903}
   m_Layer: 5
-  m_Name: Slot 3 Rounds Image
+  m_Name: Slot 4 Rounds Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
