@@ -83,6 +83,20 @@ public class GameManager : MonoBehaviour
     private CameraController cameraController;
 
 
+    //Tutorial Objects
+    [SerializeField] GameObject ToolBelt;
+    [SerializeField] GameObject ObjectiveList;
+    [SerializeField] GameObject Reticle;
+    [SerializeField] GameObject Ammo;
+    [SerializeField] GameObject HealthBar;
+    [SerializeField] GameObject StatusBar;
+    [SerializeField] GameObject OvershieldBar;
+    [SerializeField] GameObject Portals;
+    [SerializeField] GameObject NewGameScreen;
+    [SerializeField] GameObject LoadGameScreen;
+
+    
+
 
 
     public static GameManager Instance;
@@ -177,12 +191,18 @@ public class GameManager : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
+        //tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
+        tutorialComplete = false;
         if (tutorialComplete == false && sceneName == "Player Hub")
         {
             TutorialTrigger();
         }
 
+        if(tutorialComplete == true && sceneName == "Opening Scene")
+        {
+            OpeningScene();
+        }
+        
     }
 
     public void updateGameObjective()
@@ -303,6 +323,14 @@ public class GameManager : MonoBehaviour
         cameraController.enabled = false;
         playerAnimator.applyRootMotion = false;
         playerAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        ToolBelt.SetActive(false);
+        ObjectiveList.SetActive(false);
+        Reticle.SetActive(false);
+        Ammo.SetActive(false);
+        HealthBar.SetActive(false);
+        StatusBar.SetActive(false);
+        OvershieldBar.SetActive(false);
+        Portals.SetActive(false);
         playerAnimator.SetBool("Tutorial", true);
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
         PlayerPrefs.Save();
@@ -318,9 +346,29 @@ public class GameManager : MonoBehaviour
         cameraController.enabled = true;
         playerAnimator.applyRootMotion = true;
         playerAnimator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
+        ToolBelt.SetActive(true);
+        ObjectiveList.SetActive(true);
+        Reticle.SetActive(true);
+        Ammo.SetActive(true);
+        HealthBar.SetActive(true);
+        StatusBar.SetActive(true);
+        Portals.SetActive(true);
         tutorialComplete = true;
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
         PlayerPrefs.Save();
+    }
+
+    public void CameraTrigger()
+    {
+        playerAnimator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
+    }
+
+    public void OpeningScene()
+    {
+        Debug.Log("Opening Scene");
+        NewGameScreen.SetActive(false);
+        LoadGameScreen.SetActive(false);
+
     }
 
     public void updateEnemiesToKill()
