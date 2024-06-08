@@ -149,6 +149,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
         overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
         potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
+        updatePlayerUI();
     }
 
 
