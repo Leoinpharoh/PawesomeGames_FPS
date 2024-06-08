@@ -100,6 +100,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public Interact interactScript;
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
 
+    //ToolBelt
+    [SerializeField] private ToolBelt toolBelt;
     void Start()
     {
         StartUp();
@@ -682,7 +684,46 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             inventory.Container.Items.Clear();
         }
     }
+    private void HandlePotionUsageAndScrolling()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UsePotion();
+        }
 
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            SelectNextPotion();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            SelectPreviousPotion();
+        }
+    }
+
+    private void UsePotion()
+    {
+        if (toolBelt != null)
+        {
+            toolBelt.UseSelectedPotion();
+        }
+    }
+
+    private void SelectNextPotion()
+    {
+        if (toolBelt != null)
+        {
+            toolBelt.SelectNextPotion();
+        }
+    }
+
+    private void SelectPreviousPotion()
+    {
+        if (toolBelt != null)
+        {
+            toolBelt.SelectPreviousPotion();
+        }
+    }
     #endregion
 
 }

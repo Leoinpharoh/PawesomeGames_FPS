@@ -28,14 +28,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text objective1Text;
     [SerializeField] TMP_Text objective2Text;
     [SerializeField] TMP_Text objective3Text;
-    [SerializeField] TMP_Text objectiveEnemiesToKill;
-    public int objectiveEnemiesKilledCount;
-    public int objectiveEnemiesToKillCount;
     public bool objective1Aquired;
     public bool objective2Aquired;
     public bool objective3Aquired;
     public bool needsObjective;
 
+    [SerializeField] TMP_Text ItemCount;
     //status needs
     [SerializeField] TMP_Text currentEffectText;
     [SerializeField] public int poisonedTimer;
@@ -203,10 +201,6 @@ public class GameManager : MonoBehaviour
                 objective3Text.text = "";
             }
         }
-    }
-    public void updateEnemiesToKill()
-    {
-        objectiveEnemiesToKill.text = ("Enemies to kill: " + objectiveEnemiesKilledCount.ToString() + " / " + objectiveEnemiesToKillCount.ToString());
     }
 
     public void youLose()
