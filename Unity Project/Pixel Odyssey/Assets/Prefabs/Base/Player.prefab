@@ -508,6 +508,12 @@ MonoBehaviour:
   playerVelocity: {x: 0, y: 0, z: 0}
   OSTimer: 2
   moveSpeed: 4
+  dashMultiplier: 2
+  maxJumps: 0
+  jumpSpeed: 4
+  jumpCounter: 0
+  gravity: 10
+  moveSpeedOriginal: 0
   Normal: 1
   poisoned: 0
   burning: 0
@@ -736,7 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d2a2b52faae5c4e99bd5d0192aee05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupRange: 0
+  pickupRange: 3
   displayInventory: {fileID: 0}
   playerManager: {fileID: 4449042350219607151}
 --- !u!95 &3052440193595055490
