@@ -14,7 +14,6 @@ public class TriggerCode : MonoBehaviour
 
     void triggerCode()
     {
-        // Define what happens when Enter is pressed at the end of the last message
         if (performCode != null)
         {
             performCode.Invoke();

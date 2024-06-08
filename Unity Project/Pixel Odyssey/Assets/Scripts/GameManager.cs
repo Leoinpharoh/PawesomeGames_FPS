@@ -288,21 +288,21 @@ public class GameManager : MonoBehaviour
         if (sceneName == "Player Hub" && tutorialComplete == false)
         {
             
-            playerAnimator.SetBool("Tutorial", true);
+            
             characterController.enabled = false;
             weaponSwap.enabled = false;
             cameraController.enabled = false;
             tutorialComplete = false;
+            playerAnimator.SetBool("Tutorial", true);
             PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
             PlayerPrefs.Save();
 
         }
         else
         {
-            characterController.enabled = true;
-            weaponSwap.enabled = true;
-            cameraController.enabled = true;
-
+            
         }
     }
+
+    
 }

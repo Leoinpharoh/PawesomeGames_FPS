@@ -2,12 +2,14 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
 {
 
     //Static Variables
     [SerializeField] AudioSource Audio;
+    [SerializeField] Animator playerAnimator;
     [SerializeField] CharacterController characterControl;
     [SerializeField] Rigidbody rb;
     [SerializeField] AudioClip jumpAudio;
@@ -24,6 +26,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     float walkAudioTimerOriginal;
     [SerializeField] AudioClip playerDeathAudio;
     [Range(0, 1)][SerializeField] float playerDeathVolume;
+    private Subtitles subtitles;
+    [SerializeField] GameObject subtitlesObject;
+
+
+
 
     private CharacterController CharCon;
     public Vector3 moveDirection;
@@ -83,6 +90,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int currency;
     public float HP;
     public float OS;
+    public int subtitleIndex = 0;
 
 
     //Inventory
@@ -96,6 +104,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         StartUp();
         LoadPlayer();
+
+        subtitlesObject = GameObject.Find("Subtitle1");
     }
     void Update()
     {
@@ -139,6 +149,20 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
         overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
         potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
+    }
+
+
+    public void PauseAnimation()
+    {
+        playerAnimator.speed = 0;
+    }
+
+    public void subtitleTrigger()
+    {
+        subtitleIndex++;
+        subtitlesObject = GameObject.Find("Subtitle" + subtitleIndex);
+        subtitles = subtitlesObject.GetComponent<Subtitles>();
+        subtitles.StartSubtitles();
     }
 
     #region Effects and Damage
