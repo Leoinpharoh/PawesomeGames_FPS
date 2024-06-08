@@ -1618,7 +1618,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1131351126369316212, guid: a73978a718c2ce24db2afa863bdea5b4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6111834531959482214, guid: a73978a718c2ce24db2afa863bdea5b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.007017
       objectReference: {fileID: 0}
     - target: {fileID: 6111834531959482214, guid: a73978a718c2ce24db2afa863bdea5b4, type: 3}
       propertyPath: m_LocalScale.y
@@ -1626,7 +1630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6111834531959482214, guid: a73978a718c2ce24db2afa863bdea5b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -52.105003
+      value: -52.2
       objectReference: {fileID: 0}
     - target: {fileID: 6111834531959482214, guid: a73978a718c2ce24db2afa863bdea5b4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5192,12 +5196,20 @@ PrefabInstance:
       value: GetBoss/ClearAirSpace
       objectReference: {fileID: 0}
     - target: {fileID: 6111834531959482214, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.3978226
+      objectReference: {fileID: 0}
+    - target: {fileID: 6111834531959482214, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1107379
+      objectReference: {fileID: 0}
+    - target: {fileID: 6111834531959482214, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.354176
+      value: -19.8
       objectReference: {fileID: 0}
     - target: {fileID: 6111834531959482214, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 523.49835
+      value: 487.6
       objectReference: {fileID: 0}
     - target: {fileID: 6111834531959482214, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17829,7 +17841,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 30, y: 47.19, z: 30}
+  m_Size: {x: 30, y: 47.38, z: 30}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1351685879
 PrefabInstance:
@@ -20720,10 +20732,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2569964709344438882, guid: 7f170c34933807f439081b4150e81d94, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4274412060700159955, guid: 7f170c34933807f439081b4150e81d94, type: 3}
       propertyPath: m_LocalPosition.x
       value: -58.806637
