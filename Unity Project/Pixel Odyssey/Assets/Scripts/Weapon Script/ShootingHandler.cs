@@ -25,8 +25,9 @@ public class ShootingHandler : MonoBehaviour
 
     private void Start()
     {
+        //Debug.Log(weaponStats.Ammo.ToString());
         weaponStats.clip = weaponStats.TilReload;
-        weaponStats.Ammo = weaponStats.Ammo - weaponStats.TilReload;
+        Ammo = weaponStats.Ammo;
     }
 
     private void Update()

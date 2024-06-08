@@ -88,9 +88,10 @@ public class StatPickup : MonoBehaviour
 
     private void RefillAmmo(PlayerManager playerManager)
     {
-        ShootingHandler[] shootingHandlers = playerManager.gameObject.GetComponentsInChildren<ShootingHandler>(true);
+        ShootingHandler[] shootingHandlers = playerManager.gameObject.GetComponentsInChildren<ShootingHandler>();
         foreach (var shootingHandler in shootingHandlers)
         {
+            Debug.Log(shootingHandler.weaponStats.Ammo.ToString());
             shootingHandler.weaponStats.Ammo += refilAmount;
             if (shootingHandler.weaponStats.Ammo > 99)
             {

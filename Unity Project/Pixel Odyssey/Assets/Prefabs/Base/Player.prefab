@@ -536,6 +536,7 @@ MonoBehaviour:
   inventoryDisplay: {fileID: 0}
   inventoryManager: {fileID: 0}
   interactScript: {fileID: 3193789558631110542}
+  toolBelt: {fileID: 0}
 --- !u!114 &3804893452896125985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,7 +1081,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f6f3ab48cd779624189492a103caa6f2, type: 2}
+  - {fileID: 2100000, guid: 1318fdeca31502247bcf28b806eeac6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1469,7 +1470,7 @@ AudioSource:
   m_GameObject: {fileID: 4697354008268876775}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2015,7 +2016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStats: {fileID: 0}
+  weaponStats: {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
   lineRenderer: {fileID: 8559486391555919893}
   firePoint: {fileID: 7561604881690636808}
   fireAudioSource: {fileID: 1639319562463013473}
@@ -2133,7 +2134,7 @@ AudioSource:
   m_GameObject: {fileID: 6891202904782844516}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2241,7 +2242,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 1318fdeca31502247bcf28b806eeac6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3165,7 +3166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea78d7d2d0792254e90126aa92bd912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStats: {fileID: 0}
+  weaponStats: {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   lineRenderer: {fileID: 2357329859242010345}
   firePoint: {fileID: 6472608581354279539}
   fireAudioSource: {fileID: 7710918103183404709}
@@ -3387,7 +3388,7 @@ AudioSource:
   m_GameObject: {fileID: 7884569268687852493}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
