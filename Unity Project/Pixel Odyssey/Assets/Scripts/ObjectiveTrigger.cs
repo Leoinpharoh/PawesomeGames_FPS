@@ -29,7 +29,6 @@ public class ObjectiveTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Trigger");
 
             //add string to objectives list
             for (int i = 0; i < GameManager.Instance.objectives.Count; i++)
@@ -38,21 +37,11 @@ public class ObjectiveTrigger : MonoBehaviour
                 {
                     GameManager.Instance.objectives[i] = objective;
                     GameManager.Instance.updateGameObjective();
-                    Debug.Log("Objectives Loaded");
                     break;
-                }
-                else
-                {
-                    Debug.Log("Objectives not Loaded");
                 }
             }
             if (enemiesToKill)
             {
-                Debug.Log("enemiesToKill entered");
-                if (objectsToCheck == null)
-                {
-                    Debug.Log("List is Empty");
-                }
                 if (objectsToCheck != null)
                 {
                     GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
@@ -60,10 +49,6 @@ public class ObjectiveTrigger : MonoBehaviour
                     Debug.Log("List is Loaded");
                     GameManager.Instance.updateEnemiesToKill();
                 }
-            }
-            else
-            {
-                Debug.Log("No Enemies");
             }
         }
     }
@@ -90,13 +75,10 @@ public class ObjectiveTrigger : MonoBehaviour
 
     private void CheckKills()
     {
-        Debug.Log("Checking Kills");
         foreach (GameObject obj in objectsToCheck)
         {
-            Debug.Log("Checking Kills Deeper xD" + obj);
             if (obj.Equals(null))
             {
-                Debug.Log("Checking Kills Deeper the third! xD" + currentlyDeadEnemies);
                 objectsToCheck.Remove(obj);
                 currentlyDeadEnemies++;
                 GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
