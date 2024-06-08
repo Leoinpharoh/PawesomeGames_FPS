@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
     private CharacterController characterController;
     private WeaponSwap weaponSwap;
     private CameraController cameraController;
+    
 
 
 
@@ -171,8 +172,14 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayer()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
         tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
-        TutorialTrigger();
+        if (tutorialComplete == false && sceneName == "Player Hub")
+        {
+            TutorialTrigger();
+        }
+        
     }
 
     public void updateGameObjective()
@@ -285,28 +292,17 @@ public class GameManager : MonoBehaviour
 
     public void TutorialTrigger()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
         characterController = player.GetComponent<CharacterController>();
         weaponSwap = player.GetComponent<WeaponSwap>();
         cameraController = mainCamera.GetComponent<CameraController>();
-        if (sceneName == "Player Hub" && tutorialComplete == false)
-        {
-            
-            
-            characterController.enabled = false;
-            weaponSwap.enabled = false;
-            cameraController.enabled = false;
-            playerAnimator.SetBool("Tutorial", true);
-            PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
-            PlayerPrefs.Save();
-
-        }
-        else
-        {
-            
-
-        }
+        characterController.enabled = false;
+        weaponSwap.enabled = false;
+        cameraController.enabled = false;
+        playerAnimator.applyRootMotion = false;
+        playerAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        playerAnimator.SetBool("Tutorial", true);
+        PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void TutorialComplete()
@@ -317,6 +313,8 @@ public class GameManager : MonoBehaviour
         characterController.enabled = true;
         weaponSwap.enabled = true;
         cameraController.enabled = true;
+        playerAnimator.applyRootMotion = true;
+        playerAnimator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
         tutorialComplete = true;
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
         PlayerPrefs.Save();

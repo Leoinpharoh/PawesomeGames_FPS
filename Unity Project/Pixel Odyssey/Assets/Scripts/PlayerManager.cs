@@ -40,13 +40,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     float baseHeight;
     float crouchHeight;
     public int OSTimer = 0;
-    [SerializeField] public int moveSpeed = 4;
-    [SerializeField] int dashMultiplier = 2;
-    [SerializeField] int maxJumps;
-    [SerializeField] int jumpSpeed = 4;
-    [SerializeField] int jumpCounter;
-    [SerializeField] int gravity;
-    [SerializeField] int moveSpeedOriginal;
+    public int moveSpeed = 4;
+    public int dashMultiplier = 2;
+    public int maxJumps = 1;
+    public int jumpSpeed = 4;
+    public int jumpCounter;
+    public int gravity = 10;
+    public int moveSpeedOriginal;
     
 
     //Coroutines
