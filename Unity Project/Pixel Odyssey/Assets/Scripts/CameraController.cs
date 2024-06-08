@@ -48,6 +48,6 @@ public class CameraController : MonoBehaviour
 
     public void SetCameraSensitivity(float newSensitivity)
     {
-        sensitivity = newSensitivity * 250;
+        sensitivity = newSensitivity * 350;
     }
 }

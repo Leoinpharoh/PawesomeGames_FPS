@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMainMenu;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
+    [SerializeField] Animator playerAnimator;
 
 
     [SerializeField] public List<string> objectives;
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
     public GameObject slowHitScreen;
     public GameObject confuseHitScreen;
     public GameObject player;
+    public GameObject mainCamera;
 
     //basics
     public bool isPaused;
@@ -69,6 +72,11 @@ public class GameManager : MonoBehaviour
     int HeavyBullets;
     public int confusedDamage = 0;
     public int slowedDamage = 0;
+
+    public bool tutorialComplete = false;
+    private CharacterController characterController;
+    private WeaponSwap weaponSwap;
+    private CameraController cameraController;
 
 
 
@@ -83,10 +91,17 @@ public class GameManager : MonoBehaviour
         Instance = this;
         //show player location
         player = GameObject.FindWithTag("Player");
+        mainCamera = GameObject.FindWithTag("MainCamera");
         //define player script
         playerScript = player.GetComponent<PlayerManager>();
         //on awake needs objective
         needsObjective = true;
+    }
+
+    private void Start()
+    {
+        LoadPlayer();
+        
     }
 
     // Update is called once per frame
@@ -113,6 +128,8 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+
 
     public void statePaused()
     {
@@ -148,6 +165,13 @@ public class GameManager : MonoBehaviour
     //    //    menuActive.SetActive(isPaused);
     //    //}
     //}
+
+
+    public void LoadPlayer()
+    {
+        tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
+        TutorialTrigger();
+    }
 
     public void updateGameObjective()
     {
@@ -260,4 +284,32 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    public void TutorialTrigger()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        characterController = player.GetComponent<CharacterController>();
+        weaponSwap = player.GetComponent<WeaponSwap>();
+        cameraController = mainCamera.GetComponent<CameraController>();
+        if (sceneName == "Player Hub" && tutorialComplete == false)
+        {
+            
+            
+            characterController.enabled = false;
+            weaponSwap.enabled = false;
+            cameraController.enabled = false;
+            tutorialComplete = false;
+            playerAnimator.SetBool("Tutorial", true);
+            PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
+            PlayerPrefs.Save();
+
+        }
+        else
+        {
+            
+        }
+    }
+
+    
 }

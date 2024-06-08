@@ -72,9 +72,8 @@ public class SettingsManager : MonoBehaviour
             dBValue = Mathf.Log10(value) * 20; // Convert linear volume to dB
         }
 
-        Debug.Log($"SetVolume - Setting {parameterName} to dBValue: {dBValue}");
         bool result = audioMixer.SetFloat(parameterName, dBValue); // Set the volume in the AudioMixer
-        Debug.Log($"SetVolume - Result of setting {parameterName}: {result}");
+        
     }
 
     public void SetSensitivity(float value) // Set the camera sensitivity
