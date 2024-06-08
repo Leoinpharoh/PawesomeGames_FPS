@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,7 +29,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [Range(0, 1)][SerializeField] float playerDeathVolume;
     private Subtitles subtitles;
     [SerializeField] GameObject subtitlesObject;
-
 
 
 

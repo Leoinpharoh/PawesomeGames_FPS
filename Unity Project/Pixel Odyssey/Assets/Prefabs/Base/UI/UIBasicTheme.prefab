@@ -14272,10 +14272,14 @@ MonoBehaviour:
   optionsMainMenu: {fileID: 286303987757920655}
   ammoDisplayAmount: {fileID: 8698168358922032715}
   clipDisplayAmount: {fileID: 909021615015369938}
+  playerAnimator: {fileID: 0}
   objectives: []
   objective1Text: {fileID: 9131440308952120680}
   objective2Text: {fileID: 1095097303777682562}
   objective3Text: {fileID: 280567517030276733}
+  objectiveEnemiesToKill: {fileID: 0}
+  objectiveEnemiesKilledCount: 0
+  objectiveEnemiesToKillCount: 0
   objective1Aquired: 0
   objective2Aquired: 0
   objective3Aquired: 0
@@ -14299,9 +14303,11 @@ MonoBehaviour:
   slowHitScreen: {fileID: 7741596959167080849}
   confuseHitScreen: {fileID: 8899753883256872260}
   player: {fileID: 0}
+  mainCamera: {fileID: 0}
   isPaused: 0
   confusedDamage: 0
   slowedDamage: 0
+  tutorialComplete: 0
 --- !u!114 &7768245338224117361
 MonoBehaviour:
   m_ObjectHideFlags: 0
