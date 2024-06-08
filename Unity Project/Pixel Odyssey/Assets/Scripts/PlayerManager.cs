@@ -101,13 +101,20 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
 
     //ToolBelt
-    [SerializeField] private ToolBelt toolBelt;
+    [SerializeField] public ToolBelt toolBelt;
     void Start()
     {
         StartUp();
         LoadPlayer();
 
         subtitlesObject = GameObject.Find("Subtitle1");
+
+        toolBelt = GetComponent<ToolBelt>();
+        // Ensure ToolBelt is initialized
+        if (toolBelt == null)
+        {
+            toolBelt = GetComponent<ToolBelt>();
+        }
     }
     void Update()
     {                                                                                     
@@ -130,6 +137,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         OpenInventory();
 
+        HandlePotionUsage();
+        HandlePotionScroll();
     }
 
     public void LoadPlayer()
@@ -688,20 +697,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             inventory.Container.Items.Clear();
         }
     }
-    private void HandlePotionUsageAndScrolling()
+    private void HandlePotionUsage()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             UsePotion();
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            SelectNextPotion();
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            SelectPreviousPotion();
         }
     }
 
@@ -709,23 +709,20 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         if (toolBelt != null)
         {
-            toolBelt.UseSelectedPotion();
+            toolBelt.UsePotion();
         }
     }
 
-    private void SelectNextPotion()
+    private void HandlePotionScroll()
     {
         if (toolBelt != null)
         {
-            toolBelt.SelectNextPotion();
-        }
-    }
-
-    private void SelectPreviousPotion()
-    {
-        if (toolBelt != null)
-        {
-            toolBelt.SelectPreviousPotion();
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (scroll != 0f)
+            {
+                int direction = scroll > 0 ? 1 : -1;
+                toolBelt.ScrollPotions(direction);
+            }
         }
     }
     #endregion

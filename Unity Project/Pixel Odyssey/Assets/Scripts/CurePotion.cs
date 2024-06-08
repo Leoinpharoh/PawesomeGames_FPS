@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Potions/CurePotion")]
+[CreateAssetMenu(fileName = "CurePotion", menuName = "Potions/CurePotion")]
 public class CurePotion : Potion
 {
-    public override void UsePotion(GameObject player)
+    public override void Use(GameObject user)
     {
-        var playerManager = player.GetComponent<PlayerManager>();
+        PlayerManager playerManager = user.GetComponent<PlayerManager>();
         playerManager.poisoned = false;
         playerManager.burning = false;
         playerManager.freezing = false;
@@ -17,6 +15,5 @@ public class CurePotion : Potion
         playerManager.StopAllCoroutines();
         GameManager.Instance.playerEffect("Normal");
         playerManager.updatePlayerUI();
-        Debug.Log("Used Cure Potion");
     }
 }

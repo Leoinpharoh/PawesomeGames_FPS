@@ -1,86 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ToolBelt : MonoBehaviour
 {
-    [SerializeField] private List<Potion> potions;
-    [SerializeField] private int maxPotions = 10;
-    private int selectedPotionIndex = -1; // -1 means no potion is selected
+    public List<Potion> potions = new List<Potion>();
+    private int selectedPotionIndex = 0;
 
-    private void Start()
+    public void AddPotion(Potion potion)
     {
-        // Initialize potions list with empty slots
-        potions = new List<Potion>(new Potion[maxPotions]);
+        potions.Add(potion);
+        UpdateSelectedPotionUI();
     }
 
-    public void AddPotion(Potion newPotion)
+    public void UsePotion()
     {
-        for (int i = 0; i < potions.Count; i++)
+        if (potions.Count > 0)
         {
-            if (potions[i] == null)
-            {
-                potions[i] = newPotion;
-                Debug.Log("Potion added: " + newPotion.name);
-                return;
-            }
-        }
-        Debug.Log("Tool belt is full!");
-    }
-
-    public void UsePotion(int index)
-    {
-        if (index < 0 || index >= potions.Count || potions[index] == null)
-        {
-            Debug.Log("No potion in this slot!");
-            return;
-        }
-
-        potions[index].UsePotion(gameObject);
-        potions[index] = null;  // Remove potion after use
-    }
-
-    public void SelectNextPotion()
-    {
-        int startingIndex = selectedPotionIndex;
-        do
-        {
-            selectedPotionIndex = (selectedPotionIndex + 1) % potions.Count;
-        } while (potions[selectedPotionIndex] == null && selectedPotionIndex != startingIndex);
-
-        Debug.Log($"Selected potion: {GetSelectedPotionName()}");
-    }
-
-    public void SelectPreviousPotion()
-    {
-        int startingIndex = selectedPotionIndex;
-        do
-        {
-            selectedPotionIndex = (selectedPotionIndex - 1 + potions.Count) % potions.Count;
-        } while (potions[selectedPotionIndex] == null && selectedPotionIndex != startingIndex);
-
-        Debug.Log($"Selected potion: {GetSelectedPotionName()}");
-    }
-
-    public void UseSelectedPotion()
-    {
-        if (selectedPotionIndex >= 0 && selectedPotionIndex < potions.Count && potions[selectedPotionIndex] != null)
-        {
-            UsePotion(selectedPotionIndex);
-            Debug.Log("Potion used: " + selectedPotionIndex);
-        }
-        else
-        {
-            Debug.Log("No potion selected or potion slot is empty!");
+            potions[selectedPotionIndex].Use(gameObject);
+            potions.RemoveAt(selectedPotionIndex);
+            selectedPotionIndex = Mathf.Clamp(selectedPotionIndex, 0, potions.Count - 1);
+            UpdateSelectedPotionUI();
         }
     }
 
-    public string GetSelectedPotionName()
+    public void ScrollPotions(int direction)
     {
-        if (selectedPotionIndex >= 0 && selectedPotionIndex < potions.Count && potions[selectedPotionIndex] != null)
+        if (potions.Count == 0) return;
+
+        selectedPotionIndex += direction;
+        if (selectedPotionIndex >= potions.Count)
+            selectedPotionIndex = 0;
+        else if (selectedPotionIndex < 0)
+            selectedPotionIndex = potions.Count - 1;
+
+        UpdateSelectedPotionUI();
+    }
+
+    public Potion GetSelectedPotion()
+    {
+        if (potions.Count > 0)
         {
-            return potions[selectedPotionIndex].potionName;
+            return potions[selectedPotionIndex];
         }
-        return "None";
+        return null;
+    }
+
+    public int GetSelectedPotionCount()
+    {
+        if (potions.Count > 0)
+        {
+            return potions.Count;
+        }
+        return 0;
+    }
+
+    private void UpdateSelectedPotionUI()
+    {
+        GameManager.Instance.UpdateSelectedPotion();
     }
 }

@@ -6,7 +6,7 @@ public class StatPickup : MonoBehaviour
 {
     [SerializeField] private enum PickUpType { Health, Ammo, Cure }
     [SerializeField] private PickUpType type;
-    [SerializeField] private int refilAmount;
+    [SerializeField] private int refillAmount;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,55 +17,74 @@ public class StatPickup : MonoBehaviour
             {
                 var toolBelt = playerManager.GetComponent<ToolBelt>();
 
-                // If player has a ToolBelt, add the potion to it
-                if (toolBelt != null)
+                switch (type)
                 {
-                    switch (type)
-                    {
-                        case PickUpType.Health:
-                            HealingPotion healingPotion = ScriptableObject.CreateInstance<HealingPotion>();
-                            healingPotion.potionName = "Healing Potion";
-                            healingPotion.healingAmount = refilAmount;
-                            toolBelt.AddPotion(healingPotion);
-                            break;
+                    case PickUpType.Health:
+                        HandleHealthPickup(playerManager, toolBelt);
+                        break;
 
-                        case PickUpType.Cure:
-                            CurePotion curePotion = ScriptableObject.CreateInstance<CurePotion>();
-                            curePotion.potionName = "Cure Potion";
-                            toolBelt.AddPotion(curePotion);
-                            break;
+                    case PickUpType.Cure:
+                        HandleCurePickup(playerManager, toolBelt);
+                        break;
 
-                        case PickUpType.Ammo:
-                            RefillAmmo(playerManager);
-                            break;
-                    }
-                }
-                else
-                {
-                    // If player does not have a ToolBelt, apply the effect directly
-                    switch (type)
-                    {
-                        case PickUpType.Health:
-                            ApplyHealth(playerManager);
-                            break;
-
-                        case PickUpType.Cure:
-                            ApplyCure(playerManager);
-                            break;
-
-                        case PickUpType.Ammo:
-                            RefillAmmo(playerManager);
-                            break;
-                    }
+                    case PickUpType.Ammo:
+                        RefillAmmo(playerManager);
+                        break;
                 }
             }
             StartCoroutine(DestroyAfterDelay(0.5f));
         }
     }
 
+    private void HandleHealthPickup(PlayerManager playerManager, ToolBelt toolBelt)
+    {
+        if (playerManager.HP >= playerManager.HPOrignal)
+        {
+            if (toolBelt != null)
+            {
+                HealingPotion healingPotion = ScriptableObject.CreateInstance<HealingPotion>();
+                healingPotion.potionName = "Healing Potion";
+                healingPotion.healingAmount = refillAmount;
+                toolBelt.AddPotion(healingPotion);
+                Debug.Log("Health orb stored as potion");
+            }
+            else
+            {
+                Debug.Log("No ToolBelt available to store the potion.");
+            }
+        }
+        else
+        {
+            ApplyHealth(playerManager);
+        }
+    }
+
+    private void HandleCurePickup(PlayerManager playerManager, ToolBelt toolBelt)
+    {
+        if (!playerManager.poisoned && !playerManager.burning && !playerManager.freezing &&
+            !playerManager.slowed && !playerManager.confused)
+        {
+            if (toolBelt != null)
+            {
+                CurePotion curePotion = ScriptableObject.CreateInstance<CurePotion>();
+                curePotion.potionName = "Cure Potion";
+                toolBelt.AddPotion(curePotion);
+                Debug.Log("Cure orb stored as potion");
+            }
+            else
+            {
+                Debug.Log("No ToolBelt available to store the potion.");
+            }
+        }
+        else
+        {
+            ApplyCure(playerManager);
+        }
+    }
+
     private void ApplyHealth(PlayerManager playerManager)
     {
-        playerManager.HP += refilAmount;
+        playerManager.HP += refillAmount;
         if (playerManager.HP > playerManager.HPOrignal)
         {
             playerManager.HP = playerManager.HPOrignal;
@@ -91,18 +110,21 @@ public class StatPickup : MonoBehaviour
         ShootingHandler[] shootingHandlers = playerManager.gameObject.GetComponentsInChildren<ShootingHandler>();
         foreach (var shootingHandler in shootingHandlers)
         {
-            Debug.Log(shootingHandler.weaponStats.Ammo.ToString());
-            shootingHandler.weaponStats.Ammo += refilAmount;
-            if (shootingHandler.weaponStats.Ammo > 99)
+            int maxAmmoLimit = 99; // Set your max ammo limit here
+
+            shootingHandler.weaponStats.Ammo += refillAmount;
+            if (shootingHandler.weaponStats.Ammo > maxAmmoLimit)
             {
-                shootingHandler.weaponStats.Ammo = 99;
+                shootingHandler.weaponStats.Ammo = maxAmmoLimit;
             }
         }
+
         if (playerManager.gameObject.GetComponentInChildren<ShootingHandler>() != null)
         {
+            var shootingHandler = playerManager.gameObject.GetComponentInChildren<ShootingHandler>();
             GameManager.Instance.playerAmmo(
-                playerManager.gameObject.GetComponentInChildren<ShootingHandler>().weaponStats.ammoType.ToString(),
-                playerManager.gameObject.GetComponentInChildren<ShootingHandler>().weaponStats.Ammo);
+                shootingHandler.weaponStats.ammoType.ToString(),
+                shootingHandler.weaponStats.Ammo);
         }
     }
 

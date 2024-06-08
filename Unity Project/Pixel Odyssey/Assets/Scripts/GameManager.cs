@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour
     public bool objective3Aquired;
     public bool needsObjective;
 
-    [SerializeField] TMP_Text ItemCount;
+    [SerializeField] TMP_Text amountinBagText;
+    public int potionCount = 0;
     //status needs
     [SerializeField] TMP_Text currentEffectText;
     [SerializeField] public int poisonedTimer;
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
     private CharacterController characterController;
     private WeaponSwap weaponSwap;
     private CameraController cameraController;
-    
+
 
 
 
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
         objective2Text.text = "";
         objective3Text.text = "";
 
-        objectives = new List<string> {"", "", ""};
+        objectives = new List<string> { "", "", "" };
         Instance = this;
         //show player location
         player = GameObject.FindWithTag("Player");
@@ -105,7 +106,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         LoadPlayer();
-        
+
+        UpdateSelectedPotion();
     }
 
     // Update is called once per frame
@@ -180,12 +182,12 @@ public class GameManager : MonoBehaviour
         {
             TutorialTrigger();
         }
-        
+
     }
 
     public void updateGameObjective()
     {
-        if(objectives.Count <= 0)
+        if (objectives.Count <= 0)
         {
 
         }
@@ -337,5 +339,22 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void UpdateSelectedPotion()
 
+    {
+        string potionName = "None";
+        int potionCount = 0;
+
+        if (Instance.playerScript != null && Instance.playerScript.toolBelt != null)
+        {
+            var potion = Instance.playerScript.toolBelt.GetSelectedPotion();
+            potionCount = Instance.playerScript.toolBelt.GetSelectedPotionCount();
+            if (potion != null)
+            {
+                potionName = potion.potionName;
+            }
+        }
+
+        amountinBagText.text = potionCount.ToString();
+    }
 }

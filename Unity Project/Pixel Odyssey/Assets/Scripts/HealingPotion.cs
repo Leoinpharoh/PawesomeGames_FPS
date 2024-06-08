@@ -1,22 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Potions/HealingPotion")]
+[CreateAssetMenu(fileName = "HealingPotion", menuName = "Potions/HealingPotion")]
 public class HealingPotion : Potion
 {
     public int healingAmount;
 
-    public override void UsePotion(GameObject player)
+    public override void Use(GameObject user)
     {
-        var playerManager = player.GetComponent<PlayerManager>();
+        PlayerManager playerManager = user.GetComponent<PlayerManager>();
         playerManager.HP += healingAmount;
         if (playerManager.HP > playerManager.HPOrignal)
         {
             playerManager.HP = playerManager.HPOrignal;
         }
         playerManager.updatePlayerUI();
-        Debug.Log("Used Healing Potion");
     }
 }
-
