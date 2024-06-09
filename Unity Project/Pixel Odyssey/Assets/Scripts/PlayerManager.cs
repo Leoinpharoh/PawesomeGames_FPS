@@ -76,8 +76,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool playingWalkAudio;
 
     //Saved Variables
-    public float HPOrignal;
-    public float OSOrignal;
+    public int HPOrignal;
+    public int OSOrignal;
     public bool tutorialComplete;
     public bool shotgunUnlocked;
     public bool assaultRifleUnlocked;
@@ -102,10 +102,14 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     //ToolBelt
     [SerializeField] public ToolBelt toolBelt;
+
+    void Awake()
+    {
+        LoadPlayer();
+    }
     void Start()
     {
         StartUp();
-        LoadPlayer();
 
         subtitlesObject = GameObject.Find("Subtitle1");
 
@@ -685,8 +689,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         playingWalkAudio = false;
         alive = true;
         moveSpeedOriginal = moveSpeed;
-        HPOrignal = HP;
-        OSOrignal = OS;
+        HPOrignal = (int)HP;
+        OSOrignal = (int)OS;
         updatePlayerUI();
         CharCon = gameObject.GetComponent<CharacterController>();
         baseHeight = CharCon.height;
