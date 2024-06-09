@@ -252,21 +252,24 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator poisonMe(int damage, float duration)
     {
-        poisoned = true;
-        Normal = false;
-        int ticks = Mathf.FloorToInt(duration);
-
-        for (int i = 0; i < ticks; i++)
+        if (OS == 0)
         {
-            HP -= damage;
-            updatePlayerUI();
-            StartCoroutine(effectMe("Poisoned"));
-            playerDeath();
-            yield return new WaitForSeconds(1);
+            poisoned = true;
+            Normal = false;
+            int ticks = Mathf.FloorToInt(duration);
+
+            for (int i = 0; i < ticks; i++)
+            {
+                HP -= damage;
+                updatePlayerUI();
+                StartCoroutine(effectMe("Poisoned"));
+                playerDeath();
+                yield return new WaitForSeconds(1);
+            }
+            poisoned = false;
+            Normal = true;
+            StartCoroutine(effectMe("Normal"));
         }
-        poisoned = false;
-        Normal = true;
-        StartCoroutine(effectMe("Normal"));
     }
     public void burnDamage(int damage, float duration)
     {
