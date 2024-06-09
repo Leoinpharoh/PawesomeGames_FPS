@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 4bcf64689b9de4841a9e58b577655058, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1f2398a1af06bc149a8d1b39e7f9e8e5, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 9f3d7637f07b7d743b3214a39c01a130, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1902,6 +1902,10 @@ PrefabInstance:
     - target: {fileID: 3802848766677527129, guid: 355caeea4e1590442b7516a9a0d311ed, type: 3}
       propertyPath: m_Name
       value: Health Orb 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802848766677527129, guid: 355caeea4e1590442b7516a9a0d311ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4862,6 +4866,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cure Orb 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5717082804525236736, guid: 2fb6c147d6c862d4ca2bad946cc04fbf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4918,6 +4926,10 @@ PrefabInstance:
     - target: {fileID: 8884114810549261806, guid: d8a59b9f57dddd44783aaff259a81504, type: 3}
       propertyPath: m_Name
       value: Ammo Orb 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884114810549261806, guid: d8a59b9f57dddd44783aaff259a81504, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12537,6 +12549,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 506070630}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: Timer
+      value: 
+      objectReference: {fileID: 2088319310}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: Portals
       value: 
       objectReference: {fileID: 1842435802}
@@ -12730,6 +12746,11 @@ PrefabInstance:
 --- !u!224 &2088319309 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6131495630411720467, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2088319308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2088319310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4734486898304477874, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
   m_PrefabInstance: {fileID: 2088319308}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2116700640
