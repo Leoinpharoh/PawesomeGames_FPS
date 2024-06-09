@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
 
 
     //Tutorial Objects
+    [SerializeField] GameObject Timer;
     [SerializeField] GameObject ToolBelt;
     [SerializeField] GameObject ObjectiveList;
     [SerializeField] GameObject Reticle;
@@ -330,6 +331,7 @@ public class GameManager : MonoBehaviour
         StatusBar.SetActive(false);
         OvershieldBar.SetActive(false);
         Portals.SetActive(false);
+        Timer.SetActive(false);
         playerAnimator.SetBool("Tutorial", true);
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
         PlayerPrefs.Save();
