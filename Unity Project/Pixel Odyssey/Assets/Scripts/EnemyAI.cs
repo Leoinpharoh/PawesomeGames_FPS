@@ -173,6 +173,9 @@ public class EnemyAI : MonoBehaviour, IDamage
             
             anim.SetTrigger("isDead"); // Set the trigger for the death animation
             StartCoroutine(Death()); // Start the death coroutine
+
+
+
         }
         else
         {
@@ -297,7 +300,6 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
                 return true; // Return true
-
             }
         }
         return false; // Return false
