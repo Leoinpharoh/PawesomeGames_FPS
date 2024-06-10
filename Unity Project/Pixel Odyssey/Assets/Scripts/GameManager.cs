@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEditor.Experimental.GraphView;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +23,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMainMenu;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
+    [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
 
+    // Used for display of the players ammo for each gun
+    [SerializeField]
+    TMP_Text[] SlotRounds;
 
     [SerializeField] public List<string> objectives;
     [SerializeField] TMP_Text objective1Text;
@@ -76,6 +81,7 @@ public class GameManager : MonoBehaviour
     int HeavyBullets;
     public int confusedDamage = 0;
     public int slowedDamage = 0;
+    float time = 0f;
 
     public bool tutorialComplete = false;
     private CharacterController characterController;
@@ -120,6 +126,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        timerText.text = "0:00";
         LoadPlayer();
 
         UpdateSelectedPotion();
@@ -148,6 +155,7 @@ public class GameManager : MonoBehaviour
             needsObjective = false;
         }
 
+        UpdateTimer();
     }
 
 
@@ -285,6 +293,14 @@ public class GameManager : MonoBehaviour
     {
         clipDisplayAmount.text = clip.ToString(); // Update the clip display amount
 
+        ShootingHandler[] shootingHandlers = player.GetComponents<ShootingHandler>();
+        ShootingHandler[] disabledShootingHandlers = shootingHandlers.Where(handler => !handler.enabled).ToArray();
+        for (int i = 0; i < disabledShootingHandlers.Length && i < SlotRounds.Length; i++)
+        {
+            Debug.Log("GotHere"); 
+            int ammo = disabledShootingHandlers[i].Ammo;
+            SlotRounds[i].text = ammo.ToString();
+        }
     }
 
     public void playerEffect(string effect) //updates UI with current Status user is under
@@ -405,5 +421,22 @@ public class GameManager : MonoBehaviour
         }
 
         amountinBagText.text = potionCount.ToString();
+    }
+
+    public void UpdateTimer()
+    {
+        // Increment the elapsed time
+        time += Time.deltaTime;
+
+        // Format the elapsed time into minutes and seconds
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        int milliseconds = Mathf.FloorToInt((time * 1000) % 1000);
+
+        // Update the timer text
+        if (timerText != null)
+        {
+            timerText.text = string.Format("{0}:{1:00}.{2:000}", minutes, seconds, milliseconds);
+        }
     }
 }
