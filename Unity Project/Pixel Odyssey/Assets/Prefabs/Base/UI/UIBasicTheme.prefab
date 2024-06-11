@@ -1400,7 +1400,7 @@ GameObject:
   - component: {fileID: 7163635114638057136}
   - component: {fileID: 572861992680152709}
   m_Layer: 5
-  m_Name: Weapon Slot 1 KeyTip
+  m_Name: PotionSlot KeyTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1929,7 +1929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &716513789462374145
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1939,7 +1939,7 @@ RectTransform:
   m_GameObject: {fileID: 1024991455934030881}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.22398002, y: 0.3049, z: 1}
+  m_LocalScale: {x: 0.22398, y: 0.3049, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 164237551615120378}
@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 61.368492, w: 0}
+  m_margin: {x: 0, y: 0, z: 61.36849, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3638,7 +3638,7 @@ GameObject:
   - component: {fileID: 7452188183379787067}
   - component: {fileID: 8710898704576801863}
   m_Layer: 5
-  m_Name: ItemSlot
+  m_Name: PotionSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3652,8 +3652,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560398955231314503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4.3534427}
-  m_LocalScale: {x: 1.178544, y: 1.189152, z: 2.4000003}
+  m_LocalPosition: {x: 0, y: 0, z: 4.353443}
+  m_LocalScale: {x: 1.178544, y: 1.189152, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 726548739155376875}
@@ -9795,7 +9795,7 @@ RectTransform:
   m_GameObject: {fileID: 4734486898304477874}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.24234767, y: 0.324627, z: 1.1237}
+  m_LocalScale: {x: 0.2423477, y: 0.324627, z: 1.1237}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2882873993417245436}
@@ -9803,7 +9803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -319.8, y: -185.78}
+  m_AnchoredPosition: {x: -331.4, y: -185.78}
   m_SizeDelta: {x: 225.871, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7219248285135921757
@@ -11699,7 +11699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.000015258789}
+  m_AnchoredPosition: {x: -0.00003051758, y: 0.00001525879}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3867466631764089862
@@ -13018,7 +13018,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13045,7 +13045,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.55
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13757,7 +13757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 999
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13784,7 +13784,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15254,7 +15254,7 @@ MonoBehaviour:
   objective2Aquired: 0
   objective3Aquired: 0
   needsObjective: 0
-  amountinBagText: {fileID: 0}
+  amountinBagText: {fileID: 4761504444031903209}
   potionCount: 0
   currentEffectText: {fileID: 506076608056178250}
   poisonedTimer: 10
