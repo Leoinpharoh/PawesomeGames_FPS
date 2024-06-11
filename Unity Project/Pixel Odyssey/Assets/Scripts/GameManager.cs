@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text clipDisplayAmount;
     [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
+    //[SerializeField] public GameObject ToolTipsOn;
+    //[SerializeField] public GameObject ToolTipsOff;
 
     // Used for display of the players ammo for each gun
     [SerializeField]

@@ -1,7 +1,9 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -47,7 +49,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int jumpCounter;
     public int gravity = 10;
     public int moveSpeedOriginal;
-    
+
 
     //Coroutines
     public Coroutine poisonCoroutine;
@@ -75,6 +77,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool alive;
     bool playingWalkAudio;
 
+
+    //bool toolTipsOn;
+
     //Saved Variables
     public int HPOrignal;
     public int OSOrignal;
@@ -88,8 +93,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int healthPotions;
     public int overshieldPotions;
     public int currency;
-    public float HP;
-    public float OS;
+    public int HP;
+    public int OS;
     public int subtitleIndex = 0;
 
 
@@ -111,6 +116,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         StartUp();
 
+        //toolTipsOn = false;
+
         subtitlesObject = GameObject.Find("Subtitle1");
 
         toolBelt = GetComponent<ToolBelt>();
@@ -121,7 +128,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
     }
     void Update()
-    {                                                                                     
+    {
 
         FlashLight();
 
@@ -142,7 +149,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         OpenInventory();
 
         HandlePotionUsage();
+
         HandlePotionScroll();
+
+        //Tootips();
     }
 
     public void LoadPlayer()
@@ -679,8 +689,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void updatePlayerUI()
     {
+        Debug.Log("in UI");
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
         GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
+        
     }
 
     void StartUp()
@@ -689,18 +701,34 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         playingWalkAudio = false;
         alive = true;
         moveSpeedOriginal = moveSpeed;
-        HPOrignal = (int)HP;
-        OSOrignal = (int)OS;
-        updatePlayerUI();
         CharCon = gameObject.GetComponent<CharacterController>();
         baseHeight = CharCon.height;
         crouchHeight = baseHeight / 2;
+        updatePlayerUI();
     }
     void FlashLight()
     {
         if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(flashlightToggle); } // input to toggle the flashlight on or off
     }
-
+    //void Tootips()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.T))
+    //    {
+    //        Debug.Log("T Pressed");
+    //        if (!toolTipsOn)
+    //        {
+    //            Debug.Log("Tips On");
+    //            GameManager.Instance.ToolTipsOn.SetActive(true);
+    //            GameManager.Instance.ToolTipsOff.SetActive(false);
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Tips Off");
+    //            GameManager.Instance.ToolTipsOn.SetActive(false);
+    //            GameManager.Instance.ToolTipsOff.SetActive(true);
+    //        }
+    //    }
+    //}
     private void OnApplicationQuit()    //clears inventory once app is quit in editor
     {
         if (inventory != null)
