@@ -12,8 +12,8 @@ public class EnemyParams : ScriptableObject
     public GameObject bloodSplash;
     [Range(1, 1000)] public int HP;
     [Range(0.5f, 10.0f)] public float movementSpeed;
-    [Range(1, 20)] public int Acceleration;
-    [Range(2, 10)] public int animSpeedTrans;
+    [Range(0.1f, 20.0f)] public float Acceleration;
+    [Range(0.1f, 10.0f)] public float animSpeedTrans;
     public enum EnemyType { Melee, Ranged, Combination, Stationary, Exploding };
     public bool flying = false;
     public EnemyType enemyType;

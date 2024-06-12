@@ -10,7 +10,6 @@ public class SettingsManager : MonoBehaviour
     public CameraController cameraController;
 
     // Options
-    [SerializeField] public bool subtitles = true;
     [SerializeField] public float soundEffects = 1f;
     [SerializeField] public float music = 1f;
     [SerializeField] public float voice = 1f;
@@ -30,7 +29,6 @@ public class SettingsManager : MonoBehaviour
     void Awake()
     {
         cameraController = FindObjectOfType<CameraController>();
-
         soundEffects = PlayerPrefs.GetFloat("SoundEffects", 1f); // Get the Sound Effects volume from PlayerPrefs
         music = PlayerPrefs.GetFloat("Music", 1f); // Get the Music volume from PlayerPrefs
         voice = PlayerPrefs.GetFloat("Voice", 1f); // Get the Voice volume from PlayerPrefs
