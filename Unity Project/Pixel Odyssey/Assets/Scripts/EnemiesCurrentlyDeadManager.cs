@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ public class EnemeiesCurrentlyDeadManager : MonoBehaviour
 {
     public List<GameObject> objectsToCheck; // List of objects to check
     int currentlyDeadEnemies;
+    bool updated;
     void Update()
     {
         // Continuously check if all objects are destroyed
@@ -23,5 +25,20 @@ public class EnemeiesCurrentlyDeadManager : MonoBehaviour
                 break;
             }
         }
+        if (GameManager.Instance.objectiveEnemiesKilledCount == GameManager.Instance.objectiveEnemiesToKillCount)
+        {
+            StartCoroutine(Finished());
+        }
+    }
+    IEnumerator Finished()
+    {
+        if(!updated)
+        {
+            updated = true;
+            GameManager.Instance.objectiveEnemiesToKill.text = "All Clear";
+            yield return new WaitForSeconds(3);
+            GameManager.Instance.objectiveEnemiesToKill.text = "";
+        }
     }
 }
+

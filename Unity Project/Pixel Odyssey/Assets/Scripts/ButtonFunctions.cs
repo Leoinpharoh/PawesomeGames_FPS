@@ -24,6 +24,12 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.stateUnPaused();
     }
+    public void HUB()
+    {
+        //reload scene
+        SceneManager.LoadScene("Player Hub");
+        GameManager.Instance.stateUnPaused();
+    }
 
     public void options()
     {

@@ -400,7 +400,7 @@ public class GameManager : MonoBehaviour
         //else no ememies to kill
         else
         {
-            objectiveEnemiesToKill.text = ("");
+            objectiveEnemiesToKill.text = "";
         }
 
 
