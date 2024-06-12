@@ -183,6 +183,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             OSOrignal = 40;
         }
+        HP = HPOrignal;
+        OS = OSOrignal;
         updatePlayerUI();
     }
 
@@ -691,9 +693,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void updatePlayerUI()
     {
-        GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
-        GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
-        
+        float hpFillAmount = (float)HP / HPOrignal;
+        float osFillAmount = (float)OS / OSOrignal;
+
+        GameManager.Instance.playerHpBar.fillAmount = hpFillAmount;
+        GameManager.Instance.playerOS.fillAmount = osFillAmount;
+
     }
 
     void StartUp()
