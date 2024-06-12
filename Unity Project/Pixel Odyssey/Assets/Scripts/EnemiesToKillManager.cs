@@ -3,37 +3,26 @@ using UnityEngine;
 
 public class EnemeiesToKillManager : MonoBehaviour
 {
+    int enemiesToDestroy;
     public List<GameObject> objectsToCheck; // List of objects to check
 
-    void Update()
+    void Start()
     {
         // Continuously check if all objects are destroyed
         CheckObjects();
     }
     private void CheckObjects()
     {
-        bool allDestroyed = true;
         foreach (GameObject obj in objectsToCheck)
         {
             if (obj != null)
             {
-                allDestroyed = false;
-                break;
-            }
-        }
+                enemiesToDestroy++;
 
-    }
-    private void CheckKills()
-    {
-        foreach (GameObject obj in objectsToCheck)
-        {
-            if (obj.Equals(null))
-            {
-            //    currentlyDeadEnemies++;
-            //    GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
-            //    GameManager.Instance.updateEnemiesToKill();
-            //    break;
             }
         }
+        GameManager.Instance.objectiveEnemiesToKillCount = enemiesToDestroy;
+        GameManager.Instance.updateEnemiesToKill();
+
     }
 }
