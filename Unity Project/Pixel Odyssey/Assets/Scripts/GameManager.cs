@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text clipDisplayAmount;
     [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
-    //[SerializeField] public GameObject ToolTipsOn;
-    //[SerializeField] public GameObject ToolTipsOff;
+    [SerializeField] public GameObject ToolTipsOn;
+    [SerializeField] public GameObject ToolTipsOff;
 
     // Used for display of the players ammo for each gun
     [SerializeField]
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject NewGameScreen;
     [SerializeField] GameObject LoadGameScreen;
 
-    
+
 
 
 
@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         timerText.text = "0:00";
+
         LoadPlayer();
 
         UpdateSelectedPotion();
@@ -200,6 +201,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayer()
     {
+
+
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
         tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
@@ -207,12 +210,11 @@ public class GameManager : MonoBehaviour
         {
             TutorialTrigger();
         }
-
-        if(tutorialComplete == true && sceneName == "Opening Scene")
+        if (tutorialComplete == true && sceneName == "Opening Scene")
         {
             OpeningScene();
         }
-        
+
     }
 
     public void updateGameObjective()
@@ -299,7 +301,6 @@ public class GameManager : MonoBehaviour
         ShootingHandler[] disabledShootingHandlers = shootingHandlers.Where(handler => !handler.enabled).ToArray();
         for (int i = 0; i < disabledShootingHandlers.Length && i < SlotRounds.Length; i++)
         {
-            Debug.Log("GotHere"); 
             int ammo = disabledShootingHandlers[i].Ammo;
             SlotRounds[i].text = ammo.ToString();
         }
@@ -384,7 +385,6 @@ public class GameManager : MonoBehaviour
 
     public void OpeningScene()
     {
-        Debug.Log("Opening Scene");
         NewGameScreen.SetActive(false);
         LoadGameScreen.SetActive(false);
 
@@ -393,7 +393,7 @@ public class GameManager : MonoBehaviour
     public void updateEnemiesToKill()
     {
         //if there are enemies to kill
-        if(objectiveEnemiesToKillCount > 0)
+        if (objectiveEnemiesToKillCount > 0)
         {
             objectiveEnemiesToKill.text = ("Enemies to kill: " + objectiveEnemiesKilledCount.ToString() + " / " + objectiveEnemiesToKillCount.ToString());
         }

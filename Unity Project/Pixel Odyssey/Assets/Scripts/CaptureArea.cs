@@ -18,7 +18,6 @@ public class CaptureAreaLogic : MonoBehaviour
     {
         if (other.CompareTag(capturingTag) && !isCaptured)
         {
-            Debug.Log("Player entered capture area");
             playersInZone.Add(other.gameObject);
             captureCoroutine = StartCoroutine(CaptureCoroutine(other.gameObject));
         }
@@ -28,7 +27,6 @@ public class CaptureAreaLogic : MonoBehaviour
     {
         if (other.CompareTag(capturingTag) && !isCaptured)
         {
-            Debug.Log("Player exited capture area");
             playersInZone.Remove(other.gameObject);
 
             if (captureCoroutine != null)
@@ -55,16 +53,11 @@ public class CaptureAreaLogic : MonoBehaviour
     private void CaptureComplete()
     {
         isCaptured = true;
-        Debug.Log("Area captured!");
         // Additional logic for when the area is captured
 
         if (captureAreaObject != null)
         {
             Destroy(captureAreaObject);
-        }
-        else
-        {
-            Debug.LogWarning("No object specified to destroy.");
         }
     }
 
@@ -79,10 +72,6 @@ public class CaptureAreaLogic : MonoBehaviour
                 damageable.poisonDamage( damageAmount,damageInterval); // Assuming the hit position is the player's current position
                 yield return new WaitForSeconds(damageInterval);
             }
-        }
-        else
-        {
-            Debug.LogWarning("The player does not implement IDamage interface.");
         }
     }
 }

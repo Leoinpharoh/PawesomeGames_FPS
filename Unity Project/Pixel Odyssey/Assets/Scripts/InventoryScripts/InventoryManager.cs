@@ -40,17 +40,9 @@ public class InventoryManager : MonoBehaviour
 
     public void ToggleInventory()
     {
-        Debug.Log("ToggleInventory method called");
-
-        if (inventoryUI == null)    // if UI is null return debug warning and return
-        {
-            Debug.LogWarning("Cannot toggle inventory: inventoryUI GameObject is not assigned");
-            return;
-        }
 
         if (!inventoryUI.activeSelf)   //if inventory is not active
         {
-            Debug.Log("Setting the inventory to active");
             inventoryUI.SetActive(true);   //set to active
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -61,12 +53,9 @@ public class InventoryManager : MonoBehaviour
             {
                 displayInventory.CreateDisplay();
             }
-            else
-                Debug.LogWarning("DisplayInventory componnent not found on inventoryUi.");
         }
         else
         {
-            Debug.Log("Setting the inventory to inactive");
             inventoryUI.SetActive(false);  //if inventory is active deactivate and lock mouse
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

@@ -78,7 +78,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool playingWalkAudio;
 
 
-    //bool toolTipsOn;
+    bool toolTipsOn;
 
     //Saved Variables
     public int HPOrignal;
@@ -97,7 +97,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int OS;
     public int subtitleIndex = 0;
 
-
     //Inventory
     public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
     public DisplayInventory inventoryDisplay;
@@ -110,13 +109,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Awake()
     {
-        LoadPlayer();
+
     }
     void Start()
     {
+        LoadPlayer();
+
         StartUp();
 
-        //toolTipsOn = false;
+        toolTipsOn = false;
 
         subtitlesObject = GameObject.Find("Subtitle1");
 
@@ -152,7 +153,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         HandlePotionScroll();
 
-        //Tootips();
+        Tootips();
     }
 
     public void LoadPlayer()
@@ -225,7 +226,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             if (OS - amount < 0)
             {
                 Audio.PlayOneShot(OSShot[Random.Range(0, OSShot.Length)], OSShotVolume);
-                Debug.Log("True 1");
                 HP -= amount - OS;
                 OS = 0;
                 StartCoroutine(hitMe());
@@ -234,7 +234,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             else
             {
                 Audio.PlayOneShot(OSBroken[Random.Range(0, OSBroken.Length)], OSBrokenVolume);
-                Debug.Log("True 2");
                 OS -= amount;
                 StartCoroutine(hitMe());
                 updatePlayerUI();
@@ -646,7 +645,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             OSRefilling = true;
             refillCoroutine = StartCoroutine(refillOS());
-            Debug.Log("Refilling");
         }
         waitCoroutine = null; // Reset the waitCoroutine reference
     }
@@ -655,9 +653,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         for (int i = 0; i < 5; i++)
         {
-            Debug.Log("Incrementing Timer");
             OSTimer++;
-            Debug.Log("Waiting 1 Second");
             yield return new WaitForSeconds(1);
         }
         refillCoroutine = null; // Reset the refillCoroutine reference
@@ -669,7 +665,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             isWaitingToRefill = true;
             StartCoroutine(WaitBeforeRefill());
-            Debug.Log("Starting Wait Before Refill");
         }
 
         if (OSTimer >= 5)
@@ -679,7 +674,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             OSTimer = 0;
             OSRefilling = false;
             isWaitingToRefill = false;
-            Debug.Log("Refilling Complete");
         }
     }
 
@@ -689,7 +683,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void updatePlayerUI()
     {
-        Debug.Log("in UI");
         GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
         GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
         
@@ -710,25 +703,24 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(flashlightToggle); } // input to toggle the flashlight on or off
     }
-    //void Tootips()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.T))
-    //    {
-    //        Debug.Log("T Pressed");
-    //        if (!toolTipsOn)
-    //        {
-    //            Debug.Log("Tips On");
-    //            GameManager.Instance.ToolTipsOn.SetActive(true);
-    //            GameManager.Instance.ToolTipsOff.SetActive(false);
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Tips Off");
-    //            GameManager.Instance.ToolTipsOn.SetActive(false);
-    //            GameManager.Instance.ToolTipsOff.SetActive(true);
-    //        }
-    //    }
-    //}
+    void Tootips()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (!toolTipsOn)
+            {
+                GameManager.Instance.ToolTipsOn.SetActive(true);
+                GameManager.Instance.ToolTipsOff.SetActive(false);
+                toolTipsOn = true;
+            }
+            else
+            {
+                GameManager.Instance.ToolTipsOn.SetActive(false);
+                GameManager.Instance.ToolTipsOff.SetActive(true);
+                toolTipsOn = false;
+            }
+        }
+    }
     private void OnApplicationQuit()    //clears inventory once app is quit in editor
     {
         if (inventory != null)

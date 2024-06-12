@@ -49,7 +49,6 @@ public class ObjectiveTrigger : MonoBehaviour
             //    {
             //        GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
             //        GameManager.Instance.objectiveEnemiesToKillCount = enemiesToDestroy;
-            //        Debug.Log("List is Loaded");
             //        GameManager.Instance.updateEnemiesToKill();
             //    }
             //}
@@ -84,7 +83,6 @@ public class ObjectiveTrigger : MonoBehaviour
     //        {
     //            objectsToCheck.Remove(obj);
     //            currentlyDeadEnemies++;
-    //            Debug.Log("Enemy Killed");
     //            GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
     //            GameManager.Instance.updateEnemiesToKill();
     //            break;
