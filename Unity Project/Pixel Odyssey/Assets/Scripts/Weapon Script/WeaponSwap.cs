@@ -7,6 +7,7 @@ public class WeaponSwap : MonoBehaviour
     [SerializeField] GameObject weaponOne;
     [SerializeField] GameObject weaponTwo;
     [SerializeField] GameObject weaponThree;
+    [SerializeField] GameObject weaponFour;
 
     GameObject currentWeapon;
     void Update()
@@ -35,6 +36,12 @@ public class WeaponSwap : MonoBehaviour
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponThree.SetActive(true);
             currentWeapon = weaponThree;
+            redundancy();
+        }if (Input.GetKeyDown(KeyCode.Alpha4) && weaponFour != null)
+        {
+            if (currentWeapon != null) { currentWeapon.SetActive(false); }
+            weaponFour.SetActive(true);
+            currentWeapon = weaponFour;
             redundancy();
         }
     }

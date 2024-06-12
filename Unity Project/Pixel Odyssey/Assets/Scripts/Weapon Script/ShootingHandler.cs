@@ -54,7 +54,8 @@ public class ShootingHandler : MonoBehaviour
     void shoot()
     {
         // Handles the input of the player to fire the gun.
-        if (Input.GetButtonDown("Fire1") && !isShooting) { StartCoroutine(shooting()); }
+        if (Input.GetButton("Fire1") && !isShooting && weaponStats.weaponType == WeaponStats.WeaponType.Automatic) { StartCoroutine(shooting()); }
+        else if (Input.GetButtonDown("Fire1") && !isShooting) { StartCoroutine(shooting()); }
     }
 
     IEnumerator shooting()
@@ -72,7 +73,7 @@ public class ShootingHandler : MonoBehaviour
             weaponStats.clip--;
             GameManager.Instance.playerClip(weaponStats.clip);
 
-            if (weaponStats.weaponType == WeaponStats.WeaponType.Laser || weaponStats.weaponType == WeaponStats.WeaponType.RayCast || weaponStats.weaponType == WeaponStats.WeaponType.SpreadRay)
+            if (weaponStats.weaponType == WeaponStats.WeaponType.Laser || weaponStats.weaponType == WeaponStats.WeaponType.RayCast || weaponStats.weaponType == WeaponStats.WeaponType.SpreadRay || weaponStats.weaponType == WeaponStats.WeaponType.Automatic)
             {
                 for (int i = 0; i < weaponStats.numberOfRays; i++) { rayDraw(); } // Fire a bullet in a straight line.
             }
