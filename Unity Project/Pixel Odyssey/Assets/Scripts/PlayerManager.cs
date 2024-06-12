@@ -175,6 +175,14 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
         overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
         potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
+        if(HPOrignal == 0)
+        {
+            HPOrignal = 140;
+        }
+        if(OSOrignal == 0)
+        {
+            OSOrignal = 40;
+        }
         updatePlayerUI();
     }
 
@@ -221,7 +229,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             waitCoroutine = null;
         }
 
-        if (OS > 0)
+        if (OS > 0 && overshieldUnlocked)
         {
             if (OS - amount < 0)
             {
@@ -239,7 +247,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 updatePlayerUI();
             }
         }
-        else if (OS <= 0)
+        else
         {
             Audio.PlayOneShot(playerShot[Random.Range(0, playerShot.Length)], playerShotVolume);
             HP -= amount;
