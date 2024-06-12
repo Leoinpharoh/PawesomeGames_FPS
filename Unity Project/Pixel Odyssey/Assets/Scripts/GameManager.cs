@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text clipDisplayAmount;
     [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
+    [SerializeField] Animator UIAnimator;
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
 
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
     public int confusedDamage = 0;
     public int slowedDamage = 0;
     float time = 0f;
+    bool dead = false;
 
     public bool tutorialComplete = false;
     private CharacterController characterController;
@@ -251,6 +253,23 @@ public class GameManager : MonoBehaviour
 
     public void youLose()
     {
+        if (dead == false)
+        {
+            dead = true;
+            playerAnimator.enabled = true;
+            playerAnimator.applyRootMotion = true;
+            playerAnimator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
+            playerAnimator.SetTrigger("Death");
+            UIAnimator.SetTrigger("Death");
+            Debug.Log("Dead");
+            StartCoroutine(death());
+        }
+
+    }
+
+    IEnumerator death()
+    {
+        yield  return new WaitForSeconds(3);
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
