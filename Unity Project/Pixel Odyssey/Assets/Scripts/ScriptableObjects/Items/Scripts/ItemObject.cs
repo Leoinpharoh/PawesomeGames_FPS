@@ -32,6 +32,5 @@ public class Item
     {
         Name = item.name;
         id = item.ItemId;
-        Debug.Log($"Created Item '{Name}' with ID {id}"); // Debug statement
     }
 }

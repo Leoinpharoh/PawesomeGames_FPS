@@ -63,7 +63,6 @@ public class EnemyBullet : MonoBehaviour
 
     private void HandlePoisonedDamage(Collision collision)
     {
-        Debug.Log("Poison Hit");
         EDamage dmg = collision.gameObject.GetComponent<EDamage>(); // Get the EDamage component from the collided object
         IDamage Idmg = collision.gameObject.GetComponent<IDamage>();
         if (dmg != null) // Check if the EDamage component is not null

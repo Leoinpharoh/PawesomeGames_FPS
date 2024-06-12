@@ -1,7 +1,9 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -47,7 +49,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int jumpCounter;
     public int gravity = 10;
     public int moveSpeedOriginal;
-    
+
 
     //Coroutines
     public Coroutine poisonCoroutine;
@@ -75,6 +77,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool alive;
     bool playingWalkAudio;
 
+
+    bool toolTipsOn;
+
     //Saved Variables
     public int HPOrignal;
     public int OSOrignal;
@@ -88,10 +93,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int healthPotions;
     public int overshieldPotions;
     public int currency;
-    public float HP;
-    public float OS;
+    public int HP;
+    public int OS;
     public int subtitleIndex = 0;
-
 
     //Inventory
     public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
@@ -105,11 +109,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Awake()
     {
-        LoadPlayer();
+
     }
     void Start()
     {
+        LoadPlayer();
+
         StartUp();
+
+        toolTipsOn = false;
 
         subtitlesObject = GameObject.Find("Subtitle1");
 
@@ -121,7 +129,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
     }
     void Update()
-    {                                                                                     
+    {
 
         FlashLight();
 
@@ -142,7 +150,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         OpenInventory();
 
         HandlePotionUsage();
+
         HandlePotionScroll();
+
+        Tootips();
     }
 
     public void LoadPlayer()
@@ -164,6 +175,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
         overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
         potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
+        if(HPOrignal == 0)
+        {
+            HPOrignal = 140;
+        }
+        if(OSOrignal == 0)
+        {
+            OSOrignal = 40;
+        }
+        HP = HPOrignal;
+        OS = OSOrignal;
         updatePlayerUI();
     }
 
@@ -210,12 +231,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             waitCoroutine = null;
         }
 
-        if (OS > 0)
+        if (OS > 0 && overshieldUnlocked)
         {
             if (OS - amount < 0)
             {
                 Audio.PlayOneShot(OSShot[Random.Range(0, OSShot.Length)], OSShotVolume);
-                Debug.Log("True 1");
                 HP -= amount - OS;
                 OS = 0;
                 StartCoroutine(hitMe());
@@ -224,13 +244,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             else
             {
                 Audio.PlayOneShot(OSBroken[Random.Range(0, OSBroken.Length)], OSBrokenVolume);
-                Debug.Log("True 2");
                 OS -= amount;
                 StartCoroutine(hitMe());
                 updatePlayerUI();
             }
         }
-        else if (OS <= 0)
+        else
         {
             Audio.PlayOneShot(playerShot[Random.Range(0, playerShot.Length)], playerShotVolume);
             HP -= amount;
@@ -636,7 +655,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             OSRefilling = true;
             refillCoroutine = StartCoroutine(refillOS());
-            Debug.Log("Refilling");
         }
         waitCoroutine = null; // Reset the waitCoroutine reference
     }
@@ -645,9 +663,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         for (int i = 0; i < 5; i++)
         {
-            Debug.Log("Incrementing Timer");
             OSTimer++;
-            Debug.Log("Waiting 1 Second");
             yield return new WaitForSeconds(1);
         }
         refillCoroutine = null; // Reset the refillCoroutine reference
@@ -659,7 +675,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             isWaitingToRefill = true;
             StartCoroutine(WaitBeforeRefill());
-            Debug.Log("Starting Wait Before Refill");
         }
 
         if (OSTimer >= 5)
@@ -669,7 +684,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             OSTimer = 0;
             OSRefilling = false;
             isWaitingToRefill = false;
-            Debug.Log("Refilling Complete");
         }
     }
 
@@ -679,8 +693,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void updatePlayerUI()
     {
-        GameManager.Instance.playerHpBar.fillAmount = HP / HPOrignal;
-        GameManager.Instance.playerOS.fillAmount = OS / OSOrignal;
+        float hpFillAmount = (float)HP / HPOrignal;
+        float osFillAmount = (float)OS / OSOrignal;
+
+        GameManager.Instance.playerHpBar.fillAmount = hpFillAmount;
+        GameManager.Instance.playerOS.fillAmount = osFillAmount;
+
     }
 
     void StartUp()
@@ -689,18 +707,33 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         playingWalkAudio = false;
         alive = true;
         moveSpeedOriginal = moveSpeed;
-        HPOrignal = (int)HP;
-        OSOrignal = (int)OS;
-        updatePlayerUI();
         CharCon = gameObject.GetComponent<CharacterController>();
         baseHeight = CharCon.height;
         crouchHeight = baseHeight / 2;
+        updatePlayerUI();
     }
     void FlashLight()
     {
         if (Input.GetKeyDown(KeyCode.F)) { flashlightToggle = !flashlightToggle; flashlight.SetActive(flashlightToggle); } // input to toggle the flashlight on or off
     }
-
+    void Tootips()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (!toolTipsOn)
+            {
+                GameManager.Instance.ToolTipsOn.SetActive(true);
+                GameManager.Instance.ToolTipsOff.SetActive(false);
+                toolTipsOn = true;
+            }
+            else
+            {
+                GameManager.Instance.ToolTipsOn.SetActive(false);
+                GameManager.Instance.ToolTipsOff.SetActive(true);
+                toolTipsOn = false;
+            }
+        }
+    }
     private void OnApplicationQuit()    //clears inventory once app is quit in editor
     {
         if (inventory != null)

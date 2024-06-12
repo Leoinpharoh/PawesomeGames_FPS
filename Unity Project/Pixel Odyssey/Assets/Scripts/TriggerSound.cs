@@ -8,10 +8,6 @@ public class TriggerSound : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            Debug.LogError("No AudioSource component found on this GameObject.");
-        }
     }
 
     void OnTriggerEnter(Collider other)

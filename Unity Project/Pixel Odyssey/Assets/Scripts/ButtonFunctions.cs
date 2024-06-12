@@ -24,6 +24,12 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.stateUnPaused();
     }
+    public void HUB()
+    {
+        //reload scene
+        SceneManager.LoadScene("Player Hub");
+        GameManager.Instance.stateUnPaused();
+    }
 
     public void options()
     {
@@ -47,10 +53,8 @@ public class ButtonFunctions : MonoBehaviour
     public void subtitle(Button button)
     {
 
-        Debug.Log("Button" + button.name);
         Image buttonImage = button.GetComponent<Image>();
         Color color = buttonImage.color;
-        Debug.Log(color.a);
         if (color.a == 0)
         {
             color.a = 1;
@@ -68,10 +72,6 @@ public class ButtonFunctions : MonoBehaviour
 
     public void sceneSwitch(Button button) // Load the scene that the button is named after
     {
-        
-        Debug.Log("Button/Scene Name: " + button.name); // Log the button's name, which is expected to be the scene's name
-
-
         StartCoroutine(LoadAndSetActiveScene(button.name)); // Load the scene asynchronously and then set it as active
 
         //make sure scene is not stuck and allow immediate player movement and function
@@ -83,7 +83,6 @@ public class ButtonFunctions : MonoBehaviour
         
         if (!SceneManager.GetSceneByName(sceneName).isLoaded) // Check if the scene is already loaded; if not, load it
         {
-            Debug.Log("Loading scene: " + sceneName); // Log the scene that is being loaded
             yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single); // Load the scene asynchronously and wait for it to finish loading 
         }
 
@@ -92,14 +91,7 @@ public class ButtonFunctions : MonoBehaviour
 
         if (loadedScene.IsValid()) // Check if the scene is valid
         {
-            Debug.Log("Setting active scene: " + sceneName); // Log the scene that is being set as active
             SceneManager.SetActiveScene(loadedScene); // Set the scene as active
-
-
-        }
-        else
-        {
-            Debug.LogError("Failed to load the scene: " + sceneName); // Log an error message if the scene failed to load
         }
         GameManager.Instance.statePaused();
     }

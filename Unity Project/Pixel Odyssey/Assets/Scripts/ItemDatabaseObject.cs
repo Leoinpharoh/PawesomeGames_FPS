@@ -17,9 +17,7 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
 
     public void OnAfterDeserialize()
     {
-        if (Items == null)
-            Debug.Log("Items array is null");
-        else if (Items != null)     //if the array is not null
+        if (Items != null)     //if the array is not null
         {
             for (int i = 0; i < Items.Length; i++)
             {
@@ -28,10 +26,6 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
                     Items[i].ItemId = i;    //item ID gets set during serialization
                     if (!GetItem.ContainsKey(Items[i].ItemId))  //if it does not contain
                         GetItem.Add(Items[i].ItemId, Items[i]);
-                }
-                else
-                {
-                    Debug.LogWarning($"{Items[i].name}'s ID is already in Items, duplicate item ID at index {i}");
                 }
             }
         }

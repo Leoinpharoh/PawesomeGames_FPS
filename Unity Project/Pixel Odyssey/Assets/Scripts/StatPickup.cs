@@ -46,11 +46,6 @@ public class StatPickup : MonoBehaviour
                 healingPotion.potionName = "Healing Potion";
                 healingPotion.healingAmount = refillAmount;
                 toolBelt.AddPotion(healingPotion);
-                Debug.Log("Health orb stored as potion");
-            }
-            else
-            {
-                Debug.Log("No ToolBelt available to store the potion.");
             }
         }
         else
@@ -69,11 +64,6 @@ public class StatPickup : MonoBehaviour
                 CurePotion curePotion = ScriptableObject.CreateInstance<CurePotion>();
                 curePotion.potionName = "Cure Potion";
                 toolBelt.AddPotion(curePotion);
-                Debug.Log("Cure orb stored as potion");
-            }
-            else
-            {
-                Debug.Log("No ToolBelt available to store the potion.");
             }
         }
         else

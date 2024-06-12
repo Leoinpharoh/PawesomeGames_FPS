@@ -13,7 +13,7 @@ public class NextLevel : MonoBehaviour
     {
         if (levelFlashImage == null)
         {
-            Debug.LogError("LevelFlash Image is not assigned."); // Log an error message if the level flash image is not assigned
+            
         }
         else
         {
@@ -44,12 +44,7 @@ public class NextLevel : MonoBehaviour
 
         if (loadedScene.IsValid()) // Check if the scene is valid
         {
-            Debug.Log("Setting active scene: " + nextLevelName); // Log the scene that is being set as active
             SceneManager.SetActiveScene(loadedScene); // Set the scene as active
-        }
-        else
-        {
-            Debug.LogError("Failed to load the scene: " + nextLevelName); // Log an error message if the scene failed to load
         }
 
         // Fade from white

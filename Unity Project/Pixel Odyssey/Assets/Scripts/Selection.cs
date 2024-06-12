@@ -39,7 +39,6 @@ public class CenterObjectLogger : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 string hitObjectName = hit.collider.gameObject.name;
-                Debug.Log("Object at center of screen: " + hitObjectName);
 
                 if (hitObjectName == "Load Screen")
                 {
@@ -54,10 +53,6 @@ public class CenterObjectLogger : MonoBehaviour
                     HandlePlayScreenClick();
                 }
             }
-            else
-            {
-                Debug.Log("No object at center of screen.");
-            }
         }
     }
 
@@ -71,10 +66,6 @@ public class CenterObjectLogger : MonoBehaviour
             animator.enabled = true;
             animator.SetTrigger("Play");
             StartCoroutine(LoadLevel("Player Hub"));
-        }
-        else if (!GameManager.Instance.isPaused && !GameManager.Instance.tutorialComplete)
-        {
-            Debug.Log("Tutorial not complete");
         }
     }
 

@@ -165,17 +165,12 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(int amount, Vector3 hitPosition) // Method to take damage
     {
-        
         HP -= amount; // Subtract the amount from the enemy's health
         StartCoroutine(Damage(hitPosition)); // Start the flash coroutine
         if (HP <= 0) // Check if the enemy's health is less than or equal to 0
         {
-            
             anim.SetTrigger("isDead"); // Set the trigger for the death animation
             StartCoroutine(Death()); // Start the death coroutine
-
-
-
         }
         else
         {
@@ -203,11 +198,6 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 Instantiate(enemyParams.loot[Random.Range(0, enemyParams.loot.Length)], dropPosition, Quaternion.identity); // Instantiate the loot at the enemy's position
             }
-            else
-            {
-                
-            }
-            
         }
     }
 
@@ -218,7 +208,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         PlayDamageSound();
         yield return new WaitForSeconds(1); // Wait for 1 second (adjust based on your effect's needs)
         Destroy(bloodEffect); // Optionally destroy the effect after it finishes playing
-
     }
 
     IEnumerator meleeAttack() // Coroutine to handle the enemy's attack
@@ -397,14 +386,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (playerGameObject != null)
         {
             playerManager = playerGameObject.GetComponent<PlayerManager>();
-            if (playerManager == null)
-            {
-                Debug.LogError("PlayerManager component not found on Player GameObject!");
-            }
-        }
-        else
-        {
-            Debug.LogError("Player GameObject not found!");
         }
         if (enemyType == EnemyParams.EnemyType.Ranged)
         {
@@ -455,7 +436,6 @@ public class EnemyAI : MonoBehaviour, IDamage
 
                 if (!isAttacking && (enemyType == EnemyParams.EnemyType.Melee || enemyType == EnemyParams.EnemyType.Combination) && playerInMeleeAttackRange)
                 {
-                    Debug.Log("Melee Attack");
                     StartCoroutine(meleeAttack());
                 }
             }

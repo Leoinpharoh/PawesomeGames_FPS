@@ -509,11 +509,11 @@ MonoBehaviour:
   OSTimer: 2
   moveSpeed: 4
   dashMultiplier: 2
-  maxJumps: 0
+  maxJumps: 1
   jumpSpeed: 4
   jumpCounter: 0
   gravity: 10
-  moveSpeedOriginal: 0
+  moveSpeedOriginal: 4
   Normal: 1
   poisoned: 0
   burning: 0
@@ -523,9 +523,9 @@ MonoBehaviour:
   isMoving: 0
   isSprinting: 0
   OSRefilling: 0
-  HPOrignal: 0
-  OSOrignal: 0
-  tutorialComplete: 0
+  HPOrignal: 100
+  OSOrignal: 25
+  tutorialComplete: 1
   shotgunUnlocked: 0
   assaultRifleUnlocked: 0
   RPGUnlocked: 0
@@ -535,8 +535,8 @@ MonoBehaviour:
   healthPotions: 0
   overshieldPotions: 0
   currency: 0
-  HP: 25
-  OS: 20
+  HP: 100
+  OS: 25
   subtitleIndex: 0
   inventory: {fileID: 11400000, guid: b27e526d34359964f89ebb28d9f1b9e5, type: 2}
   inventoryDisplay: {fileID: 0}
@@ -754,10 +754,10 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568827330076845495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
+  m_Controller: {fileID: 9100000, guid: c491c3273d4448140ae0ead096090eed, type: 2}
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -1337,7 +1337,7 @@ Transform:
   m_GameObject: {fileID: 4697354008268876775}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.3, y: -0.376, z: 0.8}
+  m_LocalPosition: {x: 0.5, y: -0.376, z: 0.677}
   m_LocalScale: {x: 0.2, y: 0.15, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3698,7 +3698,7 @@ Transform:
   m_GameObject: {fileID: 8528702425676302201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19445452, y: 1, z: 0.036616236}
+  m_LocalPosition: {x: -0.1944545, y: 1, z: 0.03661624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
