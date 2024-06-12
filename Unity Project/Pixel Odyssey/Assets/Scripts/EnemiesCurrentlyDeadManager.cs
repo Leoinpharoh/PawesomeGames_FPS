@@ -4,24 +4,11 @@ using UnityEngine;
 public class EnemeiesCurrentlyDeadManager : MonoBehaviour
 {
     public List<GameObject> objectsToCheck; // List of objects to check
-
+    int currentlyDeadEnemies;
     void Update()
     {
         // Continuously check if all objects are destroyed
-        CheckObjects();
-    }
-    private void CheckObjects()
-    {
-        bool allDestroyed = true;
-        foreach (GameObject obj in objectsToCheck)
-        {
-            if (obj != null)
-            {
-                allDestroyed = false;
-                break;
-            }
-        }
-
+        CheckKills();
     }
     private void CheckKills()
     {
@@ -29,10 +16,11 @@ public class EnemeiesCurrentlyDeadManager : MonoBehaviour
         {
             if (obj.Equals(null))
             {
-            //    currentlyDeadEnemies++;
-            //    GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
-            //    GameManager.Instance.updateEnemiesToKill();
-            //    break;
+                objectsToCheck.Remove(obj);
+                currentlyDeadEnemies++;
+                GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
+                GameManager.Instance.updateEnemiesToKill();
+                break;
             }
         }
     }
