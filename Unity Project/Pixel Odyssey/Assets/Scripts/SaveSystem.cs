@@ -17,8 +17,8 @@ public class SaveSystem : MonoBehaviour
     public int AssaultRifleAmmo = 0;
     public int RPGAmmo = 0;
 
-    public int HealthMax = 100;
-    public int OvershieldMax = 0;
+    public int HealthMax = 140;
+    public int OvershieldMax = 40;
 
     public int OvershieldPotions = 0;
     public int HealthPotions = 0;
