@@ -50,25 +50,6 @@ public class ButtonFunctions : MonoBehaviour
 #endif
     }
 
-    public void subtitle(Button button)
-    {
-
-        Image buttonImage = button.GetComponent<Image>();
-        Color color = buttonImage.color;
-        if (color.a == 0)
-        {
-            color.a = 1;
-            SettingsManager.Instance.subtitles = true;
-        }
-        else
-        {
-            color.a = 0;
-            SettingsManager.Instance.subtitles = false;
-        }
-
-        buttonImage.color = color;
-
-    }
 
     public void sceneSwitch(Button button) // Load the scene that the button is named after
     {

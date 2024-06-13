@@ -22,6 +22,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool playerInRangedAttackRange = false; // Bool to check if the player is in ranged attack range of the enemy
     bool roaming = false; // Bool to check if the enemy is roaming
     bool destChosen;
+    bool isDead;
     int HP; // Enemy Health
     int stoppingDistanceOriginal; // Original stopping distance of the NavMeshAgent
     float meleeRange; // Enemy Attack Range
@@ -135,7 +136,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         if (isAttacking) yield break; // Prevent concurrent shooting routines
-
+        if (isDead) // Check if the enemy is dead
+        {
+            yield break; // Prevent attacking if dead
+        }
         isAttacking = true;
         PlayAttackSound();
         anim.SetBool("Attack", true);
@@ -170,6 +174,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (HP <= 0) // Check if the enemy's health is less than or equal to 0
         {
             anim.SetTrigger("isDead"); // Set the trigger for the death animation
+            isDead = true; // Set isDead to true
             StartCoroutine(Death()); // Start the death coroutine
         }
         else
@@ -186,6 +191,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         playerInRangedAttackRange = false; // Bool to check if the player is in ranged attack range of the enemy
         capsuleCollider.enabled = false; // Disable the capsule collider
         agent.isStopped = true; // Stop the agent from moving
+        agent.speed = 0;
+    agent.angularSpeed = 0;
         PlayDeathSound();
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
@@ -216,6 +223,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             yield break; // Prevent multiple simultaneous attacks
         }
+
+        if (isDead) // Check if the enemy is dead
+        {
+            yield break; // Prevent attacking if dead
+        }
         isAttacking = true; // Set isAttacking to true
         PlayAttackSound();
         anim.SetBool("Attack", true); // Set the trigger for the attack animation
@@ -231,7 +243,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             playerHealth.takeDamage(enemyParams.meleeDamage, GameManager.Instance.player.transform.position); // Call the takeDamage function from the playerHealth script
 
             // Apply manual knockback
-            Transform playerTransform = GameManager.Instance.player.transform;
+            /*Transform playerTransform = GameManager.Instance.player.transform;
             Vector3 knockbackDirection = (playerTransform.position - transform.position).normalized;
             float knockbackDistance = 2.0f; // Customize the distance as needed
 
@@ -240,7 +252,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             if (playerRigidbody != null)
             {
                 StartCoroutine(SmoothKnockback(playerRigidbody, knockbackDirection, knockbackDistance, 0.2f));
-            }
+            }*/
         }
 
         yield return new WaitForSeconds(enemyParams.attackSpeed); // Wait while attack is ongoing
@@ -271,7 +283,10 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     bool canSeePlayer()
     {
-
+        if (isDead) // Check if the enemy is dead
+        {
+            return false; // Return false
+        }
         playerDir = GameManager.Instance.player.transform.position - headPos.position; // Get the direction to the player
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, playerDir.y + 1, playerDir.z), transform.forward); // Get the angle to the player
         
@@ -409,10 +424,17 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     private void AICheck()
     {
+        if (isDead)
+        {
+            return;
+        }
         if (HP > 0)
         {
             float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
-            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * enemyParams.animSpeedTrans)); // Set the speed of the animator
+            float targetAnimSpeed = agent.velocity.magnitude / agent.speed;
+            animSpeed = Mathf.MoveTowards(animSpeed, targetAnimSpeed, agent.acceleration * Time.deltaTime);
+            anim.SetFloat("Speed", animSpeed);
+
             if (animSpeed > 0 && !audioSource.isPlaying)
             {
                 PlayWalkingSound();
