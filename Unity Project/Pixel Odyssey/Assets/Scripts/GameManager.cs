@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator UIAnimator;
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
+    public GameObject playerOSToggle;
 
     // Used for display of the players ammo for each gun
     [SerializeField]
@@ -74,6 +75,8 @@ public class GameManager : MonoBehaviour
     public GameObject confuseHitScreen;
     public GameObject player;
     public GameObject mainCamera;
+
+
 
     //basics
     public bool isPaused;

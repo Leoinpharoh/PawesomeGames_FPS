@@ -378,6 +378,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &93556140009874922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2809680958181231326}
+  m_Layer: 0
+  m_Name: OsToggle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2809680958181231326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93556140009874922}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -440.1576, y: -202.65501, z: -59.901875}
+  m_LocalScale: {x: 0.41666663, y: 0.41666663, z: 0.41666663}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6437917704847799417}
+  m_Father: {fileID: 1529861850196575557}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &220372359784209486
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +963,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 0}
-  subtitles: 1
   soundEffects: 1
   music: 1
   voice: 1
@@ -1121,7 +1152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 0}
-  subtitles: 1
   soundEffects: 1
   music: 1
   voice: 1
@@ -7833,7 +7863,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 0}
-  subtitles: 1
   soundEffects: 1
   music: 1
   voice: 1
@@ -9014,7 +9043,7 @@ RectTransform:
   - {fileID: 7007996991238566173}
   - {fileID: 9013630815917949944}
   - {fileID: 8696401434524242024}
-  - {fileID: 6437917704847799417}
+  - {fileID: 2809680958181231326}
   m_Father: {fileID: 6131495630411720467}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16018,16 +16047,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5915691726641895972}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4025026, y: 0.2531238, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 143.76451}
+  m_LocalScale: {x: 0.9660064, y: 0.60749716, z: 2.4000003}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 920530739190191154}
-  m_Father: {fileID: 1529861850196575557}
+  m_Father: {fileID: 2809680958181231326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 139.8125}
+  m_AnchoredPosition: {x: 1056.3782, y: 941.92206}
   m_SizeDelta: {x: 526, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1637125431170424878
@@ -19643,8 +19672,6 @@ MonoBehaviour:
   objective2Aquired: 0
   objective3Aquired: 0
   needsObjective: 0
-  amountinBagText: {fileID: 4761504444031903209}
-  potionCount: 0
   currentEffectText: {fileID: 506076608056178250}
   poisonedTimer: 10
   poisonedDamage: 1
@@ -19665,6 +19692,7 @@ MonoBehaviour:
   confuseHitScreen: {fileID: 8899753883256872260}
   player: {fileID: 0}
   mainCamera: {fileID: 0}
+  playerOSToggle: {fileID: 0}
   isPaused: 0
   confusedDamage: 0
   slowedDamage: 0

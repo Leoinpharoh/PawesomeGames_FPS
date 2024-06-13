@@ -114,6 +114,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         LoadPlayer();
 
+        osCheck();
+
         StartUp();
 
         toolTipsOn = false;
@@ -140,6 +142,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         PickUpThings();
 
         OpenInventory();
+
 
     }
 
@@ -252,6 +255,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void poisonDamage(int damage, float duration)
     {
+        
         if (poisoned)
         {
             StopCoroutine(poisonCoroutine);
@@ -262,7 +266,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator poisonMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             poisoned = true;
             Normal = false;
@@ -293,7 +297,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator burnMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             burning = true;
             Normal = false;
@@ -326,7 +330,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator freezeMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             if (!moveSpeedReduced)
             {
@@ -369,7 +373,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator slowMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             if (!moveSpeedReduced)
             {
@@ -410,7 +414,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator confuseMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             Normal = false;
             confused = true;
@@ -729,7 +733,22 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
     }
 
+    public void osCheck()
+    {
+        if (overshieldUnlocked)
+        {
+            GameManager.Instance.playerOSToggle.SetActive(true);
+        }
+        else if (!overshieldUnlocked)
+        {
+            GameManager.Instance.playerOSToggle.SetActive(false);
+        }
+    }
+
+
     #endregion
+
+
 
     #region ToolBelt
    
