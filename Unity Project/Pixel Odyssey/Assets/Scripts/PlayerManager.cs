@@ -103,10 +103,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public InventoryManager inventoryManager;
     public Interact interactScript;
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
-
-    //ToolBelt
-    [SerializeField] public ToolBelt toolBelt;
-
+    
+    //Access Toolbelt
+    ToolBelt toolBelt;
     void Awake()
     {
 
@@ -120,13 +119,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         toolTipsOn = false;
 
         subtitlesObject = GameObject.Find("Subtitle1");
-
-        toolBelt = GetComponent<ToolBelt>();
-        // Ensure ToolBelt is initialized
-        if (toolBelt == null)
-        {
-            toolBelt = GetComponent<ToolBelt>();
-        }
     }
     void Update()
     {
@@ -149,11 +141,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         OpenInventory();
 
-        HandlePotionUsage();
-
-        HandlePotionScroll();
-
-        Tootips();
     }
 
     public void LoadPlayer()
@@ -741,34 +728,30 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             inventory.Container.Items.Clear();
         }
     }
-    private void HandlePotionUsage()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UsePotion();
-        }
-    }
 
-    private void UsePotion()
-    {
-        if (toolBelt != null)
-        {
-            toolBelt.UsePotion();
-        }
-    }
-
-    private void HandlePotionScroll()
-    {
-        if (toolBelt != null)
-        {
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if (scroll != 0f)
-            {
-                int direction = scroll > 0 ? 1 : -1;
-                toolBelt.ScrollPotions(direction);
-            }
-        }
-    }
     #endregion
 
+    #region ToolBelt
+   
+    public void UseItem()
+    {
+     if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (HP >= HPOrignal)
+            {
+                HP = HPOrignal;
+            }
+            else
+            {
+                HP = HP + 20;
+                
+            }
+            
+        }   
+    }
+    public void SwapItem()
+    {
+
+    }
+    #endregion
 }

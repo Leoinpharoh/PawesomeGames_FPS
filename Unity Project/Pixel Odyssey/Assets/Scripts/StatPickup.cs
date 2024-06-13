@@ -15,16 +15,15 @@ public class StatPickup : MonoBehaviour
             var playerManager = other.GetComponent<PlayerManager>();
             if (playerManager != null)
             {
-                var toolBelt = playerManager.GetComponent<ToolBelt>();
 
                 switch (type)
                 {
                     case PickUpType.Health:
-                        HandleHealthPickup(playerManager, toolBelt);
+                        HandleHealthPickup(playerManager);
                         break;
 
                     case PickUpType.Cure:
-                        HandleCurePickup(playerManager, toolBelt);
+                        HandleCurePickup(playerManager);
                         break;
 
                     case PickUpType.Ammo:
@@ -36,37 +35,18 @@ public class StatPickup : MonoBehaviour
         }
     }
 
-    private void HandleHealthPickup(PlayerManager playerManager, ToolBelt toolBelt)
+    private void HandleHealthPickup(PlayerManager playerManager)
     {
-        if (playerManager.HP >= playerManager.HPOrignal)
-        {
-            if (toolBelt != null)
-            {
-                HealingPotion healingPotion = ScriptableObject.CreateInstance<HealingPotion>();
-                healingPotion.potionName = "Healing Potion";
-                healingPotion.healingAmount = refillAmount;
-                toolBelt.AddPotion(healingPotion);
-            }
-        }
-        else
+        if (playerManager.HP < playerManager.HPOrignal)
         {
             ApplyHealth(playerManager);
         }
     }
 
-    private void HandleCurePickup(PlayerManager playerManager, ToolBelt toolBelt)
+    private void HandleCurePickup(PlayerManager playerManager)
     {
-        if (!playerManager.poisoned && !playerManager.burning && !playerManager.freezing &&
-            !playerManager.slowed && !playerManager.confused)
-        {
-            if (toolBelt != null)
-            {
-                CurePotion curePotion = ScriptableObject.CreateInstance<CurePotion>();
-                curePotion.potionName = "Cure Potion";
-                toolBelt.AddPotion(curePotion);
-            }
-        }
-        else
+        if (playerManager.poisoned || playerManager.burning || playerManager.freezing ||
+            playerManager.slowed || playerManager.confused)
         {
             ApplyCure(playerManager);
         }
@@ -90,7 +70,11 @@ public class StatPickup : MonoBehaviour
         playerManager.slowed = false;
         playerManager.confused = false;
         playerManager.Normal = true;
-        playerManager.StopAllCoroutines();
+        playerManager.StopCoroutine(playerManager.poisonCoroutine);
+        playerManager.StopCoroutine(playerManager.burnCoroutine);
+        playerManager.StopCoroutine(playerManager.slowCoroutine);
+        playerManager.StopCoroutine(playerManager.freezeCoroutine);
+        playerManager.StopCoroutine(playerManager.confuseCoroutine);
         GameManager.Instance.playerEffect("Normal");
         playerManager.updatePlayerUI();
     }

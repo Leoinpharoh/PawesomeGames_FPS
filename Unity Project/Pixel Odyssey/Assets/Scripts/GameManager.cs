@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
-using UnityEditor.Experimental.GraphView;
 using System.Linq;
 
 public class GameManager : MonoBehaviour
@@ -46,8 +43,11 @@ public class GameManager : MonoBehaviour
     public bool objective3Aquired;
     public bool needsObjective;
 
-    [SerializeField] TMP_Text amountinBagText;
-    public int potionCount = 0;
+
+    //Tool Belt fields
+
+
+
     //status needs
     [SerializeField] TMP_Text currentEffectText;
     [SerializeField] public int poisonedTimer;
@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerManager>();
         //on awake needs objective
         needsObjective = true;
+        Instance = this;
     }
 
     private void Start()
@@ -134,7 +135,6 @@ public class GameManager : MonoBehaviour
 
         LoadPlayer();
 
-        UpdateSelectedPotion();
     }
 
     // Update is called once per frame
@@ -423,25 +423,6 @@ public class GameManager : MonoBehaviour
         }
 
 
-    }
-
-    public void UpdateSelectedPotion()
-
-    {
-        string potionName = "None";
-        int potionCount = 0;
-
-        if (Instance.playerScript != null && Instance.playerScript.toolBelt != null)
-        {
-            var potion = Instance.playerScript.toolBelt.GetSelectedPotion();
-            potionCount = Instance.playerScript.toolBelt.GetSelectedPotionCount();
-            if (potion != null)
-            {
-                potionName = potion.potionName;
-            }
-        }
-
-        amountinBagText.text = potionCount.ToString();
     }
 
     public void UpdateTimer()

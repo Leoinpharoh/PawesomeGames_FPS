@@ -1,18 +1,24 @@
 using UnityEngine;
-
-[CreateAssetMenu(fileName = "HealingPotion", menuName = "Potions/HealingPotion")]
-public class HealingPotion : Potion
+public class HealingPotion : MonoBehaviour
 {
-    public int healingAmount;
-
-    public override void Use(GameObject user)
+    public string potionName = "Healing Potion";
+    public int potionCount = 0;
+    ToolBelt toolBelt;
+    public void OnTriggerEnter(Collider other)
     {
-        PlayerManager playerManager = user.GetComponent<PlayerManager>();
-        playerManager.HP += healingAmount;
-        if (playerManager.HP > playerManager.HPOrignal)
+        if (other.CompareTag("Player"))
         {
-            playerManager.HP = playerManager.HPOrignal;
+            if (!toolBelt.potions.ContainsKey("Healing Potion"))
+            {
+                toolBelt.potions.Add(potionName, potionCount++);
+            }
+            else if(toolBelt.potions.ContainsKey("Healing Potion"))
+            {
+                toolBelt.potions.TryGetValue(potionName, out potionCount);
+                toolBelt.potions[potionName] = potionCount++;
+            }
+            //Destroying Object
+            Destroy(gameObject);
         }
-        playerManager.updatePlayerUI();
     }
 }
