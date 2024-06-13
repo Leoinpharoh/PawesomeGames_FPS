@@ -114,8 +114,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         LoadPlayer();
 
-        osCheck();
-
         StartUp();
 
         toolTipsOn = false;
@@ -142,7 +140,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         PickUpThings();
 
         OpenInventory();
-
 
     }
 
@@ -175,6 +172,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         HP = HPOrignal;
         OS = OSOrignal;
+        osCheck();
         updatePlayerUI();
     }
 
