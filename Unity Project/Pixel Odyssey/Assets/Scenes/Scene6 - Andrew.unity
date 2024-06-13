@@ -7218,6 +7218,10 @@ PrefabInstance:
       propertyPath: moveSpeedOriginal
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: overshieldUnlocked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4660056078010648115, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: inventoryDisplay
       value: 
@@ -7236,7 +7240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.588387
+      value: -96.58839
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22335,6 +22339,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 491802, guid: d3860bfed408c904c88168f425feed7b, type: 3}
   m_PrefabInstance: {fileID: 1575846188}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1700003035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 93556140009874922, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2112279757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1705475464 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1131351126369316212, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
@@ -27384,6 +27393,10 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1441613120}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: playerOSToggle
+      value: 
+      objectReference: {fileID: 1700003035}
     - target: {fileID: 2228915978883966922, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -27399,6 +27412,10 @@ PrefabInstance:
     - target: {fileID: 4688184907460715351, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915691726641895972, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6131495630411720467, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_Pivot.x

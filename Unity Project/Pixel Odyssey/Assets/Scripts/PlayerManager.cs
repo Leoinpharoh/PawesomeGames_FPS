@@ -141,6 +141,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         OpenInventory();
 
+        Tootips();
+
+        osCheck();
     }
 
     public void LoadPlayer()
@@ -162,7 +165,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
         overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
         potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
-        if(HPOrignal == 0)
+        if (HPOrignal == 0)
         {
             HPOrignal = 140;
         }
@@ -745,8 +748,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
 
     #endregion
-
-
 
     #region ToolBelt
    
