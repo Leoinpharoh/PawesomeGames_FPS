@@ -22,6 +22,7 @@ public class Spawner : MonoBehaviour
         if (startSpawning && !isSpawning && spawnCount < numToSpawn) // If the spawner should start, isn't spawning, and hasn't spawned enough objects
         {
             StartCoroutine(SpawnObject()); // Start spawning objects
+            Destroy(this.gameObject.GetComponent<BoxCollider>());
         }
     }
 
