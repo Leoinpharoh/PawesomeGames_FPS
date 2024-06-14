@@ -64,17 +64,32 @@ public class StatPickup : MonoBehaviour
 
     private void ApplyCure(PlayerManager playerManager)
     {
-        playerManager.poisoned = false;
-        playerManager.burning = false;
-        playerManager.freezing = false;
-        playerManager.slowed = false;
-        playerManager.confused = false;
+        if (playerManager.poisoned)
+        {
+            playerManager.poisoned = false;
+            playerManager.StopCoroutine(playerManager.poisonCoroutine);
+        }
+        if (playerManager.burning)
+        {
+            playerManager.burning = false;
+            playerManager.StopCoroutine(playerManager.burnCoroutine);
+        }
+        if (playerManager.freezing)
+        {
+            playerManager.freezing = false;
+            playerManager.StopCoroutine(playerManager.freezeCoroutine);
+        }
+        if (playerManager.slowed)
+        {
+            playerManager.slowed = false;
+            playerManager.StopCoroutine(playerManager.slowCoroutine);
+        }
+        if (playerManager.confused)
+        {
+            playerManager.confused = false;
+            playerManager.StopCoroutine(playerManager.confuseCoroutine);
+        }
         playerManager.Normal = true;
-        playerManager.StopCoroutine(playerManager.poisonCoroutine);
-        playerManager.StopCoroutine(playerManager.burnCoroutine);
-        playerManager.StopCoroutine(playerManager.slowCoroutine);
-        playerManager.StopCoroutine(playerManager.freezeCoroutine);
-        playerManager.StopCoroutine(playerManager.confuseCoroutine);
         GameManager.Instance.playerEffect("Normal");
         playerManager.updatePlayerUI();
     }

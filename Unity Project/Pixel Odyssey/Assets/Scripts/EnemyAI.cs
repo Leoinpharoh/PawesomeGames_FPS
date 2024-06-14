@@ -171,7 +171,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator Reload()
     {
         isReloading = true;
+        anim.SetBool("isReloading", true);
+        PlayReloadSound();
         yield return new WaitForSeconds(enemyParams.enemyReloadTime);
+        anim.SetBool("isReloading", false);
         isReloading = false;
     }
 
@@ -339,6 +342,15 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (audioSource != null && enemyParams.attackSound.Length > 0)
         {
             AudioClip clip = enemyParams.attackSound[Random.Range(0, enemyParams.attackSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayReloadSound()
+    {
+        if (audioSource != null && enemyParams.reloadSound.Length > 0)
+        {
+            AudioClip clip = enemyParams.reloadSound[Random.Range(0, enemyParams.reloadSound.Length)];
             audioSource.PlayOneShot(clip);
         }
     }

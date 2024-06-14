@@ -63,5 +63,6 @@ public class EnemyParams : ScriptableObject
     public AudioClip[] damagedSound;
     public AudioClip[] idleSound;
     public AudioClip[] walkingSound;
+    public AudioClip[] reloadSound;
 
 }
