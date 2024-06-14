@@ -32,9 +32,6 @@ public class EnemyParams : ScriptableObject
     [Range(2, 10)] public int destroyTime;
     [Range(0, 20)] public int effectDamage;
     [Range(0.1f, 20)] public float effectDuration;
-
-    [Range(0, 10)] public int enemyReloadTime;
-    [Range(0, 20)] public int enemyClipSize;
     public enum DamageType { Regular, Poisoned, Burning, Freezing, Slowed, Confused };
     public DamageType damageType;
 

@@ -32,8 +32,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     Vector3 startingPos; // Vector3 to store the starting position of the enemy
     float angleToPlayer; // Float to store the angle to the player
     private Transform playerTransform; // Reference to the player's transform
-    bool isReloading;
-    int shootLoop;
 
     EnemyParams.EnemyType enemyType; // references the enemy type from the EnemyParams scriptable object
     EnemyParams.DetectionType enemyDetection; // references the enemy detection from the EnemyParams scriptable object
@@ -166,13 +164,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         anim.SetBool("Attack", false);
         anim.SetBool("isStopped", false);
         isAttacking = false;
-    }
-   
-    IEnumerator Reload()
-    {
-        isReloading = true;
-        yield return new WaitForSeconds(enemyParams.enemyReloadTime);
-        isReloading = false;
     }
 
 
@@ -437,12 +428,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             return;
         }
-        if(enemyType == EnemyParams.EnemyType.Ranged && shootLoop >= enemyParams.enemyClipSize)
-        {
-            StartCoroutine(Reload());
-            shootLoop = 0;
-        }
-        if (HP > 0 && !isReloading)
+        if (HP > 0)
         {
             float animSpeed = agent.velocity.normalized.magnitude; // Get the speed of the agent
             float targetAnimSpeed = agent.velocity.magnitude / agent.speed;
@@ -467,7 +453,6 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
                 if (!isAttacking && enemyType == EnemyParams.EnemyType.Ranged && playerInRangedAttackRange || (enemyType == EnemyParams.EnemyType.Combination && !playerInMeleeAttackRange)) // Check if the enemy is a Ranged enemy and is not shooting
                 {
-                    shootLoop++;
                     StartCoroutine(shoot()); // Start the shoot coroutine
                 }
 
@@ -491,7 +476,6 @@ public class EnemyAI : MonoBehaviour, IDamage
                     agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the NavMeshAgent to the player's position
                     if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
                     {
-                        shootLoop++;
                         StartCoroutine(shoot()); // Start the shoot coroutine
                     }
                 }
@@ -522,7 +506,6 @@ public class EnemyAI : MonoBehaviour, IDamage
                     }
                     if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
                     {
-                        shootLoop++;
                         StartCoroutine(shoot()); // Start the shoot coroutine
                     }
                 }
@@ -546,7 +529,6 @@ public class EnemyAI : MonoBehaviour, IDamage
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Smoothly rotate to face the player
                 if (!isAttacking && playerInRangedAttackRange) // Check if the enemy is a Ranged enemy and is not shooting
                 {
-                    shootLoop++;
                     StartCoroutine(shoot()); // Start the shoot coroutine
                 }
             }
