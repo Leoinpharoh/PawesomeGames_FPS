@@ -204,7 +204,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         capsuleCollider.enabled = false; // Disable the capsule collider
         agent.isStopped = true; // Stop the agent from moving
         agent.speed = 0;
-    agent.angularSpeed = 0;
+        agent.angularSpeed = 0;
         PlayDeathSound();
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
