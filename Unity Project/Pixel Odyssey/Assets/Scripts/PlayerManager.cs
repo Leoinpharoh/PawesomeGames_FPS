@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
 {
@@ -103,9 +104,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public InventoryManager inventoryManager;
     public Interact interactScript;
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
-    
+
     //Access Toolbelt
     ToolBelt toolBelt;
+    public int currentPotionIndex = 0;
     void Awake()
     {
 
@@ -119,6 +121,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         toolTipsOn = false;
 
         subtitlesObject = GameObject.Find("Subtitle1");
+
+        toolBelt = GetComponent<ToolBelt>();
+        UpdateCurrentPotionSlotUI();
     }
     void Update()
     {
@@ -144,6 +149,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         Tootips();
 
         osCheck();
+
+        ScrollPotions();
+        //// Use potion when the player presses the "Q" key
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UsePotion();
+        }
     }
 
     public void LoadPlayer()
@@ -169,7 +181,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             HPOrignal = 140;
         }
-        if(OSOrignal == 0)
+        if (OSOrignal == 0)
         {
             OSOrignal = 40;
         }
@@ -256,7 +268,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void poisonDamage(int damage, float duration)
     {
-        
+
         if (poisoned)
         {
             StopCoroutine(poisonCoroutine);
@@ -750,26 +762,71 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     #endregion
 
     #region ToolBelt
-   
-    public void UseItem()
+    // Scroll through the potions in the ToolBelt
+    private void ScrollPotions()
     {
-     if (Input.GetKeyDown(KeyCode.Q))
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
         {
-            if (HP >= HPOrignal)
+            if (scroll > 0)
             {
-                HP = HPOrignal;
+                // Scroll up
+                currentPotionIndex++;
+                if (currentPotionIndex >= toolBelt.potions.Length)
+                {
+                    currentPotionIndex = 0;
+                }
             }
-            else
+            else if (scroll < 0)
             {
-                HP = HP + 20;
-                
+                // Scroll down
+                currentPotionIndex--;
+                if (currentPotionIndex < 0)
+                {
+                    currentPotionIndex = toolBelt.potions.Length - 1;
+                }
             }
-            
-        }   
-    }
-    public void SwapItem()
-    {
 
+            // Update the UI to show the current potion slot
+            UpdateCurrentPotionSlotUI();
+        }
     }
-    #endregion
+
+    // Use the currently selected potion
+    public void UsePotion()
+    {
+        // Check if there are any potions available
+        if (toolBelt.GetPotionCount(currentPotionIndex) > 0)
+        {
+            // Reduce the potion count
+            toolBelt.AddPotion(currentPotionIndex, -1);
+
+            // Heal the player
+            HealPlayer(20);
+
+            // Update the UI to reflect the new potion count
+            UpdateCurrentPotionSlotUI();
+
+            Debug.Log("Used potion. Index: " + currentPotionIndex + ", Remaining Count: " + toolBelt.GetPotionCount(currentPotionIndex));
+        }
+        else
+        {
+            Debug.LogWarning("No potions left to use!");
+        }
+    }
+
+    // Update the current potion slot UI
+    private void UpdateCurrentPotionSlotUI()
+    {
+        int potionCount = toolBelt.GetPotionCount(currentPotionIndex);
+        GameManager.Instance.UpdatePotionSlotUI(currentPotionIndex, potionCount);
+    }
+
+    // Heal the player by a certain amount
+    private void HealPlayer(int healAmount)
+    {
+        HP = Mathf.Min(HP + healAmount, HPOrignal);
+        Debug.Log("Player healed. Current HP: " + HP);
+    }
 }
+    #endregion

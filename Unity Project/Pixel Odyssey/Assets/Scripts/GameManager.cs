@@ -51,8 +51,9 @@ public class GameManager : MonoBehaviour
 
 
     //Tool Belt fields
-
-
+    [SerializeField] Image[] itemSlotImages; // Array of Images to display the potion icons
+    [SerializeField] TMP_Text AmountinBag; // Text to display the current potion count
+    [SerializeField] Sprite[] potionSprites; // Array to hold the sprites for each potion type
 
     //status needs
     [SerializeField] TMP_Text currentEffectText;
@@ -281,7 +282,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator death()
     {
-        yield  return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3);
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
@@ -458,6 +459,33 @@ public class GameManager : MonoBehaviour
         if (timerText != null)
         {
             timerText.text = string.Format("{0}:{1:00}.{2:000}", minutes, seconds, milliseconds);
+        }
+    }
+    // Method to update the potion slot UI
+    public void UpdatePotionSlotUI(int potionIndex, int potionCount)
+    {
+        // Update all slot images
+        if (itemSlotImages != null && potionIndex >= 0 && potionIndex < itemSlotImages.Length)
+        {
+            // Set the current potion image and clear the others
+            for (int i = 0; i < itemSlotImages.Length; i++)
+            {
+                if (i == potionIndex && potionIndex < potionSprites.Length)
+                {
+                    itemSlotImages[i].sprite = potionSprites[potionIndex]; // Set the UI Image to the current potion sprite
+                    itemSlotImages[i].color = Color.white; // Ensure the image is visible
+                }
+                else
+                {
+                    itemSlotImages[i].sprite = null; // Clear other slots or set to a default/empty sprite
+                    itemSlotImages[i].color = new Color(1, 1, 1, 0); // Make the image invisible
+                }
+            }
+        }
+
+        if (AmountinBag != null)
+        {
+            AmountinBag.text = potionCount.ToString(); // Set the UI Text to the current potion count
         }
     }
 }
