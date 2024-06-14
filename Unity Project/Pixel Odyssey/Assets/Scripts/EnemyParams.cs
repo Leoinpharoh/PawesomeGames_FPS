@@ -12,8 +12,8 @@ public class EnemyParams : ScriptableObject
     public GameObject bloodSplash;
     [Range(1, 1000)] public int HP;
     [Range(0.5f, 10.0f)] public float movementSpeed;
-    [Range(1, 20)] public int Acceleration;
-    [Range(2, 10)] public int animSpeedTrans;
+    [Range(0.1f, 20.0f)] public float Acceleration;
+    [Range(0.1f, 10.0f)] public float animSpeedTrans;
     public enum EnemyType { Melee, Ranged, Combination, Stationary, Exploding };
     public bool flying = false;
     public EnemyType enemyType;
@@ -32,6 +32,9 @@ public class EnemyParams : ScriptableObject
     [Range(2, 10)] public int destroyTime;
     [Range(0, 20)] public int effectDamage;
     [Range(0.1f, 20)] public float effectDuration;
+
+    [Range(0, 10)] public int enemyReloadTime;
+    [Range(0, 20)] public int enemyClipSize;
     public enum DamageType { Regular, Poisoned, Burning, Freezing, Slowed, Confused };
     public DamageType damageType;
 
@@ -60,5 +63,6 @@ public class EnemyParams : ScriptableObject
     public AudioClip[] damagedSound;
     public AudioClip[] idleSound;
     public AudioClip[] walkingSound;
+    public AudioClip[] reloadSound;
 
 }

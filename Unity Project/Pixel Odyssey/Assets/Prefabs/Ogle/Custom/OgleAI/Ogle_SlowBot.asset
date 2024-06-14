@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ogle_SlowBot
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 203a79f8c7d8cb547ba06f88fa04f57e, type: 3}
-  HP: 30
+  HP: 45
   movementSpeed: 3
   Acceleration: 5
   animSpeedTrans: 6
@@ -29,11 +29,13 @@ MonoBehaviour:
   bulletSpeed: 15
   destroyTime: 3
   effectDamage: 0
-  effectDuration: 5
+  effectDuration: 8
+  enemyReloadTime: 3
+  enemyClipSize: 8
   damageType: 4
-  roaming: 0
-  roamDist: 0
-  roamTimer: 0
+  roaming: 1
+  roamDist: 10
+  roamTimer: 10
   lootPinata: 1
   lootChance: 66
   loot:
@@ -53,3 +55,5 @@ MonoBehaviour:
   - {fileID: 0}
   walkingSound:
   - {fileID: 0}
+  reloadSound:
+  - {fileID: 8300000, guid: 907da7d35b9687b4597be4c5d9942a1c, type: 3}

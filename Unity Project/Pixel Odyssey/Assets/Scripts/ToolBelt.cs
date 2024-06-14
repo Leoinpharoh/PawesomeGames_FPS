@@ -3,59 +3,28 @@ using System.Collections.Generic;
 
 public class ToolBelt : MonoBehaviour
 {
-    public List<Potion> potions = new List<Potion>();
-    private int selectedPotionIndex = 0;
+    public int[] potions; // Array to hold the counts of different potions
 
-    public void AddPotion(Potion potion)
+    public void AddPotion(int potionIndex, int count)
     {
-        potions.Add(potion);
-        UpdateSelectedPotionUI();
-    }
-
-    public void UsePotion()
-    {
-        if (potions.Count > 0)
+        if (potionIndex >= 0 && potionIndex < potions.Length)
         {
-            potions[selectedPotionIndex].Use(gameObject);
-            potions.RemoveAt(selectedPotionIndex);
-            selectedPotionIndex = Mathf.Clamp(selectedPotionIndex, 0, potions.Count - 1);
-            UpdateSelectedPotionUI();
+            potions[potionIndex] = Mathf.Max(potions[potionIndex] + count, 0); // Ensure potion count doesn't go negative
+            Debug.Log("Updated potion. Index: " + potionIndex + ", New Count: " + potions[potionIndex]);
+        }
+        else
+        {
+            Debug.LogWarning("Potion index " + potionIndex + " is out of range.");
         }
     }
 
-    public void ScrollPotions(int direction)
+    public int GetPotionCount(int potionIndex)
     {
-        if (potions.Count == 0) return;
-
-        selectedPotionIndex += direction;
-        if (selectedPotionIndex >= potions.Count)
-            selectedPotionIndex = 0;
-        else if (selectedPotionIndex < 0)
-            selectedPotionIndex = potions.Count - 1;
-
-        UpdateSelectedPotionUI();
-    }
-
-    public Potion GetSelectedPotion()
-    {
-        if (potions.Count > 0)
+        if (potionIndex >= 0 && potionIndex < potions.Length)
         {
-            return potions[selectedPotionIndex];
+            return potions[potionIndex];
         }
-        return null;
-    }
-
-    public int GetSelectedPotionCount()
-    {
-        if (potions.Count > 0)
-        {
-            return potions.Count;
-        }
+        Debug.LogWarning("Potion index " + potionIndex + " is out of range.");
         return 0;
-    }
-
-    private void UpdateSelectedPotionUI()
-    {
-        GameManager.Instance.UpdateSelectedPotion();
     }
 }

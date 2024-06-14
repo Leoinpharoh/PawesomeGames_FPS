@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
-using UnityEditor.Experimental.GraphView;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,11 +21,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMainMenu;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
+    [SerializeField] TMP_Text clipColtAmount;
+    [SerializeField] TMP_Text clipShotgunAmount;
+    [SerializeField] TMP_Text clipAssaultAmount;
+    [SerializeField] TMP_Text clipRPGAmount;
     [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
     [SerializeField] Animator UIAnimator;
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
+    public GameObject playerOSToggle;
 
     // Used for display of the players ammo for each gun
     [SerializeField]
@@ -46,8 +49,12 @@ public class GameManager : MonoBehaviour
     public bool objective3Aquired;
     public bool needsObjective;
 
-    [SerializeField] TMP_Text amountinBagText;
-    public int potionCount = 0;
+
+    //Tool Belt fields
+    [SerializeField] Image[] itemSlotImages; // Array of Images to display the potion icons
+    [SerializeField] TMP_Text AmountinBag; // Text to display the current potion count
+    [SerializeField] Sprite[] potionSprites; // Array to hold the sprites for each potion type
+
     //status needs
     [SerializeField] TMP_Text currentEffectText;
     [SerializeField] public int poisonedTimer;
@@ -74,6 +81,8 @@ public class GameManager : MonoBehaviour
     public GameObject confuseHitScreen;
     public GameObject player;
     public GameObject mainCamera;
+
+
 
     //basics
     public bool isPaused;
@@ -102,6 +111,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject HealthBar;
     [SerializeField] GameObject StatusBar;
     [SerializeField] GameObject OvershieldBar;
+    [SerializeField] GameObject ToolTips;
     [SerializeField] GameObject Portals;
     [SerializeField] GameObject NewGameScreen;
     [SerializeField] GameObject LoadGameScreen;
@@ -126,6 +136,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerManager>();
         //on awake needs objective
         needsObjective = true;
+        Instance = this;
     }
 
     private void Start()
@@ -134,7 +145,6 @@ public class GameManager : MonoBehaviour
 
         LoadPlayer();
 
-        UpdateSelectedPotion();
     }
 
     // Update is called once per frame
@@ -203,10 +213,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayer()
     {
-
-
+        clipColtAmount.text = lightBullets.ToString();
+        clipShotgunAmount.text = MediumBullets.ToString();
+        clipAssaultAmount.text = HeavyBullets.ToString();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
+        PlayerPrefs.SetInt("TutorialComplete", 1);
+        PlayerPrefs.Save();
         tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
         if (tutorialComplete == false && sceneName == "Player Hub")
         {
@@ -269,7 +282,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator death()
     {
-        yield  return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3);
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
@@ -304,11 +317,15 @@ public class GameManager : MonoBehaviour
         switch (ammoCurrentType)
         {
             case "Light":
-                ammoDisplayAmount.text = lightBullets.ToString(); break;
+                ammoDisplayAmount.text = lightBullets.ToString();
+                clipColtAmount.text = lightBullets.ToString(); break;
             case "Medium":
-                ammoDisplayAmount.text = MediumBullets.ToString(); break;
+                ammoDisplayAmount.text = MediumBullets.ToString();
+                clipShotgunAmount.text = MediumBullets.ToString(); break;
             case "Heavy":
-                ammoDisplayAmount.text = HeavyBullets.ToString(); break;
+                ammoDisplayAmount.text = HeavyBullets.ToString();
+                //clipRPGAmount.text = HeavyBullets.ToString();
+                clipAssaultAmount.text = HeavyBullets.ToString(); break;
         }
     }
 
@@ -370,6 +387,7 @@ public class GameManager : MonoBehaviour
         OvershieldBar.SetActive(false);
         Portals.SetActive(false);
         Timer.SetActive(false);
+        ToolTips.SetActive(false);
         playerAnimator.SetBool("Tutorial", true);
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
         PlayerPrefs.Save();
@@ -391,6 +409,8 @@ public class GameManager : MonoBehaviour
         Ammo.SetActive(true);
         HealthBar.SetActive(true);
         StatusBar.SetActive(true);
+        Timer.SetActive(true);
+        ToolTips.SetActive(true);
         Portals.SetActive(true);
         tutorialComplete = true;
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
@@ -405,7 +425,7 @@ public class GameManager : MonoBehaviour
     public void OpeningScene()
     {
         NewGameScreen.SetActive(false);
-        LoadGameScreen.SetActive(false);
+        LoadGameScreen.SetActive(true);
 
     }
 
@@ -425,25 +445,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void UpdateSelectedPotion()
-
-    {
-        string potionName = "None";
-        int potionCount = 0;
-
-        if (Instance.playerScript != null && Instance.playerScript.toolBelt != null)
-        {
-            var potion = Instance.playerScript.toolBelt.GetSelectedPotion();
-            potionCount = Instance.playerScript.toolBelt.GetSelectedPotionCount();
-            if (potion != null)
-            {
-                potionName = potion.potionName;
-            }
-        }
-
-        amountinBagText.text = potionCount.ToString();
-    }
-
     public void UpdateTimer()
     {
         // Increment the elapsed time
@@ -458,6 +459,33 @@ public class GameManager : MonoBehaviour
         if (timerText != null)
         {
             timerText.text = string.Format("{0}:{1:00}.{2:000}", minutes, seconds, milliseconds);
+        }
+    }
+    // Method to update the potion slot UI
+    public void UpdatePotionSlotUI(int potionIndex, int potionCount)
+    {
+        // Update all slot images
+        if (itemSlotImages != null && potionIndex >= 0 && potionIndex < itemSlotImages.Length)
+        {
+            // Set the current potion image and clear the others
+            for (int i = 0; i < itemSlotImages.Length; i++)
+            {
+                if (i == potionIndex && potionIndex < potionSprites.Length)
+                {
+                    itemSlotImages[i].sprite = potionSprites[potionIndex]; // Set the UI Image to the current potion sprite
+                    itemSlotImages[i].color = Color.white; // Ensure the image is visible
+                }
+                else
+                {
+                    itemSlotImages[i].sprite = null; // Clear other slots or set to a default/empty sprite
+                    itemSlotImages[i].color = new Color(1, 1, 1, 0); // Make the image invisible
+                }
+            }
+        }
+
+        if (AmountinBag != null)
+        {
+            AmountinBag.text = potionCount.ToString(); // Set the UI Text to the current potion count
         }
     }
 }

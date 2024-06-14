@@ -18,7 +18,6 @@ public class EnemeiesToKillManager : MonoBehaviour
             if (obj != null)
             {
                 enemiesToDestroy++;
-
             }
         }
         GameManager.Instance.objectiveEnemiesToKillCount = enemiesToDestroy;

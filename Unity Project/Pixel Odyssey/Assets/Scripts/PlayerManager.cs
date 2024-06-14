@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
 {
@@ -104,9 +105,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public Interact interactScript;
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
 
-    //ToolBelt
-    [SerializeField] public ToolBelt toolBelt;
-
+    //Access Toolbelt
+    ToolBelt toolBelt;
+    public int currentPotionIndex = 0;
     void Awake()
     {
 
@@ -122,11 +123,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         subtitlesObject = GameObject.Find("Subtitle1");
 
         toolBelt = GetComponent<ToolBelt>();
-        // Ensure ToolBelt is initialized
-        if (toolBelt == null)
-        {
-            toolBelt = GetComponent<ToolBelt>();
-        }
+        UpdateCurrentPotionSlotUI();
     }
     void Update()
     {
@@ -149,11 +146,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         OpenInventory();
 
-        HandlePotionUsage();
-
-        HandlePotionScroll();
-
         Tootips();
+
+        osCheck();
+
+        ScrollPotions();
+        //// Use potion when the player presses the "Q" key
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UsePotion();
+        }
     }
 
     public void LoadPlayer()
@@ -175,16 +177,17 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
         overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
         potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
-        if(HPOrignal == 0)
+        if (HPOrignal == 0)
         {
             HPOrignal = 140;
         }
-        if(OSOrignal == 0)
+        if (OSOrignal == 0)
         {
             OSOrignal = 40;
         }
         HP = HPOrignal;
         OS = OSOrignal;
+        osCheck();
         updatePlayerUI();
     }
 
@@ -265,6 +268,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void poisonDamage(int damage, float duration)
     {
+
         if (poisoned)
         {
             StopCoroutine(poisonCoroutine);
@@ -275,7 +279,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator poisonMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             poisoned = true;
             Normal = false;
@@ -306,7 +310,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator burnMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             burning = true;
             Normal = false;
@@ -339,7 +343,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator freezeMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             if (!moveSpeedReduced)
             {
@@ -382,7 +386,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator slowMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             if (!moveSpeedReduced)
             {
@@ -423,7 +427,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator confuseMe(int damage, float duration)
     {
-        if (OS == 0)
+        if (OS == 0 || !overshieldUnlocked)
         {
             Normal = false;
             confused = true;
@@ -741,34 +745,88 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             inventory.Container.Items.Clear();
         }
     }
-    private void HandlePotionUsage()
+
+    public void osCheck()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (overshieldUnlocked)
         {
-            UsePotion();
+            GameManager.Instance.playerOSToggle.SetActive(true);
+        }
+        else if (!overshieldUnlocked)
+        {
+            GameManager.Instance.playerOSToggle.SetActive(false);
         }
     }
 
-    private void UsePotion()
-    {
-        if (toolBelt != null)
-        {
-            toolBelt.UsePotion();
-        }
-    }
 
-    private void HandlePotionScroll()
-    {
-        if (toolBelt != null)
-        {
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if (scroll != 0f)
-            {
-                int direction = scroll > 0 ? 1 : -1;
-                toolBelt.ScrollPotions(direction);
-            }
-        }
-    }
     #endregion
 
+    #region ToolBelt
+    // Scroll through the potions in the ToolBelt
+    private void ScrollPotions()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+        {
+            if (scroll > 0)
+            {
+                // Scroll up
+                currentPotionIndex++;
+                if (currentPotionIndex >= toolBelt.potions.Length)
+                {
+                    currentPotionIndex = 0;
+                }
+            }
+            else if (scroll < 0)
+            {
+                // Scroll down
+                currentPotionIndex--;
+                if (currentPotionIndex < 0)
+                {
+                    currentPotionIndex = toolBelt.potions.Length - 1;
+                }
+            }
+
+            // Update the UI to show the current potion slot
+            UpdateCurrentPotionSlotUI();
+        }
+    }
+
+    // Use the currently selected potion
+    public void UsePotion()
+    {
+        // Check if there are any potions available
+        if (toolBelt.GetPotionCount(currentPotionIndex) > 0)
+        {
+            // Reduce the potion count
+            toolBelt.AddPotion(currentPotionIndex, -1);
+
+            // Heal the player
+            HealPlayer(20);
+
+            // Update the UI to reflect the new potion count
+            UpdateCurrentPotionSlotUI();
+
+            Debug.Log("Used potion. Index: " + currentPotionIndex + ", Remaining Count: " + toolBelt.GetPotionCount(currentPotionIndex));
+        }
+        else
+        {
+            Debug.LogWarning("No potions left to use!");
+        }
+    }
+
+    // Update the current potion slot UI
+    private void UpdateCurrentPotionSlotUI()
+    {
+        int potionCount = toolBelt.GetPotionCount(currentPotionIndex);
+        GameManager.Instance.UpdatePotionSlotUI(currentPotionIndex, potionCount);
+    }
+
+    // Heal the player by a certain amount
+    private void HealPlayer(int healAmount)
+    {
+        HP = Mathf.Min(HP + healAmount, HPOrignal);
+        Debug.Log("Player healed. Current HP: " + HP);
+    }
 }
+    #endregion

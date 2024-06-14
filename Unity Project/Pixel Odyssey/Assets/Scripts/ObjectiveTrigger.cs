@@ -18,16 +18,7 @@ public class ObjectiveTrigger : MonoBehaviour
     {
  
         needsObjective = GameManager.Instance.needsObjective;
-        //CheckObjects();
-
     }
-
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    CheckKills();
-
-    //}
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -43,50 +34,10 @@ public class ObjectiveTrigger : MonoBehaviour
                     break;
                 }
             }
-            //if (enemiesToKill)
-            //{
-            //    if (objectsToCheck != null)
-            //    {
-            //        GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
-            //        GameManager.Instance.objectiveEnemiesToKillCount = enemiesToDestroy;
-            //        GameManager.Instance.updateEnemiesToKill();
-            //    }
-            //}
         }
     }
     private void OnTriggerExit(Collider other)
     {
         gameObject.SetActive(false);
     }
-    //private void CheckObjects()
-    //{
-    //    bool allDestroyed = true;
-    //    foreach (GameObject obj in objectsToCheck)
-    //    {
-    //        if (obj != null)
-    //        {
-    //            allDestroyed = false;
-    //            enemiesToDestroy++;
-                
-    //        }
-    //    }
-    //    GameManager.Instance.objectiveEnemiesToKillCount = enemiesToDestroy;
-    //    GameManager.Instance.updateEnemiesToKill();
-
-    //}
-
-    //private void CheckKills()
-    //{
-    //    foreach (GameObject obj in objectsToCheck)
-    //    {
-    //        if (obj.Equals(null))
-    //        {
-    //            objectsToCheck.Remove(obj);
-    //            currentlyDeadEnemies++;
-    //            GameManager.Instance.objectiveEnemiesKilledCount = currentlyDeadEnemies;
-    //            GameManager.Instance.updateEnemiesToKill();
-    //            break;
-    //        }
-    //    }
-    //}
 }

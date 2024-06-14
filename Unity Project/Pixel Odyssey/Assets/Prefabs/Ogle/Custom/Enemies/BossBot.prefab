@@ -250,6 +250,7 @@ MonoBehaviour:
   anim: {fileID: 4978542914177271930}
   enemyParams: {fileID: 11400000, guid: 7175a2d6b9f70ef499f43f38aea38b56, type: 2}
   audioSource: {fileID: 361740504524893586}
+  playerRigidbody: {fileID: 0}
 --- !u!82 &361740504524893586
 AudioSource:
   m_ObjectHideFlags: 0
@@ -259,7 +260,7 @@ AudioSource:
   m_GameObject: {fileID: 1119366472943743179}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.1

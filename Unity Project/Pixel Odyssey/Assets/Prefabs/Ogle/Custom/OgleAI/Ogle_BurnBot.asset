@@ -28,12 +28,14 @@ MonoBehaviour:
   rangedDamage: 3
   bulletSpeed: 15
   destroyTime: 3
-  effectDamage: 2
+  effectDamage: 5
   effectDuration: 10
+  enemyReloadTime: 3
+  enemyClipSize: 4
   damageType: 2
   roaming: 1
-  roamDist: 20
-  roamTimer: 5
+  roamDist: 10
+  roamTimer: 10
   lootPinata: 1
   lootChance: 66
   loot:
@@ -53,3 +55,5 @@ MonoBehaviour:
   - {fileID: 0}
   walkingSound:
   - {fileID: 0}
+  reloadSound:
+  - {fileID: 8300000, guid: 907da7d35b9687b4597be4c5d9942a1c, type: 3}
