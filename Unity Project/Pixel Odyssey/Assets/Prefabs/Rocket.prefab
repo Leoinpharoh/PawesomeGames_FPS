@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: -4868395454293122177}
   - component: {fileID: -8114841286722609328}
   - component: {fileID: 4221197140141258706}
-  - component: {fileID: 3173571864659441217}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -52,7 +51,9 @@ MonoBehaviour:
   damage: 20
   speed: 20
   destroyTime: 10
-  Explode: {fileID: 6787251472115903121, guid: 6762b8e8ee87bc74b90d358cab6ec930, type: 3}
+  useSphereColliderForDamage: 1
+  sphereColliderRadius: 5
+  Explode: {fileID: 1574360742956860145, guid: 4b7ac0d2e282f7e40a348c79045ec199, type: 3}
 --- !u!54 &-8114841286722609328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -100,27 +101,6 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.2
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &3173571864659441217
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6847005562306369180}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8287352407041335298
 GameObject:

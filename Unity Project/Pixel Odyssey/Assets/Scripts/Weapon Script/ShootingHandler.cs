@@ -7,21 +7,23 @@ using UnityEngine.UIElements;
 
 public class ShootingHandler : MonoBehaviour
 {
+    // Public variables
     public WeaponStats weaponStats;
-
-    [Header("Outside References")]
     public LineRenderer lineRenderer;
+    [Header("Outside References")]
     [SerializeField] GameObject firePoint;
     [SerializeField] AudioSource fireAudioSource;
     [SerializeField] AudioSource reloadAudioSource;
     [SerializeField] LayerMask shootableLayer;
     [SerializeField] GameObject projectileBullet;
     [SerializeField] Animator Anim;
-    Vector3 dir;
+    [SerializeField] GameObject hitParticleEffect;
 
-    [HideInInspector] public int i = 0;
+    // Private variables
+    private Vector3 dir;
+    private int i = 0;
     [HideInInspector] public bool isShooting;
-    [HideInInspector] public int Ammo;
+    [HideInInspector]public int Ammo;
 
     private void Start()
     {
@@ -31,126 +33,169 @@ public class ShootingHandler : MonoBehaviour
 
     private void Update()
     {
-        // If game is unpaused, execute the code below
         if (!GameManager.Instance.isPaused)
         {
-            shoot();
+            HandleShooting();
+            UpdateAmmoDisplay();
 
-            // This is used to ensure that the correct ammo count is displayed.
-            if (i == 0)
+            if (Input.GetKeyDown(KeyCode.R) && !isShooting)
             {
-                GameManager.Instance.playerAmmo(weaponStats.ammoType.ToString(), weaponStats.Ammo);
-                i = 1;
+                StartCoroutine(Reload());
             }
-
-            GameManager.Instance.playerClip(weaponStats.clip);
-
-            // Handles the input of the player reloading the gun.
-            if (Input.GetKeyDown(KeyCode.R) && !isShooting) { StartCoroutine(reloading()); }
         }
     }
 
-    void shoot()
+    private void HandleShooting()
     {
-        // Handles the input of the player to fire the gun.
-        if (Input.GetButton("Fire1") && !isShooting && weaponStats.weaponType == WeaponStats.WeaponType.Automatic) { StartCoroutine(shooting()); }
-        else if (Input.GetButtonDown("Fire1") && !isShooting) { StartCoroutine(shooting()); }
-    }
-
-    IEnumerator shooting()
-    {
-        if (!isShooting && GameManager.Instance.isPaused == false && weaponStats.clip != 0)
+        if (weaponStats.weaponType == WeaponStats.WeaponType.Automatic)
         {
-            // Play audio and mark that the player is shooting.
-            isShooting = true;
-            fireAudioSource.clip = weaponStats.audioSFXShoot;
-            fireAudioSource.PlayOneShot(weaponStats.audioSFXShoot);
-            Anim.SetBool("isShooting", true);
-
-            // Apply ammo changes
-            GameManager.Instance.playerAmmo(weaponStats.ammoType.ToString(), weaponStats.Ammo);
-            weaponStats.clip--;
-            GameManager.Instance.playerClip(weaponStats.clip);
-
-            if (weaponStats.weaponType == WeaponStats.WeaponType.Laser || weaponStats.weaponType == WeaponStats.WeaponType.RayCast || weaponStats.weaponType == WeaponStats.WeaponType.SpreadRay || weaponStats.weaponType == WeaponStats.WeaponType.Automatic)
+            if (Input.GetButton("Fire1") && !isShooting)
             {
-                for (int i = 0; i < weaponStats.numberOfRays; i++) { rayDraw(); } // Fire a bullet in a straight line.
+                StartCoroutine(Shoot());
             }
-            else if (weaponStats.weaponType == WeaponStats.WeaponType.Projectile)
-            {
-                projectileBullet.GetComponent<playerBullet>().damage = weaponStats.shootDamage;
-                projectileBullet.GetComponent<playerBullet>().speed = weaponStats.projectileSpeed;
-                Instantiate(projectileBullet, firePoint.transform.position, transform.rotation);
-            }
-
-            // Turn off the laser.
-            if (weaponStats.weaponType.ToString() == "Laser")
-            {
-                yield return new WaitForSeconds(weaponStats.LaserWaitTime);
-                lineRenderer.enabled = false;
-            }
-        }
-
-        // Toggle the player as no longer shooting.
-        yield return new WaitForSeconds(weaponStats.shootSpeed);
-        isShooting = false;
-        Anim.SetBool("isShooting", false);
-    }
-
-    // Handles reloading the gun when the player runs out of bullets.
-    IEnumerator reloading()
-    {
-        reloadAudioSource.clip = weaponStats.audioSFXReload;
-        reloadAudioSource.Play();
-        Anim.SetBool("isReloading", true);
-
-        isShooting = true;
-        yield return new WaitForSeconds(weaponStats.reloadTime);
-        reloadAudioSource.Stop();
-
-        if (weaponStats.Ammo == 0)
-        {
-            // No action needed if Ammo is already zero
-        }
-        else if (weaponStats.Ammo < weaponStats.TilReload) // If the player doesn't have enough ammo to fill the clip
-        {
-            weaponStats.clip = weaponStats.Ammo + weaponStats.clip; // Fill the clip with the remaining ammo
-            weaponStats.Ammo = 0; // Set the ammo to zero
         }
         else
         {
-            weaponStats.Ammo = weaponStats.Ammo - (weaponStats.TilReload - weaponStats.clip);
-            weaponStats.clip = weaponStats.TilReload;
+            if (Input.GetButtonDown("Fire1") && !isShooting)
+            {
+                StartCoroutine(Shoot());
+            }
+        }
+    }
+
+    private void UpdateAmmoDisplay()
+    {
+        if (i == 0)
+        {
+            GameManager.Instance.playerAmmo(weaponStats.ammoType.ToString(), weaponStats.Ammo);
+            i = 1;
         }
 
+        GameManager.Instance.playerClip(weaponStats.clip);
+    }
+
+    private IEnumerator Shoot()
+    {
+        if (!isShooting && !GameManager.Instance.isPaused && weaponStats.clip != 0)
+        {
+            isShooting = true;
+            fireAudioSource.PlayOneShot(weaponStats.audioSFXShoot);
+            Anim.SetBool("isShooting", true);
+            weaponStats.clip--;
+            GameManager.Instance.playerClip(weaponStats.clip);
+
+            if (weaponStats.weaponType == WeaponStats.WeaponType.Projectile)
+            {
+                FireProjectile();
+            }
+            else
+            {
+                FireRays();
+            }
+
+            yield return new WaitForSeconds(weaponStats.shootSpeed);
+            isShooting = false;
+            Anim.SetBool("isShooting", false);
+        }
+    }
+
+    private void FireProjectile()
+    {
+        var bullet = Instantiate(projectileBullet, firePoint.transform.position, transform.rotation);
+        var bulletComponent = bullet.GetComponent<playerBullet>();
+        bulletComponent.damage = weaponStats.shootDamage;
+        bulletComponent.speed = weaponStats.projectileSpeed;
+    }
+
+    private void FireRays()
+    {
+        for (int i = 0; i < weaponStats.numberOfRays; i++)
+        {
+            DrawRay();
+        }
+
+        if (weaponStats.weaponType == WeaponStats.WeaponType.Laser)
+        {
+            StartCoroutine(DisableLaserAfterDelay());
+        }
+    }
+
+    private IEnumerator DisableLaserAfterDelay()
+    {
+        yield return new WaitForSeconds(weaponStats.LaserWaitTime);
+        lineRenderer.enabled = false;
+    }
+
+    private IEnumerator Reload()
+    {
+        reloadAudioSource.PlayOneShot(weaponStats.audioSFXReload);
+        Anim.SetBool("isReloading", true);
+        isShooting = true;
+
+        yield return new WaitForSeconds(weaponStats.reloadTime);
+
+        UpdateAmmoAfterReload();
         Anim.SetBool("isReloading", false);
         isShooting = false;
+
         GameManager.Instance.playerAmmo(weaponStats.ammoType.ToString(), weaponStats.Ammo);
     }
 
-    private void rayDraw()
+    private void UpdateAmmoAfterReload()
     {
-        if (weaponStats.weaponType == WeaponStats.WeaponType.SpreadRay) // Fire bullets in a randomized spread.
+        if (weaponStats.Ammo == 0) return;
+
+        if (weaponStats.Ammo < weaponStats.TilReload)
+        {
+            weaponStats.clip += weaponStats.Ammo;
+            weaponStats.Ammo = 0;
+        }
+        else
+        {
+            weaponStats.Ammo -= (weaponStats.TilReload - weaponStats.clip);
+            weaponStats.clip = weaponStats.TilReload;
+        }
+    }
+
+    private void DrawRay()
+    {
+        if (weaponStats.weaponType == WeaponStats.WeaponType.SpreadRay)
+        {
+            dir = GetSpreadDirection();
+        }
+        else
         {
             dir = Camera.main.transform.forward;
-            Vector3 spread = Vector3.zero;
-            spread += Camera.main.transform.up * Random.Range(-1f, 1f);
-            spread += Camera.main.transform.right * Random.Range(-1f, 1f);
-            dir += spread.normalized * Random.Range(0f, 0.2f);
         }
-        else { dir = Camera.main.transform.forward; }
 
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, dir, out hit, Mathf.Infinity, shootableLayer))
+        if (Physics.Raycast(Camera.main.transform.position, dir, out RaycastHit hit, Mathf.Infinity, shootableLayer))
         {
-            // Shows the laser that the player has fired.
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, firePoint.transform.position);
-            lineRenderer.SetPosition(1, hit.point);
+            DisplayRay(hit);
 
-            // Handles the damage that the player deals to the enemy.
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null) { dmg.takeDamage(weaponStats.shootDamage, hit.point); }
+            var damageable = hit.collider.GetComponent<IDamage>();
+            if (damageable != null)
+            {
+                damageable.takeDamage(weaponStats.shootDamage, hit.point);
+            }
+            else
+            {
+                Instantiate(hitParticleEffect, hit.point, Quaternion.identity);
+            }
         }
+    }
+
+    private Vector3 GetSpreadDirection()
+    {
+        var direction = Camera.main.transform.forward;
+        direction += Camera.main.transform.up * Random.Range(-1f, 1f);
+        direction += Camera.main.transform.right * Random.Range(-1f, 1f);
+        return direction.normalized * Random.Range(0f, 0.2f);
+    }
+
+    private void DisplayRay(RaycastHit hit)
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, firePoint.transform.position);
+        lineRenderer.SetPosition(1, hit.point);
     }
 }
