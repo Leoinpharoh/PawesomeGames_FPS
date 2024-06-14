@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject HealthBar;
     [SerializeField] GameObject StatusBar;
     [SerializeField] GameObject OvershieldBar;
+    [SerializeField] GameObject ToolTips;
     [SerializeField] GameObject Portals;
     [SerializeField] GameObject NewGameScreen;
     [SerializeField] GameObject LoadGameScreen;
@@ -210,6 +211,8 @@ public class GameManager : MonoBehaviour
 
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
+        PlayerPrefs.SetInt("TutorialComplete", 1);
+        PlayerPrefs.Save();
         tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
         if (tutorialComplete == false && sceneName == "Player Hub")
         {
@@ -373,6 +376,7 @@ public class GameManager : MonoBehaviour
         OvershieldBar.SetActive(false);
         Portals.SetActive(false);
         Timer.SetActive(false);
+        ToolTips.SetActive(false);
         playerAnimator.SetBool("Tutorial", true);
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
         PlayerPrefs.Save();
@@ -394,6 +398,8 @@ public class GameManager : MonoBehaviour
         Ammo.SetActive(true);
         HealthBar.SetActive(true);
         StatusBar.SetActive(true);
+        Timer.SetActive(true);
+        ToolTips.SetActive(true);
         Portals.SetActive(true);
         tutorialComplete = true;
         PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
@@ -408,7 +414,7 @@ public class GameManager : MonoBehaviour
     public void OpeningScene()
     {
         NewGameScreen.SetActive(false);
-        LoadGameScreen.SetActive(false);
+        LoadGameScreen.SetActive(true);
 
     }
 

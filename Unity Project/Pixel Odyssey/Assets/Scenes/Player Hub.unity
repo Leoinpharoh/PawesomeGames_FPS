@@ -9300,6 +9300,17 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &1380641518 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+  m_PrefabInstance: {fileID: 1380641515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609205708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ea42ae4177d5e4abde8a24b6775107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1393722167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12565,6 +12576,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 928265124}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: ToolTips
+      value: 
+      objectReference: {fileID: 2088319311}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: HealthBar
       value: 
       objectReference: {fileID: 506070630}
@@ -12572,6 +12587,10 @@ PrefabInstance:
       propertyPath: StatusBar
       value: 
       objectReference: {fileID: 2122518348}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: playerScript
+      value: 
+      objectReference: {fileID: 1380641518}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: ObjectiveList
       value: 
@@ -12751,6 +12770,11 @@ RectTransform:
 --- !u!1 &2088319310 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4734486898304477874, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2088319308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2088319311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1245451079189582457, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
   m_PrefabInstance: {fileID: 2088319308}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2116700640
