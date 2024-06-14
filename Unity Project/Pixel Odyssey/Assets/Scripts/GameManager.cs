@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMainMenu;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
+    [SerializeField] TMP_Text clipColtAmount;
+    [SerializeField] TMP_Text clipShotgunAmount;
+    [SerializeField] TMP_Text clipAssaultAmount;
     [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
     [SerializeField] Animator UIAnimator;
@@ -207,8 +210,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayer()
     {
-
-
+        clipColtAmount.text = lightBullets.ToString();
+        //clipColtAmount.text = ;
+        clipShotgunAmount.text = lightBullets.ToString();
+        clipAssaultAmount.text = lightBullets.ToString();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
         PlayerPrefs.SetInt("TutorialComplete", 1);
@@ -310,11 +315,14 @@ public class GameManager : MonoBehaviour
         switch (ammoCurrentType)
         {
             case "Light":
-                ammoDisplayAmount.text = lightBullets.ToString(); break;
+                ammoDisplayAmount.text = lightBullets.ToString();
+                clipColtAmount.text = lightBullets.ToString(); break;
             case "Medium":
-                ammoDisplayAmount.text = MediumBullets.ToString(); break;
+                ammoDisplayAmount.text = MediumBullets.ToString();
+                clipShotgunAmount.text = MediumBullets.ToString(); break;
             case "Heavy":
-                ammoDisplayAmount.text = HeavyBullets.ToString(); break;
+                ammoDisplayAmount.text = HeavyBullets.ToString();
+                clipAssaultAmount.text = HeavyBullets.ToString(); break;
         }
     }
 
