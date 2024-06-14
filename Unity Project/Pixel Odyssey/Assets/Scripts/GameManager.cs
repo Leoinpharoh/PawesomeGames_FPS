@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text clipColtAmount;
     [SerializeField] TMP_Text clipShotgunAmount;
     [SerializeField] TMP_Text clipAssaultAmount;
+    [SerializeField] TMP_Text clipRPGAmount;
     [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
     [SerializeField] Animator UIAnimator;
@@ -211,9 +213,8 @@ public class GameManager : MonoBehaviour
     public void LoadPlayer()
     {
         clipColtAmount.text = lightBullets.ToString();
-        //clipColtAmount.text = ;
-        clipShotgunAmount.text = lightBullets.ToString();
-        clipAssaultAmount.text = lightBullets.ToString();
+        clipShotgunAmount.text = MediumBullets.ToString();
+        clipAssaultAmount.text = HeavyBullets.ToString();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
         PlayerPrefs.SetInt("TutorialComplete", 1);
@@ -322,6 +323,7 @@ public class GameManager : MonoBehaviour
                 clipShotgunAmount.text = MediumBullets.ToString(); break;
             case "Heavy":
                 ammoDisplayAmount.text = HeavyBullets.ToString();
+                //clipRPGAmount.text = HeavyBullets.ToString();
                 clipAssaultAmount.text = HeavyBullets.ToString(); break;
         }
     }
