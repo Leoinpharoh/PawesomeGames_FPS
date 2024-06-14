@@ -7460,6 +7460,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: healthPotions
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: interactScript
       value: 
       objectReference: {fileID: 2141684122}
@@ -7509,7 +7513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.5
+      value: -27.4
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7517,7 +7521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.31
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11086,6 +11090,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9172373389521032937, guid: dc46f0f207b04504d823d8e728abb0ad, type: 3}
   m_PrefabInstance: {fileID: 2126088409}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &859771703 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4761504444031903209, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2112279757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &862841692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19411,6 +19426,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc46f0f207b04504d823d8e728abb0ad, type: 3}
+--- !u!114 &1558750799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8710898704576801863, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2112279757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1558974134
 GameObject:
   m_ObjectHideFlags: 0
@@ -24603,6 +24629,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019841247}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2023354082 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8999078989238856709, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2112279757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2026389170
 GameObject:
   m_ObjectHideFlags: 0
@@ -25242,6 +25279,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: AmountinBag
+      value: 
+      objectReference: {fileID: 859771703}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 2141684123}
@@ -25249,9 +25290,33 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1441613120}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: potionSprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: itemSlotImages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: potionSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 34979e8019e9a2345a606ad1355448a6, type: 3}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: itemSlotImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 1558750799}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: itemSlotImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 2023354082}
     - target: {fileID: 3657128021650495967, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_Name
       value: UIBasicTheme
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177235702124556241, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6092368370839228119, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_IsActive
@@ -25341,6 +25406,14 @@ PrefabInstance:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 693097815}
+    - target: {fileID: 8999078989238856709, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 34979e8019e9a2345a606ad1355448a6, type: 3}
+    - target: {fileID: 8999078989238856709, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
