@@ -34,7 +34,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] GameObject subtitlesObject;
 
 
-
     private CharacterController CharCon;
     public Vector3 moveDirection;
     public Vector3 playerVelocity;
@@ -806,7 +805,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
             // Update the UI to reflect the new potion count
             UpdateCurrentPotionSlotUI();
-
+            updatePlayerUI();
             Debug.Log("Used potion. Index: " + currentPotionIndex + ", Remaining Count: " + toolBelt.GetPotionCount(currentPotionIndex));
         }
         else

@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
     public GameObject playerOSToggle;
+    //public GameObject playerToolBeltToggle;
+    public GameObject playerPotionToggle;
+    bool onPotions;
+    public GameObject playerCureToggle;
+    bool onCure;
 
     // Used for display of the players ammo for each gun
     [SerializeField]
@@ -473,6 +478,16 @@ public class GameManager : MonoBehaviour
                 if (i == potionIndex && potionIndex < potionSprites.Length)
                 {
                     itemSlotImages[i].sprite = potionSprites[potionIndex]; // Set the UI Image to the current potion sprite
+                    if(itemSlotImages[i].sprite == potionSprites[0])
+                    {
+                        playerPotionToggle.SetActive(true);
+                        playerCureToggle.SetActive(false);
+                    }
+                    if (itemSlotImages[i].sprite == potionSprites[1])
+                    {
+                        playerCureToggle.SetActive(true);
+                        playerPotionToggle.SetActive(false);
+                    }
                     itemSlotImages[i].color = Color.white; // Ensure the image is visible
                 }
                 else
