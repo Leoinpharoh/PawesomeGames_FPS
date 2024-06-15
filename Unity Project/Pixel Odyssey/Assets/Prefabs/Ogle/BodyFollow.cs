@@ -60,4 +60,29 @@ public class BodyFollow : MonoBehaviour
     {
 
     }
+
 }
+
+    //void Update()
+    //{
+    //    if (cameraTransform != null)
+    //    {
+    //        //calc direction to camera
+    //        Vector3 directionToCamera = cameraTransform.position - transform.position;
+
+    //        //Limit pitch angle to prevent direct up or down
+    //        float angle = Vector3.Angle(Vector3.up, directionToCamera);
+    //        float maxPitchAngle = 88f;
+
+    //        if (angle > maxPitchAngle)
+    //        {
+    //            directionToCamera = Vector3.RotateTowards(transform.forward, directionToCamera, Mathf.Deg2Rad * (angle - maxPitchAngle), 0);
+    //        }
+    //        // Convert target rotation relative to the initial rotation
+    //        Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
+
+    //        // smooth interpolation towards the target roation
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5);
+    //    }
+    //}
+
