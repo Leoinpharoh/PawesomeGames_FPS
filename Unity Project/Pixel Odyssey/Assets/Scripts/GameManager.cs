@@ -141,6 +141,8 @@ public class GameManager : MonoBehaviour
         //on awake needs objective
         needsObjective = true;
         Instance = this;
+
+        playerPotionToggle.SetActive(true);
     }
 
     private void Start()
