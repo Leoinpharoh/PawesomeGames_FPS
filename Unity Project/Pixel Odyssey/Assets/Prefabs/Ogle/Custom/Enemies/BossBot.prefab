@@ -1369,6 +1369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6957185784711021102}
+  - component: {fileID: 1213436822015743031}
   m_Layer: 3
   m_Name: Hips
   m_TagString: Untagged
@@ -1394,6 +1395,19 @@ Transform:
   - {fileID: 3919572036819525900}
   m_Father: {fileID: 2119920340816866562}
   m_LocalEulerAnglesHint: {x: 0, y: 98.835, z: 0}
+--- !u!114 &1213436822015743031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998985236737257327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3b0adeacb2c854eb6886015f60ef98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 6957185784711021102}
 --- !u!1 &4020726691098439309
 GameObject:
   m_ObjectHideFlags: 0

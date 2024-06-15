@@ -15,11 +15,13 @@ public class BodyFollow : MonoBehaviour
 
     void Update()
     {
+        transformPosition();
+
         if (cameraTransform != null)
         {
             Vector3 directionToCamera = cameraTransform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
-            targetRotation *= Quaternion.Euler(0, -90, -90); // Apply the corrective rotation
+            targetRotation *= Quaternion.Euler(0, 0, 0); // Apply the corrective rotation
 
             // Convert target rotation relative to the initial rotation
             Quaternion relativeRotation = Quaternion.Inverse(initialRotation) * targetRotation;
@@ -39,7 +41,7 @@ public class BodyFollow : MonoBehaviour
         angle = NormalizeAngle(angle);
 
         // Clamp the angle
-        angle = Mathf.Clamp(angle, -60, 60);
+        angle = Mathf.Clamp(angle, 0, 0);
 
         // Return the new quaternion
         return Quaternion.AngleAxis(angle, axis);
@@ -51,5 +53,11 @@ public class BodyFollow : MonoBehaviour
         while (angle < 0) angle += 360;
         if (angle > 180) angle -= 360;
         return angle;
+    }
+
+    //update robots transform as he moves
+    public void transformPosition()
+    {
+
     }
 }
