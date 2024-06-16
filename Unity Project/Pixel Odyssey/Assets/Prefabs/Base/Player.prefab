@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 85892016356726611}
   - component: {fileID: 3193789558631110542}
   - component: {fileID: 3052440193595055490}
+  - component: {fileID: 3775021277913584130}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -510,9 +511,9 @@ MonoBehaviour:
   moveSpeed: 4
   dashMultiplier: 2
   maxJumps: 1
-  jumpSpeed: 4
+  jumpSpeed: 8
   jumpCounter: 0
-  gravity: 10
+  gravity: 20
   moveSpeedOriginal: 4
   Normal: 1
   poisoned: 0
@@ -542,7 +543,7 @@ MonoBehaviour:
   inventoryDisplay: {fileID: 0}
   inventoryManager: {fileID: 0}
   interactScript: {fileID: 3193789558631110542}
-  toolBelt: {fileID: 0}
+  currentPotionIndex: 0
 --- !u!114 &3804893452896125985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +757,7 @@ Animator:
   m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c491c3273d4448140ae0ead096090eed, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -766,6 +767,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3775021277913584130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568827330076845495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040b1079a67a49c468bf8f7b30e4e2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potions: 000000000000000000000000
 --- !u!1 &1861634458113830439
 GameObject:
   m_ObjectHideFlags: 0
