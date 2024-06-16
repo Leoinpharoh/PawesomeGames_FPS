@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     //public GameObject playerToolBeltToggle; //for unlocking the ToolBelt
     public GameObject playerPotionToggle; //for toolbelt image when swapping to potion
     public GameObject playerCureToggle; //for toolbelt image when swapping to cure
-    //public GameObject playerOSPToggle; //for toolbelt image when swapping to OS Potion
+    public GameObject playerOSPToggle; //for toolbelt image when swapping to OS Potion
 
     // Used for display of the players ammo for each gun
     [SerializeField]
@@ -483,20 +483,20 @@ public class GameManager : MonoBehaviour
                     {
                         playerPotionToggle.SetActive(true);
                         playerCureToggle.SetActive(false);
-                    //  playerOSPToggle.SetActive(false);
+                        playerOSPToggle.SetActive(false);
                     }
                     if (itemSlotImages[i].sprite == potionSprites[1])
                     {
                         playerCureToggle.SetActive(true);
                         playerPotionToggle.SetActive(false);
-                    //  playerplayerOSPToggle.SetActive(false);
+                        playerOSPToggle.SetActive(false);
                     }
-                    //if (itemSlotImages[i].sprite == potionSprites[2]) OSPotion
-                    //{
-                    //    playerOSPToggle.SetActive(true);
-                    //    playerPotionToggle.SetActive(false);
-                    //    playerCureToggle.SetActive(False);
-                    //}
+                    if (itemSlotImages[i].sprite == potionSprites[2]) 
+                    {
+                        playerOSPToggle.SetActive(true);
+                        playerPotionToggle.SetActive(false);
+                        playerCureToggle.SetActive(false);
+                    }
                     itemSlotImages[i].color = Color.white; // Ensure the image is visible
                 }
                 else

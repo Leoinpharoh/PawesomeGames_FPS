@@ -1,5 +1,5 @@
 using UnityEngine;
-public class HealingPotion : MonoBehaviour
+public class OSPotion : MonoBehaviour
 {
     public int potionIndex;
     public int potionCountIncrement = 1;
@@ -14,7 +14,6 @@ public class HealingPotion : MonoBehaviour
             // Update the UI
             int potionCount = toolBelt.GetPotionCount(potionIndex);
             GameManager.Instance.UpdatePotionSlotUI(potionIndex, potionCount);
-
 
             Destroy(gameObject);
         }
