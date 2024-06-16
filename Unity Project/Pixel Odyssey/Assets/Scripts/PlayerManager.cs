@@ -34,7 +34,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] GameObject subtitlesObject;
 
 
-
     private CharacterController CharCon;
     public Vector3 moveDirection;
     public Vector3 playerVelocity;
@@ -801,12 +800,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             // Reduce the potion count
             toolBelt.AddPotion(currentPotionIndex, -1);
 
-            // Heal the player
-            HealPlayer(20);
+            ApplyPotionEffect(currentPotionIndex);
 
             // Update the UI to reflect the new potion count
             UpdateCurrentPotionSlotUI();
-
+            updatePlayerUI();
             Debug.Log("Used potion. Index: " + currentPotionIndex + ", Remaining Count: " + toolBelt.GetPotionCount(currentPotionIndex));
         }
         else
@@ -821,12 +819,61 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         int potionCount = toolBelt.GetPotionCount(currentPotionIndex);
         GameManager.Instance.UpdatePotionSlotUI(currentPotionIndex, potionCount);
     }
-
+    //Apply the effect of the selected potion
+    private void ApplyPotionEffect(int potionIndex)
+    {
+        if (potionIndex == 0)
+        {
+            HealPlayer(20);
+        }
+        if (potionIndex == 1)
+        {
+            if (poisoned)
+            {
+                poisoned = false;
+                StopCoroutine(poisonCoroutine);
+            }
+            if (burning)
+            {
+                burning = false;
+                StopCoroutine(burnCoroutine);
+            }
+            if (freezing)
+            {
+                freezing = false;
+                StopCoroutine(freezeCoroutine);
+            }
+            if (slowed)
+            {
+                slowed = false;
+                StopCoroutine(slowCoroutine);
+            }
+            if (confused)
+            {
+                confused = false;
+                StopCoroutine(confuseCoroutine);
+            }
+            Normal = true;
+            GameManager.Instance.playerEffect("Normal");
+            updatePlayerUI();
+            
+        }
+        if (potionIndex == 2 && overshieldUnlocked) 
+        {
+            HealOSPlayer(10);
+            updatePlayerUI();
+        }
+    }
     // Heal the player by a certain amount
     private void HealPlayer(int healAmount)
     {
         HP = Mathf.Min(HP + healAmount, HPOrignal);
         Debug.Log("Player healed. Current HP: " + HP);
+    }
+    private void HealOSPlayer(int healAmount)
+    {
+        OS = Mathf.Min(OS + healAmount, OSOrignal);
+        Debug.Log("Player healed. Current OS: " + OS);
     }
 }
     #endregion

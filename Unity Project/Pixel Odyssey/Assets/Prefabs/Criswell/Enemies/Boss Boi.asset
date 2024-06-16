@@ -21,7 +21,7 @@ MonoBehaviour:
   enemyType: 2
   bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
   attackSpeed: 1
-  rangedAttackLead: 0.1
+  rangedAttackLead: 0.8
   meleeRange: 5
   meleeDamage: 15
   rangedRange: 20
@@ -30,6 +30,8 @@ MonoBehaviour:
   destroyTime: 3
   effectDamage: 0
   effectDuration: 0.1
+  enemyReloadTime: 0
+  enemyClipSize: 0
   damageType: 0
   roaming: 1
   roamDist: 14
@@ -37,7 +39,7 @@ MonoBehaviour:
   lootPinata: 1
   lootChance: 100
   loot:
-  - {fileID: 3802848766677527129, guid: 927d1baae9bc8ea40bc7eda0e1c9a938, type: 3}
+  - {fileID: 8884114810549261806, guid: d8a59b9f57dddd44783aaff259a81504, type: 3}
   lineOfSightRange: 100
   viewAngle: 180
   detectionType: 0
@@ -46,3 +48,4 @@ MonoBehaviour:
   damagedSound: []
   idleSound: []
   walkingSound: []
+  reloadSound: []

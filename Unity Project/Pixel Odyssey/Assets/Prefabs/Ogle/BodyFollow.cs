@@ -15,11 +15,13 @@ public class BodyFollow : MonoBehaviour
 
     void Update()
     {
+        transformPosition();
+
         if (cameraTransform != null)
         {
             Vector3 directionToCamera = cameraTransform.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
-            targetRotation *= Quaternion.Euler(0, -90, -90); // Apply the corrective rotation
+            targetRotation *= Quaternion.Euler(0, 0, 0); // Apply the corrective rotation
 
             // Convert target rotation relative to the initial rotation
             Quaternion relativeRotation = Quaternion.Inverse(initialRotation) * targetRotation;
@@ -39,7 +41,7 @@ public class BodyFollow : MonoBehaviour
         angle = NormalizeAngle(angle);
 
         // Clamp the angle
-        angle = Mathf.Clamp(angle, -60, 60);
+        angle = Mathf.Clamp(angle, 0, 0);
 
         // Return the new quaternion
         return Quaternion.AngleAxis(angle, axis);
@@ -52,4 +54,35 @@ public class BodyFollow : MonoBehaviour
         if (angle > 180) angle -= 360;
         return angle;
     }
+
+    //update robots transform as he moves
+    public void transformPosition()
+    {
+
+    }
+
 }
+
+    //void Update()
+    //{
+    //    if (cameraTransform != null)
+    //    {
+    //        //calc direction to camera
+    //        Vector3 directionToCamera = cameraTransform.position - transform.position;
+
+    //        //Limit pitch angle to prevent direct up or down
+    //        float angle = Vector3.Angle(Vector3.up, directionToCamera);
+    //        float maxPitchAngle = 88f;
+
+    //        if (angle > maxPitchAngle)
+    //        {
+    //            directionToCamera = Vector3.RotateTowards(transform.forward, directionToCamera, Mathf.Deg2Rad * (angle - maxPitchAngle), 0);
+    //        }
+    //        // Convert target rotation relative to the initial rotation
+    //        Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
+
+    //        // smooth interpolation towards the target roation
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5);
+    //    }
+    //}
+

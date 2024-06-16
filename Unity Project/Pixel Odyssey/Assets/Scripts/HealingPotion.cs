@@ -15,7 +15,6 @@ public class HealingPotion : MonoBehaviour
             int potionCount = toolBelt.GetPotionCount(potionIndex);
             GameManager.Instance.UpdatePotionSlotUI(potionIndex, potionCount);
 
-            Debug.Log("Potion picked up. Index: " + potionIndex + ", Count: " + potionCount);
 
             Destroy(gameObject);
         }

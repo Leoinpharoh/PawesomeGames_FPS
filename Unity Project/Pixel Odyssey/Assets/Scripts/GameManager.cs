@@ -30,7 +30,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator UIAnimator;
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
-    public GameObject playerOSToggle;
+    public GameObject playerOSToggle; //for unlocking the OS
+    //public GameObject playerToolBeltToggle; //for unlocking the ToolBelt
+    public GameObject playerPotionToggle; //for toolbelt image when swapping to potion
+    public GameObject playerCureToggle; //for toolbelt image when swapping to cure
+    public GameObject playerOSPToggle; //for toolbelt image when swapping to OS Potion
 
     // Used for display of the players ammo for each gun
     [SerializeField]
@@ -137,6 +141,8 @@ public class GameManager : MonoBehaviour
         //on awake needs objective
         needsObjective = true;
         Instance = this;
+
+        playerPotionToggle.SetActive(true);
     }
 
     private void Start()
@@ -473,6 +479,24 @@ public class GameManager : MonoBehaviour
                 if (i == potionIndex && potionIndex < potionSprites.Length)
                 {
                     itemSlotImages[i].sprite = potionSprites[potionIndex]; // Set the UI Image to the current potion sprite
+                    if(itemSlotImages[i].sprite == potionSprites[0])
+                    {
+                        playerPotionToggle.SetActive(true);
+                        playerCureToggle.SetActive(false);
+                        playerOSPToggle.SetActive(false);
+                    }
+                    if (itemSlotImages[i].sprite == potionSprites[1])
+                    {
+                        playerCureToggle.SetActive(true);
+                        playerPotionToggle.SetActive(false);
+                        playerOSPToggle.SetActive(false);
+                    }
+                    if (itemSlotImages[i].sprite == potionSprites[2]) 
+                    {
+                        playerOSPToggle.SetActive(true);
+                        playerPotionToggle.SetActive(false);
+                        playerCureToggle.SetActive(false);
+                    }
                     itemSlotImages[i].color = Color.white; // Ensure the image is visible
                 }
                 else
