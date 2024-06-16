@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EventCloseTrigger : MonoBehaviour
 {
-    private Vector3 teleportPosition = new Vector3(-195.405f, 78.178f, -33.22f);
-    private Vector3 teleportRotation = new Vector3(0f, 88.452f, 0f);
+    private Vector3 teleportPosition = new Vector3(-484.8773f, 31.738f, -2.823f);
+    private Vector3 teleportRotation = new Vector3(0f, -541.893f, 0f);
     [SerializeField] public Animator animator;
     private void OnTriggerEnter(Collider other) // Triggers when player enters the collider
     {
