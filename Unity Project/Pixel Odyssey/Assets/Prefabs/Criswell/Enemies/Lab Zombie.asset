@@ -30,6 +30,8 @@ MonoBehaviour:
   destroyTime: 2
   effectDamage: 0
   effectDuration: 0.1
+  enemyReloadTime: 0
+  enemyClipSize: 0
   damageType: 0
   roaming: 1
   roamDist: 9
@@ -37,8 +39,8 @@ MonoBehaviour:
   lootPinata: 1
   lootChance: 60
   loot:
-  - {fileID: 3802848766677527129, guid: 927d1baae9bc8ea40bc7eda0e1c9a938, type: 3}
-  - {fileID: 8884114810549261806, guid: a5b228b84d9b12e46bce8e52e7cff51e, type: 3}
+  - {fileID: 3802848766677527129, guid: 355caeea4e1590442b7516a9a0d311ed, type: 3}
+  - {fileID: 8884114810549261806, guid: d8a59b9f57dddd44783aaff259a81504, type: 3}
   lineOfSightRange: 15
   viewAngle: 120
   detectionType: 0
@@ -97,3 +99,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fe1da5ea3e2c8fe4f952dbf34e6d5c72, type: 3}
   - {fileID: 8300000, guid: e10c9448d7c1c2e4cb0e98a82df61c96, type: 3}
   - {fileID: 8300000, guid: 6b29532875e76cf409fef645d5de0074, type: 3}
+  reloadSound: []
