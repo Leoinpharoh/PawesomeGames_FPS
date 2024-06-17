@@ -185,6 +185,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         HP = HPOrignal;
         OS = OSOrignal;
         osCheck();
+        rpgCheck();
+        shotgunCheck();
+        assaultCheck();
+        toolbeltCheck();
         updatePlayerUI();
     }
 
@@ -742,12 +746,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             inventory.Container.Items.Clear();
         }
     }
-
-
-    public GameObject weaponSlot2LockedToggle;
-    public GameObject weaponSlot3LockedToggle;
-    public GameObject weaponSlot4LockedToggle;
-    public GameObject itemsSlotLockedToggle;
     public void osCheck()
     {
         if (overshieldUnlocked)
@@ -758,9 +756,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             GameManager.Instance.playerOSToggle.SetActive(false);
         }
-        updatePlayerUI();
     }
-    public void showgunCheck()
+    public void shotgunCheck()
     {
         if (shotgunUnlocked)
         {
@@ -773,7 +770,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             GameManager.Instance.weaponSlot2LockedToggle.SetActive(true);
             GameManager.Instance.weaponSlot2Toggle.SetActive(false);
         }
-        updatePlayerUI();
     }
     public void assaultCheck()
     {
@@ -787,7 +783,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             GameManager.Instance.weaponSlot3LockedToggle.SetActive(true);
             GameManager.Instance.weaponSlot3Toggle.SetActive(false);
         }
-        updatePlayerUI();
     }
     public void rpgCheck()
     {
@@ -801,7 +796,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             GameManager.Instance.weaponSlot4LockedToggle.SetActive(true);
             GameManager.Instance.weaponSlot4Toggle.SetActive(false);
         }
-        updatePlayerUI();
     }
     public void toolbeltCheck()
     {
@@ -816,7 +810,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             GameManager.Instance.itemsSlotLockedToggle.SetActive(true);
             GameManager.Instance.playerToolBeltToggle.SetActive(false);
         }
-        updatePlayerUI();
     }
 
 

@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject LoadGameScreen;
 
 
-
+    public PlayerManager playerManager;
 
 
     public static GameManager Instance;
