@@ -151,7 +151,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         //// Use potion when the player presses the "Q" key
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            UsePotion();
+            if(potionbeltUnlocked)
+            {
+                UsePotion();
+            }
         }
     }
 
