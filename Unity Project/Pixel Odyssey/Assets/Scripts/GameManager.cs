@@ -235,7 +235,6 @@ public class GameManager : MonoBehaviour
         clipAssaultAmount.text = HeavyBullets.ToString();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        PlayerPrefs.SetInt("TutorialComplete", 1);
         PlayerPrefs.Save();
         tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
         if (tutorialComplete == false && sceneName == "Player Hub")
