@@ -34,10 +34,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
     public GameObject playerOSToggle; //for unlocking the OS
-    //public GameObject playerToolBeltToggle; //for unlocking the ToolBelt
+    public GameObject playerToolBeltToggle; //for unlocking the ToolBelt
+    public GameObject itemsSlotLockedToggle;
     public GameObject playerPotionToggle; //for toolbelt image when swapping to potion
     public GameObject playerCureToggle; //for toolbelt image when swapping to cure
     public GameObject playerOSPToggle; //for toolbelt image when swapping to OS Potion
+
+    public GameObject weaponSlot2Toggle;
+    public GameObject weaponSlot3Toggle;
+    public GameObject weaponSlot4Toggle;
+    public GameObject weaponSlot2LockedToggle;
+    public GameObject weaponSlot3LockedToggle;
+    public GameObject weaponSlot4LockedToggle;
 
     // Used for display of the players ammo for each gun
     [SerializeField]

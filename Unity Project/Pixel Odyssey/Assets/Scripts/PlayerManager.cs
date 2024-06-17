@@ -743,6 +743,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
     }
 
+
+    public GameObject weaponSlot2LockedToggle;
+    public GameObject weaponSlot3LockedToggle;
+    public GameObject weaponSlot4LockedToggle;
+    public GameObject itemsSlotLockedToggle;
     public void osCheck()
     {
         if (overshieldUnlocked)
@@ -752,6 +757,64 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         if (!overshieldUnlocked)
         {
             GameManager.Instance.playerOSToggle.SetActive(false);
+        }
+        updatePlayerUI();
+    }
+    public void showgunCheck()
+    {
+        if (shotgunUnlocked)
+        {
+            GameManager.Instance.weaponSlot2LockedToggle.SetActive(false);
+            GameManager.Instance.weaponSlot2Toggle.SetActive(true);
+
+        }
+        if (!shotgunUnlocked)
+        {
+            GameManager.Instance.weaponSlot2LockedToggle.SetActive(true);
+            GameManager.Instance.weaponSlot2Toggle.SetActive(false);
+        }
+        updatePlayerUI();
+    }
+    public void assaultCheck()
+    {
+        if (overshieldUnlocked)
+        {
+            GameManager.Instance.weaponSlot3LockedToggle.SetActive(false);
+            GameManager.Instance.weaponSlot3Toggle.SetActive(true);
+        }
+        if (!overshieldUnlocked)
+        {
+            GameManager.Instance.weaponSlot3LockedToggle.SetActive(true);
+            GameManager.Instance.weaponSlot3Toggle.SetActive(false);
+        }
+        updatePlayerUI();
+    }
+    public void rpgCheck()
+    {
+        if (assaultRifleUnlocked)
+        {
+            GameManager.Instance.weaponSlot4LockedToggle.SetActive(false);
+            GameManager.Instance.weaponSlot4Toggle.SetActive(true);
+        }
+        if (!assaultRifleUnlocked)
+        {
+            GameManager.Instance.weaponSlot4LockedToggle.SetActive(true);
+            GameManager.Instance.weaponSlot4Toggle.SetActive(false);
+        }
+        updatePlayerUI();
+    }
+    public void toolbeltCheck()
+    {
+        if (potionbeltUnlocked)
+        {
+            GameManager.Instance.itemsSlotLockedToggle.SetActive(false);
+            GameManager.Instance.playerToolBeltToggle.SetActive(true);
+
+        }
+        if (!potionbeltUnlocked)
+        {
+            GameManager.Instance.itemsSlotLockedToggle.SetActive(true);
+            GameManager.Instance.playerToolBeltToggle.SetActive(false);
         }
         updatePlayerUI();
     }
