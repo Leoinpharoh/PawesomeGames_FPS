@@ -1,4 +1,5 @@
 //ItemObject
+//TODO: need to set up something to say if an item can be consumed or not
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,9 @@ public enum ItemType    //create the type of item you want
     Weapon,
     AmmoPack,
     HealthPack,
+    Map,
+    Lore,
+    Currency,
     Default
 }
 
@@ -21,6 +25,8 @@ public abstract class ItemObject : ScriptableObject  //base class for items
     public ItemType type;
     [TextArea(15, 20)]   //text size for the description of the item
     public string description;
+    [TextArea(10, 15)]
+    public string pickUpMessage;
 }
 
 [System.Serializable]

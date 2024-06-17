@@ -2,37 +2,48 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [System.Serializable]
-public class InventorySlot : IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class InventorySlot : MonoBehaviour
 {
     public int ID;
     public Item item;
     public int amount;
-    public InventorySlot(int _id, Item _item, int _amount)     //constructor for the inventory slots
+
+    public ItemDescriptionUI itemDescription;
+    public DisplayInventory displayInventory;
+    private Button button;
+
+    public void Initialize(int _id, Item _item, int _amount, DisplayInventory displayInventory, ItemDescriptionUI itemDescription)     //constructor for the inventory slots
     {
-        ID = _id;
-        item = _item;
-        amount = _amount;
+        this.ID = _id;
+        this.item = _item;
+        this.amount = _amount;
+        this.displayInventory = displayInventory;
+        this.itemDescription = itemDescription;
+    }
+    //TODO: need to add listeners when the slots are created, either here or display inventory
+    public void SetDependancies(DisplayInventory displayInventory, ItemDescriptionUI itemDescription)
+    {
+        this.displayInventory = displayInventory;
+        this.itemDescription = itemDescription;
     }
 
     public void AddAmount(int value)
     {
         amount += value;
     }
+    //TODO: Need to get the right click working
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnClick()
     {
-        Debug.Log("OnPointerEnter called");
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("OnPointerExit called");
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("OnPointerClick called");
+        //Debug.Log("OnPointerClick called");
+        if(item != null)
+        {
+            string description = item.Name + "\n" + itemDescription;
+            itemDescription.UpdateDescription(description);
+            displayInventory.SetSelectedSlot(this);
+        }
     }
 }

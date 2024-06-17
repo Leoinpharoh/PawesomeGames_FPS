@@ -15,8 +15,9 @@ public class DisplayInventory : MonoBehaviour
     public GameObject inventoryGrid;
     public GameObject inventoryUI;  //reference to the UI panel
     public InventorySlot selectedSlot;  //for dropping/using purposes
+    public ItemDescriptionUI itemDescription;   //reference to the items description attached to the scriptable
 
-    Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
+    public Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -35,29 +36,27 @@ public class DisplayInventory : MonoBehaviour
     /// </summary>
     public void CreateDisplay()
     {
-        //TODO: need to make a set number of empty slots based on inventory space
+        //Debug.Log("CreateDisplay method called");
+
         List<InventorySlot> slotsToDisplay
             = inventory.Container.Items.Where(slot => !itemsDisplayed.ContainsKey(slot)).ToList();  //create a list of slots not already in itemsDisplayed
         foreach (InventorySlot slot in slotsToDisplay)
         {
-            var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, inventoryGrid.transform);
+            var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, inventoryGrid.transform); //creates a inventoryprefab to be used in the inventory display
 
             ItemObject itemObject = inventory.database.GetItem[slot.item.id];   //assigning our itemObject to corresponding item in the database
             Sprite itemSprite = itemObject.uiDisplay;   //getting the sprite from that item
 
-            obj.GetComponent<UnityEngine.UI.Image>().sprite = itemSprite;   //assinging sprite to the component of the inventory prefab
+            obj.GetComponent<UnityEngine.UI.Image>().sprite = itemSprite;   //assinging sprite to the component of the inventoryprefab
             obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");    //assigning the amount text in the slot
 
-            itemsDisplayed.Add(slot, obj);
-            /*EventTrigger trigger = obj.AddComponent<EventTrigger>();
-            EventTriggerHelper.AddEventTriggerListener(trigger, EventTriggerType.PointerEnter, (data) => { OnPointerEnter((PointerEventData)data); });
-            EventTriggerHelper.AddEventTriggerListener(trigger, EventTriggerType.PointerExit, (data) => { OnPointerExit((PointerEventData)data); });
-            EventTriggerHelper.AddEventTriggerListener(trigger, EventTriggerType.PointerClick, (data) => { OnPointerClick ((PointerEventData)data); });*/
+            itemsDisplayed.Add(slot, obj); //adding that slot to the display along with the object tied to it
         }
     }
 
     public void UpdateDisplay()
     {
+        //Debug.Log("UpdateDisplay method called");
         Dictionary<InventorySlot, GameObject> updatedItemsDisplayed = new Dictionary<InventorySlot, GameObject>();
 
         List<InventorySlot> slotsToRemove
@@ -77,7 +76,7 @@ public class DisplayInventory : MonoBehaviour
 
                 obj.GetComponent<UnityEngine.UI.Image>().sprite = itemSprite;
 
-                updatedItemsDisplayed.Add(slot, obj);
+                updatedItemsDisplayed.Add(slot, obj);  //adding that slot to the updated display
             }
             else //if there is not one in the inventory already, make a new object
             {
@@ -89,29 +88,52 @@ public class DisplayInventory : MonoBehaviour
                 obj.GetComponent<UnityEngine.UI.Image>().sprite = itemSprite;
                 obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
 
-                //giving the object mouse event handlers
-/*                EventTrigger trigger = obj.AddComponent<EventTrigger>();
-                EventTriggerHelper.AddEventTriggerListener(trigger, EventTriggerType.PointerEnter, (data) => { OnPointerEnter((PointerEventData)data); });
-                EventTriggerHelper.AddEventTriggerListener(trigger, EventTriggerType.PointerExit, (data) => { OnPointerExit((PointerEventData)data); });
-                EventTriggerHelper.AddEventTriggerListener(trigger, EventTriggerType.PointerClick, (data) => { OnPointerClick((PointerEventData)data); });
-*/
+                slot.SetDependancies(this, itemDescription);    //setting the inventoryDisplay, and the description
                 updatedItemsDisplayed.Add(slot, obj);
             }
+            //Debug.Log($"Slot: {slot} description is: {slot.itemDescription.descriptionText}");
         }
 
         itemsDisplayed.Clear(); //clearing original itemsDisplayed
+        //Debug.Log("Items in itemsDisplayed: ");
         foreach (var entry in updatedItemsDisplayed)    //adding back all the items to items displayed
         {
             itemsDisplayed.Add(entry.Key, entry.Value);
+            //Debug.Log($"Key: {entry.Key}, Value: {entry.Value}");
         }
         updatedItemsDisplayed.Clear();  //clearing the updated list for next time we need to update
     }
     public void PickUpItem(Item itemToPickup, int amount)
     {
+        //Debug.Log("Contents of inventory.Container.Items before picking up:");
+        /*foreach (var slot in inventory.Container.Items)
+        {
+            Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
+        }*/
 
         inventory.AddItem(itemToPickup, amount);    //add the item to out InventoryObject
 
+        //Debug.Log("Contents of inventory.Container.Items after picking up:");
+        /*foreach (var slot in inventory.Container.Items)
+        {
+            Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
+        }*/
+
         UpdateDisplay();
+    }
+
+    /// <summary>
+    /// Sets the current slot
+    /// </summary>
+    /// <param name="slot"></param>
+    public void SetSelectedSlot(InventorySlot slot)
+    {
+        selectedSlot = slot;
+    }
+
+    public void ClearSelectedSlot()
+    {
+        selectedSlot = null;
     }
 
     public void DropItem()
@@ -120,6 +142,12 @@ public class DisplayInventory : MonoBehaviour
         {
             if (selectedSlot != null)
             {
+                /*Debug.Log("Contents of inventory.Container.Items before dropping: ");
+                foreach (var slot in inventory.Container.Items)
+                {
+                    Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
+                }*/
+
                 //finding where to drop the object
                 ItemObject itemObject = inventory.database.GetItem[selectedSlot.ID];    //assigns itemObject as the itemObject that is found at selectedSlot.ID
 
@@ -131,6 +159,8 @@ public class DisplayInventory : MonoBehaviour
                     groundGameObject.originalPrefab.SetActive(true);   //re-activating the original item
                     groundGameObject.transform.position = dropPosition; //setting its new position
                 }
+
+                //Debug.Log("That items id is: " + selectedSlot.ID);
 
                 if (selectedSlot.amount > 1)
                 {
@@ -147,6 +177,12 @@ public class DisplayInventory : MonoBehaviour
                     }
                 }
                 UpdateDisplay();
+
+               /*Debug.Log("Contents of inventory.Container.Items after dropping: ");
+                foreach (var slot in inventory.Container.Items)
+                {
+                    Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
+                }*/
             }
         }
     }
@@ -160,13 +196,24 @@ public class DisplayInventory : MonoBehaviour
         if (itemsDisplayed.ContainsKey(slotToRemove))    //removing the slot from items displayed that is not present in the container
         {
             GameObject objToDestroy = itemsDisplayed[slotToRemove];
+            //Debug.Log($"Removing slot: {slotToRemove.item.Name}");
 
             if (objToDestroy != null)
             {
                 Destroy(objToDestroy);
                 itemsDisplayed[slotToRemove] = null;
+                //Debug.Log($"Destroyed GameObject {objToDestroy.name}");
             }
+            /*else
+            {
+                Debug.LogWarning($"GameObject for slot {slotToRemove.item.Name} does not exist");
+            }*/
             itemsDisplayed.Remove(slotToRemove);
+            //Debug.Log($"Removed slot from itemsDisplayed dictionary: {slotToRemove.item.Name}");
         }
+        /*else
+        {
+            Debug.LogWarning($"Slot {slotToRemove.item.Name} does not exist in itemsDisplayed");
+        }*/
     }
 }

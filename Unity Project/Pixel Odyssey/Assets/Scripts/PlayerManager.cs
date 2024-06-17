@@ -141,13 +141,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         Jump();
 
-        PickUpThings();
+        Interact();
 
         OpenInventory();
 
         Tootips();
-
-        osCheck();
 
         ScrollPotions();
         //// Use potion when the player presses the "Q" key
@@ -628,11 +626,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             CharCon.height = Mathf.Lerp(CharCon.height, targetHeight, interpolationProgress);
         }
     }
-    void PickUpThings()
+    void Interact()
     {
         if (Input.GetKeyDown(KeyCode.E))       //handles picking up items
         {
-            interactScript.PickupItem();
+            interactScript.InteractWithObject();
         }
     }
     void OpenInventory()
@@ -751,7 +749,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             GameManager.Instance.playerOSToggle.SetActive(true);
         }
-        else if (!overshieldUnlocked)
+        if (!overshieldUnlocked)
         {
             GameManager.Instance.playerOSToggle.SetActive(false);
         }
