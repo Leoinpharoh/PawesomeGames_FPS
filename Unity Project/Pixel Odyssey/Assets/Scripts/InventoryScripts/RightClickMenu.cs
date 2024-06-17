@@ -1,4 +1,5 @@
 //RightClickMenu
+//TODO: need to make pop up dynamically based on where the right click was
 
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ public class RightClickMenu : MonoBehaviour
 
     public void ShowMenu(InventorySlot selectedSlot)
     {
+        //if inventory is open
+        //menu pops up at the location of the right click
         rightClickMenuPanel.SetActive(true);
     }
 

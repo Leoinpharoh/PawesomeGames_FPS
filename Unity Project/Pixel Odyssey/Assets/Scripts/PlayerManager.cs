@@ -141,7 +141,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         Jump();
 
-        PickUpThings();
+        Interact();
 
         OpenInventory();
 
@@ -626,11 +626,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             CharCon.height = Mathf.Lerp(CharCon.height, targetHeight, interpolationProgress);
         }
     }
-    void PickUpThings()
+    void Interact()
     {
         if (Input.GetKeyDown(KeyCode.E))       //handles picking up items
         {
-            interactScript.PickupItem();
+            interactScript.InteractWithObject();
         }
     }
     void OpenInventory()
