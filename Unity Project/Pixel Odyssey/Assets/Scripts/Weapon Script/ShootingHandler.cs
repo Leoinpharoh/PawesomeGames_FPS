@@ -135,6 +135,7 @@ public class ShootingHandler : MonoBehaviour
         yield return new WaitForSeconds(weaponStats.reloadTime);
 
         UpdateAmmoAfterReload();
+        reloadAudioSource.Stop();
         Anim.SetBool("isReloading", false);
         isShooting = false;
 
