@@ -15,10 +15,12 @@ public class InventoryObject : ScriptableObject
     public ItemDatabaseObject database;
     public Inventory Container;
 
+#if UNITY_EDITOR
     private void Awake()
     {
         database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/ScriptableObjects/Items/Database.asset", typeof(ItemDatabaseObject));
     }
+#endif
 
     public void AddItem(Item _item, int _amount)
     {
