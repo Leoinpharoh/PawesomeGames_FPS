@@ -147,8 +147,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         Tootips();
 
-        osCheck();
-
         ScrollPotions();
         //// Use potion when the player presses the "Q" key
         if (Input.GetKeyDown(KeyCode.Q))
@@ -751,7 +749,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             GameManager.Instance.playerOSToggle.SetActive(true);
         }
-        else if (!overshieldUnlocked)
+        if (!overshieldUnlocked)
         {
             GameManager.Instance.playerOSToggle.SetActive(false);
         }
