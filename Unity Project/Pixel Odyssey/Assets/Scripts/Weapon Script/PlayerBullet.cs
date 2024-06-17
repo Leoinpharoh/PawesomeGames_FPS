@@ -21,7 +21,7 @@ public class playerBullet : MonoBehaviour
     void Start()
     {
         rb.velocity = transform.forward * speed;
-        Destroy(gameObject, destroyTime);
+        Destroy(gameObject, 10);
     }
 
     private void OnCollisionEnter(Collision collision)
