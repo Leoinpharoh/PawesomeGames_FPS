@@ -10,7 +10,7 @@ public class NextLevel : MonoBehaviour
     [SerializeField] private Image levelFlashImage; // Reference to the Image for fading
     [SerializeField] private float fadeDuration = 1.0f; // Duration of the fade
 
-    [SerializeField] public enum Unlockables { Shotgun, AssaultRifle, Rpg, ToolBelt, OverShield};
+    [SerializeField] public enum Unlockables { Shotgun, AssaultRifle, Rpg, ToolBelt, OverShield, None};
     public Unlockables unlockables;
 
     PlayerManager playerManager;
@@ -40,7 +40,7 @@ public class NextLevel : MonoBehaviour
                 //unlock Shotgun
                 PlayerPrefs.SetInt("ShotgunUnlocked", 1);
                 GameManager.Instance.ActivatePlayerOS();
-                //playerManager.osCheck();
+                //playerManager.shotgunCheck();
                 PlayerPrefs.Save();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
@@ -48,7 +48,7 @@ public class NextLevel : MonoBehaviour
             {
                 PlayerPrefs.SetInt("AssaultRifleUnlocked", 1);
                 GameManager.Instance.ActivatePlayerOS();
-                //playerManager.osCheck();
+                //playerManager.assaultCheck();
                 PlayerPrefs.Save();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
@@ -56,7 +56,7 @@ public class NextLevel : MonoBehaviour
             {
                 PlayerPrefs.SetInt("RPGUnlocked", 1);
                 GameManager.Instance.ActivatePlayerOS();
-                //playerManager.osCheck();
+                //playerManager.rpgCheck();
                 PlayerPrefs.Save();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
@@ -64,7 +64,7 @@ public class NextLevel : MonoBehaviour
             {
                 PlayerPrefs.SetInt("PotionBeltUnlocked", 1);
                 GameManager.Instance.ActivatePlayerOS();
-                //playerManager.osCheck();
+                //playerManager.toolbeltCheck();
                 PlayerPrefs.Save();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
@@ -75,6 +75,10 @@ public class NextLevel : MonoBehaviour
                 //playerManager.osCheck();
                 PlayerPrefs.Save();
                 //unlock Shotgun
+                StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            }
+            if (unlockables == Unlockables.None)
+            {
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
 

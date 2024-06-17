@@ -773,12 +773,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void assaultCheck()
     {
-        if (overshieldUnlocked)
+        if (assaultRifleUnlocked)
         {
             GameManager.Instance.weaponSlot3LockedToggle.SetActive(false);
             GameManager.Instance.weaponSlot3Toggle.SetActive(true);
         }
-        if (!overshieldUnlocked)
+        if (!assaultRifleUnlocked)
         {
             GameManager.Instance.weaponSlot3LockedToggle.SetActive(true);
             GameManager.Instance.weaponSlot3Toggle.SetActive(false);
@@ -786,12 +786,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void rpgCheck()
     {
-        if (assaultRifleUnlocked)
+        if (RPGUnlocked)
         {
             GameManager.Instance.weaponSlot4LockedToggle.SetActive(false);
             GameManager.Instance.weaponSlot4Toggle.SetActive(true);
         }
-        if (!assaultRifleUnlocked)
+        if (!RPGUnlocked)
         {
             GameManager.Instance.weaponSlot4LockedToggle.SetActive(true);
             GameManager.Instance.weaponSlot4Toggle.SetActive(false);
