@@ -28,9 +28,9 @@ public class OSUnlocked : MonoBehaviour
             {
                 Debug.Log("Boss dead");
                 //objectsToCheck.Remove(obj);
-                PlayerPrefs.SetInt("OvershieldUnlocked", 0);
+                PlayerPrefs.SetInt("OvershieldUnlocked", 1);
+                GameManager.Instance.ActivatePlayerOS();
                 PlayerPrefs.Save();
-                GameManager.Instance.playerOSToggle.SetActive(false);
             }
         }
     }

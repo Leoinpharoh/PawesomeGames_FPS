@@ -512,4 +512,9 @@ public class GameManager : MonoBehaviour
             AmountinBag.text = potionCount.ToString(); // Set the UI Text to the current potion count
         }
     }
+
+    public void ActivatePlayerOS()
+    {
+        playerOS.gameObject.SetActive(true);
+    }
 }

@@ -755,6 +755,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             GameManager.Instance.playerOSToggle.SetActive(false);
         }
+        updatePlayerUI();
     }
 
 
