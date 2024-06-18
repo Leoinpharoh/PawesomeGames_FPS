@@ -2063,6 +2063,10 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 673742661}
+    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: tutorialComplete
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4660056078010648115, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2753,6 +2757,10 @@ PrefabInstance:
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 2093309872}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: tutorialComplete
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2583085358008173265, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6502,7 +6510,6 @@ GameObject:
   - component: {fileID: 1669123426}
   - component: {fileID: 1669123427}
   - component: {fileID: 1669123429}
-  - component: {fileID: 1669123430}
   - component: {fileID: 1669123428}
   m_Layer: 5
   m_Name: Opening Scene
@@ -6568,7 +6575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1669123427}
-  saveSystem: {fileID: 1669123430}
+  saveSystem: {fileID: 2093309885}
   ShotgunUnlocked: 0
   AssaultRifleUnlocked: 0
   RPGUnlocked: 0
@@ -6598,47 +6605,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2093309872}
---- !u!114 &1669123430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669123425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a6ae1c34af78154382900e3e3b14c60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData:
-    ShotgunUnlocked: 0
-    AssaultRifleUnlocked: 0
-    RPGUnlocked: 0
-    MeleeUnlocked: 0
-    OvershieldUnlocked: 0
-    PotionbeltUnlocked: 0
-    TutorialComplete: 0
-    Scene1HPBoosterUnlocked: 0
-    Scene2HPBoosterUnlocked: 0
-    Scene3HPBoosterUnlocked: 0
-    Scene4HPBoosterUnlocked: 0
-    Scene5HPBoosterUnlocked: 0
-    Scene6HPBoosterUnlocked: 0
-    Scene1OSBoosterUnlocked: 0
-    Scene2OSBoosterUnlocked: 0
-    Scene3OSBoosterUnlocked: 0
-    Scene4OSBoosterUnlocked: 0
-    Scene5OSBoosterUnlocked: 0
-    Scene6OSBoosterUnlocked: 0
-    PythonAmmo: 0
-    ShotgunAmmo: 0
-    AssaultRifleAmmo: 0
-    RPGAmmo: 0
-    HealthMax: 0
-    OvershieldMax: 0
-    OvershieldPotions: 0
-    HealthPotions: 0
-    Currency: 0
 --- !u!1001 &1698428350
 PrefabInstance:
   m_ObjectHideFlags: 0

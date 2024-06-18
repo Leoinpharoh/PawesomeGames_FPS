@@ -24,8 +24,6 @@ public class StatPermaBoost : MonoBehaviour
 
     string Booster;
 
-    SaveSystem saveSystem;
-
     // Start is called before the first frame update
     [SerializeField] enum PickUpType { HealthPlus, OverShieldPlus }
     [SerializeField] PickUpType type;
@@ -49,14 +47,10 @@ public class StatPermaBoost : MonoBehaviour
             {
                 case PickUpType.HealthPlus:
 
-                    PlayerPrefs.SetInt("HealthMax", other.gameObject.GetComponent<PlayerManager>().HPOrignal += boostAmount);
-                    //other.gameObject.GetComponent<PlayerManager>().HP += boostAmount;
-                    //other.gameObject.GetComponent<PlayerManager>().HPOrignal += boostAmount;
+                    saveSystem.playerData.HealthMax += boostAmount;
                     break;
                 case PickUpType.OverShieldPlus:
-                    PlayerPrefs.SetInt("OverShieldMax", other.gameObject.GetComponent<PlayerManager>().OSOrignal += boostAmount);
-                    //other.gameObject.GetComponent<PlayerManager>().OS += boostAmount;
-                    //other.gameObject.GetComponent<PlayerManager>().OSOrignal += boostAmount;
+                    saveSystem.playerData.OvershieldMax += boostAmount;
                     break;
             }
             StartCoroutine(DestroyAfterDelay(0.5f));
@@ -190,16 +184,9 @@ public class StatPermaBoost : MonoBehaviour
         }
         if (Scene6HPBoosterUnlocked == false && sceneName == "Scene6 - Andrew" && Booster == "Health")
         {
-<<<<<<< Updated upstream
-            Debug.Log("Scene 6 HP Booster Saving");
-            PlayerPrefs.SetInt("Scene6HPBooster", 1);
-            PlayerPrefs.SetInt("HealthMax", HealthMax);
-            PlayerPrefs.Save();
-=======
             saveSystem.playerData.Scene6HPBoosterUnlocked = true;
             saveSystem.playerData.HealthMax = HealthMax;
             saveSystem.SavePlayer();
->>>>>>> Stashed changes
         }
         if (Scene1OSBoosterUnlocked == false && sceneName == "Scene1 - Dustin" && Booster == "OverShield")
         {
