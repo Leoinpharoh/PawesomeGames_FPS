@@ -149,14 +149,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         Tootips();
 
         ScrollPotions();
-        //// Use potion when the player presses the "Q" key
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if(potionbeltUnlocked)
-            {
-                UsePotion();
-            }
-        }
+
+        ItemUse();
+
     }
 
     public void LoadPlayer()
@@ -178,11 +173,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
         if (HPOrignal == 0)
         {
-            HPOrignal = PlayerPrefs.GetInt("HealthMax");
+            HPOrignal = saveSystem.playerData.HealthMax;
         }
         if (OSOrignal == 0)
         {
-            OSOrignal = PlayerPrefs.GetInt("OverShieldMax");
+            OSOrignal = saveSystem.playerData.OvershieldMax;
         }
         HP = HPOrignal;
         OS = OSOrignal;
@@ -192,29 +187,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         assaultCheck();
         toolbeltCheck();
         updatePlayerUI();
-    }
-
-
-    public void PauseAnimation()
-    {
-        playerAnimator.speed = 0;
-    }
-
-    public void subtitleTrigger()
-    {
-        subtitleIndex++;
-        subtitlesObject = GameObject.Find("Subtitle" + subtitleIndex);
-        subtitles = subtitlesObject.GetComponent<Subtitles>();
-        subtitles.StartSubtitles();
-    }
-
-    public void TutorialComplete()
-    {
-        GameManager.Instance.TutorialComplete();
-    }
-    public void CameraTrigger()
-    {
-        GameManager.Instance.CameraTrigger();
     }
 
     #region Effects and Damage
@@ -698,6 +670,27 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     #region PlayerUI and StartUp and FlashLight
 
+    public void PauseAnimation()
+    {
+        playerAnimator.speed = 0;
+    }
+
+    public void subtitleTrigger()
+    {
+        subtitleIndex++;
+        subtitlesObject = GameObject.Find("Subtitle" + subtitleIndex);
+        subtitles = subtitlesObject.GetComponent<Subtitles>();
+        subtitles.StartSubtitles();
+    }
+
+    public void TutorialComplete()
+    {
+        GameManager.Instance.TutorialComplete();
+    }
+    public void CameraTrigger()
+    {
+        GameManager.Instance.CameraTrigger();
+    }
     public void updatePlayerUI()
     {
         float hpFillAmount = (float)HP / HPOrignal;
@@ -819,6 +812,17 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     #region ToolBelt
     // Scroll through the potions in the ToolBelt
+    public void ItemUse()
+    {
+        //// Use potion when the player presses the "Q" key
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (potionbeltUnlocked)
+            {
+                UsePotion();
+            }
+        }
+    }
     private void ScrollPotions()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
