@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class ButtonFunctions : MonoBehaviour
 {
 
+    PlayerManager playerManager;
+
     public Button targetButton;
     public void resume()
     {
@@ -22,6 +24,7 @@ public class ButtonFunctions : MonoBehaviour
     {
         //reload scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        playerManager.LoadPlayer();
         GameManager.Instance.stateUnPaused();
     }
     public void HUB()
