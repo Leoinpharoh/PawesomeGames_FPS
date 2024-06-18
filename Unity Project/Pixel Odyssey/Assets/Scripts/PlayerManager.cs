@@ -171,7 +171,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         OSOrignal = saveSystem.playerData.OvershieldMax;
         overshieldPotions = saveSystem.playerData.OvershieldPotions;
         healthPotions = saveSystem.playerData.HealthPotions;
-        
         shotgunUnlocked = saveSystem.playerData.ShotgunUnlocked;
         assaultRifleUnlocked = saveSystem.playerData.AssaultRifleUnlocked;
         RPGUnlocked = saveSystem.playerData.RPGUnlocked;

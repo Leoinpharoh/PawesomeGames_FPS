@@ -14,7 +14,7 @@ public class NextLevel : MonoBehaviour
     public Unlockables unlockables;
 
     PlayerManager playerManager;
-    SaveSystem saveSystem;
+    public SaveSystem saveSystem;
 
     
     private void Start()

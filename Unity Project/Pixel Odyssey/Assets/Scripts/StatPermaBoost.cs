@@ -5,22 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class StatPermaBoost : MonoBehaviour
 {
-    SaveSystem saveSystem;
+    public SaveSystem saveSystem;
+    PlayerManager playerManager;
+    public PlayerData playerData;
     Scene currentScene;
 
-    bool Scene1HPBoosterUnlocked = false;
-    bool Scene2HPBoosterUnlocked = false;
-    bool Scene3HPBoosterUnlocked = false;
-    bool Scene4HPBoosterUnlocked = false;
-    bool Scene5HPBoosterUnlocked = false;
-    bool Scene6HPBoosterUnlocked = false;
+    bool Scene1HPBoosterUnlocked;
+    bool Scene2HPBoosterUnlocked;
+    bool Scene3HPBoosterUnlocked;
+    bool Scene4HPBoosterUnlocked;
+    bool Scene5HPBoosterUnlocked;
+    bool Scene6HPBoosterUnlocked;
 
-    bool Scene1OSBoosterUnlocked = false;
-    bool Scene2OSBoosterUnlocked = false;
-    bool Scene3OSBoosterUnlocked = false;
-    bool Scene4OSBoosterUnlocked = false;
-    bool Scene5OSBoosterUnlocked = false;
-    bool Scene6OSBoosterUnlocked = false;
+    bool Scene1OSBoosterUnlocked;
+    bool Scene2OSBoosterUnlocked;
+    bool Scene3OSBoosterUnlocked;
+    bool Scene4OSBoosterUnlocked;
+    bool Scene5OSBoosterUnlocked;
+    bool Scene6OSBoosterUnlocked;
 
     string Booster;
 
@@ -31,12 +33,12 @@ public class StatPermaBoost : MonoBehaviour
 
     private void Awake()
     {
-        StatBoosterCheck();
+        //StatBoosterCheck();
     }
     private void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        //StatBoosterCheck();
+        currentScene = SceneManager.GetActiveScene();
+        StatBoosterCheck();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -45,12 +47,16 @@ public class StatPermaBoost : MonoBehaviour
             GrabbedBooster();
             switch (type)
             {
-                case PickUpType.HealthPlus:
 
-                    saveSystem.playerData.HealthMax += boostAmount;
+                case PickUpType.HealthPlus:
+                    playerManager = other.gameObject.GetComponent<PlayerManager>();
+                    playerManager.HPOrignal += boostAmount;
+                    //saveSystem.playerData.HealthMax += boostAmount;
                     break;
                 case PickUpType.OverShieldPlus:
-                    saveSystem.playerData.OvershieldMax += boostAmount;
+                    playerManager = other.gameObject.GetComponent<PlayerManager>();
+                    playerManager.OSOrignal += boostAmount;
+                    //saveSystem.playerData.OvershieldMax += boostAmount;
                     break;
             }
             StartCoroutine(DestroyAfterDelay(0.5f));
@@ -73,6 +79,7 @@ public class StatPermaBoost : MonoBehaviour
         Scene4HPBoosterUnlocked = saveSystem.playerData.Scene4HPBoosterUnlocked;
         Scene5HPBoosterUnlocked = saveSystem.playerData.Scene5HPBoosterUnlocked;
         Scene6HPBoosterUnlocked = saveSystem.playerData.Scene6HPBoosterUnlocked;
+        Debug.Log(Scene6HPBoosterUnlocked);
 
         Scene1OSBoosterUnlocked = saveSystem.playerData.Scene1OSBoosterUnlocked;
         Scene2OSBoosterUnlocked = saveSystem.playerData.Scene2OSBoosterUnlocked;
@@ -104,6 +111,7 @@ public class StatPermaBoost : MonoBehaviour
         }
         if (Scene6HPBoosterUnlocked == true && sceneName == "Scene6 - Andrew")
         {
+            Debug.Log("Destroyed");
             Destroy(gameObject);
         }
         if (Scene1OSBoosterUnlocked == true && sceneName == "Scene1 - Dustin")
@@ -141,7 +149,6 @@ public class StatPermaBoost : MonoBehaviour
         switch (type)
         {
             case PickUpType.HealthPlus:
-                Debug.Log("Scene 6 HP Booster");
                 HealthMax = HealthMax + boostAmount;
                 Booster = "Health";
                 break;

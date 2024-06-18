@@ -7374,11 +7374,11 @@ PrefabInstance:
       objectReference: {fileID: 267923186}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.75
+      value: -125.3
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 75.42
+      value: -35.4
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8159,8 +8159,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPermaBooster
       objectReference: {fileID: 0}
-    - target: {fileID: 1431508598717273005, guid: e36673151c4db8d49a6ef82ca96ca63b, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 3718862795781283259, guid: e36673151c4db8d49a6ef82ca96ca63b, type: 3}
+      propertyPath: saveSystem
+      value: 
+      objectReference: {fileID: 508593672}
+    - target: {fileID: 3718862795781283259, guid: e36673151c4db8d49a6ef82ca96ca63b, type: 3}
+      propertyPath: playerData.Scene6HPBoosterUnlocked
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4094077994207908413, guid: e36673151c4db8d49a6ef82ca96ca63b, type: 3}
@@ -21150,10 +21154,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OverShieldPermaBooster
       objectReference: {fileID: 0}
-    - target: {fileID: 2128276205895195880, guid: 226bd8e06c83cf8429caffc8a08c5c68, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4850875632261329104, guid: 226bd8e06c83cf8429caffc8a08c5c68, type: 3}
       propertyPath: m_LocalPosition.x
       value: -128.94125
@@ -21194,6 +21194,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7255178270691977663, guid: 226bd8e06c83cf8429caffc8a08c5c68, type: 3}
+      propertyPath: saveSystem
+      value: 
+      objectReference: {fileID: 508593672}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36360,6 +36364,7 @@ MonoBehaviour:
   levelFlashImage: {fileID: 1600293967}
   fadeDuration: 2
   unlockables: 1
+  saveSystem: {fileID: 508593672}
 --- !u!33 &2103360467683972156
 MeshFilter:
   m_ObjectHideFlags: 0
