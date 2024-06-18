@@ -24,7 +24,7 @@ public class ButtonFunctions : MonoBehaviour
     {
         //reload scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        playerManager.LoadPlayer();
+        //playerManager.LoadPlayer();
         GameManager.Instance.stateUnPaused();
     }
     public void HUB()
