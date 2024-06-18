@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
@@ -108,6 +109,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     //Access Toolbelt
     ToolBelt toolBelt;
     public int currentPotionIndex = 0;
+
+    Scene currentScene;
+
     void Awake()
     {
 
@@ -124,6 +128,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         toolBelt = GetComponent<ToolBelt>();
         UpdateCurrentPotionSlotUI();
+
+        Scene currentScene = SceneManager.GetActiveScene();
+
     }
     void Update()
     {
@@ -495,24 +502,27 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void Movement()
     {
-        if (characterControl.isGrounded)
+        string sceneName = currentScene.name;
+        if (sceneName != "Credits")
         {
-            jumpCounter = 0;
-            playerVelocity = Vector3.zero;
+            if (characterControl.isGrounded)
+            {
+                jumpCounter = 0;
+                playerVelocity = Vector3.zero;
+            }
+            if (!confused)
+            {
+                moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+                    (Input.GetAxis("Vertical") * transform.forward).normalized;
+                characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                moveDirection = (Input.GetAxis("Vertical") * transform.right) +
+                    (Input.GetAxis("Horizontal") * transform.forward);
+                characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+            }
         }
-        if (!confused)
-        {
-            moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
-                (Input.GetAxis("Vertical") * transform.forward).normalized;
-            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-        }
-        else
-        {
-            moveDirection = (Input.GetAxis("Vertical") * transform.right) +
-                (Input.GetAxis("Horizontal") * transform.forward);
-            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-        }
-
     }
 
     public Vector3 GetCurrentMoveDirection()
