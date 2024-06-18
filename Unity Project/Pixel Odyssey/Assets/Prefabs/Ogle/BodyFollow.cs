@@ -6,31 +6,31 @@ public class BodyFollow : MonoBehaviour
 {
     public Transform cameraTransform;
     private Quaternion initialRotation;
-
+    float maxPitchAngle = 88f;
     void Start()
     {
         // Store the initial rotation of the object
         initialRotation = transform.rotation;
     }
-
     void Update()
     {
-        transformPosition();
-
+        initialRotation = transform.rotation;
         if (cameraTransform != null)
         {
+            //calc direction to camera
             Vector3 directionToCamera = cameraTransform.position - transform.position;
-            Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
-            targetRotation *= Quaternion.Euler(0, 0, 0); // Apply the corrective rotation
 
+            //Limit pitch angle to prevent direct up or down
+            float angle = Vector3.Angle(Vector3.up, directionToCamera);
+
+            if (angle > maxPitchAngle)
+            {
+                directionToCamera = Vector3.RotateTowards(transform.forward, directionToCamera, Mathf.Deg2Rad * (angle - maxPitchAngle), 0);
+            }
             // Convert target rotation relative to the initial rotation
-            Quaternion relativeRotation = Quaternion.Inverse(initialRotation) * targetRotation;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
 
-            // Clamp the Y rotation
-            relativeRotation = ClampRotation(relativeRotation);
-
-            // Convert back to world space rotation
-            targetRotation = initialRotation * relativeRotation;
+            // smooth interpolation towards the target roation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5);
         }
     }
@@ -41,7 +41,7 @@ public class BodyFollow : MonoBehaviour
         angle = NormalizeAngle(angle);
 
         // Clamp the angle
-        angle = Mathf.Clamp(angle, 0, 0);
+        angle = Mathf.Clamp(angle, -maxPitchAngle, maxPitchAngle);
 
         // Return the new quaternion
         return Quaternion.AngleAxis(angle, axis);
@@ -56,33 +56,31 @@ public class BodyFollow : MonoBehaviour
     }
 
     //update robots transform as he moves
-    public void transformPosition()
-    {
 
-    }
+
 
 }
+//void Update()
+//{
+//    transformPosition();
 
-    //void Update()
-    //{
-    //    if (cameraTransform != null)
-    //    {
-    //        //calc direction to camera
-    //        Vector3 directionToCamera = cameraTransform.position - transform.position;
+//    if (cameraTransform != null)
+//    {
+//        Vector3 directionToCamera = cameraTransform.position - transform.position;
+//        Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
+//        targetRotation *= Quaternion.Euler(0, 0, 0); // Apply the corrective rotation
 
-    //        //Limit pitch angle to prevent direct up or down
-    //        float angle = Vector3.Angle(Vector3.up, directionToCamera);
-    //        float maxPitchAngle = 88f;
+//        // Convert target rotation relative to the initial rotation
+//        Quaternion relativeRotation = Quaternion.Inverse(initialRotation) * targetRotation;
 
-    //        if (angle > maxPitchAngle)
-    //        {
-    //            directionToCamera = Vector3.RotateTowards(transform.forward, directionToCamera, Mathf.Deg2Rad * (angle - maxPitchAngle), 0);
-    //        }
-    //        // Convert target rotation relative to the initial rotation
-    //        Quaternion targetRotation = Quaternion.LookRotation(directionToCamera);
+//        // Clamp the Y rotation
+//        relativeRotation = ClampRotation(relativeRotation);
 
-    //        // smooth interpolation towards the target roation
-    //        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5);
-    //    }
-    //}
+//        // Convert back to world space rotation
+//        targetRotation = initialRotation * relativeRotation;
+//        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5);
+//    }
+//}
+
+
 
