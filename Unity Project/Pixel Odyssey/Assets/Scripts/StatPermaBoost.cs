@@ -109,9 +109,9 @@ public class StatPermaBoost : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (Scene6HPBoosterUnlocked == true && sceneName == "Scene6 - Andrew")
+        if (Scene6HPBoosterUnlocked == true && sceneName == "Scene6 - Andrew" && type == PickUpType.HealthPlus)
         {
-            Debug.Log("Destroyed");
+            Debug.Log("HP Booster Destroyed");
             Destroy(gameObject);
         }
         if (Scene1OSBoosterUnlocked == true && sceneName == "Scene1 - Dustin")
@@ -134,8 +134,9 @@ public class StatPermaBoost : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (Scene6OSBoosterUnlocked == true && sceneName == "Scene6 - Andrew")
+        if (Scene6OSBoosterUnlocked == true && sceneName == "Scene6 - Andrew" && type == PickUpType.OverShieldPlus)
         {
+            Debug.Log("OS Booster Destroyed");
             Destroy(gameObject);
         }
     }
