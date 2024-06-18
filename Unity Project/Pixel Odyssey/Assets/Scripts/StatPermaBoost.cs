@@ -5,22 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class StatPermaBoost : MonoBehaviour
 {
-
+    SaveSystem saveSystem;
     Scene currentScene;
 
-    bool Scene1HPBoosterUnlocked;
-    bool Scene2HPBoosterUnlocked;
-    bool Scene3HPBoosterUnlocked;
-    bool Scene4HPBoosterUnlocked;
-    bool Scene5HPBoosterUnlocked;
-    bool Scene6HPBoosterUnlocked;
+    bool Scene1HPBoosterUnlocked = false;
+    bool Scene2HPBoosterUnlocked = false;
+    bool Scene3HPBoosterUnlocked = false;
+    bool Scene4HPBoosterUnlocked = false;
+    bool Scene5HPBoosterUnlocked = false;
+    bool Scene6HPBoosterUnlocked = false;
 
-    bool Scene1OSBoosterUnlocked;
-    bool Scene2OSBoosterUnlocked;
-    bool Scene3OSBoosterUnlocked;
-    bool Scene4OSBoosterUnlocked;
-    bool Scene5OSBoosterUnlocked;
-    bool Scene6OSBoosterUnlocked;
+    bool Scene1OSBoosterUnlocked = false;
+    bool Scene2OSBoosterUnlocked = false;
+    bool Scene3OSBoosterUnlocked = false;
+    bool Scene4OSBoosterUnlocked = false;
+    bool Scene5OSBoosterUnlocked = false;
+    bool Scene6OSBoosterUnlocked = false;
 
     string Booster;
 
@@ -29,10 +29,14 @@ public class StatPermaBoost : MonoBehaviour
     [SerializeField] PickUpType type;
     int boostAmount = 10;
 
+    private void Awake()
+    {
+        StatBoosterCheck();
+    }
     private void Start()
     {
         Scene currentScene = SceneManager.GetActiveScene();
-        StatBoosterCheck();
+        //StatBoosterCheck();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -42,12 +46,15 @@ public class StatPermaBoost : MonoBehaviour
             switch (type)
             {
                 case PickUpType.HealthPlus:
-                    other.gameObject.GetComponent<PlayerManager>().HP += boostAmount;
-                    other.gameObject.GetComponent<PlayerManager>().HPOrignal += boostAmount;
+
+                    PlayerPrefs.SetInt("HealthMax", other.gameObject.GetComponent<PlayerManager>().HPOrignal += boostAmount);
+                    //other.gameObject.GetComponent<PlayerManager>().HP += boostAmount;
+                    //other.gameObject.GetComponent<PlayerManager>().HPOrignal += boostAmount;
                     break;
                 case PickUpType.OverShieldPlus:
-                    other.gameObject.GetComponent<PlayerManager>().OS += boostAmount;
-                    other.gameObject.GetComponent<PlayerManager>().OSOrignal += boostAmount;
+                    PlayerPrefs.SetInt("OverShieldMax", other.gameObject.GetComponent<PlayerManager>().OSOrignal += boostAmount);
+                    //other.gameObject.GetComponent<PlayerManager>().OS += boostAmount;
+                    //other.gameObject.GetComponent<PlayerManager>().OSOrignal += boostAmount;
                     break;
             }
             StartCoroutine(DestroyAfterDelay(0.5f));
@@ -138,6 +145,7 @@ public class StatPermaBoost : MonoBehaviour
         switch (type)
         {
             case PickUpType.HealthPlus:
+                Debug.Log("Scene 6 HP Booster");
                 HealthMax = HealthMax + boostAmount;
                 Booster = "Health";
                 break;
@@ -180,6 +188,7 @@ public class StatPermaBoost : MonoBehaviour
         }
         if (Scene6HPBoosterUnlocked == false && sceneName == "Scene6 - Andrew" && Booster == "Health")
         {
+            Debug.Log("Scene 6 HP Booster Saving");
             PlayerPrefs.SetInt("Scene6HPBooster", 1);
             PlayerPrefs.SetInt("HealthMax", HealthMax);
             PlayerPrefs.Save();

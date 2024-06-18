@@ -213,11 +213,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
         if (HPOrignal == 0)
         {
-            HPOrignal = 140;
+            HPOrignal = PlayerPrefs.GetInt("HealthMax");
         }
         if (OSOrignal == 0)
         {
-            OSOrignal = 40;
+            OSOrignal = PlayerPrefs.GetInt("OverShieldMax");
         }
         HP = HPOrignal;
         OS = OSOrignal;
