@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 6578782206146349159}
   - component: {fileID: 4449042350219607151}
   - component: {fileID: 3804893452896125985}
+  - component: {fileID: 1772471704587075738}
   - component: {fileID: 6918708174312642886}
   - component: {fileID: 2555936464404414126}
   - component: {fileID: 7245206801081939404}
@@ -138,9 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Audio: {fileID: 7245206801081939404}
-  playerAnimator: {fileID: 3052440193595055490}
+  playerAnimator: {fileID: 0}
   characterControl: {fileID: 6918708174312642886}
-  rb: {fileID: 85892016356726611}
+  rb: {fileID: 0}
   jumpAudio: {fileID: 8300000, guid: e59a62f995c68d1418e699c57d116d8f, type: 3}
   flashlight: {fileID: 2622531320752839541}
   playerWalk:
@@ -184,8 +185,8 @@ MonoBehaviour:
   isMoving: 0
   isSprinting: 0
   OSRefilling: 0
-  HPOrignal: 100
-  OSOrignal: 25
+  HPOrignal: 140
+  OSOrignal: 40
   tutorialComplete: 1
   shotgunUnlocked: 0
   assaultRifleUnlocked: 0
@@ -196,13 +197,14 @@ MonoBehaviour:
   healthPotions: 0
   overshieldPotions: 0
   currency: 0
-  HP: 100
-  OS: 25
+  HP: 140
+  OS: 40
   subtitleIndex: 0
   inventory: {fileID: 11400000, guid: b27e526d34359964f89ebb28d9f1b9e5, type: 2}
   inventoryDisplay: {fileID: 0}
   inventoryManager: {fileID: 0}
   interactScript: {fileID: 3193789558631110542}
+  saveSystem: {fileID: 1772471704587075738}
   currentPotionIndex: 0
 --- !u!114 &3804893452896125985
 MonoBehaviour:
@@ -220,6 +222,47 @@ MonoBehaviour:
   weaponTwo: {fileID: 7884569268687852493}
   weaponThree: {fileID: 4376854298762941457}
   weaponFour: {fileID: 6891202904782844516}
+--- !u!114 &1772471704587075738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568827330076845495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6ae1c34af78154382900e3e3b14c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData:
+    ShotgunUnlocked: 0
+    AssaultRifleUnlocked: 0
+    RPGUnlocked: 0
+    MeleeUnlocked: 0
+    OvershieldUnlocked: 0
+    PotionbeltUnlocked: 0
+    TutorialComplete: 0
+    Scene1HPBoosterUnlocked: 0
+    Scene2HPBoosterUnlocked: 0
+    Scene3HPBoosterUnlocked: 0
+    Scene4HPBoosterUnlocked: 0
+    Scene5HPBoosterUnlocked: 0
+    Scene6HPBoosterUnlocked: 0
+    Scene1OSBoosterUnlocked: 0
+    Scene2OSBoosterUnlocked: 0
+    Scene3OSBoosterUnlocked: 0
+    Scene4OSBoosterUnlocked: 0
+    Scene5OSBoosterUnlocked: 0
+    Scene6OSBoosterUnlocked: 0
+    PythonAmmo: 0
+    ShotgunAmmo: 0
+    AssaultRifleAmmo: 0
+    RPGAmmo: 0
+    HealthMax: 0
+    OvershieldMax: 0
+    OvershieldPotions: 0
+    HealthPotions: 0
+    Currency: 0
 --- !u!143 &6918708174312642886
 CharacterController:
   m_ObjectHideFlags: 0

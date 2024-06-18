@@ -103,7 +103,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public InventoryManager inventoryManager;
     public Interact interactScript;
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
-    SaveSystem saveSystem;
+    public SaveSystem saveSystem;
 
     //Access Toolbelt
     ToolBelt toolBelt;
@@ -161,56 +161,21 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void LoadPlayer()
     {
-        tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
-        if (!tutorialComplete)
-        {
-            PlayerPrefs.SetInt("Currency", 0);
-            PlayerPrefs.SetInt("PythonAmmo", 50);
-            PlayerPrefs.SetInt("ShotgunAmmo", 0);
-            PlayerPrefs.SetInt("AssaultRifleAmmo", 0);
-            PlayerPrefs.SetInt("RPGAmmo", 0);
-            PlayerPrefs.SetInt("HealthMax", 140);
-            PlayerPrefs.SetInt("OvershieldMax", 40);
-            PlayerPrefs.SetInt("OvershieldPotions", 0);
-            PlayerPrefs.SetInt("HealthPotions", 0);
-            PlayerPrefs.SetInt("TutorialComplete", 0);
-            PlayerPrefs.SetInt("ShotgunUnlocked", 0);
-            PlayerPrefs.SetInt("AssaultRifleUnlocked", 0);
-            PlayerPrefs.SetInt("RPGUnlocked", 0);
-            PlayerPrefs.SetInt("MeleeUnlocked", 0);
-            PlayerPrefs.SetInt("OvershieldUnlocked", 0);
-            PlayerPrefs.SetInt("PotionbeltUnlocked", 0);
-            PlayerPrefs.SetInt("Scene1HPBooster", 0);
-            PlayerPrefs.SetInt("Scene2HPBooster", 0);
-            PlayerPrefs.SetInt("Scene3HPBooster", 0);
-            PlayerPrefs.SetInt("Scene4HPBooster", 0);
-            PlayerPrefs.SetInt("Scene5HPBooster", 0);
-            PlayerPrefs.SetInt("Scene6HPBooster", 0);
-            PlayerPrefs.SetInt("Scene1OSBooster", 0);
-            PlayerPrefs.SetInt("Scene2OSBooster", 0);
-            PlayerPrefs.SetInt("Scene3OSBooster", 0);
-            PlayerPrefs.SetInt("Scene4OSBooster", 0);
-            PlayerPrefs.SetInt("Scene5OSBooster", 0);
-            PlayerPrefs.SetInt("Scene6OSBooster", 0);
-            PlayerPrefs.Save();
-            Debug.Log("PlayerPrefs Cleared");
-        }
-        currency = PlayerPrefs.GetInt("Currency");
-        //PythonAmmo = PlayerPrefs.GetInt("PythonAmmo");
-        //ShotgunAmmo = PlayerPrefs.GetInt("ShotgunAmmo");
-        //AssaultRifleAmmo = PlayerPrefs.GetInt("AssaultRifleAmmo");
-        //RPGAmmo = PlayerPrefs.GetInt("RPGAmmo");
-        HPOrignal = PlayerPrefs.GetInt("HealthMax");
-        OSOrignal = PlayerPrefs.GetInt("OvershieldMax");
-        overshieldPotions = PlayerPrefs.GetInt("OvershieldPotions");
-        healthPotions = PlayerPrefs.GetInt("HealthPotions");
+        //PythonAmmo = saveSystem.playerData.PythonAmmo;
+        //ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
+        //AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
+        //RPGAmmo = saveSystem.playerData.RPGAmmo;
+        HPOrignal = saveSystem.playerData.HealthMax;
+        OSOrignal = saveSystem.playerData.OvershieldMax;
+        overshieldPotions = saveSystem.playerData.OvershieldPotions;
+        healthPotions = saveSystem.playerData.HealthPotions;
         
-        shotgunUnlocked = PlayerPrefs.GetInt("ShotgunUnlocked") == 1;
-        assaultRifleUnlocked = PlayerPrefs.GetInt("AssaultRifleUnlocked") == 1;
-        RPGUnlocked = PlayerPrefs.GetInt("RPGUnlocked") == 1;
-        meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
-        overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
-        potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
+        shotgunUnlocked = saveSystem.playerData.ShotgunUnlocked;
+        assaultRifleUnlocked = saveSystem.playerData.AssaultRifleUnlocked;
+        RPGUnlocked = saveSystem.playerData.RPGUnlocked;
+        meleeUnlocked = saveSystem.playerData.MeleeUnlocked;
+        overshieldUnlocked = saveSystem.playerData.OvershieldUnlocked;
+        potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
         if (HPOrignal == 0)
         {
             HPOrignal = PlayerPrefs.GetInt("HealthMax");

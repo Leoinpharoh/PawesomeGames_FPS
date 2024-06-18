@@ -29,6 +29,10 @@ public class CenterObjectLogger : MonoBehaviour
 
     private bool isLoading = false;
 
+    private void Start()
+    {
+        TutorialComplete = saveSystem.playerData.TutorialComplete;
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -43,6 +47,7 @@ public class CenterObjectLogger : MonoBehaviour
                 if (hitObjectName == "Load Screen")
                 {
                     HandleLoadScreenClick();
+                    Debug.Log("Load Screen Clicked");
                 }
                 else if (hitObjectName == "Options Screen")
                 {
@@ -51,6 +56,7 @@ public class CenterObjectLogger : MonoBehaviour
                 else if (hitObjectName == "Play Screen")
                 {
                     HandlePlayScreenClick();
+                    
                 }
             }
         }
@@ -58,8 +64,10 @@ public class CenterObjectLogger : MonoBehaviour
 
     private void HandleLoadScreenClick()
     {
-        if (!GameManager.Instance.isPaused && GameManager.Instance.tutorialComplete && !isLoading)
+        Debug.Log("Outside");
+        if (!GameManager.Instance.isPaused && TutorialComplete)
         {
+            Debug.Log("inside");
             isLoading = true;
             saveSystem.ResetPlayer();
             saveSystem.SavePlayer();

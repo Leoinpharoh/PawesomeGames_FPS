@@ -2319,6 +2319,7 @@ MonoBehaviour:
   nextLevelName: Scene1 - Dustin
   levelFlashImage: {fileID: 849663787}
   fadeDuration: 1
+  unlockables: 0
 --- !u!1 &361500629
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,6 +3498,7 @@ MonoBehaviour:
   nextLevelName: Scene4 - Leo
   levelFlashImage: {fileID: 849663787}
   fadeDuration: 1
+  unlockables: 0
 --- !u!1001 &449286215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5486,11 +5488,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4399250378579086, guid: 055fdcd0e5479254da1a9cb6507b0ea7, type: 3}
   m_PrefabInstance: {fileID: 803893710}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &829665458 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8491990264999529249, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &849663787 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7012575878422400666, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
@@ -6261,11 +6258,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 986dcce2b5464c94ab0646c23f6e86ae, type: 3}
---- !u!1 &928265124 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 519272148608227683, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &941434744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7027,6 +7019,7 @@ MonoBehaviour:
   nextLevelName: Scene6 - Andrew
   levelFlashImage: {fileID: 849663787}
   fadeDuration: 1
+  unlockables: 0
 --- !u!1001 &1054955073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7521,16 +7514,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &1134435186 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4135521855646628868, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1134973570 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5915691726641895972, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1153899344
 GameObject:
   m_ObjectHideFlags: 0
@@ -9311,6 +9294,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ea42ae4177d5e4abde8a24b6775107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1380641519 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1772471704587075738, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+  m_PrefabInstance: {fileID: 1380641515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609205708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6ae1c34af78154382900e3e3b14c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1393722167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9849,6 +9843,7 @@ MonoBehaviour:
   nextLevelName: Scene3 - Conner
   levelFlashImage: {fileID: 849663787}
   fadeDuration: 1
+  unlockables: 0
 --- !u!1 &1509164973
 GameObject:
   m_ObjectHideFlags: 0
@@ -10388,12 +10383,12 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609205708}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c491c3273d4448140ae0ead096090eed, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -10710,11 +10705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1767211456 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8039004443290764448, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1773570901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11743,6 +11733,7 @@ MonoBehaviour:
   nextLevelName: Scene5 - Demetrice
   levelFlashImage: {fileID: 849663787}
   fadeDuration: 1
+  unlockables: 0
 --- !u!1001 &1893544117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12236,6 +12227,7 @@ MonoBehaviour:
   nextLevelName: Scene2 - Michael
   levelFlashImage: {fileID: 849663787}
   fadeDuration: 1
+  unlockables: 0
 --- !u!1 &2030701794
 GameObject:
   m_ObjectHideFlags: 0
@@ -12305,6 +12297,7 @@ MonoBehaviour:
   nextLevelName: Final Boss
   levelFlashImage: {fileID: 849663787}
   fadeDuration: 1
+  unlockables: 0
 --- !u!4 &2034363201 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 426824, guid: 7ba36f38cf8819041a5354a5adbd8102, type: 3}
@@ -12552,61 +12545,29 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: Ammo
-      value: 
-      objectReference: {fileID: 1767211456}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: HPbar
       value: 
       objectReference: {fileID: 506070630}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: Timer
-      value: 
-      objectReference: {fileID: 2088319310}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: Portals
       value: 
       objectReference: {fileID: 1842435802}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: Reticle
+      propertyPath: saveSystem
       value: 
-      objectReference: {fileID: 1134435186}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: ToolBelt
-      value: 
-      objectReference: {fileID: 928265124}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: ToolTips
-      value: 
-      objectReference: {fileID: 2088319311}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: HealthBar
-      value: 
-      objectReference: {fileID: 506070630}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: StatusBar
-      value: 
-      objectReference: {fileID: 2122518348}
+      objectReference: {fileID: 1380641519}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1380641518}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: ObjectiveList
+      propertyPath: playerManager
       value: 
-      objectReference: {fileID: 829665458}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: OvershieldBar
-      value: 
-      objectReference: {fileID: 1134973570}
+      objectReference: {fileID: 1380641518}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 1609205710}
-    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-      propertyPath: objective3Aquired
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3001051476878289587, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.4
@@ -12767,16 +12728,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6131495630411720467, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
   m_PrefabInstance: {fileID: 2088319308}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2088319310 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4734486898304477874, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2088319311 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1245451079189582457, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2116700640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12849,11 +12800,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 721768819}
   m_SourcePrefab: {fileID: 100100000, guid: 6fa4d788379f8394ea1283e58aa06fd1, type: 3}
---- !u!1 &2122518348 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1912162743288084061, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
-  m_PrefabInstance: {fileID: 2088319308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2127207483
 PrefabInstance:
   m_ObjectHideFlags: 0
