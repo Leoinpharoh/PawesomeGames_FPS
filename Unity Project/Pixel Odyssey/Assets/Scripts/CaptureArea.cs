@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CaptureAreaLogic : MonoBehaviour
 {
+    [SerializeField] GameObject ObjectToCreate;
     public string capturingTag = "Player"; // The tag of the capturing object
     private bool isCaptured = false;
     private float captureProgress = 1f;
@@ -58,6 +59,7 @@ public class CaptureAreaLogic : MonoBehaviour
         if (captureAreaObject != null)
         {
             Destroy(captureAreaObject);
+            ObjectToCreate.SetActive(true);
         }
     }
 

@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StatPermaBoost : MonoBehaviour
 {
-
+    public SaveSystem saveSystem;
+    PlayerManager playerManager;
+    public PlayerData playerData;
     Scene currentScene;
 
     bool Scene1HPBoosterUnlocked;
@@ -29,9 +31,13 @@ public class StatPermaBoost : MonoBehaviour
     [SerializeField] PickUpType type;
     int boostAmount = 10;
 
+    private void Awake()
+    {
+        //StatBoosterCheck();
+    }
     private void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
+        currentScene = SceneManager.GetActiveScene();
         StatBoosterCheck();
     }
     private void OnTriggerEnter(Collider other)
@@ -41,13 +47,16 @@ public class StatPermaBoost : MonoBehaviour
             GrabbedBooster();
             switch (type)
             {
+
                 case PickUpType.HealthPlus:
-                    other.gameObject.GetComponent<PlayerManager>().HP += boostAmount;
-                    other.gameObject.GetComponent<PlayerManager>().HPOrignal += boostAmount;
+                    playerManager = other.gameObject.GetComponent<PlayerManager>();
+                    playerManager.HPOrignal += boostAmount;
+                    //saveSystem.playerData.HealthMax += boostAmount;
                     break;
                 case PickUpType.OverShieldPlus:
-                    other.gameObject.GetComponent<PlayerManager>().OS += boostAmount;
-                    other.gameObject.GetComponent<PlayerManager>().OSOrignal += boostAmount;
+                    playerManager = other.gameObject.GetComponent<PlayerManager>();
+                    playerManager.OSOrignal += boostAmount;
+                    //saveSystem.playerData.OvershieldMax += boostAmount;
                     break;
             }
             StartCoroutine(DestroyAfterDelay(0.5f));
@@ -64,19 +73,20 @@ public class StatPermaBoost : MonoBehaviour
     {
         string sceneName = currentScene.name;
 
-        Scene1HPBoosterUnlocked = PlayerPrefs.GetInt("Scene1HPBoosterUnlocked") == 1;
-        Scene2HPBoosterUnlocked = PlayerPrefs.GetInt("Scene2HPBoosterUnlocked") == 1;
-        Scene3HPBoosterUnlocked = PlayerPrefs.GetInt("Scene3HPBoosterUnlocked") == 1;
-        Scene4HPBoosterUnlocked = PlayerPrefs.GetInt("Scene4HPBoosterUnlocked") == 1;
-        Scene5HPBoosterUnlocked = PlayerPrefs.GetInt("Scene5HPBoosterUnlocked") == 1;
-        Scene6HPBoosterUnlocked = PlayerPrefs.GetInt("Scene6HPBoosterUnlocked") == 1;
+        Scene1HPBoosterUnlocked = saveSystem.playerData.Scene1HPBoosterUnlocked;
+        Scene2HPBoosterUnlocked = saveSystem.playerData.Scene2HPBoosterUnlocked;
+        Scene3HPBoosterUnlocked = saveSystem.playerData.Scene3HPBoosterUnlocked;
+        Scene4HPBoosterUnlocked = saveSystem.playerData.Scene4HPBoosterUnlocked;
+        Scene5HPBoosterUnlocked = saveSystem.playerData.Scene5HPBoosterUnlocked;
+        Scene6HPBoosterUnlocked = saveSystem.playerData.Scene6HPBoosterUnlocked;
+        Debug.Log(Scene6HPBoosterUnlocked);
 
-        Scene1OSBoosterUnlocked = PlayerPrefs.GetInt("Scene1OSBoosterUnlocked") == 1;
-        Scene2OSBoosterUnlocked = PlayerPrefs.GetInt("Scene2OSBoosterUnlocked") == 1;
-        Scene3OSBoosterUnlocked = PlayerPrefs.GetInt("Scene3OSBoosterUnlocked") == 1;
-        Scene4OSBoosterUnlocked = PlayerPrefs.GetInt("Scene4OSBoosterUnlocked") == 1;
-        Scene5OSBoosterUnlocked = PlayerPrefs.GetInt("Scene5OSBoosterUnlocked") == 1;
-        Scene6OSBoosterUnlocked = PlayerPrefs.GetInt("Scene6OSBoosterUnlocked") == 1;
+        Scene1OSBoosterUnlocked = saveSystem.playerData.Scene1OSBoosterUnlocked;
+        Scene2OSBoosterUnlocked = saveSystem.playerData.Scene2OSBoosterUnlocked;
+        Scene3OSBoosterUnlocked = saveSystem.playerData.Scene3OSBoosterUnlocked;
+        Scene4OSBoosterUnlocked = saveSystem.playerData.Scene4OSBoosterUnlocked;
+        Scene5OSBoosterUnlocked = saveSystem.playerData.Scene5OSBoosterUnlocked;
+        Scene6OSBoosterUnlocked = saveSystem.playerData.Scene6OSBoosterUnlocked;
 
 
         if (Scene1HPBoosterUnlocked == true && sceneName == "Scene1 - Dustin")
@@ -101,6 +111,7 @@ public class StatPermaBoost : MonoBehaviour
         }
         if (Scene6HPBoosterUnlocked == true && sceneName == "Scene6 - Andrew")
         {
+            Debug.Log("Destroyed");
             Destroy(gameObject);
         }
         if (Scene1OSBoosterUnlocked == true && sceneName == "Scene1 - Dustin")
@@ -132,8 +143,8 @@ public class StatPermaBoost : MonoBehaviour
     public void GrabbedBooster()
     {
         string sceneName = currentScene.name;
-        int HealthMax = PlayerPrefs.GetInt("HealthMax");
-        int OvershieldMax = PlayerPrefs.GetInt("OvershieldMax");
+        int HealthMax = saveSystem.playerData.HealthMax;
+        int OvershieldMax = saveSystem.playerData.OvershieldMax;
 
         switch (type)
         {
@@ -150,75 +161,75 @@ public class StatPermaBoost : MonoBehaviour
 
         if (Scene1HPBoosterUnlocked == false && sceneName == "Scene1 - Dustin" && Booster == "Health")
         {
-            PlayerPrefs.SetInt("Scene1HPBooster", 1);
-            PlayerPrefs.SetInt("HealthMax", HealthMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene1HPBoosterUnlocked = true;
+            saveSystem.playerData.HealthMax = HealthMax;
+            saveSystem.SavePlayer();
         }
         if (Scene2HPBoosterUnlocked == false && sceneName == "Scene2 - Michael" && Booster == "Health")
         {
-            PlayerPrefs.SetInt("Scene2HPBooster",1);
-            PlayerPrefs.SetInt("HealthMax", HealthMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene2HPBoosterUnlocked = true;
+            saveSystem.playerData.HealthMax = HealthMax;
+            saveSystem.SavePlayer();
         }
         if (Scene3HPBoosterUnlocked == false && sceneName == "Scene3 - Conner" && Booster == "Health")
         {
-            PlayerPrefs.SetInt("Scene3HPBooster", 1);
-            PlayerPrefs.SetInt("HealthMax", HealthMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene3HPBoosterUnlocked = true;
+            saveSystem.playerData.HealthMax = HealthMax;
+            saveSystem.SavePlayer();
         }
         if (Scene4HPBoosterUnlocked == false && sceneName == "Scene4 - Leo" && Booster == "Health")
         {
-            PlayerPrefs.SetInt("Scene4HPBooster", 1);
-            PlayerPrefs.SetInt("HealthMax", HealthMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene4HPBoosterUnlocked = true;
+            saveSystem.playerData.HealthMax = HealthMax;
+            saveSystem.SavePlayer();
         }
         if (Scene5HPBoosterUnlocked == false && sceneName == "Scene5 - Demetrice" && Booster == "Health")
         {
-            PlayerPrefs.SetInt("Scene5HPBooster", 1);
-            PlayerPrefs.SetInt("HealthMax", HealthMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene5HPBoosterUnlocked = true;
+            saveSystem.playerData.HealthMax = HealthMax;
+            saveSystem.SavePlayer();
         }
         if (Scene6HPBoosterUnlocked == false && sceneName == "Scene6 - Andrew" && Booster == "Health")
         {
-            PlayerPrefs.SetInt("Scene6HPBooster", 1);
-            PlayerPrefs.SetInt("HealthMax", HealthMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene6HPBoosterUnlocked = true;
+            saveSystem.playerData.HealthMax = HealthMax;
+            saveSystem.SavePlayer();
         }
         if (Scene1OSBoosterUnlocked == false && sceneName == "Scene1 - Dustin" && Booster == "OverShield")
         {
-            PlayerPrefs.SetInt("Scene1OSBooster", 1);
-            PlayerPrefs.SetInt("OverShieldMax", OvershieldMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene1OSBoosterUnlocked = true;
+            saveSystem.playerData.OvershieldMax = OvershieldMax;
+            saveSystem.SavePlayer();
         }
         if (Scene2OSBoosterUnlocked == false && sceneName == "Scene2 - Michael" && Booster == "OverShield")
         {
-            PlayerPrefs.SetInt("Scene2OSBooster", 1);
-            PlayerPrefs.SetInt("OverShieldMax", OvershieldMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene2OSBoosterUnlocked = true;
+            saveSystem.playerData.OvershieldMax = OvershieldMax;
+            saveSystem.SavePlayer();
         }
         if (Scene3OSBoosterUnlocked == false && sceneName == "Scene3 - Conner" && Booster == "OverShield")
         {
-            PlayerPrefs.SetInt("Scene3OSBooster", 1);
-            PlayerPrefs.SetInt("OverShieldMax", OvershieldMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene3OSBoosterUnlocked = true;
+            saveSystem.playerData.OvershieldMax = OvershieldMax;
+            saveSystem.SavePlayer();
         }
         if (Scene4OSBoosterUnlocked == false && sceneName == "Scene4 - Leo" && Booster == "OverShield")
         {
-            PlayerPrefs.SetInt("Scene4OSBooster", 1);
-            PlayerPrefs.SetInt("OverShieldMax", OvershieldMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene4OSBoosterUnlocked = true;
+            saveSystem.playerData.OvershieldMax = OvershieldMax;
+            saveSystem.SavePlayer();
         }
         if (Scene5OSBoosterUnlocked == false && sceneName == "Scene5 - Demetrice" && Booster == "OverShield")
         {
-            PlayerPrefs.SetInt("Scene5OSBooster", 1);
-            PlayerPrefs.SetInt("OverShieldMax", OvershieldMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene5OSBoosterUnlocked = true;
+            saveSystem.playerData.OvershieldMax = OvershieldMax;
+            saveSystem.SavePlayer();
         }
         if (Scene6OSBoosterUnlocked == false && sceneName == "Scene6 - Andrew" && Booster == "OverShield")
         {
-            PlayerPrefs.SetInt("Scene6OSBooster", 1);
-            PlayerPrefs.SetInt("OverShieldMax", OvershieldMax);
-            PlayerPrefs.Save();
+            saveSystem.playerData.Scene6OSBoosterUnlocked = true;
+            saveSystem.playerData.OvershieldMax = OvershieldMax;
+            saveSystem.SavePlayer();
         }
     }
 }

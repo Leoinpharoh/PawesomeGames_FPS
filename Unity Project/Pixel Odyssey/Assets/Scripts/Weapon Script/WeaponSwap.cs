@@ -8,6 +8,8 @@ public class WeaponSwap : MonoBehaviour
     [SerializeField] GameObject weaponTwo;
     [SerializeField] GameObject weaponThree;
     [SerializeField] GameObject weaponFour;
+    PlayerManager playerManager;
+
 
     GameObject currentWeapon;
     void Update()
@@ -17,6 +19,11 @@ public class WeaponSwap : MonoBehaviour
 
     void SwapWeapon()
     {
+        //shotgunUnlocked = playerManager.shotgunUnlocked;
+        //assaultRifleUnlocked = playerManager.assaultRifleUnlocked;
+        //rpgUnlocked = playerManager.RPGUnlocked;
+
+        //Debug.Log(GameManager.Instance.playerManager.shotgunUnlocked);
         if (Input.GetKeyDown(KeyCode.Alpha1) && weaponOne != null)
         {
             if (currentWeapon != null) {currentWeapon.SetActive(false);}
@@ -24,20 +31,20 @@ public class WeaponSwap : MonoBehaviour
             currentWeapon = weaponOne;
             redundancy();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2) && weaponTwo != null)
+        if(Input.GetKeyDown(KeyCode.Alpha2) && weaponTwo != null && GameManager.Instance.playerManager.shotgunUnlocked)
         {
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponTwo.SetActive(true);
             currentWeapon = weaponTwo;
             redundancy();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && weaponThree != null)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && weaponThree != null && GameManager.Instance.playerManager.assaultRifleUnlocked)
         {
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponThree.SetActive(true);
             currentWeapon = weaponThree;
             redundancy();
-        }if (Input.GetKeyDown(KeyCode.Alpha4) && weaponFour != null)
+        }if (Input.GetKeyDown(KeyCode.Alpha4) && weaponFour != null && GameManager.Instance.playerManager.RPGUnlocked)
         {
             if (currentWeapon != null) { currentWeapon.SetActive(false); }
             weaponFour.SetActive(true);

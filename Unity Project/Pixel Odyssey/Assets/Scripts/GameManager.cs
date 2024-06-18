@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 //using UnityEditor.Experimental.GraphView;
 using System.Linq;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,10 +34,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
     public GameObject playerOSToggle; //for unlocking the OS
-    //public GameObject playerToolBeltToggle; //for unlocking the ToolBelt
+    public GameObject playerToolBeltToggle; //for unlocking the ToolBelt
+    public GameObject itemsSlotLockedToggle;
     public GameObject playerPotionToggle; //for toolbelt image when swapping to potion
     public GameObject playerCureToggle; //for toolbelt image when swapping to cure
     public GameObject playerOSPToggle; //for toolbelt image when swapping to OS Potion
+
+    public GameObject weaponSlot2Toggle;
+    public GameObject weaponSlot3Toggle;
+    public GameObject weaponSlot4Toggle;
+    public GameObject weaponSlot2LockedToggle;
+    public GameObject weaponSlot3LockedToggle;
+    public GameObject weaponSlot4LockedToggle;
 
     // Used for display of the players ammo for each gun
     [SerializeField]
@@ -124,7 +132,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject LoadGameScreen;
 
 
-
+    public PlayerManager playerManager;
+    public SaveSystem saveSystem;
 
 
     public static GameManager Instance;
@@ -222,14 +231,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayer()
     {
+        saveSystem.LoadPlayer();
         clipColtAmount.text = lightBullets.ToString();
         clipShotgunAmount.text = MediumBullets.ToString();
         clipAssaultAmount.text = HeavyBullets.ToString();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        PlayerPrefs.SetInt("TutorialComplete", 1);
-        PlayerPrefs.Save();
-        tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
+        bool tutorialComplete = saveSystem.playerData.TutorialComplete;
         if (tutorialComplete == false && sceneName == "Player Hub")
         {
             TutorialTrigger();
@@ -385,6 +393,7 @@ public class GameManager : MonoBehaviour
         characterController.enabled = false;
         weaponSwap.enabled = false;
         cameraController.enabled = false;
+        playerAnimator.enabled = true;
         playerAnimator.applyRootMotion = false;
         playerAnimator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
         ToolBelt.SetActive(false);
@@ -398,8 +407,6 @@ public class GameManager : MonoBehaviour
         Timer.SetActive(false);
         ToolTips.SetActive(false);
         playerAnimator.SetBool("Tutorial", true);
-        PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
-        PlayerPrefs.Save();
     }
 
     public void TutorialComplete()
@@ -410,6 +417,7 @@ public class GameManager : MonoBehaviour
         characterController.enabled = true;
         weaponSwap.enabled = true;
         cameraController.enabled = true;
+        playerAnimator.enabled = false;
         playerAnimator.applyRootMotion = true;
         playerAnimator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
         ToolBelt.SetActive(true);
@@ -422,8 +430,8 @@ public class GameManager : MonoBehaviour
         ToolTips.SetActive(true);
         Portals.SetActive(true);
         tutorialComplete = true;
-        PlayerPrefs.SetInt("TutorialComplete", tutorialComplete ? 1 : 0);
-        PlayerPrefs.Save();
+        saveSystem.playerData.TutorialComplete = true;
+        saveSystem.SavePlayer();
     }
 
     public void CameraTrigger()

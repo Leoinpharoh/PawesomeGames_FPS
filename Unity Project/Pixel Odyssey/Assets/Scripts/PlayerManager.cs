@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour, IDamage, EDamage
@@ -103,10 +104,14 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public InventoryManager inventoryManager;
     public Interact interactScript;
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
+    public SaveSystem saveSystem;
 
     //Access Toolbelt
     ToolBelt toolBelt;
     public int currentPotionIndex = 0;
+
+    Scene currentScene;
+
     void Awake()
     {
 
@@ -123,6 +128,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         toolBelt = GetComponent<ToolBelt>();
         UpdateCurrentPotionSlotUI();
+
+        Scene currentScene = SceneManager.GetActiveScene();
+
     }
     void Update()
     {
@@ -148,67 +156,43 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         Tootips();
 
         ScrollPotions();
-        //// Use potion when the player presses the "Q" key
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UsePotion();
-        }
+
+        ItemUse();
+
     }
 
     public void LoadPlayer()
     {
-
-        currency = PlayerPrefs.GetInt("Currency");
-        //PythonAmmo = PlayerPrefs.GetInt("PythonAmmo");
-        //ShotgunAmmo = PlayerPrefs.GetInt("ShotgunAmmo");
-        //AssaultRifleAmmo = PlayerPrefs.GetInt("AssaultRifleAmmo");
-        //RPGAmmo = PlayerPrefs.GetInt("RPGAmmo");
-        HPOrignal = PlayerPrefs.GetInt("HealthMax");
-        OSOrignal = PlayerPrefs.GetInt("OvershieldMax");
-        overshieldPotions = PlayerPrefs.GetInt("OvershieldPotions");
-        healthPotions = PlayerPrefs.GetInt("HealthPotions");
-        tutorialComplete = PlayerPrefs.GetInt("TutorialComplete") == 1;
-        shotgunUnlocked = PlayerPrefs.GetInt("ShotgunUnlocked") == 1;
-        assaultRifleUnlocked = PlayerPrefs.GetInt("AssaultRifleUnlocked") == 1;
-        RPGUnlocked = PlayerPrefs.GetInt("RPGUnlocked") == 1;
-        meleeUnlocked = PlayerPrefs.GetInt("MeleeUnlocked") == 1;
-        overshieldUnlocked = PlayerPrefs.GetInt("OvershieldUnlocked") == 1;
-        potionbeltUnlocked = PlayerPrefs.GetInt("PotionbeltUnlocked") == 1;
+        //PythonAmmo = saveSystem.playerData.PythonAmmo;
+        //ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
+        //AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
+        //RPGAmmo = saveSystem.playerData.RPGAmmo;
+        HPOrignal = saveSystem.playerData.HealthMax;
+        OSOrignal = saveSystem.playerData.OvershieldMax;
+        overshieldPotions = saveSystem.playerData.OvershieldPotions;
+        healthPotions = saveSystem.playerData.HealthPotions;
+        shotgunUnlocked = saveSystem.playerData.ShotgunUnlocked;
+        assaultRifleUnlocked = saveSystem.playerData.AssaultRifleUnlocked;
+        RPGUnlocked = saveSystem.playerData.RPGUnlocked;
+        meleeUnlocked = saveSystem.playerData.MeleeUnlocked;
+        overshieldUnlocked = saveSystem.playerData.OvershieldUnlocked;
+        potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
         if (HPOrignal == 0)
         {
-            HPOrignal = 140;
+            HPOrignal = saveSystem.playerData.HealthMax;
         }
         if (OSOrignal == 0)
         {
-            OSOrignal = 40;
+            OSOrignal = saveSystem.playerData.OvershieldMax;
         }
         HP = HPOrignal;
         OS = OSOrignal;
         osCheck();
+        rpgCheck();
+        shotgunCheck();
+        assaultCheck();
+        toolbeltCheck();
         updatePlayerUI();
-    }
-
-
-    public void PauseAnimation()
-    {
-        playerAnimator.speed = 0;
-    }
-
-    public void subtitleTrigger()
-    {
-        subtitleIndex++;
-        subtitlesObject = GameObject.Find("Subtitle" + subtitleIndex);
-        subtitles = subtitlesObject.GetComponent<Subtitles>();
-        subtitles.StartSubtitles();
-    }
-
-    public void TutorialComplete()
-    {
-        GameManager.Instance.TutorialComplete();
-    }
-    public void CameraTrigger()
-    {
-        GameManager.Instance.CameraTrigger();
     }
 
     #region Effects and Damage
@@ -517,24 +501,27 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void Movement()
     {
-        if (characterControl.isGrounded)
+        string sceneName = currentScene.name;
+        if (sceneName != "Credits")
         {
-            jumpCounter = 0;
-            playerVelocity = Vector3.zero;
+            if (characterControl.isGrounded)
+            {
+                jumpCounter = 0;
+                playerVelocity = Vector3.zero;
+            }
+            if (!confused)
+            {
+                moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+                    (Input.GetAxis("Vertical") * transform.forward).normalized;
+                characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                moveDirection = (Input.GetAxis("Vertical") * transform.right) +
+                    (Input.GetAxis("Horizontal") * transform.forward);
+                characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
+            }
         }
-        if (!confused)
-        {
-            moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
-                (Input.GetAxis("Vertical") * transform.forward).normalized;
-            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-        }
-        else
-        {
-            moveDirection = (Input.GetAxis("Vertical") * transform.right) +
-                (Input.GetAxis("Horizontal") * transform.forward);
-            characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-        }
-
     }
 
     public Vector3 GetCurrentMoveDirection()
@@ -692,6 +679,27 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     #region PlayerUI and StartUp and FlashLight
 
+    public void PauseAnimation()
+    {
+        playerAnimator.speed = 0;
+    }
+
+    public void subtitleTrigger()
+    {
+        subtitleIndex++;
+        subtitlesObject = GameObject.Find("Subtitle" + subtitleIndex);
+        subtitles = subtitlesObject.GetComponent<Subtitles>();
+        subtitles.StartSubtitles();
+    }
+
+    public void TutorialComplete()
+    {
+        GameManager.Instance.TutorialComplete();
+    }
+    public void CameraTrigger()
+    {
+        GameManager.Instance.CameraTrigger();
+    }
     public void updatePlayerUI()
     {
         float hpFillAmount = (float)HP / HPOrignal;
@@ -742,7 +750,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             inventory.Container.Items.Clear();
         }
     }
-
     public void osCheck()
     {
         if (overshieldUnlocked)
@@ -753,7 +760,60 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             GameManager.Instance.playerOSToggle.SetActive(false);
         }
-        updatePlayerUI();
+    }
+    public void shotgunCheck()
+    {
+        if (shotgunUnlocked)
+        {
+            GameManager.Instance.weaponSlot2LockedToggle.SetActive(false);
+            GameManager.Instance.weaponSlot2Toggle.SetActive(true);
+
+        }
+        if (!shotgunUnlocked)
+        {
+            GameManager.Instance.weaponSlot2LockedToggle.SetActive(true);
+            GameManager.Instance.weaponSlot2Toggle.SetActive(false);
+        }
+    }
+    public void assaultCheck()
+    {
+        if (assaultRifleUnlocked)
+        {
+            GameManager.Instance.weaponSlot3LockedToggle.SetActive(false);
+            GameManager.Instance.weaponSlot3Toggle.SetActive(true);
+        }
+        if (!assaultRifleUnlocked)
+        {
+            GameManager.Instance.weaponSlot3LockedToggle.SetActive(true);
+            GameManager.Instance.weaponSlot3Toggle.SetActive(false);
+        }
+    }
+    public void rpgCheck()
+    {
+        if (RPGUnlocked)
+        {
+            GameManager.Instance.weaponSlot4LockedToggle.SetActive(false);
+            GameManager.Instance.weaponSlot4Toggle.SetActive(true);
+        }
+        if (!RPGUnlocked)
+        {
+            GameManager.Instance.weaponSlot4LockedToggle.SetActive(true);
+            GameManager.Instance.weaponSlot4Toggle.SetActive(false);
+        }
+    }
+    public void toolbeltCheck()
+    {
+        if (potionbeltUnlocked)
+        {
+            GameManager.Instance.itemsSlotLockedToggle.SetActive(false);
+            GameManager.Instance.playerToolBeltToggle.SetActive(true);
+
+        }
+        if (!potionbeltUnlocked)
+        {
+            GameManager.Instance.itemsSlotLockedToggle.SetActive(true);
+            GameManager.Instance.playerToolBeltToggle.SetActive(false);
+        }
     }
 
 
@@ -761,6 +821,17 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     #region ToolBelt
     // Scroll through the potions in the ToolBelt
+    public void ItemUse()
+    {
+        //// Use potion when the player presses the "Q" key
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (potionbeltUnlocked)
+            {
+                UsePotion();
+            }
+        }
+    }
     private void ScrollPotions()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");

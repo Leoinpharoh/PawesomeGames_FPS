@@ -171,10 +171,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator Reload()
     {
         isReloading = true;
+        agent.isStopped = true;
         anim.SetBool("isReloading", true);
         PlayReloadSound();
         yield return new WaitForSeconds(enemyParams.enemyReloadTime);
         anim.SetBool("isReloading", false);
+        agent.isStopped = false;
         isReloading = false;
     }
 

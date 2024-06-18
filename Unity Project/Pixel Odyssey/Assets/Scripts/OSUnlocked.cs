@@ -6,6 +6,7 @@ using UnityEngine;
 public class OSUnlocked : MonoBehaviour
 {
     PlayerManager playerManager;
+    SaveSystem saveSystem;
 
     public List<GameObject> objectsToCheck; // List of objects to check
     void Start()
@@ -28,9 +29,9 @@ public class OSUnlocked : MonoBehaviour
             {
                 Debug.Log("Boss dead");
                 //objectsToCheck.Remove(obj);
-                PlayerPrefs.SetInt("OvershieldUnlocked", 1);
+                saveSystem.playerData.OvershieldUnlocked = true;
+                saveSystem.SavePlayer();
                 GameManager.Instance.ActivatePlayerOS();
-                PlayerPrefs.Save();
             }
         }
     }

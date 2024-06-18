@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,13 @@ public class NextLevel : MonoBehaviour
     [SerializeField] private Image levelFlashImage; // Reference to the Image for fading
     [SerializeField] private float fadeDuration = 1.0f; // Duration of the fade
 
+    [SerializeField] public enum Unlockables { Shotgun, AssaultRifle, Rpg, ToolBelt, OverShield, None};
+    public Unlockables unlockables;
+
+    PlayerManager playerManager;
+    public SaveSystem saveSystem;
+
+    
     private void Start()
     {
         if (levelFlashImage == null)
@@ -25,9 +33,45 @@ public class NextLevel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            if(unlockables == Unlockables.Shotgun)
+            {
+                //unlock Shotgun
+                saveSystem.playerData.ShotgunUnlocked = true;
+                saveSystem.SavePlayer();
+                StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            }
+            if (unlockables == Unlockables.AssaultRifle)
+            {
+                saveSystem.playerData.AssaultRifleUnlocked = true;
+                saveSystem.SavePlayer();
+                StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            }
+            if (unlockables == Unlockables.Rpg)
+            {
+                saveSystem.playerData.RPGUnlocked = true;
+                saveSystem.SavePlayer();
+                StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            }
+            if (unlockables == Unlockables.ToolBelt)
+            {
+                saveSystem.playerData.PotionbeltUnlocked = true;
+                saveSystem.SavePlayer();
+                StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            }
+            if (unlockables == Unlockables.OverShield)
+            {
+                saveSystem.playerData.OvershieldUnlocked = true;
+                saveSystem.SavePlayer();
+                StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            }
+            if (unlockables == Unlockables.None)
+            {
+                StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
+            }
+
         }
     }
 
