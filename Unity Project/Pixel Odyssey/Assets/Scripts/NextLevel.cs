@@ -14,6 +14,7 @@ public class NextLevel : MonoBehaviour
     public Unlockables unlockables;
 
     PlayerManager playerManager;
+    SaveSystem saveSystem;
 
     
     private void Start()
@@ -38,43 +39,32 @@ public class NextLevel : MonoBehaviour
             if(unlockables == Unlockables.Shotgun)
             {
                 //unlock Shotgun
-                PlayerPrefs.SetInt("ShotgunUnlocked", 1);
-                GameManager.Instance.ActivatePlayerOS();
-                //playerManager.shotgunCheck();
-                PlayerPrefs.Save();
+                saveSystem.playerData.ShotgunUnlocked = true;
+                saveSystem.SavePlayer();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
             if (unlockables == Unlockables.AssaultRifle)
             {
-                PlayerPrefs.SetInt("AssaultRifleUnlocked", 1);
-                GameManager.Instance.ActivatePlayerOS();
-                //playerManager.assaultCheck();
-                PlayerPrefs.Save();
+                saveSystem.playerData.AssaultRifleUnlocked = true;
+                saveSystem.SavePlayer();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
             if (unlockables == Unlockables.Rpg)
             {
-                PlayerPrefs.SetInt("RPGUnlocked", 1);
-                GameManager.Instance.ActivatePlayerOS();
-                //playerManager.rpgCheck();
-                PlayerPrefs.Save();
+                saveSystem.playerData.RPGUnlocked = true;
+                saveSystem.SavePlayer();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
             if (unlockables == Unlockables.ToolBelt)
             {
-                PlayerPrefs.SetInt("PotionBeltUnlocked", 1);
-                GameManager.Instance.ActivatePlayerOS();
-                //playerManager.toolbeltCheck();
-                PlayerPrefs.Save();
+                saveSystem.playerData.PotionbeltUnlocked = true;
+                saveSystem.SavePlayer();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
             if (unlockables == Unlockables.OverShield)
             {
-                PlayerPrefs.SetInt("OvershieldUnlocked", 1);
-                GameManager.Instance.ActivatePlayerOS();
-                //playerManager.osCheck();
-                PlayerPrefs.Save();
-                //unlock Shotgun
+                saveSystem.playerData.OvershieldUnlocked = true;
+                saveSystem.SavePlayer();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
             if (unlockables == Unlockables.None)
