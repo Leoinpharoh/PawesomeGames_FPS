@@ -79,6 +79,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
 
     bool toolTipsOn;
+    bool ObjectivesActive;
 
     //Saved Variables
     public int HPOrignal;
@@ -159,6 +160,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         ItemUse();
 
+        ObjectiveMenu();
     }
 
     public void LoadPlayer()
@@ -740,6 +742,30 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 GameManager.Instance.ToolTipsOn.SetActive(false);
                 GameManager.Instance.ToolTipsOff.SetActive(true);
                 toolTipsOn = false;
+            }
+        }
+    }
+    void ObjectiveMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (ObjectivesActive)
+            {
+                GameManager.Instance.ObjectivesOn.SetActive(true);
+                GameManager.Instance.ObjectivesOff.SetActive(false);
+                GameManager.Instance.objectiveEnemiesToKillwithObjectiveClosedOn.SetActive(true);
+                GameManager.Instance.objectiveEnemiesToKillwithObjectiveClosedOff.SetActive(false);
+
+                ObjectivesActive = false;
+            }
+            else
+            {
+                GameManager.Instance.ObjectivesOn.SetActive(false);
+                GameManager.Instance.ObjectivesOff.SetActive(true);
+                GameManager.Instance.objectiveEnemiesToKillwithObjectiveClosedOn.SetActive(false);
+                GameManager.Instance.objectiveEnemiesToKillwithObjectiveClosedOff.SetActive(true);
+
+                ObjectivesActive = true;
             }
         }
     }

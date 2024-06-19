@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator UIAnimator;
     [SerializeField] public GameObject ToolTipsOn;
     [SerializeField] public GameObject ToolTipsOff;
+    [SerializeField] public GameObject ObjectivesOn;
+    [SerializeField] public GameObject objectiveEnemiesToKillwithObjectiveClosedOff;
+    [SerializeField] public GameObject ObjectivesOff;
+    [SerializeField] public GameObject objectiveEnemiesToKillwithObjectiveClosedOn;
     public GameObject playerOSToggle; //for unlocking the OS
     public GameObject playerToolBeltToggle; //for unlocking the ToolBelt
     public GameObject itemsSlotLockedToggle;
@@ -55,6 +59,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text objective2Text;
     [SerializeField] TMP_Text objective3Text;
     [SerializeField] public TMP_Text objectiveEnemiesToKill;
+    [SerializeField] public TMP_Text objectiveEnemiesToKillwithObjectiveClosed;
     public int objectiveEnemiesKilledCount;
     public int objectiveEnemiesToKillCount;
 
