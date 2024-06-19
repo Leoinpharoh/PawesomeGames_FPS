@@ -34,7 +34,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     private Transform playerTransform; // Reference to the player's transform
     bool isReloading;
     int shootLoop;
-
+    bool hitEnemy;
     EnemyParams.EnemyType enemyType; // references the enemy type from the EnemyParams scriptable object
     EnemyParams.DetectionType enemyDetection; // references the enemy detection from the EnemyParams scriptable object
     PlayerManager playerManager; // Reference to the PlayerManager script
@@ -341,10 +341,19 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     private void PlayAttackSound()
     {
-        if (audioSource != null && enemyParams.attackSound.Length > 0)
+        if (hitEnemy)
         {
-            AudioClip clip = enemyParams.attackSound[Random.Range(0, enemyParams.attackSound.Length)];
-            audioSource.PlayOneShot(clip);
+
+        }
+        else
+        {
+            if (audioSource != null && enemyParams.attackSound.Length > 0)
+            {
+                hitEnemy =  true;
+                AudioClip clip = enemyParams.attackSound[Random.Range(0, enemyParams.attackSound.Length)];
+                audioSource.PlayOneShot(clip);
+            }
+            hitEnemy = false;
         }
     }
 

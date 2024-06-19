@@ -76,8 +76,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     bool moveSpeedReduced;
     bool alive;
     bool playingWalkAudio;
-
-
     bool toolTipsOn;
     bool ObjectivesActive;
 
@@ -93,7 +91,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool potionbeltUnlocked;
     public int healthPotions;
     public int overshieldPotions;
-    public int currency;
     public int HP;
     public int OS;
     public int subtitleIndex = 0;
@@ -108,29 +105,16 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     //Access Toolbelt
     ToolBelt toolBelt;
+
     public int currentPotionIndex = 0;
 
     Scene currentScene;
 
-    public GameManager gameManager;
-
-    void Awake()
-    {
-
-    }
     void Start()
     {
         LoadPlayer();
 
         StartUp();
-
-        toolTipsOn = false;
-
-        subtitlesObject = GameObject.Find("Subtitle1");
-
-        toolBelt = GetComponent<ToolBelt>();
-        UpdateCurrentPotionSlotUI();
-        Scene currentScene = SceneManager.GetActiveScene();
 
     }
     void Update()
@@ -161,40 +145,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         ItemUse();
 
         ObjectiveMenu();
-    }
-
-    public void LoadPlayer()
-    {
-        //PythonAmmo = saveSystem.playerData.PythonAmmo;
-        //ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
-        //AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
-        //RPGAmmo = saveSystem.playerData.RPGAmmo;
-        HPOrignal = saveSystem.playerData.HealthMax;
-        OSOrignal = saveSystem.playerData.OvershieldMax;
-        overshieldPotions = saveSystem.playerData.OvershieldPotions;
-        healthPotions = saveSystem.playerData.HealthPotions;
-        shotgunUnlocked = saveSystem.playerData.ShotgunUnlocked;
-        assaultRifleUnlocked = saveSystem.playerData.AssaultRifleUnlocked;
-        RPGUnlocked = saveSystem.playerData.RPGUnlocked;
-        meleeUnlocked = saveSystem.playerData.MeleeUnlocked;
-        overshieldUnlocked = saveSystem.playerData.OvershieldUnlocked;
-        potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
-        if (HPOrignal == 0)
-        {
-            HPOrignal = saveSystem.playerData.HealthMax;
-        }
-        if (OSOrignal == 0)
-        {
-            OSOrignal = saveSystem.playerData.OvershieldMax;
-        }
-        HP = HPOrignal;
-        OS = OSOrignal;
-        osCheck();
-        rpgCheck();
-        shotgunCheck();
-        assaultCheck();
-        toolbeltCheck();
-        updatePlayerUI();
     }
 
     #region Effects and Damage
@@ -681,6 +631,39 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     #region PlayerUI and StartUp and FlashLight
 
+    public void LoadPlayer()
+    {
+        //PythonAmmo = saveSystem.playerData.PythonAmmo;
+        //ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
+        //AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
+        //RPGAmmo = saveSystem.playerData.RPGAmmo;
+        HPOrignal = saveSystem.playerData.HealthMax;
+        OSOrignal = saveSystem.playerData.OvershieldMax;
+        overshieldPotions = saveSystem.playerData.OvershieldPotions;
+        healthPotions = saveSystem.playerData.HealthPotions;
+        shotgunUnlocked = saveSystem.playerData.ShotgunUnlocked;
+        assaultRifleUnlocked = saveSystem.playerData.AssaultRifleUnlocked;
+        RPGUnlocked = saveSystem.playerData.RPGUnlocked;
+        meleeUnlocked = saveSystem.playerData.MeleeUnlocked;
+        overshieldUnlocked = saveSystem.playerData.OvershieldUnlocked;
+        potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
+        if (HPOrignal == 0)
+        {
+            HPOrignal = saveSystem.playerData.HealthMax;
+        }
+        if (OSOrignal == 0)
+        {
+            OSOrignal = saveSystem.playerData.OvershieldMax;
+        }
+        HP = HPOrignal;
+        OS = OSOrignal;
+        osCheck();
+        rpgCheck();
+        shotgunCheck();
+        assaultCheck();
+        toolbeltCheck();
+        updatePlayerUI();
+    }
     public void PauseAnimation()
     {
         playerAnimator.speed = 0;
@@ -721,6 +704,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         CharCon = gameObject.GetComponent<CharacterController>();
         baseHeight = CharCon.height;
         crouchHeight = baseHeight / 2;
+        toolTipsOn = false;
+        subtitlesObject = GameObject.Find("Subtitle1");
+        toolBelt = GetComponent<ToolBelt>();
+        UpdateCurrentPotionSlotUI();
+        Scene currentScene = SceneManager.GetActiveScene();
         updatePlayerUI();
     }
     void FlashLight()
