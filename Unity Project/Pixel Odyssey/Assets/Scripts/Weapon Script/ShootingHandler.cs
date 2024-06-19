@@ -28,7 +28,6 @@ public class ShootingHandler : MonoBehaviour
     private void Start()
     {
         weaponStats.clip = weaponStats.TilReload;
-        GameManager.Instance.playerAmmo(weaponStats.ammoType.ToString(), weaponStats.Ammo);
         Ammo = weaponStats.Ammo;
     }
 
@@ -66,6 +65,12 @@ public class ShootingHandler : MonoBehaviour
 
     private void UpdateAmmoDisplay()
     {
+        if (i == 0)
+        {
+            GameManager.Instance.playerAmmo(weaponStats.ammoType.ToString(), weaponStats.Ammo);
+            i = 1;
+        }
+
         GameManager.Instance.playerClip(weaponStats.clip);
     }
 

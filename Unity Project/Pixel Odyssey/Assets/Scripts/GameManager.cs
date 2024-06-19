@@ -47,9 +47,8 @@ public class GameManager : MonoBehaviour
     public GameObject weaponSlot3LockedToggle;
     public GameObject weaponSlot4LockedToggle;
     PlayerData playerData;
-
     // Used for display of the players ammo for each gun
-    //[SerializeField]TMP_Text[] SlotRounds;
+    [SerializeField]TMP_Text[] SlotRounds;
 
     [SerializeField] public List<string> objectives;
     [SerializeField] TMP_Text objective1Text;
@@ -353,6 +352,14 @@ public class GameManager : MonoBehaviour
     public void playerClip(int clip) // Update the player's clip amount
     {
         clipDisplayAmount.text = clip.ToString(); // Update the clip display amount
+
+        ShootingHandler[] shootingHandlers = player.GetComponents<ShootingHandler>();
+        ShootingHandler[] disabledShootingHandlers = shootingHandlers.Where(handler => !handler.enabled).ToArray();
+        for (int i = 0; i < disabledShootingHandlers.Length && i < SlotRounds.Length; i++)
+        {
+            int ammo = disabledShootingHandlers[i].Ammo;
+            SlotRounds[i].text = ammo.ToString();
+        }
     }
 
     public void playerEffect(string effect) //updates UI with current Status user is under
