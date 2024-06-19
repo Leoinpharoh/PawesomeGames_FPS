@@ -27,6 +27,11 @@ public class ButtonFunctions : MonoBehaviour
         //playerManager.LoadPlayer();
         GameManager.Instance.stateUnPaused();
     }
+    public void credits()
+    {
+        SceneManager.LoadScene("Credits");
+        GameManager.Instance.stateUnPaused();
+    }
     public void HUB()
     {
         //reload scene
