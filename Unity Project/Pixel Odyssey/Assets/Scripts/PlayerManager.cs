@@ -34,7 +34,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     private Subtitles subtitles;
     [SerializeField] GameObject subtitlesObject;
 
-
     private CharacterController CharCon;
     public Vector3 moveDirection;
     public Vector3 playerVelocity;
@@ -111,6 +110,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int currentPotionIndex = 0;
 
     Scene currentScene;
+
+    public GameManager gameManager;
 
     void Awake()
     {

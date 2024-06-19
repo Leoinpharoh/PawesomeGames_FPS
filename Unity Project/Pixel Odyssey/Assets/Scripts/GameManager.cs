@@ -24,10 +24,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsMainMenu;
     [SerializeField] TMP_Text ammoDisplayAmount;
     [SerializeField] TMP_Text clipDisplayAmount;
-    [SerializeField] TMP_Text clipColtAmount;
-    [SerializeField] TMP_Text clipShotgunAmount;
-    [SerializeField] TMP_Text clipAssaultAmount;
-    [SerializeField] TMP_Text clipRPGAmount;
+    [SerializeField] public TMP_Text clipColtAmount;
+    [SerializeField] public TMP_Text clipShotgunAmount;
+    [SerializeField] public TMP_Text clipAssaultAmount;
+    [SerializeField] public TMP_Text clipRPGAmount;
     [SerializeField] TMP_Text timerText;
     [SerializeField] Animator playerAnimator;
     [SerializeField] Animator UIAnimator;
@@ -46,10 +46,9 @@ public class GameManager : MonoBehaviour
     public GameObject weaponSlot2LockedToggle;
     public GameObject weaponSlot3LockedToggle;
     public GameObject weaponSlot4LockedToggle;
-
+    PlayerData playerData;
     // Used for display of the players ammo for each gun
-    [SerializeField]
-    TMP_Text[] SlotRounds;
+    [SerializeField]TMP_Text[] SlotRounds;
 
     [SerializeField] public List<string> objectives;
     [SerializeField] TMP_Text objective1Text;
@@ -103,9 +102,9 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     //int enemyCount;
     string ammoCurrentType;
-    int lightBullets;
-    int MediumBullets;
-    int HeavyBullets;
+    public int lightBullets;
+    public int MediumBullets;
+    public int HeavyBullets;
     public int confusedDamage = 0;
     public int slowedDamage = 0;
     float time = 0f;
@@ -159,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
         timerText.text = "0:00";
 
         LoadPlayer();
