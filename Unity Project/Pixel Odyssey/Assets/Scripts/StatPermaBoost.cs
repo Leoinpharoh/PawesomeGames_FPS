@@ -79,8 +79,6 @@ public class StatPermaBoost : MonoBehaviour
         Scene4HPBoosterUnlocked = saveSystem.playerData.Scene4HPBoosterUnlocked;
         Scene5HPBoosterUnlocked = saveSystem.playerData.Scene5HPBoosterUnlocked;
         Scene6HPBoosterUnlocked = saveSystem.playerData.Scene6HPBoosterUnlocked;
-        Debug.Log(Scene6HPBoosterUnlocked);
-
         Scene1OSBoosterUnlocked = saveSystem.playerData.Scene1OSBoosterUnlocked;
         Scene2OSBoosterUnlocked = saveSystem.playerData.Scene2OSBoosterUnlocked;
         Scene3OSBoosterUnlocked = saveSystem.playerData.Scene3OSBoosterUnlocked;
@@ -89,54 +87,52 @@ public class StatPermaBoost : MonoBehaviour
         Scene6OSBoosterUnlocked = saveSystem.playerData.Scene6OSBoosterUnlocked;
 
 
-        if (Scene1HPBoosterUnlocked == true && sceneName == "Scene1 - Dustin")
+        if (Scene1HPBoosterUnlocked == true && sceneName == "Scene1 - Dustin" && type == PickUpType.HealthPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene2HPBoosterUnlocked == true && sceneName == "Scene2 - Michael")
+        if (Scene2HPBoosterUnlocked == true && sceneName == "Scene2 - Michael" && type == PickUpType.HealthPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene3HPBoosterUnlocked == true && sceneName == "Scene3 - Conner")
+        if (Scene3HPBoosterUnlocked == true && sceneName == "Scene3 - Conner" && type == PickUpType.HealthPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene4HPBoosterUnlocked == true && sceneName == "Scene4 - Leo")
+        if (Scene4HPBoosterUnlocked == true && sceneName == "Scene4 - Leo" && type == PickUpType.HealthPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene5HPBoosterUnlocked == true && sceneName == "Scene5 - Demetrice")
+        if (Scene5HPBoosterUnlocked == true && sceneName == "Scene5 - Demetrice" && type == PickUpType.HealthPlus)
         {
             Destroy(gameObject);
         }
         if (Scene6HPBoosterUnlocked == true && sceneName == "Scene6 - Andrew" && type == PickUpType.HealthPlus)
         {
-            Debug.Log("HP Booster Destroyed");
             Destroy(gameObject);
         }
-        if (Scene1OSBoosterUnlocked == true && sceneName == "Scene1 - Dustin")
+        if (Scene1OSBoosterUnlocked == true && sceneName == "Scene1 - Dustin" && type == PickUpType.OverShieldPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene2OSBoosterUnlocked == true && sceneName == "Scene2 - Michael")
+        if (Scene2OSBoosterUnlocked == true && sceneName == "Scene2 - Michael" && type == PickUpType.OverShieldPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene3OSBoosterUnlocked == true && sceneName == "Scene3 - Conner")
+        if (Scene3OSBoosterUnlocked == true && sceneName == "Scene3 - Conner" && type == PickUpType.OverShieldPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene4OSBoosterUnlocked == true && sceneName == "Scene4 - Leo")
+        if (Scene4OSBoosterUnlocked == true && sceneName == "Scene4 - Leo" && type == PickUpType.OverShieldPlus)
         {
             Destroy(gameObject);
         }
-        if (Scene5OSBoosterUnlocked == true && sceneName == "Scene5 - Demetrice")
+        if (Scene5OSBoosterUnlocked == true && sceneName == "Scene5 - Demetrice" && type == PickUpType.OverShieldPlus)
         {
             Destroy(gameObject);
         }
         if (Scene6OSBoosterUnlocked == true && sceneName == "Scene6 - Andrew" && type == PickUpType.OverShieldPlus)
         {
-            Debug.Log("OS Booster Destroyed");
             Destroy(gameObject);
         }
     }

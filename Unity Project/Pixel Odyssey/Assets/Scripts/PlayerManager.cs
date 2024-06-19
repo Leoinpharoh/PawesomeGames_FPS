@@ -128,7 +128,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         toolBelt = GetComponent<ToolBelt>();
         UpdateCurrentPotionSlotUI();
-
         Scene currentScene = SceneManager.GetActiveScene();
 
     }
