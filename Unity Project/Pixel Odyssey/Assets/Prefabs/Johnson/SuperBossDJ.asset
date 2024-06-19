@@ -13,31 +13,31 @@ MonoBehaviour:
   m_Name: SuperBossDJ
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 203a79f8c7d8cb547ba06f88fa04f57e, type: 3}
-  HP: 500
+  HP: 400
   movementSpeed: 7
   Acceleration: 5
   animSpeedTrans: 6
   flying: 0
   enemyType: 1
-  bullet: {fileID: 6060363923453239229, guid: cb5062c98519cf341af4ccb44a880a6b, type: 3}
-  attackSpeed: 0.3
-  rangedAttackLead: 0.5
+  bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
+  attackSpeed: 0.1
+  rangedAttackLead: 0.8
   meleeRange: 0
   meleeDamage: 1
-  rangedRange: 15
-  rangedDamage: 1
-  bulletSpeed: 15
+  rangedRange: 0
+  rangedDamage: 20
+  bulletSpeed: 20
   destroyTime: 3
   effectDamage: 0
-  effectDuration: 5
+  effectDuration: 0.1
   enemyReloadTime: 3
-  enemyClipSize: 8
-  damageType: 5
+  enemyClipSize: 20
+  damageType: 0
   roaming: 1
   roamDist: 10
   roamTimer: 3
   lootPinata: 1
-  lootChance: 85
+  lootChance: 66
   loot:
   - {fileID: 8884114810549261806, guid: d8a59b9f57dddd44783aaff259a81504, type: 3}
   - {fileID: 3802848766677527129, guid: 355caeea4e1590442b7516a9a0d311ed, type: 3}
