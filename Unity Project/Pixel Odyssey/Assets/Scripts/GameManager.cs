@@ -335,14 +335,17 @@ public class GameManager : MonoBehaviour
         {
             case "Light":
                 ammoDisplayAmount.text = lightBullets.ToString();
-                clipColtAmount.text = lightBullets.ToString(); break;
+                clipColtAmount.text = lightBullets.ToString();
+                clipAssaultAmount.text = lightBullets.ToString(); 
+                break;
             case "Medium":
                 ammoDisplayAmount.text = MediumBullets.ToString();
-                clipShotgunAmount.text = MediumBullets.ToString(); break;
+                clipShotgunAmount.text = MediumBullets.ToString(); 
+                break;
             case "Heavy":
                 ammoDisplayAmount.text = HeavyBullets.ToString();
-                //clipRPGAmount.text = HeavyBullets.ToString();
-                clipAssaultAmount.text = HeavyBullets.ToString(); break;
+                clipRPGAmount.text = HeavyBullets.ToString();
+                 break;
         }
     }
 
