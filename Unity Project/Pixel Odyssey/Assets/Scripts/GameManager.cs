@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
     public bool objective3Aquired;
     public bool needsObjective;
 
+    [SerializeField] public TMP_Text hpBarText;
 
     //Tool Belt fields
     [SerializeField] Image[] itemSlotImages; // Array of Images to display the potion icons

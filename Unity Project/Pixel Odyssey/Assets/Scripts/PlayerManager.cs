@@ -692,6 +692,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
         GameManager.Instance.playerHpBar.fillAmount = hpFillAmount;
         GameManager.Instance.playerOS.fillAmount = osFillAmount;
+        GameManager.Instance.hpBarText.text = HP.ToString();
 
     }
 
