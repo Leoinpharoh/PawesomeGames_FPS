@@ -80,18 +80,21 @@ public class DamageSphere : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamage dmg = other.GetComponent<IDamage>();
-        SDamage sDMG = other.GetComponent<SDamage>();
-
-        if (dmg != null)
+        if (other != other.gameObject.CompareTag("Player"))
         {
-            Vector3 hitPosition = other.ClosestPoint(transform.position);
-            dmg.takeDamage(damage, hitPosition);
-        }
+            IDamage dmg = other.GetComponent<IDamage>();
+            SDamage sDMG = other.GetComponent<SDamage>();
 
-        if (sDMG != null)
-        {
-            sDMG.ObjectDamage(damage);
+            if (dmg != null)
+            {
+                Vector3 hitPosition = other.ClosestPoint(transform.position);
+                dmg.takeDamage(damage, hitPosition);
+            }
+
+            if (sDMG != null)
+            {
+                sDMG.ObjectDamage(damage);
+            }
         }
     }
 }

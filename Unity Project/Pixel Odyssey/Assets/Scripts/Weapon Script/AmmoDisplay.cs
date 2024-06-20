@@ -14,7 +14,7 @@ public class AmmoDisplay : MonoBehaviour
     {
         if (weaponStats.Ammo + weaponStats.clip != ammo)
         {
-            ammo = weaponStats.Ammo + weaponStats.clip;
+            ammo = weaponStats.Ammo;
             displayAmmoHere.text = ammo.ToString();
         }
     }
