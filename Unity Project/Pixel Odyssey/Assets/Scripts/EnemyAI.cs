@@ -34,7 +34,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     private Transform playerTransform; // Reference to the player's transform
     bool isReloading;
     int shootLoop;
-    bool hitEnemy;
     EnemyParams.EnemyType enemyType; // references the enemy type from the EnemyParams scriptable object
     EnemyParams.DetectionType enemyDetection; // references the enemy detection from the EnemyParams scriptable object
     PlayerManager playerManager; // Reference to the PlayerManager script
@@ -58,13 +57,13 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            
+
         }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if(HP > 0)
+        if (HP > 0)
         {
             if (other.CompareTag("Player"))
             {
@@ -122,7 +121,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 }
             }
         }
-        
+
     }
 
     void OnTriggerExit(Collider other)
@@ -167,7 +166,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         anim.SetBool("isStopped", false);
         isAttacking = false;
     }
-   
+
     IEnumerator Reload()
     {
         isReloading = true;
@@ -211,11 +210,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
         //GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
-        Vector3 dropPosition = new Vector3 (transform.position.x, transform.position.y + 2, transform.position.z);
+        Vector3 dropPosition = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
         if (enemyParams.lootPinata)
         {
             int chance = Random.Range(0, 100);
-            if(chance <= enemyParams.lootChance)
+            if (chance <= enemyParams.lootChance)
             {
                 Instantiate(enemyParams.loot[Random.Range(0, enemyParams.loot.Length)], dropPosition, Quaternion.identity); // Instantiate the loot at the enemy's position
             }
@@ -303,9 +302,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         playerDir = GameManager.Instance.player.transform.position - headPos.position; // Get the direction to the player
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, playerDir.y + 1, playerDir.z), transform.forward); // Get the angle to the player
-        
 
-        if(enemyDetection == EnemyParams.DetectionType.Wave)
+
+        if (enemyDetection == EnemyParams.DetectionType.Wave)
         {
             agent.SetDestination(GameManager.Instance.player.transform.position); // Set the destination of the agent to the player's position
             return true;
@@ -341,19 +340,10 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     private void PlayAttackSound()
     {
-        if (hitEnemy)
+        if (audioSource != null && enemyParams.attackSound.Length > 0)
         {
-
-        }
-        else
-        {
-            if (audioSource != null && enemyParams.attackSound.Length > 0)
-            {
-                hitEnemy =  true;
-                AudioClip clip = enemyParams.attackSound[Random.Range(0, enemyParams.attackSound.Length)];
-                audioSource.PlayOneShot(clip);
-            }
-            hitEnemy = false;
+            AudioClip clip = enemyParams.attackSound[Random.Range(0, enemyParams.attackSound.Length)];
+            audioSource.PlayOneShot(clip);
         }
     }
 
@@ -460,7 +450,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             return;
         }
-        if(enemyType == EnemyParams.EnemyType.Ranged && shootLoop >= enemyParams.enemyClipSize)
+        if (enemyType == EnemyParams.EnemyType.Ranged && shootLoop >= enemyParams.enemyClipSize)
         {
             StartCoroutine(Reload());
             shootLoop = 0;
@@ -507,7 +497,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = stoppingDistanceOriginal; // Set the stopping distance of the NavMeshAgent to the original stopping distance
                 if (enemyType == EnemyParams.EnemyType.Ranged)
                 {
-                    
+
                     Vector3 direction = (playerTransform.position - transform.position).normalized; // Get the direction to the player
                     Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
                     transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
