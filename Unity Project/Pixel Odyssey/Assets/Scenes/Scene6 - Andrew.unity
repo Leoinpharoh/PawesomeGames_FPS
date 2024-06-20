@@ -4183,6 +4183,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87d292c3b7224241b9d73452b1be61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &277117253 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7012575878422400666, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2112279757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &278162975
 GameObject:
   m_ObjectHideFlags: 0
@@ -8007,6 +8018,10 @@ PrefabInstance:
       propertyPath: inventoryDisplay
       value: 
       objectReference: {fileID: 267923186}
+    - target: {fileID: 4697354008268876775, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.52
@@ -41356,7 +41371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelName: Player Hub
-  levelFlashImage: {fileID: 0}
+  levelFlashImage: {fileID: 277117253}
   fadeDuration: 2
   unlockables: 1
   saveSystem: {fileID: 508593672}
