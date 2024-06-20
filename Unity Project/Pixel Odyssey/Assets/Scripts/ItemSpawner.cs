@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomSpawner : MonoBehaviour
+public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] objectsToSpawn; // Array of objects to spawn
+    [SerializeField] private GameObject objectToSpawn; // Object to spawn
     [SerializeField] private int numToSpawn; // Number of objects to spawn
     [SerializeField] private float spawnTimer; // Time between spawns
     [SerializeField] private Transform[] spawnPos; // Array of spawn positions
@@ -23,16 +22,10 @@ public class RandomSpawner : MonoBehaviour
         if (startSpawning && !isSpawning && spawnCount < numToSpawn) // If the spawner should start, isn't spawning, and hasn't spawned enough objects
         {
             StartCoroutine(SpawnObject()); // Start spawning objects
+            Destroy(this.gameObject.GetComponent<BoxCollider>());
         }
     }
 
-    private void OnTriggerEnter(Collider other) // Trigger when player enters the collider
-    {
-        if (other.CompareTag("Player")) // If the player enters the collider
-        {
-            startSpawning = true; // Set the spawner to start spawning
-        }
-    }
     private void OnTriggerStay(Collider other) // Trigger when player enters the collider
     {
         if (other.CompareTag("Player")) // If the player enters the collider
@@ -48,9 +41,7 @@ public class RandomSpawner : MonoBehaviour
         while (spawnCount < numToSpawn) // While there are still objects to spawn
         {
             int arrayPos = spawnCount % spawnPos.Length; // Get the current spawn position
-            int randomIndex = Random.Range(0, objectsToSpawn.Length); // Get a random index for the object to spawn
-
-            Instantiate(objectsToSpawn[randomIndex], spawnPos[arrayPos].position, spawnPos[arrayPos].rotation); // Instantiate the object at the current spawn position
+            Instantiate(objectToSpawn, spawnPos[arrayPos].position, spawnPos[arrayPos].rotation); // Instantiate the object at the current spawn position
             spawnCount++; // Increment the number of objects spawned
             yield return new WaitForSeconds(spawnTimer); // Wait for the spawn timer before spawning the next object
         }

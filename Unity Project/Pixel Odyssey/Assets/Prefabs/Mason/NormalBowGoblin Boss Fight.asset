@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48c53f8b5934b54ab4f3ff630d62aa4, type: 3}
+  m_Name: NormalBowGoblin Boss Fight
+  m_EditorClassIdentifier: 
+  bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
+  HP: 10
+  movementSpeed: 3
+  Acceleration: 10
+  animSpeedTrans: 10
+  flying: 0
+  enemyType: 1
+  bullet: {fileID: 6060363923453239229, guid: a2477b0059be95644b96f8e294a1d086, type: 3}
+  attackSpeed: 0.8
+  rangedAttackLead: 0.5
+  meleeRange: 0
+  meleeDamage: 4
+  rangedRange: 20
+  rangedDamage: 2
+  bulletSpeed: 9
+  destroyTime: 6
+  effectDamage: 0
+  effectDuration: 0.1
+  enemyReloadTime: 0
+  enemyClipSize: 20
+  damageType: 0
+  roaming: 0
+  roamDist: 5
+  roamTimer: 3
+  lootPinata: 1
+  lootChance: 60
+  loot:
+  - {fileID: 5717082804525236736, guid: 2fb6c147d6c862d4ca2bad946cc04fbf, type: 3}
+  - {fileID: 3802848766677527129, guid: 355caeea4e1590442b7516a9a0d311ed, type: 3}
+  - {fileID: 8884114810549261806, guid: d8a59b9f57dddd44783aaff259a81504, type: 3}
+  lineOfSightRange: 14
+  viewAngle: 180
+  detectionType: 0
+  attackSound:
+  - {fileID: 8300000, guid: d5af17ea00ac985419319c3799154a97, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: 47df5ad02e88c804e94751c8cf24572c, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: ef6cd6df919c9824ebfbe371b9b1bc33, type: 3}
+  idleSound:
+  - {fileID: 8300000, guid: cbaf4a920be24f846bea194fa72894fb, type: 3}
+  walkingSound:
+  - {fileID: 8300000, guid: 040e6e5807632e54cbe19d044330b1b5, type: 3}
+  reloadSound: []
