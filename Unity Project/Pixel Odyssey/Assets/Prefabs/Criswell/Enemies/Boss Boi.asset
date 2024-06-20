@@ -18,7 +18,7 @@ MonoBehaviour:
   Acceleration: 2.2
   animSpeedTrans: 3.53
   flying: 0
-  enemyType: 2
+  enemyType: 0
   bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
   attackSpeed: 1.8
   rangedAttackLead: 0.8
@@ -43,9 +43,43 @@ MonoBehaviour:
   lineOfSightRange: 100
   viewAngle: 180
   detectionType: 0
-  attackSound: []
-  deathSound: []
-  damagedSound: []
+  attackSound:
+  - {fileID: 8300000, guid: c88695f6913c3ab428d6de49c98d346f, type: 3}
+  - {fileID: 8300000, guid: 70f411af8e722614fb51d328b93acb64, type: 3}
+  - {fileID: 8300000, guid: a4e02142ddf17164c8b94fd3dddb80f2, type: 3}
+  - {fileID: 8300000, guid: b1fd1cf21ecb4a54ebbd293763ea0afc, type: 3}
+  - {fileID: 8300000, guid: ab51cf04c5dc8434da5306efbdd58ab8, type: 3}
+  - {fileID: 8300000, guid: 0af9911e285298649b646b149e14acc9, type: 3}
+  - {fileID: 8300000, guid: e2ad82920cbeb164db80ca7b9ef1ad10, type: 3}
+  - {fileID: 8300000, guid: 0af9911e285298649b646b149e14acc9, type: 3}
+  - {fileID: 8300000, guid: 67f56c806308e784097db2b094bace7d, type: 3}
+  - {fileID: 8300000, guid: 1248b883506f5b8459720546fa8fd58d, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: f80351565a9fb2041990733d84c0e950, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: 4443d16efad02c845b219fb2840531f4, type: 3}
+  - {fileID: 8300000, guid: b1986f82e41aa3c48a56c7b31944ec8e, type: 3}
+  - {fileID: 8300000, guid: ad246b418bb6d6349b57179f6911e8ca, type: 3}
+  - {fileID: 8300000, guid: 3ced08389597de240a003e45a5758933, type: 3}
+  - {fileID: 8300000, guid: fb10cdb2c9f2d6a42bd831334cfdd732, type: 3}
+  - {fileID: 8300000, guid: 83564cdbf8133b4498d1807ecf8aa7e8, type: 3}
+  - {fileID: 8300000, guid: 1653305ce7f2a804e885ce4b1d2d754f, type: 3}
+  - {fileID: 8300000, guid: 3ced08389597de240a003e45a5758933, type: 3}
+  - {fileID: 8300000, guid: 6c2e837209798c74f9eba163ece8b4c3, type: 3}
+  - {fileID: 8300000, guid: 6c2e837209798c74f9eba163ece8b4c3, type: 3}
+  - {fileID: 8300000, guid: fb10cdb2c9f2d6a42bd831334cfdd732, type: 3}
+  - {fileID: 8300000, guid: b548c3c4e6bf6aa46863d91adbb4cdce, type: 3}
+  - {fileID: 8300000, guid: e1f75437ac982c04d8123afca88f9c83, type: 3}
+  - {fileID: 8300000, guid: 4edf66a8488faf14097e67fe84c312ee, type: 3}
   idleSound: []
-  walkingSound: []
+  walkingSound:
+  - {fileID: 8300000, guid: 23b3e963fab7b8b4fb2ffdd695cb14ce, type: 3}
+  - {fileID: 8300000, guid: 94615628a9e7b3e40a16504a82153d43, type: 3}
+  - {fileID: 8300000, guid: 8cace84cd34ea934bacd86753b056137, type: 3}
+  - {fileID: 8300000, guid: c42bdf8168656984b95cac20806c772d, type: 3}
+  - {fileID: 8300000, guid: 79f4f2cca993fc9469c5aadb46bef8e5, type: 3}
+  - {fileID: 8300000, guid: 5fd2a1f49a772e34d925ca451684ca32, type: 3}
+  - {fileID: 8300000, guid: 224ddc4b229a26e4dae1bb51b89cbcce, type: 3}
+  - {fileID: 8300000, guid: 060f73cbae631f04aa3da9ac2ee049fc, type: 3}
+  - {fileID: 8300000, guid: 84694ebd066f7d44982bc97e61bc5faf, type: 3}
   reloadSound: []
