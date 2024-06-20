@@ -29,7 +29,8 @@ public class StatPermaBoost : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] enum PickUpType { HealthPlus, OverShieldPlus }
     [SerializeField] PickUpType type;
-    int boostAmount = 10;
+    int boostHPAmount = 10;
+    int boostOSAmount = 5;
 
     private void Awake()
     {
@@ -51,11 +52,11 @@ public class StatPermaBoost : MonoBehaviour
 
                 case PickUpType.HealthPlus:
                     playerManager = other.gameObject.GetComponent<PlayerManager>();
-                    playerManager.HPOrignal += boostAmount;
+                    playerManager.HPOrignal += boostHPAmount;
                     break;
                 case PickUpType.OverShieldPlus:
                     playerManager = other.gameObject.GetComponent<PlayerManager>();
-                    playerManager.OSOrignal += boostAmount;
+                    playerManager.OSOrignal += boostOSAmount;
                     break;
             }
             StartCoroutine(DestroyAfterDelay(0.5f));
@@ -145,11 +146,11 @@ public class StatPermaBoost : MonoBehaviour
         switch (type)
         {
             case PickUpType.HealthPlus:
-                HealthMax = HealthMax + boostAmount;
+                HealthMax = HealthMax + boostHPAmount;
                 Booster = "Health";
                 break;
             case PickUpType.OverShieldPlus:
-                OvershieldMax = OvershieldMax + boostAmount;
+                OvershieldMax = OvershieldMax + boostOSAmount;
                 Booster = "OverShield";
                 break;
         }
