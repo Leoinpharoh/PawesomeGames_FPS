@@ -10,7 +10,7 @@ public class EnemyParams : ScriptableObject
 
     [Header("General Parameters")]
     public GameObject bloodSplash;
-    [Range(1, 1000)] public int HP;
+    [Range(1, 3000)] public int HP;
     [Range(0.5f, 10.0f)] public float movementSpeed;
     [Range(0.1f, 20.0f)] public float Acceleration;
     [Range(0.1f, 10.0f)] public float animSpeedTrans;
