@@ -33,7 +33,8 @@ public class StatPermaBoost : MonoBehaviour
 
     private void Awake()
     {
-        //StatBoosterCheck();
+        saveSystem.LoadPlayer();
+        playerData = saveSystem.playerData;
     }
     private void Start()
     {
@@ -51,12 +52,10 @@ public class StatPermaBoost : MonoBehaviour
                 case PickUpType.HealthPlus:
                     playerManager = other.gameObject.GetComponent<PlayerManager>();
                     playerManager.HPOrignal += boostAmount;
-                    //saveSystem.playerData.HealthMax += boostAmount;
                     break;
                 case PickUpType.OverShieldPlus:
                     playerManager = other.gameObject.GetComponent<PlayerManager>();
                     playerManager.OSOrignal += boostAmount;
-                    //saveSystem.playerData.OvershieldMax += boostAmount;
                     break;
             }
             StartCoroutine(DestroyAfterDelay(0.5f));
