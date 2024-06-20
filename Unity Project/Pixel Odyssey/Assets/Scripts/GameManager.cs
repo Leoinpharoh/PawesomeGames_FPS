@@ -449,7 +449,7 @@ public class GameManager : MonoBehaviour
 
     public void OpeningScene()
     {
-        NewGameScreen.SetActive(false);
+        NewGameScreen.SetActive(true);
         LoadGameScreen.SetActive(true);
 
     }
