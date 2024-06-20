@@ -53,12 +53,12 @@ public class SaveSystem : MonoBehaviour
     {
         playerData = new PlayerData
         {
-            PythonAmmo = 50,
+            PythonAmmo = 30,
             ShotgunAmmo = 0,
             AssaultRifleAmmo = 0,
             RPGAmmo = 0,
             HealthMax = 140,
-            OvershieldMax = 40,
+            OvershieldMax = 10,
             OvershieldPotions = 0,
             HealthPotions = 0,
             TutorialComplete = false,
