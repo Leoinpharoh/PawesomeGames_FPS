@@ -112,7 +112,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int currentPotionIndex = 0;
 
     Scene currentScene;
-    ArchitectAI architectAI;
+    public ArchitectAI architectAI;
 
     void Start()
     {
@@ -733,7 +733,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         float hpFillAmount = (float)HP / HPOrignal;
         float osFillAmount = (float)OS / OSOrignal;
-        float enemyHPFillAmount = (float)architectAI.HP / architectAI.HPOrignal;
+        float enemyHPFillAmount = (float)architectAI.HP / architectAI.HPOriginal;
 
         GameManager.Instance.finalBossHpBar.fillAmount = enemyHPFillAmount;
         GameManager.Instance.playerHpBar.fillAmount = hpFillAmount;
