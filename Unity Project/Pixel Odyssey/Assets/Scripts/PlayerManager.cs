@@ -448,7 +448,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         if (alive)
         {
-            if (HP <= 0 && Normal || HP <= 0 && !Normal)
+            if (HP <= 0)
             {
                 GameManager.Instance.youLose();
                 alive = false;
