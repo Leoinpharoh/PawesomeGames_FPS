@@ -29,41 +29,44 @@ public class playerBullet : MonoBehaviour
         dmg = collision.gameObject.GetComponent<IDamage>();
         sDMG = collision.gameObject.GetComponent<SDamage>();
 
-        if (collision.contacts.Length > 0)
+        if (!collision.gameObject.CompareTag("Player"))
         {
-            Vector3 collisionPoint = collision.contacts[0].point;
-            Instantiate(Explode, collisionPoint, Quaternion.identity);
-
-            if (useSphereColliderForDamage)
+            if (collision.contacts.Length > 0)
             {
-                // Create a sphere collider at the collision point
-                GameObject damageSphere = new GameObject("DamageSphere");
-                damageSphere.transform.position = collisionPoint;
-                SphereCollider sphereCollider = damageSphere.AddComponent<SphereCollider>();
-                sphereCollider.isTrigger = true;
-                sphereCollider.radius = sphereColliderRadius;
+                Vector3 collisionPoint = collision.contacts[0].point;
+                Instantiate(Explode, collisionPoint, Quaternion.identity);
 
-                // Add DamageSphere component to handle the damage logic
-                DamageSphere damageSphereComponent = damageSphere.AddComponent<DamageSphere>();
-                damageSphereComponent.damage = damage;
-                damageSphereComponent.destructionTime = destroyTime; // Destroy the sphere collider after the bullet destroy time
+                if (useSphereColliderForDamage)
+                {
+                    // Create a sphere collider at the collision point
+                    GameObject damageSphere = new GameObject("DamageSphere");
+                    damageSphere.transform.position = collisionPoint;
+                    SphereCollider sphereCollider = damageSphere.AddComponent<SphereCollider>();
+                    sphereCollider.isTrigger = true;
+                    sphereCollider.radius = sphereColliderRadius;
+
+                    // Add DamageSphere component to handle the damage logic
+                    DamageSphere damageSphereComponent = damageSphere.AddComponent<DamageSphere>();
+                    damageSphereComponent.damage = damage;
+                    damageSphereComponent.destructionTime = destroyTime; // Destroy the sphere collider after the bullet destroy time
+                }
             }
-        }
 
-        if (dmg != null)
-        {
-            hitPosition = collision.contacts[0].point;
-            dmg.takeDamage(damage, hitPosition);
+            if (dmg != null)
+            {
+                hitPosition = collision.contacts[0].point;
+                dmg.takeDamage(damage, hitPosition);
+                Destroy(gameObject);
+            }
+            if (sDMG != null)
+            {
+                hitPosition = collision.contacts[0].point;
+                sDMG.ObjectDamage(damage);
+                Destroy(gameObject);
+            }
+
             Destroy(gameObject);
         }
-        if (sDMG != null)
-        {
-            hitPosition = collision.contacts[0].point;
-            sDMG.ObjectDamage(damage);
-            Destroy(gameObject);
-        }
-
-        Destroy(gameObject);
     }
 }
 
