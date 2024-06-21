@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour
     //gameObject/screenflashes
     public Image playerHpBar;
     public Image playerOS;
+    public GameObject finalBossHpBarToggle;
+    public Image finalBossHpBar;
     public PlayerManager playerScript;
     public GameObject playerFlashDamage;
     public GameObject poisonHitScreen;
