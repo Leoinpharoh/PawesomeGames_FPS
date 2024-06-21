@@ -12,8 +12,6 @@ public class ItemDescriptionUI : MonoBehaviour
     {
         if (descriptionPanel != null && descriptionText != null)    //if there is a description panel
             descriptionText.text = ""; //initially empty
-        //else
-          //  Debug.LogWarning("Description panel/text is not set");
     }
 
     public void UpdateDescription(string description)

@@ -23,7 +23,7 @@ public class WeaponSwap : MonoBehaviour
         //assaultRifleUnlocked = playerManager.assaultRifleUnlocked;
         //rpgUnlocked = playerManager.RPGUnlocked;
 
-        //Debug.Log(GameManager.Instance.playerManager.shotgunUnlocked);
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && weaponOne != null)
         {
             if (currentWeapon != null) {currentWeapon.SetActive(false);}

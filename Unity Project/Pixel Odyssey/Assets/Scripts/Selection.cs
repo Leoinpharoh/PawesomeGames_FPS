@@ -47,7 +47,6 @@ public class CenterObjectLogger : MonoBehaviour
                 if (hitObjectName == "Load Screen")
                 {
                     HandleLoadScreenClick();
-                    Debug.Log("Load Screen Clicked");
                 }
                 else if (hitObjectName == "Options Screen")
                 {
@@ -64,10 +63,8 @@ public class CenterObjectLogger : MonoBehaviour
 
     private void HandleLoadScreenClick()
     {
-        Debug.Log("Outside");
         if (!GameManager.Instance.isPaused && TutorialComplete)
         {
-            Debug.Log("inside");
             isLoading = true;
             saveSystem.ResetPlayer();
             saveSystem.SavePlayer();
