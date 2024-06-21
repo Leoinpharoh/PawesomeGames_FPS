@@ -1002,7 +1002,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
-        Debug.Log(sceneName);
         if (sceneName == "Final Boss")
         {
             GameManager.Instance.finalBossHpBarToggle.SetActive(true);
