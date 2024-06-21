@@ -19,7 +19,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
     [SerializeField] GameObject Phase2Spawner;
     [SerializeField] GameObject Phase3Spawner;
     [SerializeField] GameObject PoisonArea;
-    [SerializeField] GameObject flameEffectPrefab;
+    [SerializeField] GameObject FlameArea;
+    [SerializeField] GameObject IceArea;
 
 
 
@@ -61,6 +62,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     void Start()
     {
         StartCoroutine(AttackSequence());
+        Phase1Spawner.SetActive(true);
     }
 
     // Update is called once per frame
@@ -127,8 +129,12 @@ public class ArchitectAI : MonoBehaviour, IDamage
         anim.SetBool("iceBreath", true);
         breathAttack = true;
         yield return new WaitForSeconds(5f);
+        IceArea.SetActive(true);
+        yield return new WaitForSeconds(2f);
         anim.SetBool("iceBreath", false);
         breathAttack = false;
+        yield return new WaitForSeconds(12f);
+        IceArea.SetActive(false);
     }
 
     IEnumerator FlameBreath()
@@ -136,8 +142,12 @@ public class ArchitectAI : MonoBehaviour, IDamage
         anim.SetBool("flameBreath", true);
         breathAttack = true;
         yield return new WaitForSeconds(5f);
+        FlameArea.SetActive(true);
+        yield return new WaitForSeconds(2f);
         anim.SetBool("flameBreath", false);
         breathAttack = false;
+        yield return new WaitForSeconds(8f);
+        FlameArea.SetActive(false);
     }
 
 
@@ -145,7 +155,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("slam", true);
         slam = true;
-        yield return new WaitForSeconds(3.2f);
+        yield return new WaitForSeconds(3.5f);
         anim.SetBool("slam", false);
         slam = false;
     }
@@ -154,7 +164,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("leftHandAttack", true);
         leftSwing = true;
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.5f);
         anim.SetBool("leftHandAttack", false);
         leftSwing = false;
     }
@@ -163,7 +173,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("rightHandAttack", true);
         rightSwing = true;
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.5f);
         anim.SetBool("rightHandAttack", false);
         rightSwing = false;
     }
@@ -203,6 +213,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
                 phase1 = false;
                 phase2 = true;
                 dazedTimer = 10;
+                Phase1Spawner.SetActive(false);
+                Phase2Spawner.SetActive(true);
                 StartCoroutine(Dazed());
             }
             if (HP <= 0 && phase2)
@@ -212,10 +224,13 @@ public class ArchitectAI : MonoBehaviour, IDamage
                 phase2 = false;
                 phase3 = true;
                 dazedTimer = 10;
+                Phase2Spawner.SetActive(false);
+                Phase3Spawner.SetActive(true);
                 StartCoroutine(Dazed());
             }
             if (HP <= 0 && phase3) // Check if the enemy's health is less than or equal to 0
             {
+                Phase3Spawner.SetActive(false);
                 anim.SetTrigger("isDead"); // Set the trigger for the death animation
                 isDead = true; // Set isDead to true
                 StartCoroutine(Death()); // Start the death coroutine
@@ -246,12 +261,10 @@ public class ArchitectAI : MonoBehaviour, IDamage
 
     IEnumerator Edamage(GameObject player)
     {
-        Debug.Log("Slow Roar");
         EDamage damageable = player.GetComponent<EDamage>();
 
         if (damageable != null)
         {
-            Debug.Log("Damagable");
             damageable.slowDamage(0,8);
         }
         yield return new WaitForSeconds(8);
@@ -405,48 +418,6 @@ public class ArchitectAI : MonoBehaviour, IDamage
         {
             playerHealth.takeDamage(20, GameManager.Instance.player.transform.position);
         }
-    }
-
-
-    void FlameRay()
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(shootPos.position, shootPos.forward, out hit, 100))
-        {
-            if (hit.collider.isTrigger && hit.collider.CompareTag("flame"))
-            {
-                StartCoroutine(ActivateEffect(hit.collider));
-            }
-        }
-    }
-
-    void IceRay()
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(shootPos.position, shootPos.forward, out hit, 100))
-        {
-            if (hit.collider.isTrigger && hit.collider.CompareTag("ice"))
-            {
-                StartCoroutine(ActivateEffect(hit.collider));
-            }
-        }
-    }
-
-    IEnumerator ActivateEffect(Collider collider)
-    {
-        GameObject flameEffect = Instantiate(flameEffectPrefab, collider.transform.position, Quaternion.identity);
-
-        // Optionally, parent the effect to the collider's transform
-        flameEffect.transform.SetParent(collider.transform);
-
-        // Wait for 10 seconds
-        yield return new WaitForSeconds(10f);
-
-        // Destroy the flame effect
-        Destroy(flameEffect);
-
     }
 
 }
