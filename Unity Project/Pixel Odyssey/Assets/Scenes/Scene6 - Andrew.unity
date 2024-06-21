@@ -7458,6 +7458,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3860bfed408c904c88168f425feed7b, type: 3}
+--- !u!114 &486969477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1914708847502794690, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2112279757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &503433079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7944,6 +7955,10 @@ PrefabInstance:
       propertyPath: weaponThree
       value: 
       objectReference: {fileID: 1009961810}
+    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 3052440193153571717}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: inventoryDisplay
       value: 
@@ -11479,6 +11494,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1802819107}
   m_SourcePrefab: {fileID: 100100000, guid: a73978a718c2ce24db2afa863bdea5b4, type: 3}
+--- !u!1 &746635489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1770338007763735935, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+  m_PrefabInstance: {fileID: 2112279757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &746741649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30157,9 +30177,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4449042350392654440}
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: finalBossHpBar
+      value: 
+      objectReference: {fileID: 486969477}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 3052440193153571717}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: finalBossHpBarToggle
+      value: 
+      objectReference: {fileID: 746635489}
     - target: {fileID: 3657128021650495967, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_Name
       value: UIBasicTheme
