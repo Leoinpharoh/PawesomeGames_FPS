@@ -35,8 +35,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
     public bool dazed = false;
     public bool roar = false;
     public bool isDead = false;
-    public int HP = 5000; // Enemy Health
-    public int HPOriginal = 5000;
+    public float HP = 5000; // Enemy Health
+    public float HPOriginal = 5000;
     public int dazedTimer;
     private float breathAttackCooldown = 30f;
     private float nextBreathAttackTime = 0f;
