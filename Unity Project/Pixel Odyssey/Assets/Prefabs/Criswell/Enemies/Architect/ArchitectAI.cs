@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ArchitectAI : MonoBehaviour //IDamage
+public class ArchitectAI : MonoBehaviour, IDamage
 {
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
@@ -15,6 +15,12 @@ public class ArchitectAI : MonoBehaviour //IDamage
     [SerializeField] Animator anim;
     [SerializeField] AudioSource audioSource; // Reference to the AudioSource component
     [SerializeField] GameObject bloodSplash;
+    [SerializeField] GameObject Phase1Spawner;
+    [SerializeField] GameObject Phase2Spawner;
+    [SerializeField] GameObject Phase3Spawner;
+    [SerializeField] GameObject PoisonArea;
+    [SerializeField] GameObject FlameArea;
+    [SerializeField] GameObject IceArea;
 
 
 
@@ -30,7 +36,8 @@ public class ArchitectAI : MonoBehaviour //IDamage
     public bool dazed = false;
     public bool roar = false;
     public bool isDead = false;
-    public int HP = 5000; // Enemy Health
+    public float HP = 5000; // Enemy Health
+    public float HPOriginal = 5000;
     public int dazedTimer;
     private float breathAttackCooldown = 30f;
     private float nextBreathAttackTime = 0f;
@@ -39,7 +46,7 @@ public class ArchitectAI : MonoBehaviour //IDamage
     Vector3 playerDir; // Vector3 to store the direction to the player
     Vector3 startingPos; // Vector3 to store the starting position of the enemy
     float angleToPlayer; // Float to store the angle to the player
-    private Transform playerTransform; // Reference to the player's transform
+    public Transform playerTransform; // Reference to the player's transform
     public PlayerManager playerManager; // Reference to the PlayerManager script
     public SaveSystem saveSystem; // Reference to the SaveSystem script
     PlayerData playerData;
@@ -55,6 +62,7 @@ public class ArchitectAI : MonoBehaviour //IDamage
     void Start()
     {
         StartCoroutine(AttackSequence());
+        Phase1Spawner.SetActive(true);
     }
 
     // Update is called once per frame
@@ -62,7 +70,22 @@ public class ArchitectAI : MonoBehaviour //IDamage
     {
         
         OScheck();
-        
+        if (!isDead && !breathAttack && !slam && !leftSwing && !rightSwing && !dazed)
+        {
+            FacePlayer();
+        }
+
+    }
+
+    void FacePlayer()
+    {
+
+        if (playerTransform != null)
+        {
+            Vector3 direction = (playerTransform.position - headPos.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * 300f);
+        }
     }
 
 
@@ -92,28 +115,39 @@ public class ArchitectAI : MonoBehaviour //IDamage
         anim.SetBool("poisonBreath", true);
         poisonAttack = true;
         breathAttack = true;
-        yield return new WaitForSeconds(.1f);
+        PoisonArea.SetActive(true);
+        yield return new WaitForSeconds(4f);
         anim.SetBool("poisonBreath", false);
         poisonAttack = false;
         breathAttack = false;
+        yield return new WaitForSeconds(3f);
+        PoisonArea.SetActive(false);
     }
 
     IEnumerator IceBreath()
     {
         anim.SetBool("iceBreath", true);
         breathAttack = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(5f);
+        IceArea.SetActive(true);
+        yield return new WaitForSeconds(2f);
         anim.SetBool("iceBreath", false);
         breathAttack = false;
+        yield return new WaitForSeconds(12f);
+        IceArea.SetActive(false);
     }
 
     IEnumerator FlameBreath()
     {
         anim.SetBool("flameBreath", true);
         breathAttack = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(5f);
+        FlameArea.SetActive(true);
+        yield return new WaitForSeconds(2f);
         anim.SetBool("flameBreath", false);
         breathAttack = false;
+        yield return new WaitForSeconds(8f);
+        FlameArea.SetActive(false);
     }
 
 
@@ -121,7 +155,7 @@ public class ArchitectAI : MonoBehaviour //IDamage
     {
         anim.SetBool("slam", true);
         slam = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(3.5f);
         anim.SetBool("slam", false);
         slam = false;
     }
@@ -130,7 +164,7 @@ public class ArchitectAI : MonoBehaviour //IDamage
     {
         anim.SetBool("leftHandAttack", true);
         leftSwing = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(1.5f);
         anim.SetBool("leftHandAttack", false);
         leftSwing = false;
     }
@@ -139,28 +173,29 @@ public class ArchitectAI : MonoBehaviour //IDamage
     {
         anim.SetBool("rightHandAttack", true);
         rightSwing = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(1.5f);
         anim.SetBool("rightHandAttack", false);
         rightSwing = false;
     }
 
     IEnumerator Roar()
     {
-        anim.SetBool("roar", true);
+        anim.SetBool("Roar", true);
         roar = true;
-        yield return new WaitForSeconds(.1f);
-        anim.SetBool("roar", false);
+        StartCoroutine(Edamage(GameManager.Instance.player));
+        yield return new WaitForSeconds(4f);
+        anim.SetBool("Roar", false);
         roar = false;
     }
 
     IEnumerator Dazed()
     {
-        anim.SetBool("dazed", true);
+        anim.SetBool("Dazed", true);
         dazed = true;
         yield return new WaitForSeconds(dazedTimer);
-        anim.SetBool("dazed", false);
+        anim.SetBool("Dazed", false);
         dazed = false;
-        Roar();
+        StartCoroutine(Roar());
     }
 
 
@@ -170,24 +205,32 @@ public class ArchitectAI : MonoBehaviour //IDamage
         {
             HP -= amount; // Subtract the amount from the enemy's health
             StartCoroutine(Damage(hitPosition)); // Start the flash coroutine
+            playerManager.updatePlayerUI(); // Call the updatePlayerUI function from the playerManager script
             if (HP <= 0 && phase1)
             {
                 HP = 8000;
+                HPOriginal = 8000;
                 phase1 = false;
                 phase2 = true;
-                dazedTimer = 60;
+                dazedTimer = 10;
+                Phase1Spawner.SetActive(false);
+                Phase2Spawner.SetActive(true);
                 StartCoroutine(Dazed());
             }
             if (HP <= 0 && phase2)
             {
                 HP = 10000;
+                HPOriginal = 10000;
                 phase2 = false;
                 phase3 = true;
-                dazedTimer = 30;
+                dazedTimer = 10;
+                Phase2Spawner.SetActive(false);
+                Phase3Spawner.SetActive(true);
                 StartCoroutine(Dazed());
             }
             if (HP <= 0 && phase3) // Check if the enemy's health is less than or equal to 0
             {
+                Phase3Spawner.SetActive(false);
                 anim.SetTrigger("isDead"); // Set the trigger for the death animation
                 isDead = true; // Set isDead to true
                 StartCoroutine(Death()); // Start the death coroutine
@@ -214,6 +257,18 @@ public class ArchitectAI : MonoBehaviour //IDamage
         //PlayDamageSound();
         yield return new WaitForSeconds(1); // Wait for 1 second (adjust based on your effect's needs)
         Destroy(bloodEffect); // Optionally destroy the effect after it finishes playing
+    }
+
+    IEnumerator Edamage(GameObject player)
+    {
+        EDamage damageable = player.GetComponent<EDamage>();
+
+        if (damageable != null)
+        {
+            damageable.slowDamage(0,8);
+        }
+        yield return new WaitForSeconds(8);
+
     }
 
 
@@ -283,7 +338,7 @@ public class ArchitectAI : MonoBehaviour //IDamage
         {
             yield return new WaitForSeconds(5f);
 
-            if (!isDead)
+            if (!isDead && !dazed)
             {
                 if (phase1 && !roar)
                 {

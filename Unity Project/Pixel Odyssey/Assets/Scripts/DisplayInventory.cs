@@ -36,7 +36,6 @@ public class DisplayInventory : MonoBehaviour
     /// </summary>
     public void CreateDisplay()
     {
-        //Debug.Log("CreateDisplay method called");
 
         List<InventorySlot> slotsToDisplay
             = inventory.Container.Items.Where(slot => !itemsDisplayed.ContainsKey(slot)).ToList();  //create a list of slots not already in itemsDisplayed
@@ -56,7 +55,6 @@ public class DisplayInventory : MonoBehaviour
 
     public void UpdateDisplay()
     {
-        //Debug.Log("UpdateDisplay method called");
         Dictionary<InventorySlot, GameObject> updatedItemsDisplayed = new Dictionary<InventorySlot, GameObject>();
 
         List<InventorySlot> slotsToRemove
@@ -91,33 +89,19 @@ public class DisplayInventory : MonoBehaviour
                 slot.SetDependancies(this, itemDescription);    //setting the inventoryDisplay, and the description
                 updatedItemsDisplayed.Add(slot, obj);
             }
-            //Debug.Log($"Slot: {slot} description is: {slot.itemDescription.descriptionText}");
         }
 
         itemsDisplayed.Clear(); //clearing original itemsDisplayed
-        //Debug.Log("Items in itemsDisplayed: ");
         foreach (var entry in updatedItemsDisplayed)    //adding back all the items to items displayed
         {
             itemsDisplayed.Add(entry.Key, entry.Value);
-            //Debug.Log($"Key: {entry.Key}, Value: {entry.Value}");
         }
         updatedItemsDisplayed.Clear();  //clearing the updated list for next time we need to update
     }
     public void PickUpItem(Item itemToPickup, int amount)
     {
-        //Debug.Log("Contents of inventory.Container.Items before picking up:");
-        /*foreach (var slot in inventory.Container.Items)
-        {
-            Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
-        }*/
 
         inventory.AddItem(itemToPickup, amount);    //add the item to out InventoryObject
-
-        //Debug.Log("Contents of inventory.Container.Items after picking up:");
-        /*foreach (var slot in inventory.Container.Items)
-        {
-            Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
-        }*/
 
         UpdateDisplay();
     }
@@ -142,12 +126,6 @@ public class DisplayInventory : MonoBehaviour
         {
             if (selectedSlot != null)
             {
-                /*Debug.Log("Contents of inventory.Container.Items before dropping: ");
-                foreach (var slot in inventory.Container.Items)
-                {
-                    Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
-                }*/
-
                 //finding where to drop the object
                 ItemObject itemObject = inventory.database.GetItem[selectedSlot.ID];    //assigns itemObject as the itemObject that is found at selectedSlot.ID
 
@@ -159,8 +137,6 @@ public class DisplayInventory : MonoBehaviour
                     groundGameObject.originalPrefab.SetActive(true);   //re-activating the original item
                     groundGameObject.transform.position = dropPosition; //setting its new position
                 }
-
-                //Debug.Log("That items id is: " + selectedSlot.ID);
 
                 if (selectedSlot.amount > 1)
                 {
@@ -178,11 +154,6 @@ public class DisplayInventory : MonoBehaviour
                 }
                 UpdateDisplay();
 
-               /*Debug.Log("Contents of inventory.Container.Items after dropping: ");
-                foreach (var slot in inventory.Container.Items)
-                {
-                    Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");
-                }*/
             }
         }
     }
@@ -196,24 +167,14 @@ public class DisplayInventory : MonoBehaviour
         if (itemsDisplayed.ContainsKey(slotToRemove))    //removing the slot from items displayed that is not present in the container
         {
             GameObject objToDestroy = itemsDisplayed[slotToRemove];
-            //Debug.Log($"Removing slot: {slotToRemove.item.Name}");
 
             if (objToDestroy != null)
             {
                 Destroy(objToDestroy);
                 itemsDisplayed[slotToRemove] = null;
-                //Debug.Log($"Destroyed GameObject {objToDestroy.name}");
             }
-            /*else
-            {
-                Debug.LogWarning($"GameObject for slot {slotToRemove.item.Name} does not exist");
-            }*/
             itemsDisplayed.Remove(slotToRemove);
-            //Debug.Log($"Removed slot from itemsDisplayed dictionary: {slotToRemove.item.Name}");
         }
-        /*else
-        {
-            Debug.LogWarning($"Slot {slotToRemove.item.Name} does not exist in itemsDisplayed");
-        }*/
+
     }
 }

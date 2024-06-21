@@ -8,8 +8,10 @@ public class PoisonArea : MonoBehaviour
     [SerializeField] public float damageInterval; // Time interval between damage applications
 
     public SaveSystem saveSystem;
-    bool OSUnlocked;
-    bool PlayerInZone = false;
+    public PlayerManager playerManager;
+    public bool OSUnlocked;
+    public bool DamageOverTime = false;
+    public bool PlayerInZone = false;
 
     private void Start()
     {
@@ -17,23 +19,28 @@ public class PoisonArea : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !DamageOverTime)
         {
             PlayerInZone = true;
 
-            if (!OSUnlocked)
+            if (!OSUnlocked || playerManager.OS <= 0)
             {
                 StartCoroutine(damage(other.gameObject));
-                Debug.Log("Test");
             }
         }
         
     }
 
+    private void OnDisable()
+    {
+        DamageOverTime = false;
+        PlayerInZone = false;
+    }
+
     IEnumerator damage(GameObject player)
     {
         EDamage damageable = player.GetComponent<EDamage>();
-
+        DamageOverTime = true;
         while (PlayerInZone)
         {
             if (damageable != null)
@@ -41,6 +48,7 @@ public class PoisonArea : MonoBehaviour
                 damageable.poisonDamage(damageAmount, damageInterval); // Assuming the hit position is the player's current position
             }
             yield return new WaitForSeconds(damageInterval);
+            DamageOverTime = false;
         }
         
     }

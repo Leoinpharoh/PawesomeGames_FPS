@@ -38,7 +38,6 @@ public class InventorySlot : MonoBehaviour
 
     public void OnClick()
     {
-        //Debug.Log("OnPointerClick called");
         if(item != null)
         {
             string description = item.Name + "\n" + itemDescription;

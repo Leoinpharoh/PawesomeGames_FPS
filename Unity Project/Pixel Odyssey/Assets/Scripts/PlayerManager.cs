@@ -112,12 +112,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int currentPotionIndex = 0;
 
     Scene currentScene;
+    public ArchitectAI architectAI;
 
     void Start()
     {
         LoadPlayer();
 
         StartUp();
+
+        FinalBossHPBarActivator();
 
     }
     void Update()
@@ -150,6 +153,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         ObjectiveMenu();
 
         lastPosition = transform.position;
+
     }
 
     #region Effects and Damage
@@ -324,8 +328,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator slowMe(int damage, float duration)
     {
-        if (OS == 0 || !overshieldUnlocked)
-        {
+        
             if (!moveSpeedReduced)
             {
                 moveSpeed /= 2;
@@ -352,7 +355,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 moveSpeedReduced = false;
             }
             StartCoroutine(effectMe("Normal"));
-        }
+        
     }
     public void confuseDamage(int damage, float duration)
     {
@@ -445,7 +448,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         if (alive)
         {
-            if (HP <= 0 && Normal || HP <= 0 && !Normal)
+            if (HP <= 0)
             {
                 GameManager.Instance.youLose();
                 alive = false;
@@ -555,7 +558,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         // Check if the player is moving left
         float horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log("Moving Left");
+
         return horizontalInput < -0.1f;
     }
 
@@ -563,7 +566,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         // Check if the player is moving right
         float horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log("Moving Right");
         return horizontalInput > 0.1f;
     }
 
@@ -575,7 +577,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             stillTimer += Time.deltaTime;
             if (stillTimer >= stillThreshold)
             {
-                Debug.Log("Standing Still");
                 return true;
                 
             }
@@ -732,11 +733,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         float hpFillAmount = (float)HP / HPOrignal;
         float osFillAmount = (float)OS / OSOrignal;
+        float enemyHPFillAmount = (float)architectAI.HP / architectAI.HPOriginal;
 
+        GameManager.Instance.finalBossHpBar.fillAmount = enemyHPFillAmount;
         GameManager.Instance.playerHpBar.fillAmount = hpFillAmount;
         GameManager.Instance.playerOS.fillAmount = osFillAmount;
         GameManager.Instance.hpBarText.text = HP.ToString();
-
     }
 
     void StartUp()
@@ -933,11 +935,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             // Update the UI to reflect the new potion count
             UpdateCurrentPotionSlotUI();
             updatePlayerUI();
-            Debug.Log("Used potion. Index: " + currentPotionIndex + ", Remaining Count: " + toolBelt.GetPotionCount(currentPotionIndex));
-        }
-        else
-        {
-            Debug.LogWarning("No potions left to use!");
         }
     }
 
@@ -996,12 +993,23 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     private void HealPlayer(int healAmount)
     {
         HP = Mathf.Min(HP + healAmount, HPOrignal);
-        Debug.Log("Player healed. Current HP: " + HP);
     }
     private void HealOSPlayer(int healAmount)
     {
         OS = Mathf.Min(OS + healAmount, OSOrignal);
-        Debug.Log("Player healed. Current OS: " + OS);
+    }
+    public void FinalBossHPBarActivator()
+    {
+        currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        if (sceneName == "Final Boss")
+        {
+            GameManager.Instance.finalBossHpBarToggle.SetActive(true);
+        }
+        else
+        {
+            GameManager.Instance.finalBossHpBarToggle.SetActive(false);
+        }
     }
 }
     #endregion

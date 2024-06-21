@@ -27,7 +27,6 @@ public class OSUnlocked : MonoBehaviour
         {
             if (obj == null)
             {
-                Debug.Log("Boss dead");
                 //objectsToCheck.Remove(obj);
                 saveSystem.playerData.OvershieldUnlocked = true;
                 saveSystem.SavePlayer();

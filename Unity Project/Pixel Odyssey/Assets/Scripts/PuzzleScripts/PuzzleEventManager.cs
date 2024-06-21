@@ -16,9 +16,6 @@ public class PuzzleEventManager : MonoBehaviour
             if (!puzzleEventManager)
             {
                 puzzleEventManager = FindObjectOfType<PuzzleEventManager> ();
-                //if (!puzzleEventManager)
-                  //  Debug.Log("There needs to be one active PuzzleEventManager script on a GameObject in your scene.");
-                //else
                     puzzleEventManager.Init();
             }
             return puzzleEventManager;
