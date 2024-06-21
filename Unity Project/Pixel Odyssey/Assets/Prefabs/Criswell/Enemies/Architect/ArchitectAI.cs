@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ArchitectAI : MonoBehaviour //IDamage
+public class ArchitectAI : MonoBehaviour, IDamage
 {
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
@@ -39,7 +39,7 @@ public class ArchitectAI : MonoBehaviour //IDamage
     Vector3 playerDir; // Vector3 to store the direction to the player
     Vector3 startingPos; // Vector3 to store the starting position of the enemy
     float angleToPlayer; // Float to store the angle to the player
-    private Transform playerTransform; // Reference to the player's transform
+    public Transform playerTransform; // Reference to the player's transform
     public PlayerManager playerManager; // Reference to the PlayerManager script
     public SaveSystem saveSystem; // Reference to the SaveSystem script
     PlayerData playerData;
@@ -62,7 +62,21 @@ public class ArchitectAI : MonoBehaviour //IDamage
     {
         
         OScheck();
-        
+        if (!isDead && !breathAttack && !slam && !leftSwing && !rightSwing && !dazed)
+        {
+            FacePlayer();
+        }
+
+    }
+
+    void FacePlayer()
+    {
+        if (playerTransform != null)
+        {
+            Vector3 direction = (playerTransform.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
 
 
@@ -146,19 +160,20 @@ public class ArchitectAI : MonoBehaviour //IDamage
 
     IEnumerator Roar()
     {
-        anim.SetBool("roar", true);
+        Debug.Log("Roar");
+        anim.SetBool("Roar", true);
         roar = true;
-        yield return new WaitForSeconds(.1f);
-        anim.SetBool("roar", false);
+        yield return new WaitForSeconds(4f);
+        anim.SetBool("Roar", false);
         roar = false;
     }
 
     IEnumerator Dazed()
     {
-        anim.SetBool("dazed", true);
+        anim.SetBool("Dazed", true);
         dazed = true;
         yield return new WaitForSeconds(dazedTimer);
-        anim.SetBool("dazed", false);
+        anim.SetBool("Dazed", false);
         dazed = false;
         Roar();
     }
@@ -283,7 +298,7 @@ public class ArchitectAI : MonoBehaviour //IDamage
         {
             yield return new WaitForSeconds(5f);
 
-            if (!isDead)
+            if (!isDead && !dazed)
             {
                 if (phase1 && !roar)
                 {
