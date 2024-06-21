@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 2522243682938831490}
   m_Layer: 3
   m_Name: MaleeGoblin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -696,6 +696,7 @@ MonoBehaviour:
   anim: {fileID: 8616541915037073091}
   enemyParams: {fileID: 11400000, guid: 5d5d635ab82aba4468b2d3d6ed39ae28, type: 2}
   audioSource: {fileID: 2522243682938831490}
+  playerRigidbody: {fileID: 0}
 --- !u!195 &4843577786101161110
 NavMeshAgent:
   m_ObjectHideFlags: 0

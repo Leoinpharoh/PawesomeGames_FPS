@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48c53f8b5934b54ab4f3ff630d62aa4, type: 3}
+  m_Name: Lab Zombie BossFightBrain
+  m_EditorClassIdentifier: 
+  bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
+  HP: 35
+  movementSpeed: 3
+  Acceleration: 1.8
+  animSpeedTrans: 3
+  flying: 0
+  enemyType: 0
+  bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
+  attackSpeed: 1
+  rangedAttackLead: 0.1
+  meleeRange: 3
+  meleeDamage: 5
+  rangedRange: 0
+  rangedDamage: 1
+  bulletSpeed: 0.1
+  destroyTime: 2
+  effectDamage: 0
+  effectDuration: 0.1
+  enemyReloadTime: 0
+  enemyClipSize: 0
+  damageType: 0
+  roaming: 1
+  roamDist: 9
+  roamTimer: 4
+  lootPinata: 1
+  lootChance: 60
+  loot:
+  - {fileID: 3802848766677527129, guid: 355caeea4e1590442b7516a9a0d311ed, type: 3}
+  - {fileID: 8884114810549261806, guid: d8a59b9f57dddd44783aaff259a81504, type: 3}
+  lineOfSightRange: 100
+  viewAngle: 120
+  detectionType: 1
+  attackSound:
+  - {fileID: 8300000, guid: 2dcf41fb7d0fa9546b48ca00b08bc8da, type: 3}
+  - {fileID: 8300000, guid: 3abf246ced1ca3c4e8c74d8b3023d1b1, type: 3}
+  - {fileID: 8300000, guid: d40278bbe07668e4f81105154165099b, type: 3}
+  - {fileID: 8300000, guid: 382003b6f4b5a7b4b98aa96a20b6c763, type: 3}
+  - {fileID: 8300000, guid: f17f37d3e9944d94d84ba2b9d3290d98, type: 3}
+  - {fileID: 8300000, guid: dc8d99f3f04b404498e49e5582af1cd7, type: 3}
+  - {fileID: 8300000, guid: 085550bfa8b7b7b47a49da8c7e5141d9, type: 3}
+  - {fileID: 8300000, guid: 082dbb06d7a5280489db7a7cd6b4ac2b, type: 3}
+  - {fileID: 8300000, guid: 1c908f0f676dadd4fbec8bd6886fa91b, type: 3}
+  - {fileID: 8300000, guid: d0936743051d5264f82cda8546ca0be8, type: 3}
+  - {fileID: 8300000, guid: eb89cfe99fae5bf4f8757777ef00fe34, type: 3}
+  - {fileID: 8300000, guid: b863b6e50079db340861abac9688e15b, type: 3}
+  - {fileID: 8300000, guid: a92ec64d8b85a91499659726d6374ba4, type: 3}
+  - {fileID: 8300000, guid: f8fc8ea85a682ae438df2a5f0881b89f, type: 3}
+  - {fileID: 8300000, guid: 30955ab1a556bab4e985f8175a7e597f, type: 3}
+  - {fileID: 8300000, guid: f106dd22a8f3b5e45a130bf4bb1532f7, type: 3}
+  - {fileID: 8300000, guid: f950dde9985a13c4c99802d34ffdb87e, type: 3}
+  - {fileID: 8300000, guid: 1214a0e23de40fa4581483defa5e8330, type: 3}
+  - {fileID: 8300000, guid: 5bb00bbdea3d1c945a4c76669dfef84c, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: baf123e9194144748beb7914d012075b, type: 3}
+  - {fileID: 8300000, guid: 2a3e2039759ff1c47a95873bdc9e948b, type: 3}
+  - {fileID: 8300000, guid: dff7c26fbba362e4787eba5b402e076b, type: 3}
+  - {fileID: 8300000, guid: 83564cdbf8133b4498d1807ecf8aa7e8, type: 3}
+  - {fileID: 8300000, guid: 13e83a9ae48058749bb22c56e43d8d7c, type: 3}
+  - {fileID: 8300000, guid: c8382add447ff8346a3853fa2e00d56d, type: 3}
+  - {fileID: 8300000, guid: 02ef6527192917a46af394d4bdfac931, type: 3}
+  - {fileID: 8300000, guid: 1653305ce7f2a804e885ce4b1d2d754f, type: 3}
+  - {fileID: 8300000, guid: e682d5e5c2914e041ae696e6b1c3d819, type: 3}
+  - {fileID: 8300000, guid: 0e30e020784eefa42aa8f906aeefd293, type: 3}
+  - {fileID: 8300000, guid: 3ced08389597de240a003e45a5758933, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: cc7f882f1be0a8e449d0567cbc4e395c, type: 3}
+  - {fileID: 8300000, guid: d40b17ca0c646d74eb3997afa31285e7, type: 3}
+  - {fileID: 8300000, guid: 4edf66a8488faf14097e67fe84c312ee, type: 3}
+  - {fileID: 8300000, guid: e1f75437ac982c04d8123afca88f9c83, type: 3}
+  - {fileID: 8300000, guid: 1d249196cd743bd44be7283515805c58, type: 3}
+  - {fileID: 8300000, guid: 301e24463178a6748b304e48c119501c, type: 3}
+  - {fileID: 8300000, guid: d39570622e699d54bab7a0806e9fc1d8, type: 3}
+  - {fileID: 8300000, guid: b548c3c4e6bf6aa46863d91adbb4cdce, type: 3}
+  - {fileID: 8300000, guid: ea5e711be6c1a4d4d899692b0340edf6, type: 3}
+  - {fileID: 8300000, guid: db72db28011ccfe4fb3ad52e14a0087a, type: 3}
+  - {fileID: 8300000, guid: 176fcec6c460b4f428776ac18db8512b, type: 3}
+  - {fileID: 8300000, guid: 7c39329102e825f42a34b5913cde7fe8, type: 3}
+  - {fileID: 8300000, guid: c54b6f50d694cc04bac8b626fef63d9c, type: 3}
+  - {fileID: 8300000, guid: 3771aefe8525ca74080532d0345eea88, type: 3}
+  - {fileID: 8300000, guid: fb10cdb2c9f2d6a42bd831334cfdd732, type: 3}
+  - {fileID: 8300000, guid: 3ced08389597de240a003e45a5758933, type: 3}
+  idleSound:
+  - {fileID: 8300000, guid: bf92246d2e9b6a64c90234f50f0ef192, type: 3}
+  walkingSound:
+  - {fileID: 8300000, guid: fe1da5ea3e2c8fe4f952dbf34e6d5c72, type: 3}
+  - {fileID: 8300000, guid: e10c9448d7c1c2e4cb0e98a82df61c96, type: 3}
+  - {fileID: 8300000, guid: 6b29532875e76cf409fef645d5de0074, type: 3}
+  reloadSound: []
