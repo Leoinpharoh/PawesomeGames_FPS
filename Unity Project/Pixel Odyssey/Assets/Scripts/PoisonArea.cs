@@ -24,7 +24,6 @@ public class PoisonArea : MonoBehaviour
             if (!OSUnlocked)
             {
                 StartCoroutine(damage(other.gameObject));
-                Debug.Log("Test");
             }
         }
         

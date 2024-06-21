@@ -24,13 +24,7 @@ public class InventoryObject : ScriptableObject
 
     public void AddItem(Item _item, int _amount)
     {
-        //Debug.Log("AddItem method called with item ID: " + _item.id + "and amount: " + _amount);
 
-        //Debug.Log("Contents of Container.Items before picking up: \n");
-        /*foreach (var slot in Container.Items)
-        {
-            Debug.Log($"Item ID: {slot.item.id}, Amount: {slot.amount}");   //debug
-        }*/
 
         for (int i = 0; i < Container.Items.Count; i++)   //looping through the container/slot
         {
@@ -41,10 +35,6 @@ public class InventoryObject : ScriptableObject
             }
         }
 
-        /*foreach (var slot in Container.Items)
-        {
-            Debug.Log($"Item ID: {slot.item.id} Amount: {slot.amount}");
-        }*/
 
         GameObject newSlotObj = new GameObject("InventorySlot_" + _item.id);
         InventorySlot newSlot = newSlotObj.AddComponent<InventorySlot>();   //giving the new object an inventory slot component
@@ -94,7 +84,6 @@ public class InventoryObject : ScriptableObject
             InventorySlot slot = Container.Items[i];
             ItemObject itemObject = database.GetItem[slot.ID];
             slot.item = new Item(itemObject); // Create a new Item instance with the retrieved ItemObject
-            //Debug.Log($"Assigned Item '{itemObject.name}' with ID {itemObject.ItemId} to InventorySlot {i}");
         }
     }
 }

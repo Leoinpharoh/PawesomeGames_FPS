@@ -555,7 +555,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         // Check if the player is moving left
         float horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log("Moving Left");
+
         return horizontalInput < -0.1f;
     }
 
@@ -933,11 +933,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             // Update the UI to reflect the new potion count
             UpdateCurrentPotionSlotUI();
             updatePlayerUI();
-            Debug.Log("Used potion. Index: " + currentPotionIndex + ", Remaining Count: " + toolBelt.GetPotionCount(currentPotionIndex));
-        }
-        else
-        {
-            Debug.LogWarning("No potions left to use!");
         }
     }
 
@@ -996,12 +991,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     private void HealPlayer(int healAmount)
     {
         HP = Mathf.Min(HP + healAmount, HPOrignal);
-        Debug.Log("Player healed. Current HP: " + HP);
     }
     private void HealOSPlayer(int healAmount)
     {
         OS = Mathf.Min(OS + healAmount, OSOrignal);
-        Debug.Log("Player healed. Current OS: " + OS);
     }
 }
     #endregion

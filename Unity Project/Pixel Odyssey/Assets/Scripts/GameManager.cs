@@ -297,7 +297,6 @@ public class GameManager : MonoBehaviour
             playerAnimator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
             playerAnimator.SetTrigger("Death");
             UIAnimator.SetTrigger("Death");
-            Debug.Log("Dead");
             StartCoroutine(death());
         }
 

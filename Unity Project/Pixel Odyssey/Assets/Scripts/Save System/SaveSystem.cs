@@ -26,7 +26,6 @@ public class SaveSystem : MonoBehaviour
         {
             serializer.Serialize(stream, playerData);
         }
-        Debug.Log("Player data saved to " + filePath);
     }
 
     public void LoadPlayer()
@@ -39,11 +38,9 @@ public class SaveSystem : MonoBehaviour
             {
                 playerData = serializer.Deserialize(stream) as PlayerData;
             }
-            Debug.Log("Player data loaded from " + path);
         }
         else
         {
-            Debug.LogWarning("Save file not found, creating a new one.");
             ResetPlayer();
             SavePlayer();
         }

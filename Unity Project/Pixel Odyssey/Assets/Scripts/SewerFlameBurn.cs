@@ -23,7 +23,6 @@ public class SewerFlameBurn : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player Entered");
             if (!OSUnlocked || OSAmount > 0)
             {
                 StartCoroutine(Edamage(other.gameObject));
