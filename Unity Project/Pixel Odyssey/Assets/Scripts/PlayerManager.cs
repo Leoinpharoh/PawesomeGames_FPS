@@ -324,8 +324,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     private IEnumerator slowMe(int damage, float duration)
     {
-        if (OS == 0 || !overshieldUnlocked)
-        {
+        
             if (!moveSpeedReduced)
             {
                 moveSpeed /= 2;
@@ -352,7 +351,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                 moveSpeedReduced = false;
             }
             StartCoroutine(effectMe("Normal"));
-        }
+        
     }
     public void confuseDamage(int damage, float duration)
     {
@@ -563,7 +562,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         // Check if the player is moving right
         float horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log("Moving Right");
         return horizontalInput > 0.1f;
     }
 
@@ -575,7 +573,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             stillTimer += Time.deltaTime;
             if (stillTimer >= stillThreshold)
             {
-                Debug.Log("Standing Still");
                 return true;
                 
             }
