@@ -49,6 +49,9 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int jumpCounter;
     public int gravity = 10;
     public int moveSpeedOriginal;
+    private Vector3 lastPosition;
+    private float stillTimer = 0f;
+    private float stillThreshold = 2f;
 
 
     //Coroutines
@@ -145,6 +148,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         ItemUse();
 
         ObjectiveMenu();
+
+        lastPosition = transform.position;
     }
 
     #region Effects and Damage
@@ -544,6 +549,44 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         }
         playerVelocity.y -= gravity * Time.deltaTime;
         characterControl.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public bool IsMovingLeft()
+    {
+        // Check if the player is moving left
+        float horizontalInput = Input.GetAxis("Horizontal");
+        Debug.Log("Moving Left");
+        return horizontalInput < -0.1f;
+    }
+
+    public bool IsMovingRight()
+    {
+        // Check if the player is moving right
+        float horizontalInput = Input.GetAxis("Horizontal");
+        Debug.Log("Moving Right");
+        return horizontalInput > 0.1f;
+    }
+
+    public bool PlayerStandingStill()
+    {
+        // Check if the player is standing still
+        if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
+        {
+            stillTimer += Time.deltaTime;
+            if (stillTimer >= stillThreshold)
+            {
+                Debug.Log("Standing Still");
+                return true;
+                
+            }
+        }
+        else
+        {
+            stillTimer = 0f; // Reset timer if the player moves
+        }
+
+        lastPosition = transform.position;
+        return false;
     }
     void Crouch()
     {

@@ -916,6 +916,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 101170792}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 2083578881}
+    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: inventoryDisplay
       value: 
       objectReference: {fileID: 1734053542}
@@ -22321,6 +22325,10 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 68798055}
+    - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 2083578881}
     - target: {fileID: 3657128021650495967, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_Name
       value: UIBasicTheme
@@ -57638,7 +57646,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d0e604b2705534c479a7e9951097db92, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -57771,28 +57779,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1691000427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6899769094836122345}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64a19a1163ed2f44bdf2ba1bb58573f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 1691000421}
-  model: {fileID: 6899769094836122349}
-  shootPos: {fileID: 629980394}
-  headPos: {fileID: 2432205531325795674}
-  capsuleCollider: {fileID: 6899769094836122348}
-  triggerCollider: {fileID: 6899769094836122350}
-  anim: {fileID: 1691000424}
-  enemyParams: {fileID: 11400000, guid: 9b52fec775b602649be2266cac87c8ce, type: 2}
-  audioSource: {fileID: 1691000425}
-  playerRigidbody: {fileID: 1691000426}
 --- !u!1 &1714154025
 GameObject:
   m_ObjectHideFlags: 0
@@ -77584,7 +77570,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6899769094836122347}
-  - component: {fileID: 1691000427}
+  - component: {fileID: 6899769094836122351}
   - component: {fileID: 1691000426}
   - component: {fileID: 1691000425}
   - component: {fileID: 1691000424}
@@ -77701,6 +77687,44 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.11
   m_Center: {x: 0, y: 1.51, z: 0}
+--- !u!114 &6899769094836122351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899769094836122345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a24775001a0903b428bad9ec8c11e0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootPos: {fileID: 629980394}
+  headPos: {fileID: 2432205531325795674}
+  agent: {fileID: 1691000421}
+  model: {fileID: 6899769094836122349}
+  body: {fileID: 6899769094836122348}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+  anim: {fileID: 1691000424}
+  audioSource: {fileID: 1691000425}
+  bloodSplash: {fileID: 3548588485384254792, guid: 5bca2a66296896a4db04224185d1db8b, type: 3}
+  phase1: 1
+  phase2: 0
+  phase3: 0
+  playerOSUp: 0
+  leftSwing: 0
+  rightSwing: 0
+  slam: 0
+  breathAttack: 0
+  poisonAttack: 0
+  dazed: 0
+  roar: 0
+  isDead: 0
+  HP: 5000
+  dazedTimer: 0
+  playerManager: {fileID: 68798055}
+  saveSystem: {fileID: 68798054}
 --- !u!4 &6986170735933104908
 Transform:
   m_ObjectHideFlags: 0
@@ -77941,8 +77965,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &8182289811675506961
-SphereCollider:
+--- !u!136 &8182289811675506961
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -77959,9 +77983,11 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.005
-  m_Center: {x: 0, y: 0.003, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.004
+  m_Height: 0.02
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.004, z: 0}
 --- !u!4 &8203592772305697156
 Transform:
   m_ObjectHideFlags: 0
@@ -78059,8 +78085,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &8520135929887893452
-SphereCollider:
+--- !u!136 &8520135929887893452
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -78077,9 +78103,11 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.005
-  m_Center: {x: 0, y: 0.003, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.004
+  m_Height: 0.02
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.004, z: 0}
 --- !u!4 &8681303735764541930
 Transform:
   m_ObjectHideFlags: 0
