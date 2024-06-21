@@ -174,9 +174,15 @@ public class ShootingHandler : MonoBehaviour
             DisplayRay(hit);
 
             var damageable = hit.collider.GetComponent<IDamage>();
+            var mDamageable = hit.collider.GetComponent<MDamage>();
             if (damageable != null)
             {
                 damageable.takeDamage(weaponStats.shootDamage, hit.point);
+            }
+            if (mDamageable != null && weaponStats.weaponType == WeaponStats.WeaponType.Automatic)
+            {
+
+                mDamageable.ObjectDamage(weaponStats.shootDamage);
             }
             else
             {

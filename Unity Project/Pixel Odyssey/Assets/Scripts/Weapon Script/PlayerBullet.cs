@@ -16,6 +16,7 @@ public class playerBullet : MonoBehaviour
 
     private IDamage dmg;
     private SDamage sDMG;
+    private MDamage mDMG;
     private Vector3 hitPosition;
 
     void Start()
@@ -28,6 +29,7 @@ public class playerBullet : MonoBehaviour
     {
         dmg = collision.gameObject.GetComponent<IDamage>();
         sDMG = collision.gameObject.GetComponent<SDamage>();
+        mDMG = collision.gameObject.GetComponent<MDamage>();
 
         if (collision.contacts.Length > 0)
         {
@@ -62,6 +64,12 @@ public class playerBullet : MonoBehaviour
             sDMG.ObjectDamage(damage);
             Destroy(gameObject);
         }
+        if (mDMG != null)
+        {
+            hitPosition = collision.contacts[0].point;
+            mDMG.ObjectDamage(damage);
+            Destroy(gameObject);
+        }
 
         Destroy(gameObject);
     }
@@ -84,7 +92,7 @@ public class DamageSphere : MonoBehaviour
         {
             IDamage dmg = other.GetComponent<IDamage>();
             SDamage sDMG = other.GetComponent<SDamage>();
-
+            MDamage mDMG = other.GetComponent<MDamage>();
             if (dmg != null)
             {
                 Vector3 hitPosition = other.ClosestPoint(transform.position);
@@ -94,6 +102,11 @@ public class DamageSphere : MonoBehaviour
             if (sDMG != null)
             {
                 sDMG.ObjectDamage(damage);
+            }
+
+            if (mDMG != null)
+            {
+                mDMG.ObjectDamage(damage);
             }
         }
     }
