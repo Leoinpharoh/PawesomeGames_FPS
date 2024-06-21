@@ -71,11 +71,12 @@ public class ArchitectAI : MonoBehaviour, IDamage
 
     void FacePlayer()
     {
+
         if (playerTransform != null)
         {
-            Vector3 direction = (playerTransform.position - transform.position).normalized;
+            Vector3 direction = (playerTransform.position - headPos.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * 300f);
         }
     }
 
@@ -106,7 +107,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
         anim.SetBool("poisonBreath", true);
         poisonAttack = true;
         breathAttack = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(4f);
         anim.SetBool("poisonBreath", false);
         poisonAttack = false;
         breathAttack = false;
@@ -116,7 +117,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("iceBreath", true);
         breathAttack = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(5f);
         anim.SetBool("iceBreath", false);
         breathAttack = false;
     }
@@ -125,7 +126,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("flameBreath", true);
         breathAttack = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(5f);
         anim.SetBool("flameBreath", false);
         breathAttack = false;
     }
@@ -135,7 +136,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("slam", true);
         slam = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(3.2f);
         anim.SetBool("slam", false);
         slam = false;
     }
@@ -144,7 +145,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("leftHandAttack", true);
         leftSwing = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(1.2f);
         anim.SetBool("leftHandAttack", false);
         leftSwing = false;
     }
@@ -153,7 +154,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("rightHandAttack", true);
         rightSwing = true;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(1.2f);
         anim.SetBool("rightHandAttack", false);
         rightSwing = false;
     }

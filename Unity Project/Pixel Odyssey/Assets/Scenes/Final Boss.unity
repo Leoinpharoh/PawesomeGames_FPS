@@ -918,7 +918,7 @@ PrefabInstance:
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: playerAnimator
       value: 
-      objectReference: {fileID: 2083578881}
+      objectReference: {fileID: 0}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: inventoryDisplay
       value: 
@@ -22328,7 +22328,7 @@ PrefabInstance:
     - target: {fileID: 2069256964518309630, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: playerAnimator
       value: 
-      objectReference: {fileID: 2083578881}
+      objectReference: {fileID: 0}
     - target: {fileID: 3657128021650495967, guid: 055b6fcb115452b43a90c3a4face2fff, type: 3}
       propertyPath: m_Name
       value: UIBasicTheme
@@ -77723,6 +77723,7 @@ MonoBehaviour:
   isDead: 0
   HP: 5000
   dazedTimer: 0
+  playerTransform: {fileID: 1536608625}
   playerManager: {fileID: 68798055}
   saveSystem: {fileID: 68798054}
 --- !u!4 &6986170735933104908
