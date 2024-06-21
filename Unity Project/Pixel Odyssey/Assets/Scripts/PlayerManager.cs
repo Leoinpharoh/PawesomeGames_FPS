@@ -112,12 +112,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int currentPotionIndex = 0;
 
     Scene currentScene;
+    ArchitectAI architectAI;
 
     void Start()
     {
         LoadPlayer();
 
         StartUp();
+
+        FinalBossHPBarActivator();
 
     }
     void Update()
@@ -150,6 +153,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         ObjectiveMenu();
 
         lastPosition = transform.position;
+
     }
 
     #region Effects and Damage
@@ -729,11 +733,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         float hpFillAmount = (float)HP / HPOrignal;
         float osFillAmount = (float)OS / OSOrignal;
+        float enemyHPFillAmount = (float)architectAI.HP / architectAI.HPOrignal;
 
+        GameManager.Instance.finalBossHpBar.fillAmount = enemyHPFillAmount;
         GameManager.Instance.playerHpBar.fillAmount = hpFillAmount;
         GameManager.Instance.playerOS.fillAmount = osFillAmount;
         GameManager.Instance.hpBarText.text = HP.ToString();
-
     }
 
     void StartUp()
@@ -992,6 +997,20 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     private void HealOSPlayer(int healAmount)
     {
         OS = Mathf.Min(OS + healAmount, OSOrignal);
+    }
+    public void FinalBossHPBarActivator()
+    {
+        currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        Debug.Log(sceneName);
+        if (sceneName == "Final Boss")
+        {
+            GameManager.Instance.finalBossHpBarToggle.SetActive(true);
+        }
+        else
+        {
+            GameManager.Instance.finalBossHpBarToggle.SetActive(false);
+        }
     }
 }
     #endregion
