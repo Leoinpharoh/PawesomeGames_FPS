@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DevilBoss
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
-  HP: 60
+  HP: 400
   movementSpeed: 6
   Acceleration: 4
   animSpeedTrans: 7
@@ -22,16 +22,18 @@ MonoBehaviour:
   bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
   attackSpeed: 2
   rangedAttackLead: 0.1
-  meleeRange: 3
-  meleeDamage: 12
+  meleeRange: 5
+  meleeDamage: 20
   rangedRange: 0
   rangedDamage: 1
   bulletSpeed: 0.1
   destroyTime: 2
   effectDamage: 0
   effectDuration: 0.1
-  damageType: 0
-  roaming: 1
+  enemyReloadTime: 0
+  enemyClipSize: 0
+  damageType: 2
+  roaming: 0
   roamDist: 9
   roamTimer: 2
   lootPinata: 0
@@ -45,3 +47,4 @@ MonoBehaviour:
   damagedSound: []
   idleSound: []
   walkingSound: []
+  reloadSound: []
