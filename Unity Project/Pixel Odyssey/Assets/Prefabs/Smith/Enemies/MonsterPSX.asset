@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b48c53f8b5934b54ab4f3ff630d62aa4, type: 3}
-  m_Name: PSX Zombie
+  m_Name: MonsterPSX
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
-  HP: 20
+  HP: 70
   movementSpeed: 3
   Acceleration: 4
   animSpeedTrans: 7
@@ -21,6 +21,7 @@ MonoBehaviour:
   enemyType: 0
   bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
   attackSpeed: 3
+  rangedAttackLead: 0.1
   meleeRange: 3
   meleeDamage: 5
   rangedRange: 0
@@ -29,6 +30,8 @@ MonoBehaviour:
   destroyTime: 2
   effectDamage: 0
   effectDuration: 0.1
+  enemyReloadTime: 0
+  enemyClipSize: 0
   damageType: 0
   roaming: 1
   roamDist: 9
@@ -44,3 +47,4 @@ MonoBehaviour:
   damagedSound: []
   idleSound: []
   walkingSound: []
+  reloadSound: []

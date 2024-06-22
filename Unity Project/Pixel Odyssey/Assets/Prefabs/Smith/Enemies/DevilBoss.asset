@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DevilBoss
   m_EditorClassIdentifier: 
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
-  HP: 400
+  HP: 200
   movementSpeed: 6
   Acceleration: 4
   animSpeedTrans: 7
@@ -42,9 +42,13 @@ MonoBehaviour:
   lineOfSightRange: 10
   viewAngle: 180
   detectionType: 0
-  attackSound: []
-  deathSound: []
-  damagedSound: []
+  attackSound:
+  - {fileID: 8300000, guid: 6bb73967bff2e2b46b9984825f5d8c62, type: 3}
+  deathSound:
+  - {fileID: 8300000, guid: 99991f15e51a4f94f8d2ffbfec6edf77, type: 3}
+  damagedSound:
+  - {fileID: 8300000, guid: 8d6cd3f74f779f24cabf9c3b4f88e59e, type: 3}
   idleSound: []
-  walkingSound: []
+  walkingSound:
+  - {fileID: 8300000, guid: 02159ab9f642fdb43878606c1e374571, type: 3}
   reloadSound: []

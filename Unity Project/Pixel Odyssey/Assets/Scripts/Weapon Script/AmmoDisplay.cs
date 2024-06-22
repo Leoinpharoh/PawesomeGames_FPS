@@ -10,6 +10,10 @@ public class AmmoDisplay : MonoBehaviour
 
     int ammo;
 
+    private void Start()
+    {
+        
+    }
     void Update()
     {
         if (weaponStats.Ammo + weaponStats.clip != ammo)
