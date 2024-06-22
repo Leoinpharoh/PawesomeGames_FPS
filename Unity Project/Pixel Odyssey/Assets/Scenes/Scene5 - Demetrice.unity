@@ -36038,7 +36038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &818620025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42527,6 +42527,14 @@ PrefabInstance:
       propertyPath: displayAmmoHere
       value: 
       objectReference: {fileID: 411522476}
+    - target: {fileID: 3804893452896125985, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: weaponFour
+      value: 
+      objectReference: {fileID: 1809209405}
+    - target: {fileID: 3804893452896125985, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: weaponThree
+      value: 
+      objectReference: {fileID: 1046201452}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: architectAI
       value: 
@@ -44794,6 +44802,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 469584, guid: 2216270888a4ced48b33b7b5641611e6, type: 3}
   m_PrefabInstance: {fileID: 752066621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1046201452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4376854298762941457, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+  m_PrefabInstance: {fileID: 988958757}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1047135112 stripped
 Transform:
@@ -75212,7 +75225,7 @@ PrefabInstance:
       objectReference: {fileID: 988958758}
     - target: {fileID: 7739568684683910294, guid: e1a6b1d91cecbce4ca82e24577f63fb6, type: 3}
       propertyPath: unlockables
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7739568684683910294, guid: e1a6b1d91cecbce4ca82e24577f63fb6, type: 3}
       propertyPath: nextLevelName
@@ -78093,6 +78106,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 548a40efc092c6f408cc4d1691b171cc, type: 3}
+--- !u!1 &1809209405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6891202904782844516, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+  m_PrefabInstance: {fileID: 988958757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1809682770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439240, guid: 548a40efc092c6f408cc4d1691b171cc, type: 3}
