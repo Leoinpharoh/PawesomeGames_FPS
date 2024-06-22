@@ -194,9 +194,15 @@ public class ShootingHandler : MonoBehaviour
     private Vector3 GetSpreadDirection()
     {
         var direction = Camera.main.transform.forward;
+<<<<<<< Updated upstream
         direction += Camera.main.transform.up * Random.Range(-0.1f, 0.1f);
         direction += Camera.main.transform.right * Random.Range(-0.1f, 0.1f);
         return direction.normalized;
+=======
+        direction += Camera.main.transform.up * Random.Range(-0.2f, 0.2f);
+        direction += Camera.main.transform.right * Random.Range(-0.2f, 0.2f);
+        return direction.normalized * Random.Range(0f, 0.2f);
+>>>>>>> Stashed changes
     }
 
     private void DisplayRay(RaycastHit hit)

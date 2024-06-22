@@ -2258,6 +2258,7 @@ GameObject:
   - component: {fileID: 5720966853410270050}
   - component: {fileID: 891564076542843006}
   - component: {fileID: 612488906918634754}
+  - component: {fileID: -8141481347396441450}
   m_Layer: 3
   m_Name: God Zombie
   m_TagString: Enemy
@@ -2314,8 +2315,9 @@ MonoBehaviour:
   capsuleCollider: {fileID: 7551584972537609336}
   triggerCollider: {fileID: 4206187915800240963}
   anim: {fileID: 7021960251539538804}
-  enemyParams: {fileID: 11400000, guid: 931f5852256278d4ab70fc2eb80dd3b4, type: 2}
+  enemyParams: {fileID: 11400000, guid: d3daac55eea5326438db795b873ee2f2, type: 2}
   audioSource: {fileID: 612488906918634754}
+  playerRigidbody: {fileID: -8141481347396441450}
 --- !u!95 &7021960251539538804
 Animator:
   serializedVersion: 5
@@ -2541,6 +2543,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &-8141481347396441450
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5446079174862273798}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5615948405660469728
 GameObject:
   m_ObjectHideFlags: 0
