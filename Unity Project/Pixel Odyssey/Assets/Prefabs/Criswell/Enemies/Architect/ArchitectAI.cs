@@ -21,6 +21,18 @@ public class ArchitectAI : MonoBehaviour, IDamage
     [SerializeField] GameObject PoisonArea;
     [SerializeField] GameObject FlameArea;
     [SerializeField] GameObject IceArea;
+    [SerializeField] AudioClip[] leftAttackSound;
+    [SerializeField] AudioClip[] rightAttackSound;
+    [SerializeField] AudioClip[] dazeSound;
+    [SerializeField] AudioClip[] deathSound;
+    [SerializeField] AudioClip[] damagedSound;
+    [SerializeField] AudioClip[] idleSound;
+    [SerializeField] AudioClip[] poisonSound;
+    [SerializeField] AudioClip[] iceSound;
+    [SerializeField] AudioClip[] fireSound;
+    [SerializeField] AudioClip[] slamSound;
+    [SerializeField] AudioClip[] roarSound;
+
 
 
 
@@ -50,7 +62,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     public PlayerManager playerManager; // Reference to the PlayerManager script
     public SaveSystem saveSystem; // Reference to the SaveSystem script
     PlayerData playerData;
-
+    
 
     private void Awake()
     {
@@ -115,6 +127,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
         anim.SetBool("poisonBreath", true);
         poisonAttack = true;
         breathAttack = true;
+        PlayPosionBreath();
         PoisonArea.SetActive(true);
         yield return new WaitForSeconds(4f);
         anim.SetBool("poisonBreath", false);
@@ -128,6 +141,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("iceBreath", true);
         breathAttack = true;
+        PlayIceBreath();
         yield return new WaitForSeconds(5f);
         IceArea.SetActive(true);
         yield return new WaitForSeconds(2f);
@@ -141,6 +155,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("flameBreath", true);
         breathAttack = true;
+        PlayFireBreath();
         yield return new WaitForSeconds(5f);
         FlameArea.SetActive(true);
         yield return new WaitForSeconds(2f);
@@ -155,7 +170,9 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("slam", true);
         slam = true;
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(2f);
+        PlaySlamSound();
+        yield return new WaitForSeconds(1.5f);
         anim.SetBool("slam", false);
         slam = false;
     }
@@ -164,7 +181,9 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("leftHandAttack", true);
         leftSwing = true;
+        PlayLeftAttackSound();
         yield return new WaitForSeconds(1.5f);
+        PlayLeftAttackSound();
         anim.SetBool("leftHandAttack", false);
         leftSwing = false;
     }
@@ -173,7 +192,9 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("rightHandAttack", true);
         rightSwing = true;
+        PlayRightAttackSound();
         yield return new WaitForSeconds(1.5f);
+        PlayRightAttackSound();
         anim.SetBool("rightHandAttack", false);
         rightSwing = false;
     }
@@ -182,8 +203,10 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("Roar", true);
         roar = true;
+        PlayRoarSound();
         StartCoroutine(Edamage(GameManager.Instance.player));
         yield return new WaitForSeconds(4f);
+        PlayRoarSound();
         anim.SetBool("Roar", false);
         roar = false;
     }
@@ -192,7 +215,9 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         anim.SetBool("Dazed", true);
         dazed = true;
+        PlayDazedSound();
         yield return new WaitForSeconds(dazedTimer);
+        PlayDazedSound();
         anim.SetBool("Dazed", false);
         dazed = false;
         StartCoroutine(Roar());
@@ -243,10 +268,9 @@ public class ArchitectAI : MonoBehaviour, IDamage
         agent.isStopped = true; // Stop the agent from moving
         agent.speed = 0;
         agent.angularSpeed = 0;
-        //PlayDeathSound();
+        PlayDeathSound();
         yield return new WaitForSeconds(2.5f); // Wait for the destroyTime from the EnemyParams scriptable object
         Destroy(gameObject); // Destroy the enemy
-        //GameManager.Instance.updateGameGoal(-1); // Call the updateGameGoal function from the gameManager script. tells game manager that there is one less enemy in the scene
         Vector3 dropPosition = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
     }
 
@@ -254,7 +278,7 @@ public class ArchitectAI : MonoBehaviour, IDamage
     {
         GameObject bloodEffect = Instantiate(bloodSplash, hitPosition, Quaternion.identity); // Instantiate at the hit position
         bloodEffect.transform.SetParent(transform); // Optionally set the parent to the enemy's transform
-        //PlayDamageSound();
+        PlayDamageSound();
         yield return new WaitForSeconds(1); // Wait for 1 second (adjust based on your effect's needs)
         Destroy(bloodEffect); // Optionally destroy the effect after it finishes playing
     }
@@ -273,64 +297,100 @@ public class ArchitectAI : MonoBehaviour, IDamage
 
 
 
-    /*private void PlayAttackSound()
+    private void PlayRightAttackSound()
     {
-        if (audioSource != null && enemyParams.attackSound.Length > 0)
+        if (audioSource != null && rightAttackSound.Length > 0)
         {
-            AudioClip clip = enemyParams.attackSound[Random.Range(0, enemyParams.attackSound.Length)];
+            AudioClip clip = rightAttackSound[Random.Range(0, rightAttackSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+    private void PlayLeftAttackSound()
+    {
+        if (audioSource != null && leftAttackSound.Length > 0)
+        {
+            AudioClip clip = leftAttackSound[Random.Range(0, leftAttackSound.Length)];
             audioSource.PlayOneShot(clip);
         }
     }
 
-    private void PlayReloadSound()
+    private void PlayDazedSound()
     {
-        if (audioSource != null && enemyParams.reloadSound.Length > 0)
+        if (audioSource != null && dazeSound.Length > 0)
         {
-            AudioClip clip = enemyParams.reloadSound[Random.Range(0, enemyParams.reloadSound.Length)];
+            AudioClip clip = dazeSound[Random.Range(0, dazeSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+    private void PlaySlamSound()
+    {
+        if (audioSource != null && slamSound.Length > 0)
+        {
+            AudioClip clip = slamSound[Random.Range(0, slamSound.Length)];
             audioSource.PlayOneShot(clip);
         }
     }
 
     private void PlayDeathSound()
     {
-        if (audioSource != null && enemyParams.deathSound.Length > 0)
+        if (audioSource != null && deathSound.Length > 0)
         {
-            AudioClip clip = enemyParams.deathSound[Random.Range(0, enemyParams.deathSound.Length)];
+            AudioClip clip = deathSound[Random.Range(0, deathSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+    private void PlayPosionBreath()
+    {
+        if (audioSource != null && poisonSound.Length > 0)
+        {
+            AudioClip clip = poisonSound[Random.Range(0, poisonSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+    private void PlayFireBreath()
+    {
+        if (audioSource != null && fireSound.Length > 0)
+        {
+            AudioClip clip = fireSound[Random.Range(0, fireSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+    private void PlayIceBreath()
+    {
+        if (audioSource != null && iceSound.Length > 0)
+        {
+            AudioClip clip = iceSound[Random.Range(0, iceSound.Length)];
+            audioSource.PlayOneShot(clip);
+        }
+    }
+    private void PlayRoarSound()
+    {
+        if (audioSource != null && roarSound.Length > 0)
+        {
+            AudioClip clip = roarSound[Random.Range(0, roarSound.Length)];
             audioSource.PlayOneShot(clip);
         }
     }
 
     private void PlayDamageSound()
     {
-        if (audioSource != null && enemyParams.damagedSound.Length > 0)
+        if (audioSource != null && damagedSound.Length > 0)
         {
-            AudioClip clip = enemyParams.damagedSound[Random.Range(0, enemyParams.damagedSound.Length)];
+            AudioClip clip = damagedSound[Random.Range(0, damagedSound.Length)];
             audioSource.PlayOneShot(clip);
         }
     }
 
     private void PlayIdleSound()
     {
-        if (audioSource != null && enemyParams.idleSound.Length > 0)
+        if (audioSource != null && idleSound.Length > 0)
         {
-            AudioClip clip = enemyParams.idleSound[Random.Range(0, enemyParams.idleSound.Length)];
+            AudioClip clip = idleSound[Random.Range(0, idleSound.Length)];
             audioSource.clip = clip;
             audioSource.loop = true;
             audioSource.Play();
         }
     }
-
-    private void PlayWalkingSound()
-    {
-        if (audioSource != null && enemyParams.walkingSound.Length > 0)
-        {
-            AudioClip clip = enemyParams.walkingSound[Random.Range(0, enemyParams.walkingSound.Length)];
-            audioSource.clip = clip;
-            audioSource.loop = true;
-            audioSource.Play();
-        }
-    }*/
-
 
     IEnumerator AttackSequence()
     {
