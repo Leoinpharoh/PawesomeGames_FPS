@@ -1,5 +1,6 @@
 //Interact
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interact : MonoBehaviour
@@ -7,8 +8,9 @@ public class Interact : MonoBehaviour
     public float pickupRange;   //will be the distance a player can pickup from
     public DisplayInventory displayInventory;
     public PlayerManager playerManager;
-    private Camera mainCamera;
     public PickUpMessage pickupMessage;
+
+    private Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -21,16 +23,18 @@ public class Interact : MonoBehaviour
         RaycastHit hit;
         Vector3 raycastOrigin = mainCamera.transform.position;
         Vector3 raycastDirection = mainCamera.transform.forward;
-        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit, pickupRange))
+        Debug.DrawRay(raycastOrigin, raycastDirection, Color.red, 2f);
+        
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, pickupRange))
         {
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();    //check for interactable
             GroundItem groundItem = hit.collider.GetComponent<GroundItem>();    //check if there is a grounditem hit
-            if (groundItem != null)
+            if (groundItem != null) //if it is a groundItem we call HandlePickup
             {
                 HandlePickup(groundItem);
-                hit.collider.gameObject.SetActive(false);   //deactivate the grounditem
+                hit.collider.gameObject.SetActive(false);
             }
-            if(interactable != null && groundItem == null)  //if it is interactable and not a ground item
+            else if(interactable != null)  //if it is interactable we trigger interact
             {
                 interactable.Interact(playerManager, displayInventory, pickupMessage);
             }
@@ -45,5 +49,19 @@ public class Interact : MonoBehaviour
         Item _item = new Item(itemObject);
         displayInventory.PickUpItem(_item, 1);
         pickupMessage.ShowPickUpPanel(itemObject.pickUpMessage);
+
+        //checking for keys
+        if(itemObject is VineKeyObject)
+        {
+            displayInventory.vineKeyCount++;
+        }
+        if(itemObject is MazeKeyObject)
+        {
+            displayInventory.mazeKeyCount++;
+        }
+        if(itemObject is GlyphObject)
+        {
+            displayInventory.glyphCount++;
+        }
     }
 }

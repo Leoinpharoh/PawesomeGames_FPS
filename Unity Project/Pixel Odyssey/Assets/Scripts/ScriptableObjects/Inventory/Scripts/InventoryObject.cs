@@ -2,11 +2,14 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.EventSystems;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -16,16 +19,23 @@ public class InventoryObject : ScriptableObject
     public Inventory Container;
 
 #if UNITY_EDITOR
-    private void Awake()
+    private void OnValidate()
     {
-        database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/ScriptableObjects/Items/Database.asset", typeof(ItemDatabaseObject));
+        if(database == null)
+        {
+            database = LoadDatabaseInEditor();
+            EditorUtility.SetDirty(this);
+        }
+    }
+
+    private ItemDatabaseObject LoadDatabaseInEditor()
+    {
+        return (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/ScriptableObjects/Items/Database.asset", typeof(ItemDatabaseObject));
     }
 #endif
 
     public void AddItem(Item _item, int _amount)
     {
-
-
         for (int i = 0; i < Container.Items.Count; i++)   //looping through the container/slot
         {
             if (Container.Items[i].item.id == _item.id) //if we have the item already
@@ -34,8 +44,7 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }
-
-
+        //TODO: need to move this to display most likely
         GameObject newSlotObj = new GameObject("InventorySlot_" + _item.id);
         InventorySlot newSlot = newSlotObj.AddComponent<InventorySlot>();   //giving the new object an inventory slot component
         newSlot.Initialize(_item.id, _item, _amount, FindObjectOfType<DisplayInventory>(), FindObjectOfType<ItemDescriptionUI>());

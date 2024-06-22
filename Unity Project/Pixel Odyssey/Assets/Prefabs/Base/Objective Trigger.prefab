@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c78000166726240ba2d8147465c48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objective: Objective 1 here
-  objective2: Objective 2 here
-  objective3: Objective 3
+  objective: 
+  enemiesToKill: 0
+  objectsToCheck: []
+  enemiesToDestroy: 0
+  currentlyDeadEnemies: 0
 --- !u!135 &2078983647015882358
 SphereCollider:
   m_ObjectHideFlags: 0

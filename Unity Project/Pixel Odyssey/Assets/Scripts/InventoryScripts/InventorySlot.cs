@@ -24,11 +24,6 @@ public class InventorySlot : MonoBehaviour
         this.itemDescription = itemDescription;
     }
     //TODO: need to add listeners when the slots are created, either here or display inventory
-    public void SetDependancies(DisplayInventory displayInventory, ItemDescriptionUI itemDescription)
-    {
-        this.displayInventory = displayInventory;
-        this.itemDescription = itemDescription;
-    }
 
     public void AddAmount(int value)
     {
