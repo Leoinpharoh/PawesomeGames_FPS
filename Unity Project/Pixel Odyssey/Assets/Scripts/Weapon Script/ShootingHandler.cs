@@ -179,7 +179,7 @@ public class ShootingHandler : MonoBehaviour
             {
                 damageable.takeDamage(weaponStats.shootDamage, hit.point);
             }
-            if (mDamageable != null && weaponStats.weaponType == WeaponStats.WeaponType.Automatic)
+            else if (mDamageable != null && weaponStats.weaponType == WeaponStats.WeaponType.Automatic)
             {
 
                 mDamageable.ObjectDamage(weaponStats.shootDamage);
