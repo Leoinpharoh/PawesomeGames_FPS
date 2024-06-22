@@ -97,6 +97,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public int HP;
     public int OS;
     public int subtitleIndex = 0;
+    public int PythonAmmo;
+    public int ShotgunAmmo;
+    public int AssaultRifleAmmo;
+    public int RPGAmmo;
 
     //Inventory
     public InventoryObject inventory;   //inventory object that can be given by dragging inventory prefab onto
@@ -105,6 +109,8 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public Interact interactScript;
     public Dictionary<ItemObject, GroundItem> itemObjectToGroundItemMap = new Dictionary<ItemObject, GroundItem>();    //map for ground items in scene to itemObjects
     public SaveSystem saveSystem;
+    public WeaponStats[] weaponStatsArray;
+    [SerializeField] WeaponStats weaponStats;
 
     //Access Toolbelt
     ToolBelt toolBelt;
@@ -679,10 +685,30 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void LoadPlayer()
     {
-        //PythonAmmo = saveSystem.playerData.PythonAmmo;
-        //ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
-        //AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
-        //RPGAmmo = saveSystem.playerData.RPGAmmo;
+        PythonAmmo = saveSystem.playerData.PythonAmmo;
+        ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
+        AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
+        RPGAmmo = saveSystem.playerData.RPGAmmo;
+
+        foreach (WeaponStats weapon in weaponStatsArray)
+        {
+            switch (weapon.weaponName)
+            {
+                case "Python":
+                    weapon.Ammo = saveSystem.playerData.PythonAmmo;
+                    break;
+                case "Shotgun":
+                    weapon.Ammo = saveSystem.playerData.ShotgunAmmo;
+                    break;
+                case "AssaultRifle":
+                    weapon.Ammo = saveSystem.playerData.AssaultRifleAmmo;
+                    break;
+                case "RPG":
+                    weapon.Ammo = saveSystem.playerData.RPGAmmo;
+                    break;
+                    // Add more cases for additional weapons if needed
+            }
+        }
         HPOrignal = saveSystem.playerData.HealthMax;
         OSOrignal = saveSystem.playerData.OvershieldMax;
         overshieldPotions = saveSystem.playerData.OvershieldPotions;
@@ -709,6 +735,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         assaultCheck();
         toolbeltCheck();
         updatePlayerUI();
+    }
+
+
+    public void UpdateAmmoCount()
+    {
+
     }
     public void PauseAnimation()
     {

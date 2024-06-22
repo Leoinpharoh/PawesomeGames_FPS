@@ -15,8 +15,10 @@ public class NextLevel : MonoBehaviour
 
     PlayerManager playerManager;
     public SaveSystem saveSystem;
+    public WeaponStats[] weaponStatsArray;
+    [SerializeField] WeaponStats weaponStats;
 
-    
+
     private void Start()
     {
         if (levelFlashImage == null)
@@ -36,7 +38,28 @@ public class NextLevel : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
-            if(unlockables == Unlockables.Shotgun)
+
+            foreach (WeaponStats weapon in weaponStatsArray)
+            {
+                switch (weapon.weaponName)
+                {
+                    case "Python":
+                        saveSystem.playerData.PythonAmmo = weapon.Ammo;
+                        break;
+                    case "Shotgun":
+                        saveSystem.playerData.ShotgunAmmo = weapon.Ammo;
+                        break;
+                    case "AssaultRifle":
+                        saveSystem.playerData.AssaultRifleAmmo = weapon.Ammo;
+                        break;
+                    case "RPG":
+                        saveSystem.playerData.RPGAmmo = weapon.Ammo;
+                        break;
+                }
+            }
+
+
+            if (unlockables == Unlockables.Shotgun)
             {
                 //unlock Shotgun
                 saveSystem.playerData.ShotgunUnlocked = true;
@@ -69,8 +92,11 @@ public class NextLevel : MonoBehaviour
             }
             if (unlockables == Unlockables.None)
             {
+                saveSystem.SavePlayer();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
+
+            
 
         }
     }
