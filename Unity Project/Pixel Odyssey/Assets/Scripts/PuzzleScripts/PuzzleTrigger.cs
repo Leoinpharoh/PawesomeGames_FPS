@@ -6,43 +6,33 @@ using UnityEngine;
 
 public enum TriggerType
 {
-    Switch,
-    Pickup
+    DoorSlide,
+    PickupCount,
+    KeyOpen,
+    OpenMazeLid,
+    OpenChest
 }
 
 public class PuzzleTrigger : MonoBehaviour, IInteractable
 {
     public TriggerType triggerType;
-    public string eventName;
     public PuzzleHandler puzzleHandler;
+
+    public void Start()
+    {
+        if(puzzleHandler == null)
+        {
+            puzzleHandler = FindAnyObjectByType<PuzzleHandler>();   //finding puzzlehandler
+        }
+    }
 
     public void Interact(PlayerManager playerManager, DisplayInventory displayInventory, PickUpMessage pickUpMessage)
     {
         switch (triggerType)
         {
-            case TriggerType.Switch:
-                HandleSwitch();
-                break;
-            case TriggerType.Pickup:
-                HandlePickup();
-                break;
+            case TriggerType.DoorSlide: puzzleHandler.OnSlideVineWall(); break;
+            case TriggerType.OpenMazeLid: puzzleHandler.OnRotateMazeChest(); break;
+            //case TriggerType.OpenChest: puzzleHandler.ChestTryOpen(); break;
         }
     }
-
-    private void HandlePickup()
-    {
-        // Logic to handle item pickup
-        // Assuming we need to increment some counter or similar
-        int collectedItems = 1; // Replace with the actual logic to count pickups
-        if (collectedItems >= 1) // Placeholder condition, update with actual requirement
-        {
-            PuzzleEventManager.TriggerEvent(eventName);
-        }
-    }
-
-    private void HandleSwitch()
-    {
-        PuzzleEventManager.TriggerEvent(eventName);
-    }
-    //TODO: may need to add levers, buttons.... etc
 }

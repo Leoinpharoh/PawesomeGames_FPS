@@ -10,13 +10,25 @@ using UnityEditor;
 
 
 [CreateAssetMenu(fileName = "New Item Database", menuName = "Inventory System/Items/Database")]
-public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiver //fires before Unity Serializes object
+[ExecuteInEditMode]
+public class ItemDatabaseObject : ScriptableObject //fires before Unity Serializes object
 {
     public ItemObject[] Items;  //array full of the items
     public Dictionary<int, ItemObject> GetItem = new Dictionary<int, ItemObject>();
 
     public void OnAfterDeserialize()
     {
+        UpdateDatabase();
+    }
+
+    public void OnValidate()
+    {
+        UpdateDatabase();
+    }
+
+    public void UpdateDatabase()
+    {
+        GetItem = new Dictionary<int, ItemObject>();
         if (Items != null)     //if the array is not null
         {
             for (int i = 0; i < Items.Length; i++)
@@ -29,12 +41,5 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
                 }
             }
         }
-        //every time Unity serializes the object it auto populates dictionary
-    }
-
-
-    public void OnBeforeSerialize()
-    {
-        GetItem = new Dictionary<int, ItemObject>();
     }
 }

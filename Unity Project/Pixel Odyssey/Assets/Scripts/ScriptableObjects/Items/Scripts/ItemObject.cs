@@ -7,14 +7,12 @@ using UnityEngine;
 
 public enum ItemType    //create the type of item you want
 {
-    Potion,
-    Collectable,
-    Weapon,
-    AmmoPack,
-    HealthPack,
+    Glyph,
     Map,
     Lore,
     Currency,
+    VineKey,
+    MazeKey,
     Default
 }
 

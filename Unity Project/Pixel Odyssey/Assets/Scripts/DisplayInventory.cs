@@ -16,27 +16,17 @@ public class DisplayInventory : MonoBehaviour
     public GameObject inventoryUI;  //reference to the UI panel
     public InventorySlot selectedSlot;  //for dropping/using purposes
     public ItemDescriptionUI itemDescription;   //reference to the items description attached to the scriptable
+    public int vineKeyCount;    //used to keep track of vineWall keys
+    public int mazeKeyCount;
+    public int glyphCount;
 
     public Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     /// <summary>
     /// iterating over itemsDisplayed and giving them objects and sprites to appear in the inventory screen
     /// </summary>
     public void CreateDisplay()
     {
-
         List<InventorySlot> slotsToDisplay
             = inventory.Container.Items.Where(slot => !itemsDisplayed.ContainsKey(slot)).ToList();  //create a list of slots not already in itemsDisplayed
         foreach (InventorySlot slot in slotsToDisplay)
@@ -59,8 +49,11 @@ public class DisplayInventory : MonoBehaviour
 
         List<InventorySlot> slotsToRemove
             = inventory.Container.Items.Where(slot => !itemsDisplayed.ContainsKey(slot)).ToList();  //if it contains a key that is not in itemsDisplayed
-        foreach (InventorySlot slot in slotsToRemove)
-            RemoveSlot(slot);   //calling RemoveSlot to remove the slot not in itemsDisplayed
+        if (slotsToRemove.Count > 0)    //if there is anything in slotsToRemove
+        {
+            foreach (InventorySlot slot in slotsToRemove)
+                RemoveSlot(slot);   //calling RemoveSlot to remove the slot not in itemsDisplayed
+        }
 
         foreach (InventorySlot slot in inventory.Container.Items)
         {
@@ -79,14 +72,13 @@ public class DisplayInventory : MonoBehaviour
             else //if there is not one in the inventory already, make a new object
             {
                 var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, inventoryGrid.transform);
-
+                //slot.Initialize(slot.ID, slot.item, slot.amount, this, itemDescription);
                 ItemObject itemObject = inventory.database.GetItem[slot.item.id];
                 Sprite itemSprite = itemObject.uiDisplay;
 
                 obj.GetComponent<UnityEngine.UI.Image>().sprite = itemSprite;
                 obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
-
-                slot.SetDependancies(this, itemDescription);    //setting the inventoryDisplay, and the description
+                
                 updatedItemsDisplayed.Add(slot, obj);
             }
         }
@@ -100,9 +92,7 @@ public class DisplayInventory : MonoBehaviour
     }
     public void PickUpItem(Item itemToPickup, int amount)
     {
-
         inventory.AddItem(itemToPickup, amount);    //add the item to out InventoryObject
-
         UpdateDisplay();
     }
 
@@ -153,7 +143,6 @@ public class DisplayInventory : MonoBehaviour
                     }
                 }
                 UpdateDisplay();
-
             }
         }
     }
@@ -175,6 +164,5 @@ public class DisplayInventory : MonoBehaviour
             }
             itemsDisplayed.Remove(slotToRemove);
         }
-
     }
 }
