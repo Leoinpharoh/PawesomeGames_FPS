@@ -41343,6 +41343,12 @@ MonoBehaviour:
   fadeDuration: 2
   unlockables: 1
   saveSystem: {fileID: 1772471704346986141}
+  weaponStatsArray:
+  - {fileID: 11400000, guid: ab27f254ea4342d4f8c75000b8962b5b, type: 2}
+  - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
+  - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
+  - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  weaponStats: {fileID: 0}
 --- !u!33 &2103360467683972156
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -42475,6 +42481,7 @@ GameObject:
   - component: {fileID: 1482513797329200284}
   - component: {fileID: 162324755271780292}
   - component: {fileID: 7576357065722094873}
+  - component: {fileID: 7576357065722094874}
   m_Layer: 0
   m_Name: HelicopterV1
   m_TagString: Untagged
@@ -43416,6 +43423,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16dd7d689532ac9459ef52903ff59432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7576357065722094874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4730721443372086998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d22a203511a3946b17207ed78e4d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectHP: 200
 --- !u!1 &7595078939908036144
 GameObject:
   m_ObjectHideFlags: 0
