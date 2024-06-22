@@ -228,5 +228,6 @@ public class StatPermaBoost : MonoBehaviour
             saveSystem.playerData.OvershieldMax = OvershieldMax;
             saveSystem.SavePlayer();
         }
+        playerManager.updatePlayerUI();
     }
 }
