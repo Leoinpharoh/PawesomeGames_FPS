@@ -49,7 +49,7 @@ public class NextLevel : MonoBehaviour
                     case "Shotgun":
                         saveSystem.playerData.ShotgunAmmo = weapon.Ammo;
                         break;
-                    case "AssaultRifle":
+                    case "FAMAS":
                         saveSystem.playerData.AssaultRifleAmmo = weapon.Ammo;
                         break;
                     case "RPG":
