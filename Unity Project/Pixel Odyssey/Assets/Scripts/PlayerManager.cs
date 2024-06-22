@@ -211,12 +211,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void poisonDamage(int damage, float duration)
     {
 
-        if (poisoned)
+
+        if (!poisoned)
         {
-            StopCoroutine(poisonCoroutine);
+            poisonCoroutine = StartCoroutine(poisonMe(damage, duration));
         }
 
-        poisonCoroutine = StartCoroutine(poisonMe(damage, duration));
+        
     }
 
     private IEnumerator poisonMe(int damage, float duration)
