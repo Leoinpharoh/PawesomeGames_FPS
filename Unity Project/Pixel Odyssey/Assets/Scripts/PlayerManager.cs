@@ -642,7 +642,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     IEnumerator WaitBeforeRefill()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(20);
         if (!OSRefilling && OS < OSOrignal)
         {
             OSRefilling = true;
