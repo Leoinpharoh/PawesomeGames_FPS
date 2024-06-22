@@ -5388,6 +5388,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 846197151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &316521253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3571766750720174450, guid: e1a6b1d91cecbce4ca82e24577f63fb6, type: 3}
+  m_PrefabInstance: {fileID: 1041685037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &318829672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13642,6 +13647,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 176fe53fa149d1d4eb480dcae203f941, type: 3}
+--- !u!1 &720395854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720395856}
+  - component: {fileID: 720395855}
+  m_Layer: 0
+  m_Name: NextLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &720395855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720395854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d340265dca92f0448a3fae909a86e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevelBeam: {fileID: 316521253}
+  objectsToCheck:
+  - {fileID: 560512292}
+--- !u!4 &720395856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720395854}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -53.45071, y: 5.5508623, z: -25.058561}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &723536427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44249,3 +44301,4 @@ SceneRoots:
   - {fileID: 211431055}
   - {fileID: 116798965}
   - {fileID: 142482595}
+  - {fileID: 720395856}
