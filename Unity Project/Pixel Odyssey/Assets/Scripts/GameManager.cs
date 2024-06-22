@@ -241,7 +241,8 @@ public class GameManager : MonoBehaviour
         saveSystem.LoadPlayer();
         clipColtAmount.text = lightBullets.ToString();
         clipShotgunAmount.text = MediumBullets.ToString();
-        clipAssaultAmount.text = HeavyBullets.ToString();
+        clipAssaultAmount.text = lightBullets.ToString();
+        clipRPGAmount.text = HeavyBullets.ToString();
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
         bool tutorialComplete = saveSystem.playerData.TutorialComplete;
