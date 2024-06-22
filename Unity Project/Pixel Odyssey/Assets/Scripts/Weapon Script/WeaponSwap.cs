@@ -56,6 +56,7 @@ public class WeaponSwap : MonoBehaviour
     void redundancy()
     {
         ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
+        GameManager.Instance.playerAmmo(gunScript.weaponStats.ammoType.ToString(), gunScript.weaponStats.Ammo);
         gunScript.isShooting = false;
         gunScript.lineRenderer.enabled = false;
         if (gunScript.lineRenderer != null) { gunScript.lineRenderer.enabled = false; }
