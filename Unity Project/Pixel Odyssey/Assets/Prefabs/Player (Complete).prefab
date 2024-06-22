@@ -205,7 +205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31578512585674822}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0.7071057, z: -0, w: 0.707108}
   m_LocalPosition: {x: -25.52, y: 75.44, z: -0.3}
   m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Audio: {fileID: 7214981840184230338}
-  playerAnimator: {fileID: 8339651073444154665}
+  playerAnimator: {fileID: 0}
   characterControl: {fileID: 7867101763847752851}
   rb: {fileID: 0}
   jumpAudio: {fileID: 8300000, guid: e59a62f995c68d1418e699c57d116d8f, type: 3}
@@ -295,7 +295,6 @@ MonoBehaviour:
   interactScript: {fileID: 3796737111222841932}
   saveSystem: {fileID: 3868086113092690002}
   currentPotionIndex: 0
-  architectAI: {fileID: 0}
 --- !u!114 &2698918099634081156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18790,11 +18789,7 @@ MonoBehaviour:
   objective2Aquired: 0
   objective3Aquired: 0
   needsObjective: 0
-<<<<<<< Updated upstream
   hpBarText: {fileID: 0}
-=======
-  hpBarText: {fileID: 2329144123034527699}
->>>>>>> Stashed changes
   itemSlotImages:
   - {fileID: 8312879732981729776}
   - {fileID: 1442262256033470998}
@@ -18815,8 +18810,6 @@ MonoBehaviour:
   confusedTimer: 5
   playerHpBar: {fileID: 5255711393584863724}
   playerOS: {fileID: 910352261922847145}
-  finalBossHpBarToggle: {fileID: 0}
-  finalBossHpBar: {fileID: 0}
   playerScript: {fileID: 7274427388963733395}
   playerFlashDamage: {fileID: 1531465605331227071}
   poisonHitScreen: {fileID: 1285304133425578870}
