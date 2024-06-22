@@ -243,12 +243,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void burnDamage(int damage, float duration)
     {
-        if (burning)
+
+        if (!burning)
         {
-            StopCoroutine(burnCoroutine);
+            burnCoroutine = StartCoroutine(burnMe(damage, duration));
         }
 
-        burnCoroutine = StartCoroutine(burnMe(damage, duration));
+        
     }
 
     private IEnumerator burnMe(int damage, float duration)
@@ -276,12 +277,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void freezeDamage(int damage, float duration)
     {
 
-        if (freezing)
-        {
-            StopCoroutine(freezeCoroutine);
+        if (!freezing) {
+            freezeCoroutine = StartCoroutine(freezeMe(damage, duration));
         }
-
-        freezeCoroutine = StartCoroutine(freezeMe(damage, duration));
+        
     }
 
     private IEnumerator freezeMe(int damage, float duration)
@@ -318,12 +317,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void slowDamage(int damage, float duration)
     {
-        if (slowed)
-        {
-            StopCoroutine(slowCoroutine);
 
+        if (!slowed)
+        {
+            slowCoroutine = StartCoroutine(slowMe(damage, duration));
         }
-        slowCoroutine = StartCoroutine(slowMe(damage, duration));
+        
 
     }
 
@@ -360,11 +359,13 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     public void confuseDamage(int damage, float duration)
     {
-        if (confused)
+
+
+        if (!confused)
         {
-            StopCoroutine(confuseCoroutine);
+            confuseCoroutine = StartCoroutine(confuseMe(damage, duration));
         }
-        confuseCoroutine = StartCoroutine(confuseMe(damage, duration));
+        
     }
 
     private IEnumerator confuseMe(int damage, float duration)

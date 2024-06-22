@@ -48,8 +48,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
     public bool dazed = false;
     public bool roar = false;
     public bool isDead = false;
-    public float HP = 5000; // Enemy Health
-    public float HPOriginal = 5000;
+    public float HP = 2000; // Enemy Health
+    public float HPOriginal = 2000;
     public int dazedTimer;
     private float breathAttackCooldown = 30f;
     private float nextBreathAttackTime = 0f;
@@ -233,8 +233,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
             playerManager.updatePlayerUI(); // Call the updatePlayerUI function from the playerManager script
             if (HP <= 0 && phase1)
             {
-                HP = 8000;
-                HPOriginal = 8000;
+                HP = 3000;
+                HPOriginal = 3000;
                 phase1 = false;
                 phase2 = true;
                 dazedTimer = 10;
@@ -244,8 +244,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
             }
             if (HP <= 0 && phase2)
             {
-                HP = 10000;
-                HPOriginal = 10000;
+                HP = 4000;
+                HPOriginal = 4000;
                 phase2 = false;
                 phase3 = true;
                 dazedTimer = 10;
