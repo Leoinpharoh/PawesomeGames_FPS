@@ -21,7 +21,7 @@ public class WeaponStats : ScriptableObject
     public int Ammo;
     public int clip;
     public int TilReload;
-    [HideInInspector] public enum AmmoType { Light, Medium, Heavy }
+    [HideInInspector] public enum AmmoType { Light, Automatic, Medium, Heavy }
     public AmmoType ammoType;
 
     [Header("Audio Files")]

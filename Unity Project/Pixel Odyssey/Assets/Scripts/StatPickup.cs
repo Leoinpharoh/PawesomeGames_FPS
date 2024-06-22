@@ -101,6 +101,7 @@ public class StatPickup : MonoBehaviour
         {
             int maxAmmoLimit = 99; // Set your max ammo limit here
             if (shootingHandler.weaponStats.ammoType == WeaponStats.AmmoType.Light) { shootingHandler.weaponStats.Ammo += 10; }
+            if (shootingHandler.weaponStats.ammoType == WeaponStats.AmmoType.Automatic) { shootingHandler.weaponStats.Ammo += 12; }
             else if (shootingHandler.weaponStats.ammoType == WeaponStats.AmmoType.Medium) { shootingHandler.weaponStats.Ammo += 6; }
             else if (shootingHandler.weaponStats.ammoType == WeaponStats.AmmoType.Heavy) { shootingHandler.weaponStats.Ammo += 1; }
             if (shootingHandler.weaponStats.Ammo > maxAmmoLimit)
