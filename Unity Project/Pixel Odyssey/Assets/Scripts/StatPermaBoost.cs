@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class StatPermaBoost : MonoBehaviour
 {
     public SaveSystem saveSystem;
-    PlayerManager playerManager;
+    public PlayerManager playerManager;
     public PlayerData playerData;
     Scene currentScene;
 
