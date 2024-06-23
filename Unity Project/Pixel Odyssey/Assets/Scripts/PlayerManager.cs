@@ -689,10 +689,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
         AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
         RPGAmmo = saveSystem.playerData.RPGAmmo;
-        Debug.Log("Python Ammo: " + PythonAmmo);
-        Debug.Log("Shotgun Ammo: " + ShotgunAmmo);
-        Debug.Log("Assault Rifle Ammo: " + AssaultRifleAmmo);
-        Debug.Log("RPG Ammo: " + RPGAmmo);
         UpdateAmmoCount();
         HPOrignal = saveSystem.playerData.HealthMax;
         OSOrignal = saveSystem.playerData.OvershieldMax;
@@ -725,7 +721,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void UpdateAmmoCount()
     {
-        Debug.Log("In Update Ammo Count");
         foreach (WeaponStats weapon in weaponStatsArray)
         {
             Debug.Log("In For Loop");
@@ -733,19 +728,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
             {
                 case "Python":
                     weapon.Ammo = PythonAmmo;
-                    Debug.Log("Python Ammo Set" + weapon.Ammo + " / " + PythonAmmo);
                     break;
                 case "Shotgun":
                     weapon.Ammo = ShotgunAmmo;
-                    Debug.Log("Shotgun Ammo Set" + weapon.Ammo + " / " + ShotgunAmmo);
                     break;
                 case "FAMAS":
                     weapon.Ammo = AssaultRifleAmmo;
-                    Debug.Log("Assault Rifle Ammo Set" + weapon.Ammo + " / " + AssaultRifleAmmo);
                     break;
                 case "RPG":
                     weapon.Ammo = RPGAmmo;
-                    Debug.Log("RPG Ammo Set" + weapon.Ammo + " / " + RPGAmmo);
                     break;
                     // Add more cases for additional weapons if needed
             }
