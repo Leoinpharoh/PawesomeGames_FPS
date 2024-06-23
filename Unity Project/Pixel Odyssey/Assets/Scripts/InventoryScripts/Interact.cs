@@ -25,19 +25,25 @@ public class Interact : MonoBehaviour
         Vector3 raycastDirection = mainCamera.transform.forward;
         Debug.DrawRay(raycastOrigin, raycastDirection, Color.red, 2f);
         
+        //SimpleConsole.Instance.Log("Attempting interaction. Origin: " + raycastOrigin + ", Direction: " + raycastDirection); 
+
         if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, pickupRange))
         {
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();    //check for interactable
             GroundItem groundItem = hit.collider.GetComponent<GroundItem>();    //check if there is a grounditem hit
             if (groundItem != null) //if it is a groundItem we call HandlePickup
             {
+                //SimpleConsole.Instance.Log("Interactable found: " + groundItem.name);
                 HandlePickup(groundItem);
                 hit.collider.gameObject.SetActive(false);
             }
-            else if(interactable != null)  //if it is interactable we trigger interact
+            else if (interactable != null)  //if it is interactable we trigger interact
             {
+                //SimpleConsole.Instance.Log("Interactable found: " + hit.collider.gameObject.name);
                 interactable.Interact(playerManager, displayInventory, pickupMessage);
             }
+            //else
+                //SimpleConsole.Instance.Log("No interactable or ground item found on: " + hit.collider.gameObject.name);
         }
     }
 
