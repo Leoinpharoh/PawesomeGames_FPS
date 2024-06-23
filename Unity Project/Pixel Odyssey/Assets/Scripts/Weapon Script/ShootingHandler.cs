@@ -144,6 +144,12 @@ public class ShootingHandler : MonoBehaviour
 
     private void UpdateAmmoAfterReload()
     {
+        if(weaponStats.weaponName == "Python")
+        {
+            weaponStats.clip = 6;
+            weaponStats.Ammo = 99;
+            return;
+        }
         if (weaponStats.Ammo == 0) return;
 
         if (weaponStats.Ammo < weaponStats.TilReload)
