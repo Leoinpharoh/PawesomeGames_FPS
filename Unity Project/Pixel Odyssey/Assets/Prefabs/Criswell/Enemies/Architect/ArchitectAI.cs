@@ -48,8 +48,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
     public bool dazed = false;
     public bool roar = false;
     public bool isDead = false;
-    public float HP = 2000; // Enemy Health
-    public float HPOriginal = 2000;
+    public float HP = 500; // Enemy Health
+    public float HPOriginal = 500;
     public int dazedTimer;
     private float breathAttackCooldown = 30f;
     private float nextBreathAttackTime = 0f;
@@ -233,22 +233,22 @@ public class ArchitectAI : MonoBehaviour, IDamage
             playerManager.updatePlayerUI(); // Call the updatePlayerUI function from the playerManager script
             if (HP <= 0 && phase1)
             {
-                HP = 3000;
-                HPOriginal = 3000;
+                HP = 1000;
+                HPOriginal = 1000;
                 phase1 = false;
                 phase2 = true;
-                dazedTimer = 10;
+                dazedTimer = 30;
                 Phase1Spawner.SetActive(false);
                 Phase2Spawner.SetActive(true);
                 StartCoroutine(Dazed());
             }
             if (HP <= 0 && phase2)
             {
-                HP = 4000;
-                HPOriginal = 4000;
+                HP = 2000;
+                HPOriginal = 2000;
                 phase2 = false;
                 phase3 = true;
-                dazedTimer = 10;
+                dazedTimer = 30;
                 Phase2Spawner.SetActive(false);
                 Phase3Spawner.SetActive(true);
                 StartCoroutine(Dazed());
