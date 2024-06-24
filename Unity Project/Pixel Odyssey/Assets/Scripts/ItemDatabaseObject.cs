@@ -10,18 +10,18 @@ using UnityEditor;
 
 
 [CreateAssetMenu(fileName = "New Item Database", menuName = "Inventory System/Items/Database")]
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class ItemDatabaseObject : ScriptableObject //fires before Unity Serializes object
 {
     public ItemObject[] Items;  //array full of the items
     public Dictionary<int, ItemObject> GetItem = new Dictionary<int, ItemObject>();
 
-    public void OnAfterDeserialize()
+    private void OnEnable()
     {
         UpdateDatabase();
     }
 
-    public void OnValidate()
+    private void OnValidate()
     {
         UpdateDatabase();
     }
@@ -29,16 +29,15 @@ public class ItemDatabaseObject : ScriptableObject //fires before Unity Serializ
     public void UpdateDatabase()
     {
         GetItem = new Dictionary<int, ItemObject>();
-        if (Items != null)     //if the array is not null
+
+        for (int i = 0; i < Items.Length; i++)
         {
-            for (int i = 0; i < Items.Length; i++)
+            if (Items[i] != null)   //if that item is not null
             {
-                if (Items[i] != null)   //if that item is not null
-                {
-                    Items[i].ItemId = i;    //item ID gets set during serialization
-                    if (!GetItem.ContainsKey(Items[i].ItemId))  //if it does not contain
-                        GetItem.Add(Items[i].ItemId, Items[i]);
-                }
+                Items[i].ItemId = i;    //item ID gets set during serialization
+
+                if (!GetItem.ContainsKey(Items[i].ItemId))  //if it does not contain
+                    GetItem.Add(Items[i].ItemId, Items[i]);
             }
         }
     }

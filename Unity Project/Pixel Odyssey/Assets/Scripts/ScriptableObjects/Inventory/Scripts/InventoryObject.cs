@@ -1,15 +1,10 @@
 //InventoryObject
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEngine.EventSystems;
-
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -18,21 +13,39 @@ public class InventoryObject : ScriptableObject
     public ItemDatabaseObject database;
     public Inventory Container;
 
-#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        LoadDatabase();
+    }
     private void OnValidate()
     {
-        if(database == null)
-        {
-            database = LoadDatabaseInEditor();
-            EditorUtility.SetDirty(this);
-        }
+        LoadDatabase();
     }
 
-    private ItemDatabaseObject LoadDatabaseInEditor()
+    private void LoadDatabase()
     {
-        return (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/ScriptableObjects/Items/Database.asset", typeof(ItemDatabaseObject));
+        //SimpleConsole.Instance.Log("Loading database...");
+        if (database == null)
+        {
+            database = Resources.Load<ItemDatabaseObject>("Database");
+            /*if (database == null)
+            {
+                SimpleConsole.Instance.Log("Failed to load database from Resources!");
+            }
+            else
+            {
+                SimpleConsole.Instance.Log($"Database loaded. Item count: {database.Items.Length}");
+                foreach (var item in database.Items)
+                {
+                    SimpleConsole.Instance.Log($"Item in database: ID={item.ItemId}, Name={item.name}");
+                }
+            }*/
+        }
+        /*else
+        {
+            SimpleConsole.Instance.Log($"Database already loaded. Item count: {database.Items.Length}");
+        }*/
     }
-#endif
 
     public void AddItem(Item _item, int _amount)
     {
@@ -44,7 +57,6 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }
-        //TODO: need to move this to display most likely
         GameObject newSlotObj = new GameObject("InventorySlot_" + _item.id);
         InventorySlot newSlot = newSlotObj.AddComponent<InventorySlot>();   //giving the new object an inventory slot component
         newSlot.Initialize(_item.id, _item, _amount, FindObjectOfType<DisplayInventory>(), FindObjectOfType<ItemDescriptionUI>());

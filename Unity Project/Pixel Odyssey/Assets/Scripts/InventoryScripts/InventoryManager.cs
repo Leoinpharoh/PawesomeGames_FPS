@@ -10,7 +10,6 @@ public class InventoryManager : MonoBehaviour
     public DisplayInventory displayInventory;
     public GameObject inventoryUI;
 
-    private EventSystem eventSystem;
 
     void Awake()
     {
@@ -21,20 +20,12 @@ public class InventoryManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-
     }
 
     // Start is called before the first frame update
     void Start()
     {
         inventoryUI.SetActive(false);
-        eventSystem = EventSystem.current;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -69,12 +60,6 @@ public class InventoryManager : MonoBehaviour
             if (displayInventory != null)
             {
                 displayInventory.CreateDisplay();
-
-                if (eventSystem != null && displayInventory != null)    //TODO: may need a check for if there are slots in the display
-                {
-                    var firstslot = displayInventory.itemsDisplayed.First().Value;  //setting the first slot to the first value in itemsDisplayed
-                    eventSystem.SetSelectedGameObject(firstslot);
-                }
             }
         }
         else
