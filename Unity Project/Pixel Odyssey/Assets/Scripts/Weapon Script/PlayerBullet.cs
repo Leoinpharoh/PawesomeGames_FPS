@@ -49,6 +49,7 @@ public class playerBullet : MonoBehaviour
                     DamageSphere damageSphereComponent = damageSphere.AddComponent<DamageSphere>();
                     damageSphereComponent.damage = damage;
                     damageSphereComponent.destructionTime = destroyTime; // Destroy the sphere collider after the bullet destroy time
+     
                 }
             }
 
@@ -74,29 +75,43 @@ public class DamageSphere : MonoBehaviour
 {
     public int damage;
     public float destructionTime;
+    public float radius = 4.5f;
 
     private void Start()
     {
+        StartCoroutine(ApplyDamage());
         // Destroy the sphere collider object after the specified time
         Destroy(gameObject, destructionTime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != other.gameObject.CompareTag("Player"))
+    }
+    private IEnumerator ApplyDamage()
+    {
+        // Wait for a fixed update to ensure all collisions are processed
+        yield return new WaitForFixedUpdate();
+
+        // Get all colliders within the specified radius
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
+
+        foreach (Collider hitCollider in hitColliders)
         {
-            IDamage dmg = other.GetComponent<IDamage>();
-            SDamage sDMG = other.GetComponent<SDamage>();
-
-            if (dmg != null)
+            if (!hitCollider.CompareTag("Player"))
             {
-                Vector3 hitPosition = other.ClosestPoint(transform.position);
-                dmg.takeDamage(damage, hitPosition);
-            }
+                IDamage dmg = hitCollider.GetComponent<IDamage>();
+                SDamage sDMG = hitCollider.GetComponent<SDamage>();
 
-            if (sDMG != null)
-            {
-                sDMG.ObjectDamage(damage);
+                if (dmg != null)
+                {
+                    Vector3 hitPosition = hitCollider.ClosestPoint(transform.position);
+                    dmg.takeDamage(damage, hitPosition);
+                }
+
+                if (sDMG != null)
+                {
+                    sDMG.ObjectDamage(damage);
+                }
             }
         }
     }
