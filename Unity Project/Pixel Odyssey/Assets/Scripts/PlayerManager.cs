@@ -475,24 +475,22 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         {
             return;
         }
-            if (characterControl.isGrounded)
-            {
-                jumpCounter = 0;
-                playerVelocity = Vector3.zero;
-            }
-            if (!confused)
-            {
-                moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
-                    (Input.GetAxis("Vertical") * transform.forward).normalized;
-                characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-            }
-            else
-            {
-                moveDirection = (Input.GetAxis("Vertical") * transform.right) +
-                    (Input.GetAxis("Horizontal") * transform.forward);
-                characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
-            }
-        
+        if (characterControl.isGrounded)
+        {
+            jumpCounter = 0;
+            playerVelocity = Vector3.zero;
+        }
+        if (!confused)
+        {
+            moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+                (Input.GetAxis("Vertical") * transform.forward).normalized;
+        }
+        else
+        {
+            moveDirection = (Input.GetAxis("Vertical") * transform.right) +
+                (Input.GetAxis("Horizontal") * transform.forward);
+        }
+        characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
 
     public Vector3 GetCurrentMoveDirection()
