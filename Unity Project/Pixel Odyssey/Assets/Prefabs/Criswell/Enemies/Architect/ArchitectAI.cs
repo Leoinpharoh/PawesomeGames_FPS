@@ -233,8 +233,8 @@ public class ArchitectAI : MonoBehaviour, IDamage
             playerManager.updatePlayerUI(); // Call the updatePlayerUI function from the playerManager script
             if (HP <= 0 && phase1)
             {
-                HP = 1000;
-                HPOriginal = 1000;
+                HP = 1400;
+                HPOriginal = 1400;
                 phase1 = false;
                 phase2 = true;
                 dazedTimer = 30;

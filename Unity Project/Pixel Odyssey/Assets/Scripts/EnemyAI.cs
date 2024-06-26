@@ -449,9 +449,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         if (!isChasing)
         {
+            roaming = false;
             StartCoroutine(ChasePlayerRoutine());
+            
         }
     }
+
 
     private IEnumerator ChasePlayerRoutine()
     {

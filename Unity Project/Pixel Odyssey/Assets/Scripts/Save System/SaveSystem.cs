@@ -41,6 +41,7 @@ public class SaveSystem : MonoBehaviour
         }
         else
         {
+            // If the file does not exist, create a new one with default values
             ResetPlayer();
             SavePlayer();
         }
@@ -58,7 +59,7 @@ public class SaveSystem : MonoBehaviour
             OvershieldMax = 10,
             OvershieldPotions = 0,
             HealthPotions = 0,
-            CurePotions = 0, 
+            CurePotions = 0,
             TutorialComplete = false,
             ShotgunUnlocked = false,
             AssaultRifleUnlocked = false,
