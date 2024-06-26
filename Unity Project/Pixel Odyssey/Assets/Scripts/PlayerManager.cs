@@ -470,8 +470,10 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void Movement()
     {
         string sceneName = currentScene.name;
-        if (sceneName != "Credits")
+        if (sceneName == "Credits" || (sceneName == "Player Hub" && !tutorialComplete))
         {
+            return;
+        }
             if (characterControl.isGrounded)
             {
                 jumpCounter = 0;
@@ -489,7 +491,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
                     (Input.GetAxis("Horizontal") * transform.forward);
                 characterControl.Move(moveDirection * moveSpeed * Time.deltaTime);
             }
-        }
+        
     }
 
     public Vector3 GetCurrentMoveDirection()
@@ -514,7 +516,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     }
     IEnumerator walking()
     {
-        if (!playingWalkAudio)
+        string sceneName = currentScene.name;
+        if (sceneName == "Credits" || (sceneName == "Player Hub" && !tutorialComplete))
+        {
+            yield return null;
+        }
+        else if (!playingWalkAudio)
         {
             playingWalkAudio = true;
             Audio.PlayOneShot(playerWalk[Random.Range(0, playerWalk.Length)], playerWalkVolume);
@@ -549,6 +556,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Jump()
     {
+        string sceneName = currentScene.name;
+        if (sceneName == "Credits" || (sceneName == "Player Hub" && !tutorialComplete))
+        {
+            return;
+        }
         if (Input.GetButtonDown("Jump") && jumpCounter < maxJumps)
         {
             jumpCounter++;
@@ -700,6 +712,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         meleeUnlocked = saveSystem.playerData.MeleeUnlocked;
         overshieldUnlocked = saveSystem.playerData.OvershieldUnlocked;
         potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
+        tutorialComplete = saveSystem.playerData.TutorialComplete;
         if (HPOrignal == 0)
         {
             HPOrignal = saveSystem.playerData.HealthMax;
