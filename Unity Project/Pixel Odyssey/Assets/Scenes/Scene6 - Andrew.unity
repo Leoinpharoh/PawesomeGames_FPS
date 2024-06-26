@@ -8164,11 +8164,11 @@ PrefabInstance:
       objectReference: {fileID: 2569964708181356284}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.2
+      value: -26.9
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 75.35
+      value: 75.43
       objectReference: {fileID: 0}
     - target: {fileID: 6578782206146349159, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14611,6 +14611,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1131351126369316212, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2017783631}
+    - targetCorrespondingSourceObject: {fileID: 1131351126369316212, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2017783632}
   m_SourcePrefab: {fileID: 100100000, guid: 9002d8b79ed35f0439006723d53dd79e, type: 3}
 --- !u!4 &1021049401 stripped
 Transform:
@@ -29145,6 +29148,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 1930933675}
+--- !u!114 &2017783632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017783625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775b328b54c8b9d49af5418c903ebf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerToDestroy: {fileID: 2017783625}
 --- !u!1 &2018225101
 GameObject:
   m_ObjectHideFlags: 0
