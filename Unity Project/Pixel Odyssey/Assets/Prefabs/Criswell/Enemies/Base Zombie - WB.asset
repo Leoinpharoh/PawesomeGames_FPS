@@ -15,14 +15,14 @@ MonoBehaviour:
   bloodSplash: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d, type: 3}
   HP: 45
   movementSpeed: 3
-  Acceleration: 1.6
-  animSpeedTrans: 3
+  Acceleration: 5.7
+  animSpeedTrans: 4.4
   flying: 0
   enemyType: 0
   bullet: {fileID: 6060363923453239229, guid: fada63677c69a6d49a92576ccc01d679, type: 3}
   attackSpeed: 1
   rangedAttackLead: 0.1
-  meleeRange: 3
+  meleeRange: 4
   meleeDamage: 5
   rangedRange: 0
   rangedDamage: 1
@@ -30,6 +30,8 @@ MonoBehaviour:
   destroyTime: 2
   effectDamage: 0
   effectDuration: 0.1
+  enemyReloadTime: 0
+  enemyClipSize: 0
   damageType: 0
   roaming: 0
   roamDist: 0
@@ -98,3 +100,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fe1da5ea3e2c8fe4f952dbf34e6d5c72, type: 3}
   - {fileID: 8300000, guid: e10c9448d7c1c2e4cb0e98a82df61c96, type: 3}
   - {fileID: 8300000, guid: 6b29532875e76cf409fef645d5de0074, type: 3}
+  reloadSound: []
