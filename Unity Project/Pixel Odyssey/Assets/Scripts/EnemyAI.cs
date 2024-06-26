@@ -33,10 +33,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     float angleToPlayer; // Float to store the angle to the player
     private Transform playerTransform; // Reference to the player's transform
     bool isReloading;
+    bool isChasing;
     int shootLoop;
     EnemyParams.EnemyType enemyType; // references the enemy type from the EnemyParams scriptable object
     EnemyParams.DetectionType enemyDetection; // references the enemy detection from the EnemyParams scriptable object
     PlayerManager playerManager; // Reference to the PlayerManager script
+    private Transform player;
 
 
     // Start is called before the first frame update
@@ -396,6 +398,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     private void Startup()
     {
+        player = GameManager.Instance.player.transform;
         HP = enemyParams.HP; // Set the HP to the HP from the EnemyParams scriptable object
         enemyType = enemyParams.enemyType; // Get the enemy type from the EnemyParams scriptable object
         enemyDetection = enemyParams.detectionType; // Get the enemy detection from the EnemyParams scriptable object
@@ -441,6 +444,83 @@ public class EnemyAI : MonoBehaviour, IDamage
         stoppingDistanceOriginal = (int)agent.stoppingDistance; // Set the stoppingDistanceOriginal to the stopping distance of the NavMeshAgent
     }
 
+
+    public void ChasePlayer()
+    {
+        if (!isChasing)
+        {
+            StartCoroutine(ChasePlayerRoutine());
+        }
+    }
+
+    private IEnumerator ChasePlayerRoutine()
+    {
+        isChasing = true;
+
+        while (true)
+        {
+            if (HasLineOfSight())
+            {
+                // Move directly to the player if there is a clear line of sight
+                agent.SetDestination(player.position);
+                agent.stoppingDistance = stoppingDistanceOriginal;
+            }
+            else
+            {
+                // Find a position where there is a clear line of sight
+                Vector3 targetPosition = FindPositionWithLineOfSight();
+                agent.stoppingDistance = 0;
+                agent.SetDestination(targetPosition);
+            }
+
+            yield return new WaitForSeconds(0.5f); // Check every 0.5 seconds
+        }
+    }
+
+    private bool HasLineOfSight()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, out hit))
+        {
+            if (hit.transform == player)
+            {
+                return true; // There is a clear line of sight
+            }
+        }
+        return false; // No clear line of sight
+    }
+
+    private Vector3 FindPositionWithLineOfSight()
+    {
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(player.position, path);
+        Vector3[] corners = path.corners;
+
+        // Iterate through the corners of the path to find a point with a clear line of sight
+        for (int i = corners.Length - 1; i >= 0; i--)
+        {
+            if (HasLineOfSightToPoint(corners[i]))
+            {
+                return corners[i];
+            }
+        }
+
+        // If no point with a clear line of sight is found, return the player's position as fallback
+        return player.position;
+    }
+
+    private bool HasLineOfSightToPoint(Vector3 point)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (point - transform.position).normalized, out hit))
+        {
+            if (hit.point == point)
+            {
+                return true; // There is a clear line of sight to the point
+            }
+        }
+        return false; // No clear line of sight to the point
+    }
 
     private void AICheck()
     {

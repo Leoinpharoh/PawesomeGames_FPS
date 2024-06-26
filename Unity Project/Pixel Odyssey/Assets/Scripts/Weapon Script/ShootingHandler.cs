@@ -74,6 +74,19 @@ public class ShootingHandler : MonoBehaviour
         GameManager.Instance.playerClip(weaponStats.clip);
     }
 
+    private void TriggerEnemies()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 20);
+        foreach (var hitCollider in hitColliders)
+        {
+            EnemyAI enemyAI = hitCollider.GetComponent<EnemyAI>();
+            if (enemyAI != null)
+            {
+                enemyAI.ChasePlayer();
+            }
+        }
+    }
+
     private IEnumerator Shoot()
     {
         if (!isShooting && !GameManager.Instance.isPaused && weaponStats.clip != 0)
@@ -92,6 +105,7 @@ public class ShootingHandler : MonoBehaviour
             {
                 FireRays();
             }
+            TriggerEnemies();
 
             yield return new WaitForSeconds(weaponStats.shootSpeed);
             isShooting = false;
