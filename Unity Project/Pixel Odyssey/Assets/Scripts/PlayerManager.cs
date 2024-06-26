@@ -736,7 +736,6 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     {
         foreach (WeaponStats weapon in weaponStatsArray)
         {
-            Debug.Log("In For Loop");
             switch (weapon.weaponName)
             {
                 case "Python":
