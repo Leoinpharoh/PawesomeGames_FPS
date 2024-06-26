@@ -16,6 +16,7 @@ public class NextLevel : MonoBehaviour
     PlayerManager playerManager;
     public SaveSystem saveSystem;
     public WeaponStats[] weaponStatsArray;
+    public ToolBelt toolbelt;
     [SerializeField] WeaponStats weaponStats;
 
 
@@ -95,8 +96,10 @@ public class NextLevel : MonoBehaviour
                 saveSystem.SavePlayer();
                 StartCoroutine(NextLevelCoroutine()); // Start the coroutine to load the next level
             }
-
-            
+            saveSystem.playerData.HealthPotions = toolbelt.potions[0];
+            saveSystem.playerData.OvershieldPotions = toolbelt.potions[1];
+            saveSystem.playerData.CurePotions = toolbelt.potions[2];
+            saveSystem.SavePlayer();
 
         }
     }

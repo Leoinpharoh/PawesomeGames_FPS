@@ -50,7 +50,7 @@ public class SaveSystem : MonoBehaviour
     {
         playerData = new PlayerData
         {
-            PythonAmmo = 30,
+            PythonAmmo = 99,
             ShotgunAmmo = 0,
             AssaultRifleAmmo = 0,
             RPGAmmo = 0,
@@ -58,11 +58,11 @@ public class SaveSystem : MonoBehaviour
             OvershieldMax = 10,
             OvershieldPotions = 0,
             HealthPotions = 0,
+            CurePotions = 0, 
             TutorialComplete = false,
             ShotgunUnlocked = false,
             AssaultRifleUnlocked = false,
             RPGUnlocked = false,
-            MeleeUnlocked = false,
             OvershieldUnlocked = false,
             PotionbeltUnlocked = false,
             Scene1HPBoosterUnlocked = false,
@@ -95,12 +95,6 @@ public class SaveSystem : MonoBehaviour
     public void UnlockRPG()
     {
         playerData.RPGUnlocked = true;
-        SavePlayer();
-    }
-
-    public void UnlockMelee()
-    {
-        playerData.MeleeUnlocked = true;
         SavePlayer();
     }
 

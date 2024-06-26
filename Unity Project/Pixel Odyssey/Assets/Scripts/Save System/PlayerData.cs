@@ -7,7 +7,6 @@ public class PlayerData
     public bool ShotgunUnlocked;
     public bool AssaultRifleUnlocked;
     public bool RPGUnlocked;
-    public bool MeleeUnlocked;
     public bool OvershieldUnlocked;
     public bool PotionbeltUnlocked;
     public bool TutorialComplete;
@@ -36,4 +35,5 @@ public class PlayerData
 
     public int OvershieldPotions;
     public int HealthPotions;
+    public int CurePotions;
 }

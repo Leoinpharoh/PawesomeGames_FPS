@@ -2573,6 +2573,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
   - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  toolbelt: {fileID: 0}
   weaponStats: {fileID: 0}
 --- !u!1 &361500629
 GameObject:
@@ -3789,6 +3790,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
   - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  toolbelt: {fileID: 0}
   weaponStats: {fileID: 0}
 --- !u!1001 &449286215
 PrefabInstance:
@@ -7652,6 +7654,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
   - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  toolbelt: {fileID: 0}
   weaponStats: {fileID: 0}
 --- !u!1001 &1054955073
 PrefabInstance:
@@ -10061,6 +10064,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+      propertyPath: toolBelt
+      value: 
+      objectReference: {fileID: 1380641520}
+    - target: {fileID: 4449042350219607151, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 11400000, guid: b27e526d34359964f89ebb28d9f1b9e5, type: 2}
@@ -10262,6 +10269,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a6ae1c34af78154382900e3e3b14c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1380641520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3775021277913584130, guid: bfab06920fbf46149aff0f432dbb294d, type: 3}
+  m_PrefabInstance: {fileID: 1380641515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609205708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040b1079a67a49c468bf8f7b30e4e2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1393722167
@@ -10839,6 +10857,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
   - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  toolbelt: {fileID: 0}
   weaponStats: {fileID: 0}
 --- !u!1 &1509164973
 GameObject:
@@ -12805,6 +12824,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
   - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  toolbelt: {fileID: 0}
   weaponStats: {fileID: 0}
 --- !u!1001 &1893544117
 PrefabInstance:
@@ -13463,6 +13483,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
   - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  toolbelt: {fileID: 0}
   weaponStats: {fileID: 0}
 --- !u!1 &2030701794
 GameObject:
@@ -13540,6 +13561,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1b74b5312b180484c8df558568dd4760, type: 2}
   - {fileID: 11400000, guid: c3cdc501e4da5364e87d557c9642cb2f, type: 2}
   - {fileID: 11400000, guid: 6d99acececfe38a48b0389854a5a524d, type: 2}
+  toolbelt: {fileID: 0}
   weaponStats: {fileID: 0}
 --- !u!4 &2034363201 stripped
 Transform:

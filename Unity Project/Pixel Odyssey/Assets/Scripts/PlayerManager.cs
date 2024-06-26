@@ -94,6 +94,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool potionbeltUnlocked;
     public int healthPotions;
     public int overshieldPotions;
+    public int curePotions;
     public int HP;
     public int OS;
     public int subtitleIndex = 0;
@@ -113,7 +114,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     [SerializeField] WeaponStats weaponStats;
 
     //Access Toolbelt
-    ToolBelt toolBelt;
+    public ToolBelt toolBelt;
 
     public int currentPotionIndex = 0;
 
@@ -704,12 +705,20 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         UpdateAmmoCount();
         HPOrignal = saveSystem.playerData.HealthMax;
         OSOrignal = saveSystem.playerData.OvershieldMax;
-        overshieldPotions = saveSystem.playerData.OvershieldPotions;
-        healthPotions = saveSystem.playerData.HealthPotions;
+
+
+        //healthPotions = saveSystem.playerData.HealthPotions;
+        //overshieldPotions = saveSystem.playerData.OvershieldPotions;
+        //curePotions = saveSystem.playerData.CurePotions;
+
+        toolBelt.potions[0] = saveSystem.playerData.HealthPotions;
+        toolBelt.potions[1] = saveSystem.playerData.OvershieldPotions;
+        toolBelt.potions[2] = saveSystem.playerData.CurePotions;
+
+
         shotgunUnlocked = saveSystem.playerData.ShotgunUnlocked;
         assaultRifleUnlocked = saveSystem.playerData.AssaultRifleUnlocked;
         RPGUnlocked = saveSystem.playerData.RPGUnlocked;
-        meleeUnlocked = saveSystem.playerData.MeleeUnlocked;
         overshieldUnlocked = saveSystem.playerData.OvershieldUnlocked;
         potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
         tutorialComplete = saveSystem.playerData.TutorialComplete;
