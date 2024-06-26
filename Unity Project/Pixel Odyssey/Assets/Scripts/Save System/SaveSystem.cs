@@ -56,7 +56,7 @@ public class SaveSystem : MonoBehaviour
             AssaultRifleAmmo = 0,
             RPGAmmo = 0,
             HealthMax = 140,
-            OvershieldMax = 10,
+            OvershieldMax = 20,
             OvershieldPotions = 0,
             HealthPotions = 0,
             CurePotions = 0,

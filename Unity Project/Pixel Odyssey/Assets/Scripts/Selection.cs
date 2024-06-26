@@ -29,10 +29,7 @@ public class CenterObjectLogger : MonoBehaviour
 
     private bool isLoading = false;
 
-    private void Start()
-    {
-        TutorialComplete = saveSystem.playerData.TutorialComplete;
-    }
+    
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -63,7 +60,7 @@ public class CenterObjectLogger : MonoBehaviour
 
     private void HandleLoadScreenClick()
     {
-        if (!GameManager.Instance.isPaused && TutorialComplete)
+        if (!GameManager.Instance.isPaused && saveSystem.playerData.TutorialComplete)
         {
             isLoading = true;
             saveSystem.ResetPlayer();
