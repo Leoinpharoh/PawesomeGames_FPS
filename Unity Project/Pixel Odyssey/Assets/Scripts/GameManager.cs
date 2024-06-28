@@ -454,7 +454,7 @@ public class GameManager : MonoBehaviour
         //if there are enemies to kill
         if (objectiveEnemiesToKillCount > 0)
         {
-            objectiveEnemiesToKill.text = ("Enemies to kill: " + objectiveEnemiesKilledCount.ToString() + " / " + objectiveEnemiesToKillCount.ToString());
+            objectiveEnemiesToKill.text = ("Elementals : " + objectiveEnemiesKilledCount.ToString() + " / " + objectiveEnemiesToKillCount.ToString());
         }
         //else no ememies to kill
         else
