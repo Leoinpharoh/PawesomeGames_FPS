@@ -247,10 +247,7 @@ public class GameManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
         bool tutorialComplete = saveSystem.playerData.TutorialComplete;
-        if (tutorialComplete == false && sceneName == "Player Hub")
-        {
-            TutorialTrigger();
-        }
+        
         if (tutorialComplete == true && sceneName == "Opening Scene")
         {
             OpeningScene();
@@ -394,6 +391,7 @@ public class GameManager : MonoBehaviour
         weaponSwap = player.GetComponent<WeaponSwap>();
         cameraController = mainCamera.GetComponent<CameraController>();
         characterController.enabled = false;
+        playerManager.cutscene = true;
         weaponSwap.enabled = false;
         cameraController.enabled = false;
         playerAnimator.enabled = true;
@@ -414,6 +412,7 @@ public class GameManager : MonoBehaviour
 
     public void TutorialComplete()
     {
+        Debug.Log("TutorialComplete method called.");
         characterController = player.GetComponent<CharacterController>();
         weaponSwap = player.GetComponent<WeaponSwap>();
         cameraController = mainCamera.GetComponent<CameraController>();
@@ -434,6 +433,7 @@ public class GameManager : MonoBehaviour
         Portals.SetActive(true);
         tutorialComplete = true;
         saveSystem.playerData.TutorialComplete = true;
+        playerManager.cutscene = false;
         saveSystem.SavePlayer();
     }
 
