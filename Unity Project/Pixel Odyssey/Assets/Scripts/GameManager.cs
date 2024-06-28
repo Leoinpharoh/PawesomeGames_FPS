@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     //basics
     public bool isPaused;
+    public bool isLoading;
     //int enemyCount;
     string ammoCurrentType;
     public int lightBullets;
@@ -179,17 +180,21 @@ public class GameManager : MonoBehaviour
         // to pause
         if (Input.GetButtonDown("Cancel"))
         {
-            if (menuActive == null)
+            if (!isLoading && !dead)
             {
-                statePaused();
+                if (menuActive == null)
+                {
+                    statePaused();
 
-                menuActive = menuPause;
-                menuActive.SetActive(isPaused);
+                    menuActive = menuPause;
+                    menuActive.SetActive(isPaused);
+                }
+                else if (menuActive == menuPause || menuActive == menuOptions)
+                {
+                    stateUnPaused();
+                }
             }
-            else if (menuActive == menuPause || menuActive == menuOptions)
-            {
-                stateUnPaused();
-            }
+            
         }
         if (objective1Aquired && objective2Aquired && objective3Aquired)
         {

@@ -36,7 +36,7 @@ public class NextLevel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        GameManager.Instance.isLoading = true; 
         if (other.CompareTag("Player"))
         {
 
@@ -118,6 +118,7 @@ public class NextLevel : MonoBehaviour
         if (loadedScene.IsValid()) // Check if the scene is valid
         {
             SceneManager.SetActiveScene(loadedScene); // Set the scene as active
+            GameManager.Instance.isLoading = false; // Set the game as not loading
         }
 
         // Fade from white
