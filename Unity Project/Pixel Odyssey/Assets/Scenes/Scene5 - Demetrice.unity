@@ -57933,6 +57933,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2615090789427594648, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
+      propertyPath: MaxDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615090789427594648, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615090789427594648, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6008648644646918953, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7
@@ -79701,7 +79713,7 @@ AudioSource:
   m_GameObject: {fileID: 1831287424}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6440469614712678350, guid: e4aa5efa89fe3b54ea6a9f57d01718a9, type: 2}
   m_audioClip: {fileID: 8300000, guid: 1fdb58406054e9d449e2c6ce8f97e902, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -79713,9 +79725,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -79748,7 +79760,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -97476,6 +97488,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 909977307700345390, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615090789427594648, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
+      propertyPath: MaxDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615090789427594648, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615090789427594648, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6008648644646918953, guid: 2062bfb6672007b418bd890f764c6663, type: 3}
