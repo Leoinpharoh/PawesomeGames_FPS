@@ -76,6 +76,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public bool isMoving;
     public bool isSprinting;
     public bool OSRefilling;
+    public bool cutscene;
     bool moveSpeedReduced;
     bool alive;
     bool playingWalkAudio;
@@ -123,9 +124,11 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     void Start()
     {
-        LoadPlayer();
+        currentScene = SceneManager.GetActiveScene();
 
         StartUp();
+
+        LoadPlayer();
 
         FinalBossHPBarActivator();
 
@@ -471,7 +474,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     public void Movement()
     {
         string sceneName = currentScene.name;
-        if (sceneName == "Credits" || (sceneName == "Player Hub" && !tutorialComplete))
+        if (sceneName == "Credits" || cutscene)
         {
             return;
         }
@@ -516,7 +519,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     IEnumerator walking()
     {
         string sceneName = currentScene.name;
-        if (sceneName == "Credits" || (sceneName == "Player Hub" && !tutorialComplete))
+        if (sceneName == "Credits" || cutscene)
         {
             yield return null;
         }
@@ -556,7 +559,7 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
     void Jump()
     {
         string sceneName = currentScene.name;
-        if (sceneName == "Credits" || (sceneName == "Player Hub" && !tutorialComplete))
+        if (sceneName == "Credits" || cutscene)
         {
             return;
         }
@@ -696,6 +699,12 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
 
     public void LoadPlayer()
     {
+        tutorialComplete = saveSystem.playerData.TutorialComplete;
+        string sceneName = currentScene.name;
+        if (sceneName == "Player Hub" && !tutorialComplete)
+        {
+            GameManager.Instance.TutorialTrigger();
+        }
         PythonAmmo = saveSystem.playerData.PythonAmmo;
         ShotgunAmmo = saveSystem.playerData.ShotgunAmmo;
         AssaultRifleAmmo = saveSystem.playerData.AssaultRifleAmmo;
@@ -704,22 +713,15 @@ public class PlayerManager : MonoBehaviour, IDamage, EDamage
         HPOrignal = saveSystem.playerData.HealthMax;
         OSOrignal = saveSystem.playerData.OvershieldMax;
 
-
-        //healthPotions = saveSystem.playerData.HealthPotions;
-        //overshieldPotions = saveSystem.playerData.OvershieldPotions;
-        //curePotions = saveSystem.playerData.CurePotions;
-
         toolBelt.potions[0] = saveSystem.playerData.HealthPotions;
         toolBelt.potions[1] = saveSystem.playerData.OvershieldPotions;
         toolBelt.potions[2] = saveSystem.playerData.CurePotions;
-
 
         shotgunUnlocked = saveSystem.playerData.ShotgunUnlocked;
         assaultRifleUnlocked = saveSystem.playerData.AssaultRifleUnlocked;
         RPGUnlocked = saveSystem.playerData.RPGUnlocked;
         overshieldUnlocked = saveSystem.playerData.OvershieldUnlocked;
         potionbeltUnlocked = saveSystem.playerData.PotionbeltUnlocked;
-        tutorialComplete = saveSystem.playerData.TutorialComplete;
         if (HPOrignal == 0)
         {
             HPOrignal = saveSystem.playerData.HealthMax;

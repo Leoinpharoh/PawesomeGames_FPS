@@ -8,8 +8,8 @@ public class SaveSystem : MonoBehaviour
 
     private string GetFilePath()
     {
-        // Ensure the directory exists
-        string folderPath = Path.Combine(Application.dataPath, "Scripts/Save System");
+        // Ensure the directory exists in the AppData folder
+        string folderPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Pixel Odyssey", "Save System");
         if (!Directory.Exists(folderPath))
         {
             Directory.CreateDirectory(folderPath);
