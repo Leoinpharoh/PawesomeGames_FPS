@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CenterObjectLogger : MonoBehaviour
+public class Selection : MonoBehaviour
 {
     public Animator animator;
     public SaveSystem saveSystem;
