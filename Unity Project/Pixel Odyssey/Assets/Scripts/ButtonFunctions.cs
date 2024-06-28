@@ -13,6 +13,12 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.Instance.stateUnPaused();
     }
 
+    public void resume2()
+    {
+        GameManager.Instance.menuPause.SetActive(true);
+        GameManager.Instance.quitConfirm.SetActive(false);
+    }
+
     public void back()
     {
         GameManager.Instance.stateUnPaused();
@@ -48,6 +54,11 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.Instance.menuActive = GameManager.Instance.menuOptions; // Set the active menu to the options menu
     }
     public void quit()
+    {
+        GameManager.Instance.menuPause.SetActive(false);
+        GameManager.Instance.quitConfirm.SetActive(true);
+    }
+    public void quit2()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

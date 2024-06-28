@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] public GameObject quitConfirm;
     [SerializeField] GameObject sceneSelect;
     [SerializeField] public GameObject menuOptions;
     [SerializeField] GameObject optionsMainMenu;
