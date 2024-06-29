@@ -16,7 +16,7 @@ public class ShootingHandler : MonoBehaviour
     [SerializeField] AudioSource reloadAudioSource;
     [SerializeField] LayerMask shootableLayer;
     [SerializeField] GameObject projectileBullet;
-    [SerializeField] Animator Anim;
+    [SerializeField] public Animator Anim;
     [SerializeField] GameObject hitParticleEffect;
 
     // Private variables
