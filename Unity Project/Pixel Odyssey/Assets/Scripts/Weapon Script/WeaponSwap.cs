@@ -22,35 +22,37 @@ public class WeaponSwap : MonoBehaviour
         //shotgunUnlocked = playerManager.shotgunUnlocked;
         //assaultRifleUnlocked = playerManager.assaultRifleUnlocked;
         //rpgUnlocked = playerManager.RPGUnlocked;
-
-
         if (Input.GetKeyDown(KeyCode.Alpha1) && weaponOne != null)
         {
+            
             if (currentWeapon != null && currentWeapon.GetComponent<ShootingHandler>().Anim.GetBool("isReloading") == true)
             {
 
             }
             else
             {
+                if (currentWeapon != null && currentWeapon != weaponOne) { currentWeapon.SetActive(false); }
                 weaponOne.SetActive(true);
                 currentWeapon = weaponOne;
                 redundancy();
             }
-            if (currentWeapon != null && currentWeapon != weaponOne) { currentWeapon.SetActive(false); }
+            
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && weaponTwo != null && GameManager.Instance.playerManager.shotgunUnlocked)
         {
-            if(currentWeapon != null && currentWeapon.GetComponent<ShootingHandler>().Anim.GetBool("isReloading") == true)
+            
+            if (currentWeapon != null && currentWeapon.GetComponent<ShootingHandler>().Anim.GetBool("isReloading") == true)
             {
 
             }
             else
             {
+                if (currentWeapon != null && currentWeapon != weaponTwo) { currentWeapon.SetActive(false); }
                 weaponTwo.SetActive(true);
                 currentWeapon = weaponTwo;
                 redundancy();
             }
-            if (currentWeapon != null && currentWeapon != weaponTwo) { currentWeapon.SetActive(false); }
+            
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && weaponThree != null && GameManager.Instance.playerManager.assaultRifleUnlocked)
         {
@@ -60,11 +62,12 @@ public class WeaponSwap : MonoBehaviour
             }
             else
             {
+                if (currentWeapon != null && currentWeapon != weaponThree) { currentWeapon.SetActive(false); }
                 weaponThree.SetActive(true);
                 currentWeapon = weaponThree;
                 redundancy();
             }
-            if (currentWeapon != null && currentWeapon != weaponThree) { currentWeapon.SetActive(false); }
+            
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && weaponFour != null && GameManager.Instance.playerManager.RPGUnlocked)
         {
@@ -74,18 +77,18 @@ public class WeaponSwap : MonoBehaviour
             }
             else
             {
+                if (currentWeapon != null && currentWeapon != weaponFour) { currentWeapon.SetActive(false); }
                 weaponFour.SetActive(true);
                 currentWeapon = weaponFour;
                 redundancy();
             }
-            if (currentWeapon != null && currentWeapon != weaponFour) { currentWeapon.SetActive(false); }
+            
         }
 
     }
 
     void redundancy()
     {
-        
         ShootingHandler gunScript = currentWeapon.GetComponent<ShootingHandler>();
         gunScript.Ammo = gunScript.weaponStats.Ammo;
         gunScript.isShooting = false;
